@@ -1,4 +1,3 @@
-source /lib/python2.7/site-packages/powerline//bindings/vim/plugin/powerline.vim
 filetype off
 
 "show line numbers
@@ -13,11 +12,40 @@ set showcmd
 "turn off vi compatibility
 set nocp
 
-"for pathogen to autoinclude plugins
-execute pathogen#infect()
-call pathogen#helptags()
-syntax on
+" Vundle stuff for plugins
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin('~/.vim/vundle')
+
+"list of plugins to add
+Plugin 'gmarik/Vundle.vim'
+Plugin 'rking/ag.vim'
+Plugin 'alvan/vim-closetag'
+Plugin 'nixprime/cpsm'
+Plugin 'godlygeek/csapprox'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'sjl/gundo.vim'
+Plugin 'yegappan/mru'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+"Plugin 'powerline/powerline'
+Plugin 'majutsushi/tagbar'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'thinca/vim-guicolorscheme'
+Plugin 'tpope/vim-surround'
+Plugin 'bling/vim-airline'
+
+call vundle#end()
 filetype plugin indent on
+
+"for pathogen to autoinclude plugins
+"execute pathogen#infect()
+"call pathogen#helptags()
+syntax on
+"filetype plugin indent on
 
 "gives more space at the bottom so you don't have to hit enter to see stuff
 set cmdheight=2
@@ -51,6 +79,9 @@ noremap <Leader>k :wincmd k<cr>
 noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
+
+"set omnicompolete to ctrl space
+inoremap <C-Space> <C-x><C-o>
 
 "what vim looks like
 colorscheme nerv-ous 
@@ -117,6 +148,12 @@ set dir=~/.vim/tmp//,.
 
 "for gitgutter to free up leader + h
 let g:gitgutter_map_keys = 0
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(pyc)$',
+  \ 'link': '',
+  \ }
 
 "ctrlp replacement options
 "let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}

@@ -35,6 +35,8 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
+
 ~/.django_bash_completion.sh
 
 NPM_PACKAGES="${HOME}/.npm-packages"
