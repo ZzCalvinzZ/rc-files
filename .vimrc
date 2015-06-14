@@ -37,15 +37,17 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'thinca/vim-guicolorscheme'
 Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'othree/html5.vim'
+Plugin 'pfdevilliers/Pretty-Vim-Python'
+
 
 call vundle#end()
 filetype plugin indent on
 
-"for pathogen to autoinclude plugins
-"execute pathogen#infect()
-"call pathogen#helptags()
+"syntax highlighting
 syntax on
-"filetype plugin indent on
+let python_highlight_all = 1
 
 "gives more space at the bottom so you don't have to hit enter to see stuff
 set cmdheight=2
@@ -84,7 +86,7 @@ noremap <Leader>l :wincmd l<cr>
 inoremap <C-Space> <C-x><C-o>
 
 "what vim looks like
-colorscheme nerv-ous 
+colorscheme monokain 
 set guifont=Menlo\ Regular:h15
 
 "incremental search(auto select first match when searching)
@@ -155,5 +157,10 @@ let g:ctrlp_custom_ignore = {
   \ 'link': '',
   \ }
 
+"for airline to use powerline fonts
+let g:airline_powerline_fonts = 1
+
 "ctrlp replacement options
 "let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+"
+let g:airline_theme='dark'
