@@ -57,4 +57,6 @@ alias git="git --no-pager"
 cd ~/Dev/fluidware/
 workon fr5.1
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
 

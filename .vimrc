@@ -1,10 +1,10 @@
-filetype off
-
 "show line numbers
 set number
-
 "turn on syntax highlighting
 syntax on
+
+filetype off
+
 
 "shows last command made
 set showcmd
@@ -39,15 +39,18 @@ Plugin 'tpope/vim-surround'
 Plugin 'bling/vim-airline'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-Plugin 'pfdevilliers/Pretty-Vim-Python'
+"Plugin 'pfdevilliers/Pretty-Vim-Python'
+"Plugin 'zzcalvinzz/neovim-gitgutter'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'unblevable/quick-scope'
 
 
 call vundle#end()
 filetype plugin indent on
 
-"syntax highlighting
-syntax on
 let python_highlight_all = 1
+
+let b:did_indent = 1
 
 "gives more space at the bottom so you don't have to hit enter to see stuff
 set cmdheight=2
@@ -86,8 +89,8 @@ noremap <Leader>l :wincmd l<cr>
 inoremap <C-Space> <C-x><C-o>
 
 "what vim looks like
-colorscheme monokain 
-set guifont=Menlo\ Regular:h15
+colorscheme molokai 
+set guifont=Menlo\ Regular:h14
 
 "incremental search(auto select first match when searching)
 set incsearch
@@ -162,5 +165,37 @@ let g:airline_powerline_fonts = 1
 
 "ctrlp replacement options
 "let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-"
+"ctrlp stuff to show all files
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+
+"airline theme
 let g:airline_theme='dark'
+
+"make gitgutter faster
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
+
+
+
+"for quick-scope in find mode
+let g:qs_enable = 0
+let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+    let letter = nr2char(getchar())
+    if needs_disabling
+        QuickScopeToggle
+    endif
+    return a:movement . letter
+endfunction
+
+for i in g:qs_enable_char_list
+	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
