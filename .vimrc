@@ -5,7 +5,6 @@ syntax on
 
 filetype off
 
-
 "shows last command made
 set showcmd
 
@@ -43,7 +42,8 @@ Plugin 'othree/html5.vim'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'unblevable/quick-scope'
-
+Plugin 'leafgarland/typescript-vim.git'
+Plugin 'mbbill/undotree.git'
 
 call vundle#end()
 filetype plugin indent on
@@ -73,6 +73,7 @@ map <Leader>2 :NERDTreeFind
 map <Leader>3 :NERDTreeToggle
 map <Leader>4 :TagbarToggle
 map <Leader>a :MRU
+map <Leader>5 :UndotreeToggle
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -84,6 +85,7 @@ noremap <Leader>k :wincmd k<cr>
 noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
+
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
@@ -147,10 +149,6 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=xmlcomplete#CompletePython
 
-"change where vim stores backup and swap files
-set backupdir=~/.vim/tmp,.
-set dir=~/.vim/tmp//,.
-
 "for gitgutter to free up leader + h
 let g:gitgutter_map_keys = 0
 
@@ -163,6 +161,7 @@ let g:ctrlp_custom_ignore = {
 "for airline to use powerline fonts
 let g:airline_powerline_fonts = 1
 
+let g:ctrlp_cmd = 'CtrlPMixed'
 "ctrlp replacement options
 "let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 "ctrlp stuff to show all files
@@ -176,7 +175,10 @@ let g:airline_theme='dark'
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
-
+"change where vim stores backup and swap files
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 "for quick-scope in find mode
 let g:qs_enable = 0
@@ -199,3 +201,5 @@ endfunction
 for i in g:qs_enable_char_list
 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
+
+
