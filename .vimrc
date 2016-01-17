@@ -5,9 +5,6 @@ syntax on
 
 filetype off
 
-"shows last command made
-set showcmd
-
 "turn off vi compatibility
 set nocp
 
@@ -86,6 +83,11 @@ noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
 
+"map space f to copy current file to clipboard
+nmap <Leader>f :let @* = expand("%")<cr>
+
+"map f12 to generate ctags
+map <f12> :! ctags -R .<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
@@ -96,6 +98,7 @@ set guifont=Menlo\ Regular:h14
 
 "incremental search(auto select first match when searching)
 set incsearch
+set hlsearch
 
 "this will ignore case unless explicitly searching with capitals
 set ignorecase
@@ -201,5 +204,8 @@ endfunction
 for i in g:qs_enable_char_list
 	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
 endfor
+
+"shows last command made
+set showcmd
 
 

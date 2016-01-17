@@ -56,7 +56,7 @@ alias git="git --no-pager"
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
 
-cd ~/Dev/fluidware/
+cd ~/dev/fluidreview/
 workon fr5.1
 
 export VISUAL=vim
