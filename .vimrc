@@ -229,4 +229,11 @@ endfor
 "shows last command made
 set showcmd
 
-
+if has("win32")
+	set directory=.,$TEMP
+	set backupdir=.,$TEMP
+	set backspace=2
+	set backspace=indent,eol,start
+	set guioptions-=m  "remove menu bar
+	set guioptions-=T  "remove toolbar
+endif
