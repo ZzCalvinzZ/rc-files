@@ -65,7 +65,11 @@ set lines=999 columns=9999
 let mapleader = " "
 
 "map vimrc for quick access
-map <Leader>v :e ~/.vimrc
+if has("win32")
+	map <Leader>v :e \Users\Calvin\_vimrc
+else
+	map <Leader>v :e ~/.vimrc
+endif
 
 "map plugin commands
 map <Leader>2 :NERDTreeFind
