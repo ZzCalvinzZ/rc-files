@@ -49,6 +49,8 @@ let python_highlight_all = 1
 
 let b:did_indent = 1
 
+set relativenumber
+
 "gives more space at the bottom so you don't have to hit enter to see stuff
 set cmdheight=2
 
@@ -93,8 +95,10 @@ map <f12> :! ctags -R .<cr>
 inoremap <C-Space> <C-x><C-o>
 
 "what vim looks like
-colorscheme molokai 
-set guifont=Menlo\ Regular:h14
+colorscheme inkpot
+set guifont=Menlo\ Regular:h13
+
+set foldcolumn=1
 
 "incremental search(auto select first match when searching)
 set incsearch
@@ -186,6 +190,14 @@ set undodir=~/.vim/undo//
 "for quick-scope in find mode
 let g:qs_enable = 0
 let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+"this function allows you to visually select lines to perform macro
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+	echo "@".getcmdline()
+	execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 function! Quick_scope_selective(movement)
     let needs_disabling = 0

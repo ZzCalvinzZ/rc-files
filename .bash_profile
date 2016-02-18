@@ -22,43 +22,44 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
 
-# Make sure CXXFLAGS is the same as CFLAGS
+#lots of Node stuff
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
 PATH="$NPM_PACKAGES/bin:$PATH"
-# Unset manpath so we can inherit from /etc/manpath via the `manpath`
-# command
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-# MacPorts Installer addition on 2015-03-24_at_12:36:10: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-# Finished adapting your PATH environment variable for use with MacPorts.
-
-PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
-
-~/.django_bash_completion.sh
 
 NPM_PACKAGES="${HOME}/.npm-packages"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
+#MacPorts
+PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
+#other paths
+PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/local/Cellar/gettext/0.19.2/bin"
+PATH="$PATH:/usr/local/Cellar/graphviz/2.38.0/include/graphviz"
 for d in /Users/calvinc/.npm-packages/*/bin; do PATH="$PATH:$d"; done
-# Unset manpath so we can inherit from /etc/manpath via the `manpath`
-# command
+export PATH
+
+# for pygraphviz to work
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/pkgconfig"
+
+# add django bash completion script
+~/.django_bash_completion.sh
+
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 alias manage="reviewroom/project/manage.py"
-alias git="git --no-pager"
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
+alias rm_pyc='find . -name "*.pyc" -delete'
 
 cd ~/dev/fluidreview/
 workon fr5.1
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
