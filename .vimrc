@@ -9,7 +9,12 @@ filetype off
 set nocp
 
 " Vundle stuff for plugins
-set rtp+=~/.vim/bundle/Vundle.vim
+if has("win32")
+	set rtp+=\Users\Calvin\vimfiles\bundle\Vundle.vim
+else
+	set rtp+=~/.vim/bundle/Vundle.vim
+endif
+
 call vundle#begin('~/.vim/vundle')
 
 "list of plugins to add
