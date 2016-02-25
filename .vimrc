@@ -32,20 +32,33 @@ Plugin 'scrooloose/nerdtree'
 "Plugin 'powerline/powerline'
 Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'tpope/vim-fugitive'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'thinca/vim-guicolorscheme'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
+Plugin 'ajh17/VimCompletesMe'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
 "Plugin 'pfdevilliers/Pretty-Vim-Python'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'unblevable/quick-scope'
 Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
+Plugin 'ap/vim-css-color'
+
+" Set ultisnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"                                            
+let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 call vundle#end()
 filetype plugin indent on
@@ -104,8 +117,13 @@ map <f12> :! ctags -R .<cr>
 inoremap <C-Space> <C-x><C-o>
 
 "what vim looks like
-colorscheme inkpot
-set guifont=Menlo\ Regular:h13
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+set guifont=Menlo\ Regular:h12
+
+"don't use menu popup when it detects new changes in gui
+set guioptions+=c
 
 set foldcolumn=1
 
@@ -119,6 +137,10 @@ set smartcase
 
 "Shows menu items when tabbing for autocomplete
 set wildmenu
+
+"buffer next and buffer previous
+nmap <Leader>n :bn<cr>
+nmap <Leader>p :bp<cr>
 
 "don't wrap text when it doesn't fit in the window
 set nowrap
@@ -183,6 +205,12 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 "ctrlp stuff to show all files
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
+
+"enable neocomplete
+let g:neocomplete#enable_at_startup = 1
+
+"make diffs appear side by side
+set diffopt=vertical
 
 "airline theme
 let g:airline_theme='dark'
