@@ -41,7 +41,8 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-Plugin 'ajh17/VimCompletesMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 "Plugin 'pfdevilliers/Pretty-Vim-Python'
@@ -53,7 +54,7 @@ Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
 
 " Set ultisnips triggers
-let g:UltiSnipsExpandTrigger="<tab>"                                            
+let g:UltiSnipsExpandTrigger="<Leader><tab>"                                            
 let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
 
@@ -97,12 +98,12 @@ map <Leader>m :MRU
 map <Leader>5 :UndotreeToggle
 
 "map fugitive commands
-map <Leader>a :Git add .
-map <Leader>s :Gstatus
-map <Leader>cd :Gcommit
-map <Leader>p :Gpush
-map <Leader>d :Gdiff
-map <Leader>b :Gblame
+noremap <Leader>a :Git add .
+noremap <Leader>s :Gstatus
+noremap <Leader>p :Gpush
+noremap <Leader>d :Gdiff
+noremap <Leader>b :Gblame
+noremap <Leader>r :Gread
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
