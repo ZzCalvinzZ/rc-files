@@ -93,8 +93,16 @@ endif
 map <Leader>2 :NERDTreeFind
 map <Leader>3 :NERDTreeToggle
 map <Leader>4 :TagbarToggle
-map <Leader>a :MRU
+map <Leader>m :MRU
 map <Leader>5 :UndotreeToggle
+
+"map fugitive commands
+map <Leader>a :Git add .
+map <Leader>s :Gstatus
+map <Leader>cd :Gcommit
+map <Leader>p :Gpush
+map <Leader>d :Gdiff
+map <Leader>b :Gblame
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -137,10 +145,6 @@ set smartcase
 
 "Shows menu items when tabbing for autocomplete
 set wildmenu
-
-"buffer next and buffer previous
-nmap <Leader>n :bn<cr>
-nmap <Leader>p :bp<cr>
 
 "don't wrap text when it doesn't fit in the window
 set nowrap
