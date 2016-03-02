@@ -41,7 +41,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
@@ -53,10 +53,15 @@ Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
 
-" Set ultisnips triggers
-let g:UltiSnipsExpandTrigger="<Leader><tab>"                                            
-let g:UltiSnipsJumpForwardTrigger="<tab>"                                       
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>" 
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -115,6 +120,9 @@ noremap <Leader>k :wincmd k<cr>
 noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
+
+"map retab
+noremap <Leader>t :%retab!<cr>
 
 "map space f to copy current file to clipboard
 nmap <Leader>f :let @* = expand("%")<cr>
