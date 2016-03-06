@@ -200,9 +200,6 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=xmlcomplete#CompletePython
 
-"for gitgutter to free up leader + h
-let g:gitgutter_map_keys = 0
-
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(pyc)$',
@@ -278,3 +275,12 @@ if has("win32")
 	set guioptions-=m  "remove menu bar
 	set guioptions-=T  "remove toolbar
 endif
+
+"for gitgutter
+nmap <Leader>gs <Plug>GitGutterStageHunk
+nmap <Leader>gr <Plug>GitGutterRevertHunk
+nmap <Leader>gp <Plug>GitGutterPreviewHunk
+let g:gitgutter_realtime = 1
+let g:gitgutter_eager = 1
+set updatetime=250
+
