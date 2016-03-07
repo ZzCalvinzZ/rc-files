@@ -58,8 +58,13 @@ alias love="/Applications/love.app/Contents/MacOS/love"
 alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
 alias rm_pyc='find . -name "*.pyc" -delete'
 
+alias runfr="manage runserver_plus 3000"
+
 cd ~/dev/fluidreview/
 workon fr5.1
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+# prevent security pin in flask
+export WERKZEUG_DEBUG_PIN=off
