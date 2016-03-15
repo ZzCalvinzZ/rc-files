@@ -69,7 +69,7 @@ bind ;:cmd;ctrl hint ASDFGHJKL
 bind 1:ctrl;alt         throw 0 resize
 bind 2:ctrl;alt         throw 1 resize
 bind 3:ctrl;alt         throw 2 resize
-bind l:ctrl;alt;cmd throw right resize
-bind h:ctrl;alt;cmd  throw left  resize
-bind j:ctrl;alt;cmd    throw up    resize
-bind k:ctrl;alt;cmd  throw down  resize
+bind l:cmd;ctrl    focus right
+bind h:cmd;ctrl     focus left
+bind k:cmd;ctrl       focus up
+bind j:cmd;ctrl     focus down
