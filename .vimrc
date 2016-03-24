@@ -29,19 +29,20 @@ Plugin 'sjl/gundo.vim'
 Plugin 'yegappan/mru'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-"Plugin 'powerline/powerline'
 Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'thinca/vim-guicolorscheme'
+Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
@@ -137,7 +138,7 @@ inoremap <C-Space> <C-x><C-o>
 let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
-set guifont=Menlo\ Regular:h12
+set guifont=Menlo\ for\ Powerline:h14
 
 "don't use menu popup when it detects new changes in gui
 set guioptions+=c
@@ -209,21 +210,37 @@ let g:ctrlp_custom_ignore = {
 "for airline to use powerline fonts
 let g:airline_powerline_fonts = 1
 
+"airline font stuff
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
 let g:ctrlp_cmd = 'CtrlPMixed'
 "ctrlp replacement options
 "let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 "ctrlp stuff to show all files
+"
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
-
-"enable neocomplete
-let g:neocomplete#enable_at_startup = 1
 
 "make diffs appear side by side
 set diffopt=vertical
 
 "airline theme
-let g:airline_theme='dark'
+let g:airline_theme='powerlineish'
 
 "make gitgutter faster
 let g:gitgutter_realtime = 0
