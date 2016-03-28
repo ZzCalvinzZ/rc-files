@@ -42,7 +42,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/html5.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
@@ -133,6 +133,9 @@ map <f12> :! ctags -R .<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
+
+"use jk as esc in insert mode
+inoremap jk <esc>
 
 "what vim looks like
 let g:solarized_termcolors=256
