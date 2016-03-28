@@ -66,7 +66,7 @@ bind ;:cmd;ctrl hint ASDFGHJKL
 # the window which was just moved to your second display will come
 # back to your first display
 # Throw Bindings
-bind k:ctrl;alt;cmd   throw 0 resize
+bind h:ctrl;alt;cmd   throw 0 resize
 bind j:ctrl;alt;cmd   throw 1 resize
 bind l:ctrl;alt;cmd   throw 2 resize
 bind l:cmd;ctrl       focus right
