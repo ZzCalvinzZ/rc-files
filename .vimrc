@@ -138,8 +138,7 @@ map <f12> :! ctags -R .<cr>
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
 
-"use jk as esc in insert mode
-inoremap jk <esc>
+"stop using esc to escape from insert mode
 inoremap <esc> <nop>
 
 "what vim looks like
