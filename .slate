@@ -73,3 +73,4 @@ bind l:cmd;ctrl       focus right
 bind h:cmd;ctrl       focus left
 bind k:cmd;ctrl       focus up
 bind j:cmd;ctrl       focus down
+bind b:cmd;ctrl       focus behind
