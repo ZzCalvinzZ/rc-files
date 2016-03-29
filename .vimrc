@@ -53,6 +53,7 @@ Plugin 'unblevable/quick-scope'
 Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
+Plugin 'takac/vim-hardtime'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -96,6 +97,9 @@ else
 	map <Leader>v :e ~/.vimrc
 endif
 
+"hard mode commands
+nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
+
 "map plugin commands
 map <Leader>2 :NERDTreeFind
 map <Leader>3 :NERDTreeToggle
@@ -136,6 +140,7 @@ inoremap <C-Space> <C-x><C-o>
 
 "use jk as esc in insert mode
 inoremap jk <esc>
+inoremap <esc> <nop>
 
 "what vim looks like
 let g:solarized_termcolors=256
