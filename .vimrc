@@ -161,6 +161,7 @@ set ignorecase
 set smartcase
 
 "Shows menu items when tabbing for autocomplete
+set wildmode=longest,list,full
 set wildmenu
 
 "don't wrap text when it doesn't fit in the window
