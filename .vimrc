@@ -338,3 +338,6 @@ endfunction
 
 " Call the function after opening a buffer
 autocmd BufReadPost * call TabsOrSpaces()
+
+"call silver searcher for word under cursor
+:nnoremap <Leader>A :Ag -Q '<cword>'<CR>
