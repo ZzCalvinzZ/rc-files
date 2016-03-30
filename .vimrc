@@ -203,6 +203,9 @@ let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
+"when doing zl or zh do it 30 spaces instead
+nnoremap zl 30zl
+nnoremap zh 30zh
 
 set infercase
 set completeopt=longest,menuone
