@@ -99,6 +99,7 @@ endif
 
 "hard mode commands
 nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
+let g:hardtime_default_on = 1
 
 "map plugin commands
 map <Leader>2 :NERDTreeFind
@@ -140,6 +141,7 @@ inoremap <C-Space> <C-x><C-o>
 
 "stop using esc to escape from insert mode
 inoremap <esc> <nop>
+inoremap <C-c> <esc>
 
 "what vim looks like
 let g:solarized_termcolors=256
@@ -195,6 +197,12 @@ set nostartofline
 
 "NERDTree ignore files
 let NERDTreeIgnore = ['\.pyc$']
+
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
 
 set infercase
 set completeopt=longest,menuone
