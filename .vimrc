@@ -55,7 +55,7 @@ Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
 Plugin 'takac/vim-hardtime'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'tmhedberg/SimpylFold'
+Plugin 'mtscout6/vim-tagbar-css'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -136,7 +136,7 @@ noremap <Leader>t :%retab!<cr>
 nmap <Leader>f :let @* = expand("%")<cr>
 
 "map f12 to generate ctags
-noremap <Leader>C :! ctags<cr>
+noremap <Leader>C :! ctags -R -f ./.git/tags .<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
@@ -154,29 +154,50 @@ set guifont=Menlo\ for\ Powerline:h14
 "don't use menu popup when it detects new changes in gui
 set guioptions+=c
 
-set foldmethod=syntax
-set foldlevelstart=1
+set foldlevelstart=99
 
-let javaScript_fold=1         " JavaScript
-let perl_fold=1               " Perl
-let php_folding=1             " PHP
-let r_syntax_folding=1        " R
-let ruby_fold=1               " Ruby
-let sh_fold_enabled=1         " sh
-let vimsyn_folding='af'       " Vim script
-let xml_syntax_folding=1      " XML
+setlocal foldmethod=expr
+setlocal foldexpr=GetIndentFold(v:lnum)
+
+function! NextNonBlankLine(lnum)
+    let numlines = line('$')
+    let current = a:lnum + 1
+
+    while current <= numlines
+        if getline(current) =~? '\v\S'
+            return current
+        endif
+
+        let current += 1
+    endwhile
+
+    return -2
+endfunction
+
+function! IndentLevel(lnum)
+    return indent(a:lnum) / &shiftwidth
+endfunction
+
+function! GetIndentFold(lnum)
+    if getline(a:lnum) =~? '\v^\s*$'
+        return '-1'
+    endif
+
+    let this_indent = IndentLevel(a:lnum)
+    let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+
+    if next_indent == this_indent
+        return this_indent
+    elseif next_indent < this_indent
+        return this_indent
+    elseif next_indent > this_indent
+        return '>' . next_indent
+    endif
+endfunction
+
 
 "for vim-javascript to show html and css highlighting
 let javascript_enable_domhtmlcss=1
-
-"for coffeescript folding
-autocmd BufNewFile,BufReadPost *.coffee call SetCoffeeFolding()
-
-function! SetCoffeeFolding()
-	"execute ":setl fdm=expr fde=getline(v:lnum)=~'class'?'>1':getline(v:lnum)=~'^\\s*$'?0:'='"
-	execute ":setl fdm=expr fde=getline(v:lnum)=~'->$'?'>1':getline(v:lnum)=~'^\\s*$'?0:'='"
-	execute ":normal zM"
-endfunction
 
 "incremental search(auto select first match when searching)
 set incsearch
@@ -224,6 +245,12 @@ let NERDTreeIgnore = ['\.pyc$']
 
 " enable line numbers
 let NERDTreeShowLineNumbers=1
+
+"tagbar stuff
+let g:tagbar_show_linenumbers = 2
+let g:tagbar_foldlevel = 0
+let g:tagbar_autofocus = 1
+
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
