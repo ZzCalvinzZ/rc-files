@@ -40,7 +40,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
@@ -54,6 +54,8 @@ Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
 Plugin 'takac/vim-hardtime'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'tmhedberg/SimpylFold'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -152,7 +154,20 @@ set guifont=Menlo\ for\ Powerline:h14
 "don't use menu popup when it detects new changes in gui
 set guioptions+=c
 
-set foldcolumn=1
+set foldmethod=syntax
+set foldlevelstart=1
+
+let javascript_fold=1         " JavaScript
+let perl_fold=1               " Perl
+let php_folding=1             " PHP
+let r_syntax_folding=1        " R
+let ruby_fold=1               " Ruby
+let sh_fold_enabled=1         " sh
+let vimsyn_folding='af'       " Vim script
+let xml_syntax_folding=1      " XML
+
+"for vim-javascript to show html and css highlighting
+let javascript_enable_domhtmlcss=1
 
 "incremental search(auto select first match when searching)
 set incsearch
@@ -340,4 +355,4 @@ endfunction
 autocmd BufReadPost * call TabsOrSpaces()
 
 "call silver searcher for word under cursor
-:nnoremap <Leader>A :Ag -Q '<cword>'<CR>
+:nnoremap <Leader>A :Ag -Q '<cword>' -G "py\|js\|html" <CR>
