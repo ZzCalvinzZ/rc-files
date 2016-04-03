@@ -136,7 +136,7 @@ noremap <Leader>t :%retab!<cr>
 nmap <Leader>f :let @* = expand("%")<cr>
 
 "map f12 to generate ctags
-map <f12> :! ctags -R .<cr>
+noremap <Leader>C :! ctags<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
@@ -157,7 +157,7 @@ set guioptions+=c
 set foldmethod=syntax
 set foldlevelstart=1
 
-let javascript_fold=1         " JavaScript
+let javaScript_fold=1         " JavaScript
 let perl_fold=1               " Perl
 let php_folding=1             " PHP
 let r_syntax_folding=1        " R
@@ -168,6 +168,15 @@ let xml_syntax_folding=1      " XML
 
 "for vim-javascript to show html and css highlighting
 let javascript_enable_domhtmlcss=1
+
+"for coffeescript folding
+autocmd BufNewFile,BufReadPost *.coffee call SetCoffeeFolding()
+
+function! SetCoffeeFolding()
+	"execute ":setl fdm=expr fde=getline(v:lnum)=~'class'?'>1':getline(v:lnum)=~'^\\s*$'?0:'='"
+	execute ":setl fdm=expr fde=getline(v:lnum)=~'->$'?'>1':getline(v:lnum)=~'^\\s*$'?0:'='"
+	execute ":normal zM"
+endfunction
 
 "incremental search(auto select first match when searching)
 set incsearch

@@ -1,1 +1,5 @@
 --python-kinds=-i
+--recurse=yes
+
+--exclude=.git
+--exclude=reviewroom/media/c/
