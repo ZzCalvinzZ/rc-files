@@ -136,7 +136,7 @@ noremap <Leader>t :%retab!<cr>
 nmap <Leader>f :let @* = expand("%")<cr>
 
 "map f12 to generate ctags
-noremap <Leader>C :! ctags -R -f ./.git/tags .<cr>
+noremap <Leader>C :! ctags<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
