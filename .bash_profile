@@ -59,6 +59,8 @@ alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
 alias rm_pyc='find . -name "*.pyc" -delete'
 
 alias runfr="manage runserver_plus 3000"
+alias runserver="./manage.py runserver_plus 4000"
+alias nutri="workon nutrihive; cd ../nutrihive"
 
 cd ~/dev/fluidreview/
 workon fr5.1
