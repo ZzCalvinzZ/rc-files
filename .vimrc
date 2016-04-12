@@ -46,16 +46,14 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'ervandew/supertab'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
-"Plugin 'pfdevilliers/Pretty-Vim-Python'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
-Plugin 'marijnh/tern_for_vim'
 Plugin 'unblevable/quick-scope'
 Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
-"Plugin 'takac/vim-hardtime'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'mtscout6/vim-tagbar-css'
+Plugin 'easymotion/vim-easymotion'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -101,10 +99,6 @@ if has("win32")
 else
 	map <Leader>v :e ~/.vimrc
 endif
-
-"hard mode commands
-nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
-let g:hardtime_default_on = 1
 
 "map plugin commands
 map <Leader>2 :NERDTreeFind
