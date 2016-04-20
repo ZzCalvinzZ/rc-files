@@ -37,6 +37,7 @@ Plugin 'thinca/vim-guicolorscheme'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -54,8 +55,22 @@ Plugin 'ap/vim-css-color'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'mtscout6/vim-tagbar-css'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'godlygeek/tabular'
+Plugin 'mattn/emmet-vim'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'wikitopian/hardmode'
+
+call vundle#end()
+
+
+"enable hardmode by default
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 
 " make YCM compatible with UltiSnips (using supertab)
+
+let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -71,7 +86,6 @@ autocmd FileType html set ft=htmldjango.html
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-call vundle#end()
 filetype plugin indent on
 
 let python_highlight_all = 1
@@ -106,6 +120,12 @@ map <Leader>3 :NERDTreeToggle
 map <Leader>4 :TagbarToggle
 map <Leader>m :MRU
 map <Leader>5 :UndotreeToggle
+
+"easymotion
+map , <Plug>(easymotion-prefix)
+let g:EasyMotion_smartcase = 1
+map S <Plug>(easymotion-bd-jk)
+map s <Plug>(easymotion-bd-w)
 
 "map fugitive commands
 noremap <Leader>a :Git add .
@@ -268,11 +288,14 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType python setlocal omnifunc=xmlcomplete#CompletePython
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(pyc)$',
-  \ 'link': '',
-  \ }
+"use gitignore for ctrlp ignore
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  "\ 'file': '\v\.(pyc)$',
+  "\ 'link': '',
+  "\ }
 
 "for airline to use powerline fonts
 let g:airline_powerline_fonts = 1
@@ -397,3 +420,7 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
     execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
     execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
+
+"info
+":%!python -m json.tool
+":%!xmllint

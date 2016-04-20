@@ -48,7 +48,7 @@ export PATH
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/pkgconfig"
 
 # add django bash completion script
-~/.django_bash_completion.sh
+. ~/.django_bash_completion.sh
 
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
