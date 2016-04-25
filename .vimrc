@@ -15,15 +15,14 @@ else
 	set rtp+=~/.vim/bundle/Vundle.vim
 endif
 
-call vundle#begin('~/.vim/vundle')
+call vundle#begin()
 
 "list of plugins to add
 Plugin 'gmarik/Vundle.vim'
 Plugin 'rking/ag.vim'
 Plugin 'alvan/vim-closetag'
-Plugin 'nixprime/cpsm'
 Plugin 'godlygeek/csapprox'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'sjl/gundo.vim'
 Plugin 'yegappan/mru'
@@ -31,10 +30,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'thinca/vim-guicolorscheme'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -58,13 +56,18 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'godlygeek/tabular'
 Plugin 'mattn/emmet-vim'
 Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'wikitopian/hardmode'
+Plugin 'nixprime/cpsm'
+Plugin 'Olical/vim-enmasse'
+
+"Plugin 'takac/vim-hardtime'
+"Plugin 'wikitopian/hardmode'
 
 call vundle#end()
 
-
-"enable hardmode by default
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+"hard time commands
+nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
+let g:hardtime_default_on = 1
+let g:hardtime_allow_different_key = 1
 
 " make YCM compatible with UltiSnips (using supertab)
 
@@ -125,6 +128,7 @@ map <Leader>5 :UndotreeToggle
 map , <Plug>(easymotion-prefix)
 let g:EasyMotion_smartcase = 1
 map S <Plug>(easymotion-bd-jk)
+vmap S <Plug>(easymotion-bd-jk)
 map s <Plug>(easymotion-bd-w)
 
 "map fugitive commands
@@ -162,10 +166,12 @@ inoremap <C-Space> <C-x><C-o>
 inoremap <esc> <nop>
 inoremap <C-c> <esc>
 
+"toggle background easily
+map <Leader><Leader>b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
 "what vim looks like
-let g:solarized_termcolors=256
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 set guifont=Menlo\ for\ Powerline:h14
 
 "don't use menu popup when it detects new changes in gui
@@ -231,12 +237,20 @@ set wildmenu
 "don't wrap text when it doesn't fit in the window
 set nowrap
 
-"4 space hard tabs with autoindenting
-set tabstop=4
-set smarttab
-set shiftwidth=4
-set noexpandtab
-set autoindent
+"set this to the value of shiftwidth
+let g:pyindent_open_paren=4
+
+"wrap this in a function so that it overrides macvim settings
+function OverrideIndentation()
+    "4 space hard tabs with autoindenting
+    set tabstop=4
+    set smarttab
+    set shiftwidth=4
+    set noexpandtab
+    set autoindent
+endfunction
+
+autocmd BufReadPost * call OverrideIndentation()
 
 "highlight the line you are on
 set cursorline
@@ -291,11 +305,15 @@ autocmd FileType python setlocal omnifunc=xmlcomplete#CompletePython
 "use gitignore for ctrlp ignore
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
+"custom ctrlp ignore
 "let g:ctrlp_custom_ignore = {
-  "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  "\ 'dir':  '\v[\/]\.(git|hg|svn|htmlconv|compiled_static)$',
   "\ 'file': '\v\.(pyc)$',
   "\ 'link': '',
   "\ }
+
+"use cpsm as matcher for ctrlp
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 
 "for airline to use powerline fonts
 let g:airline_powerline_fonts = 1
@@ -319,10 +337,8 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 let g:ctrlp_cmd = 'CtrlPMixed'
-"ctrlp replacement options
-"let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 "ctrlp stuff to show all files
-"
+
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
@@ -330,14 +346,15 @@ let g:ctrlp_max_depth=40
 set diffopt=vertical
 
 "airline theme
-let g:airline_theme='powerlineish'
+let g:airline_theme='gruvbox'
 
 "make gitgutter faster
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
 "change where vim stores backup and swap files
-set backupdir=~/.vim/backup//
+"set backupdir=~/.vim/backup//
+set nobackup
 set directory=~/.vim/swap//
 set undodir=~/.vim/undo//
 
@@ -374,11 +391,12 @@ endfor
 "shows last command made
 set showcmd
 
+set backspace=2
+set backspace=indent,eol,start
+
 if has("win32")
 	set directory=.,$TEMP
 	set backupdir=.,$TEMP
-	set backspace=2
-	set backspace=indent,eol,start
 	set guioptions-=m  "remove menu bar
 	set guioptions-=T  "remove toolbar
 endif
@@ -387,6 +405,8 @@ endif
 nmap <Leader>gs <Plug>GitGutterStageHunk
 nmap <Leader>gr <Plug>GitGutterRevertHunk
 nmap <Leader>gp <Plug>GitGutterPreviewHunk
+nmap <Nop> <Plug>GitGutterUndoHunk
+
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 set updatetime=250
