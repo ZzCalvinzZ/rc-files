@@ -163,7 +163,6 @@ noremap <Leader>C :! ctags<cr>
 inoremap <C-Space> <C-x><C-o>
 
 "stop using esc to escape from insert mode
-inoremap <esc> <nop>
 inoremap <C-c> <esc>
 
 "toggle background easily
@@ -444,3 +443,9 @@ endfor
 "info
 ":%!python -m json.tool
 ":%!xmllint
+
+"use enter and shift enter to add blank lines without ending up in insert mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+map <Leader><BS> :!rm -r ~/.vim/swap/* <CR>
