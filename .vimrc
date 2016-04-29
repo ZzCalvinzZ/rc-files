@@ -41,8 +41,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
@@ -58,6 +57,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'nixprime/cpsm'
 Plugin 'Olical/vim-enmasse'
+Plugin 'terryma/vim-multiple-cursors'
 
 "Plugin 'takac/vim-hardtime'
 "Plugin 'wikitopian/hardmode'
@@ -65,18 +65,25 @@ Plugin 'Olical/vim-enmasse'
 call vundle#end()
 
 "hard time commands
-nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
-let g:hardtime_default_on = 1
-let g:hardtime_allow_different_key = 1
+"nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
+"let g:hardtime_default_on = 1
+"let g:hardtime_allow_different_key = 1
+
+"neocomplete stuff
+let g:neocomplete#enable_at_startup = 1
 
 " make YCM compatible with UltiSnips (using supertab)
 
-let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_seed_identifiers_with_syntax = 1
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+
+"let g:ycm_filetype_blacklist = {
+	  "\ '.git' : 1,
+	  "\}
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -150,8 +157,13 @@ noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
 
+function Retab()
+	set noexpandtab
+	:%retab!<cr>
+endfunction
+
 "map retab
-noremap <Leader>t :%retab!<cr>
+noremap <Leader>t :call Retab()<cr>
 
 "map space f to copy current file to clipboard
 nmap <Leader>f :let @* = expand("%")<cr>
@@ -182,39 +194,39 @@ setlocal foldmethod=expr
 setlocal foldexpr=GetIndentFold(v:lnum)
 
 function! NextNonBlankLine(lnum)
-    let numlines = line('$')
-    let current = a:lnum + 1
+	let numlines = line('$')
+	let current = a:lnum + 1
 
-    while current <= numlines
-        if getline(current) =~? '\v\S'
-            return current
-        endif
+	while current <= numlines
+		if getline(current) =~? '\v\S'
+			return current
+		endif
 
-        let current += 1
-    endwhile
+		let current += 1
+	endwhile
 
-    return -2
+	return -2
 endfunction
 
 function! IndentLevel(lnum)
-    return indent(a:lnum) / &shiftwidth
+	return indent(a:lnum) / &shiftwidth
 endfunction
 
 function! GetIndentFold(lnum)
-    if getline(a:lnum) =~? '\v^\s*$'
-        return '-1'
-    endif
+	if getline(a:lnum) =~? '\v^\s*$'
+		return '-1'
+	endif
 
-    let this_indent = IndentLevel(a:lnum)
-    let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
+	let this_indent = IndentLevel(a:lnum)
+	let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
 
-    if next_indent == this_indent
-        return this_indent
-    elseif next_indent < this_indent
-        return this_indent
-    elseif next_indent > this_indent
-        return '>' . next_indent
-    endif
+	if next_indent == this_indent
+		return this_indent
+	elseif next_indent < this_indent
+		return this_indent
+	elseif next_indent > this_indent
+		return '>' . next_indent
+	endif
 endfunction
 
 
@@ -241,12 +253,12 @@ let g:pyindent_open_paren=4
 
 "wrap this in a function so that it overrides macvim settings
 function OverrideIndentation()
-    "4 space hard tabs with autoindenting
-    set tabstop=4
-    set smarttab
-    set shiftwidth=4
-    set noexpandtab
-    set autoindent
+	"4 space hard tabs with autoindenting
+	set tabstop=4
+	set smarttab
+	set shiftwidth=4
+	set noexpandtab
+	set autoindent
 endfunction
 
 autocmd BufReadPost * call OverrideIndentation()
@@ -299,20 +311,29 @@ autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType python setlocal omnifunc=xmlcomplete#CompletePython
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "use gitignore for ctrlp ignore
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-"custom ctrlp ignore
-"let g:ctrlp_custom_ignore = {
-  "\ 'dir':  '\v[\/]\.(git|hg|svn|htmlconv|compiled_static)$',
-  "\ 'file': '\v\.(pyc)$',
-  "\ 'link': '',
-  "\ }
+function! CtrlPIgnoreToggle()
+	if g:custom_ctrlp_on==0
+		let g:custom_ctrlp_on=1
+		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+	else
+		let g:custom_ctrlp_on=0
+		let g:ctrlp_user_command = ''
+	endif
+endfunction
+
+let g:custom_ctrlp_on=0
+call CtrlPIgnoreToggle()
+noremap <Leader><Leader>p :call CtrlPIgnoreToggle() <CR>
 
 "use cpsm as matcher for ctrlp
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+
+"always use ctrlp from the directory it started out in
+let g:ctrlp_working_path_mode = 0
 
 "for airline to use powerline fonts
 let g:airline_powerline_fonts = 1
@@ -370,17 +391,17 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 function! Quick_scope_selective(movement)
-    let needs_disabling = 0
-    if !g:qs_enable
-        QuickScopeToggle
-        redraw
-        let needs_disabling = 1
-    endif
-    let letter = nr2char(getchar())
-    if needs_disabling
-        QuickScopeToggle
-    endif
-    return a:movement . letter
+	let needs_disabling = 0
+	if !g:qs_enable
+		QuickScopeToggle
+		redraw
+		let needs_disabling = 1
+	endif
+	let letter = nr2char(getchar())
+	if needs_disabling
+		QuickScopeToggle
+	endif
+	return a:movement . letter
 endfunction
 
 for i in g:qs_enable_char_list
@@ -412,18 +433,18 @@ set updatetime=250
 
 "determine whether to indent tabs or spaces based on buffer
 function TabsOrSpaces()
-    " Determines whether to use spaces or tabs on the current buffer.
-    if getfsize(bufname("%")) > 256000
-        " File is very large, just use the default.
-        return
-    endif
+	" Determines whether to use spaces or tabs on the current buffer.
+	if getfsize(bufname("%")) > 256000
+		" File is very large, just use the default.
+		return
+	endif
 
-    let numTabs=len(filter(getbufline(bufname("%"), 1, 250), 'v:val =~ "^\\t"'))
-    let numSpaces=len(filter(getbufline(bufname("%"), 1, 250), 'v:val =~ "^ "'))
+	let numTabs=len(filter(getbufline(bufname("%"), 1, 250), 'v:val =~ "^\\t"'))
+	let numSpaces=len(filter(getbufline(bufname("%"), 1, 250), 'v:val =~ "^ "'))
 
-    if numTabs < numSpaces
-        setlocal expandtab
-    endif
+	if numTabs < numSpaces
+		setlocal expandtab
+	endif
 endfunction
 
 " Call the function after opening a buffer
@@ -434,10 +455,10 @@ autocmd BufReadPost * call TabsOrSpaces()
 
 "extra text objects
 for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
-    execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-    execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-    execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-    execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
+	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
+	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
+	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
+	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 
 "info
@@ -449,3 +470,7 @@ nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
 map <Leader><BS> :!rm -r ~/.vim/swap/* <CR>
+
+"use ctrl-a and ctrl-e as home and end
+:inoremap <C-E> <End>
+:inoremap <C-A> <Home>
