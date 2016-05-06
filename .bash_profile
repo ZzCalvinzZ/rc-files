@@ -13,7 +13,7 @@ _expand()
 PROMPT_GIT_BRANCH='$(__git_ps1 "(%s) ")'
 PROMPT_SYSTEM='\n\[\e[30;1m\]Ã¡Â<9a>Â<9c> \[\e[34;1m\]\u@\h\[\e[30;1m\] Ã¡Â<9a>Â<9b>Ã¡Â<9a>Â<9c> \[\e[34;1m\]\j\[\e[30;1m\] Ã¡Â<9a>Â<9b>Ã¡Â<9a>Â<9c> \[\e[34;1m\]\@ \d\[\e[30;1m\] Ã¡Â<9a>Â<9b>\[\e[30;1m\]'
 PROMPT_PATH='\[\e[32;1m\]\w'
-PROMPT_ERR='$( if [[ $? = 0 ]]; then echo -ne "\[\e[01;34m\]\w $(__git_ps1 "(%s) "):)\[\e[0m\] "; else echo -ne "\[\e[01;31m\]\w $(__git_ps1 "(%s) "):(\[\e[0m\] "; fi; )'
+PROMPT_ERR='$( if [[ $? = 0 ]]; then echo -ne "\[\e[0;32m\]\w $(__git_ps1 "(%s) "):)\[\e[0m\] "; else echo -ne "\[\e[0;31m\]\w $(__git_ps1 "(%s) "):(\[\e[0m\] "; fi; )'
 PS1="$PROMPT_ERR"
 
 export CLICOLOR=1
@@ -56,7 +56,7 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 alias manage="reviewroom/project/manage.py"
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
-alias rm_pyc='find . -name "*.pyc" -delete'
+alias rm_pycs='find . -name "*.pyc" -delete'
 
 alias runfr="manage runserver_plus 3000"
 alias runserver="./manage.py runserver_plus 4000"
