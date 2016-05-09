@@ -30,6 +30,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'chriskempson/base16-vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'thinca/vim-guicolorscheme'
@@ -41,7 +42,7 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
@@ -58,6 +59,8 @@ Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'nixprime/cpsm'
 Plugin 'Olical/vim-enmasse'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'lfv89/vim-interestingwords'
+Plugin 'Valloric/YouCompleteMe'
 
 "Plugin 'takac/vim-hardtime'
 "Plugin 'wikitopian/hardmode'
@@ -70,20 +73,22 @@ call vundle#end()
 "let g:hardtime_allow_different_key = 1
 
 "neocomplete stuff
-let g:neocomplete#enable_at_startup = 1
+"let g:acp_enableAtStartup = 0
+"let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#max_list=10
 
 " make YCM compatible with UltiSnips (using supertab)
 
-"let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
-"let g:ycm_collect_identifiers_from_tags_files = 1
-"let g:ycm_seed_identifiers_with_syntax = 1
-"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-"let g:ycm_filetype_blacklist = {
-	  "\ '.git' : 1,
-	  "\}
+let g:ycm_filetype_blacklist = {
+	  \ '.git' : 1,
+	  \}
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -190,45 +195,7 @@ set guioptions+=c
 
 set foldlevelstart=99
 
-setlocal foldmethod=expr
-setlocal foldexpr=GetIndentFold(v:lnum)
-
-function! NextNonBlankLine(lnum)
-	let numlines = line('$')
-	let current = a:lnum + 1
-
-	while current <= numlines
-		if getline(current) =~? '\v\S'
-			return current
-		endif
-
-		let current += 1
-	endwhile
-
-	return -2
-endfunction
-
-function! IndentLevel(lnum)
-	return indent(a:lnum) / &shiftwidth
-endfunction
-
-function! GetIndentFold(lnum)
-	if getline(a:lnum) =~? '\v^\s*$'
-		return '-1'
-	endif
-
-	let this_indent = IndentLevel(a:lnum)
-	let next_indent = IndentLevel(NextNonBlankLine(a:lnum))
-
-	if next_indent == this_indent
-		return this_indent
-	elseif next_indent < this_indent
-		return this_indent
-	elseif next_indent > this_indent
-		return '>' . next_indent
-	endif
-endfunction
-
+setlocal foldmethod=indent
 
 "for vim-javascript to show html and css highlighting
 let javascript_enable_domhtmlcss=1
@@ -313,20 +280,25 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+"detect .md as markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
 "use gitignore for ctrlp ignore
 
 function! CtrlPIgnoreToggle()
 	if g:custom_ctrlp_on==0
 		let g:custom_ctrlp_on=1
 		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+		:echo 'now using gitignore'
 	else
 		let g:custom_ctrlp_on=0
 		let g:ctrlp_user_command = ''
+		:echo 'not using gitignore anymore'
 	endif
 endfunction
 
-let g:custom_ctrlp_on=0
-call CtrlPIgnoreToggle()
+let g:custom_ctrlp_on=1
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 noremap <Leader><Leader>p :call CtrlPIgnoreToggle() <CR>
 
 "use cpsm as matcher for ctrlp
@@ -474,3 +446,10 @@ map <Leader><BS> :!rm -r ~/.vim/swap/* <CR>
 "use ctrl-a and ctrl-e as home and end
 :inoremap <C-E> <End>
 :inoremap <C-A> <Home>
+
+"interesting words stuff
+nnoremap <silent> <Leader>i :call InterestingWords('n')<cr>
+nnoremap <silent> <Leader>I :call UncolorAllWords()<cr>
+nnoremap <Insert> <Plug>InterestingWords
+
+set sidescroll=1
