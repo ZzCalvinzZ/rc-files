@@ -20,20 +20,17 @@ call vundle#begin()
 "list of plugins to add
 Plugin 'gmarik/Vundle.vim'
 Plugin 'rking/ag.vim'
-Plugin 'alvan/vim-closetag'
 Plugin 'godlygeek/csapprox'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'sjl/gundo.vim'
+Plugin 'jiangmiao/auto-pairs'
+"Plugin 'sjl/gundo.vim'
 Plugin 'yegappan/mru'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'chriskempson/base16-vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'thinca/vim-guicolorscheme'
+"Plugin 'thinca/vim-guicolorscheme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -42,25 +39,22 @@ Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/html5.vim'
-"Plugin 'Shougo/neocomplete.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 "Plugin 'zzcalvinzz/neovim-gitgutter'
-Plugin 'unblevable/quick-scope'
 Plugin 'leafgarland/typescript-vim.git'
 Plugin 'mbbill/undotree.git'
 Plugin 'ap/vim-css-color'
 Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'mtscout6/vim-tagbar-css'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'godlygeek/tabular'
-Plugin 'mattn/emmet-vim'
-Plugin 'jmcantrell/vim-virtualenv'
+"Plugin 'mattn/emmet-vim'
+"Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'nixprime/cpsm'
 Plugin 'Olical/vim-enmasse'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'lfv89/vim-interestingwords'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 
 "Plugin 'takac/vim-hardtime'
 "Plugin 'wikitopian/hardmode'
@@ -72,11 +66,6 @@ call vundle#end()
 "let g:hardtime_default_on = 1
 "let g:hardtime_allow_different_key = 1
 
-"neocomplete stuff
-"let g:acp_enableAtStartup = 0
-"let g:neocomplete#enable_at_startup = 1
-"let g:neocomplete#max_list=10
-
 " make YCM compatible with UltiSnips (using supertab)
 
 let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
@@ -84,7 +73,6 @@ let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:ycm_filetype_blacklist = {
 	  \ '.git' : 1,
@@ -103,9 +91,13 @@ let g:UltiSnipsEditSplit="vertical"
 
 filetype plugin indent on
 
-let python_highlight_all = 1
+"fixes macvim python defaults
 
+let python_highlight_all = 1
 let b:did_indent = 1
+
+"set this to the value of shiftwidth
+let g:pyindent_open_paren=4
 
 set relativenumber
 
@@ -215,9 +207,6 @@ set wildmenu
 "don't wrap text when it doesn't fit in the window
 set nowrap
 
-"set this to the value of shiftwidth
-let g:pyindent_open_paren=4
-
 "wrap this in a function so that it overrides macvim settings
 function OverrideIndentation()
 	"4 space hard tabs with autoindenting
@@ -249,19 +238,16 @@ set laststatus=2
 "keep the cursor on the same column when changing lines
 set nostartofline
 
-"NERDTree ignore files
+"NERDTree stuff
 let NERDTreeIgnore = ['\.pyc$']
-
-" enable line numbers
 let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
 
 "tagbar stuff
-let g:tagbar_show_linenumbers = 2
-let g:tagbar_foldlevel = 0
-let g:tagbar_autofocus = 1
+"let g:tagbar_show_linenumbers = 2
+"let g:tagbar_foldlevel = 0
+"let g:tagbar_autofocus = 1
 
-" make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
 
 "when doing zl or zh do it 30 spaces instead
 nnoremap zl 30zl
@@ -307,10 +293,10 @@ let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 "always use ctrlp from the directory it started out in
 let g:ctrlp_working_path_mode = 0
 
-"for airline to use powerline fonts
+"airline stuff
 let g:airline_powerline_fonts = 1
+let g:airline_theme='gruvbox'
 
-"airline font stuff
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -328,17 +314,13 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+"ctrlp stuff
 let g:ctrlp_cmd = 'CtrlPMixed'
-"ctrlp stuff to show all files
-
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
 "make diffs appear side by side
 set diffopt=vertical
-
-"airline theme
-let g:airline_theme='gruvbox'
 
 "make gitgutter faster
 let g:gitgutter_realtime = 0
@@ -347,7 +329,7 @@ let g:gitgutter_eager = 0
 "change where vim stores backup and swap files
 "set backupdir=~/.vim/backup//
 set nobackup
-set directory=~/.vim/swap//
+set noswapfile
 set undodir=~/.vim/undo//
 
 "for quick-scope in find mode
@@ -433,10 +415,6 @@ for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', 
 	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
 endfor
 
-"info
-":%!python -m json.tool
-":%!xmllint
-
 "use enter and shift enter to add blank lines without ending up in insert mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
@@ -453,3 +431,14 @@ nnoremap <silent> <Leader>I :call UncolorAllWords()<cr>
 nnoremap <Insert> <Plug>InterestingWords
 
 set sidescroll=1
+
+"syntastic stuff
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"let g:syntastic_quiet_messages = {"!level":  "warnings"}
