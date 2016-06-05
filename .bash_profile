@@ -61,6 +61,8 @@ alias rm_pycs='find . -name "*.pyc" -delete'
 alias runfr="manage runserver_plus 3000"
 alias runserver="./manage.py runserver_plus 4000"
 alias nutri="workon nutrihive; cd ../nutrihive"
+alias master="git checkout master"
+alias goodssl="/usr/local/opt/openssl/bin/openssl"
 
 cd ~/dev/fluidreview/
 workon fr5.1
