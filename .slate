@@ -13,7 +13,7 @@ config windowHintsSpread true
 #
 # Abstract positions for later use within configuration.
 #
-alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias full move screenOriginX+10;screenOriginY+10 screenSizeX-20;screenSizeY-20
 alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
 alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
 alias tophalf move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
