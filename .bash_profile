@@ -72,3 +72,5 @@ export EDITOR="$VISUAL"
 
 # prevent security pin in flask
 export WERKZEUG_DEBUG_PIN=off
+
+TERM=screen-256color

@@ -30,7 +30,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'morhetz/gruvbox'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'thinca/vim-guicolorscheme'
+Plugin 'thinca/vim-guicolorscheme'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
@@ -54,7 +54,7 @@ Plugin 'nixprime/cpsm'
 Plugin 'Olical/vim-enmasse'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 "Plugin 'takac/vim-hardtime'
 "Plugin 'wikitopian/hardmode'
@@ -109,7 +109,7 @@ set cmdheight=2
 set hidden
 
 "maximize window when vim starts
-set lines=999 columns=9999
+"set lines=999 columns=9999
 
 "map leader set to Space key
 let mapleader = " "
@@ -332,10 +332,6 @@ set nobackup
 set noswapfile
 set undodir=~/.vim/undo//
 
-"for quick-scope in find mode
-let g:qs_enable = 0
-let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
-
 "this function allows you to visually select lines to perform macro
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 
@@ -357,10 +353,6 @@ function! Quick_scope_selective(movement)
 	endif
 	return a:movement . letter
 endfunction
-
-for i in g:qs_enable_char_list
-	execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
-endfor
 
 "shows last command made
 set showcmd
