@@ -8,86 +8,80 @@ filetype off
 "turn off vi compatibility
 set nocp
 
-" Vundle stuff for plugins
-if has("win32")
-	set rtp+=\Users\Calvin\vimfiles\bundle\Vundle.vim
-else
-	set rtp+=~/.vim/bundle/Vundle.vim
-endif
-
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
 "list of plugins to add
-Plugin 'gmarik/Vundle.vim'
-Plugin 'rking/ag.vim'
-Plugin 'godlygeek/csapprox'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-"Plugin 'sjl/gundo.vim'
-Plugin 'yegappan/mru'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'morhetz/gruvbox'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'thinca/vim-guicolorscheme'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/html5.vim'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-"Plugin 'zzcalvinzz/neovim-gitgutter'
-Plugin 'leafgarland/typescript-vim.git'
-Plugin 'mbbill/undotree.git'
-Plugin 'ap/vim-css-color'
-Plugin 'michaeljsmith/vim-indent-object'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'godlygeek/tabular'
-"Plugin 'mattn/emmet-vim'
-"Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'nixprime/cpsm'
-Plugin 'Olical/vim-enmasse'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Valloric/YouCompleteMe'
-"Plugin 'scrooloose/syntastic'
+Plug 'rking/ag.vim'
+"Plug 'godlygeek/csapprox'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'yegappan/mru'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'kchmck/vim-coffee-script'
+Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
+Plug 'thinca/vim-guicolorscheme'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-unimpaired'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/html5.vim'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'leafgarland/typescript-vim'
+Plug 'mbbill/undotree'
+Plug 'ap/vim-css-color'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'godlygeek/tabular'
+Plug 'nixprime/cpsm' , { 'do': './install.sh' }
+Plug 'Olical/vim-enmasse'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'ervandew/supertab'
+Plug 'luochen1990/rainbow'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'isRuslan/vim-es6'
+Plug 'junegunn/vim-plug'
 
-"Plugin 'takac/vim-hardtime'
-"Plugin 'wikitopian/hardmode'
+"Plug 'vim-scripts/AutoComplPop'
 
-call vundle#end()
+call plug#end()
 
-"hard time commands
-"nnoremap <leader>u <Esc>:call HardTimeToggle()<CR>
-"let g:hardtime_default_on = 1
-"let g:hardtime_allow_different_key = 1
+let g:ycm_dont_warn_on_startup = 0
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
-" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_filetype_whitelist = {
+	"\'python' : 1,
+	"\'*.html' : 1,
+	"\'vim' : 1,
+	"\'css' : 1,
+"\}
 
-let g:ycm_path_to_python_interpreter = "/usr/local/bin/python"
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-let g:ycm_filetype_blacklist = {
-	  \ '.git' : 1,
-	  \}
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger           = '<tab>'
+let g:UltiSnipsJumpForwardTrigger      = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " automatically include certain sippets based on filetypes
 autocmd FileType html set ft=htmldjango.html
 
 " If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsEditSplit="vertical"
 
 filetype plugin indent on
 
@@ -108,6 +102,13 @@ set cmdheight=2
 "(hides it in a buffer)
 set hidden
 
+" allows incsearch highlighting for range commands
+cnoremap $t <CR>:t''<CR>
+cnoremap $T <CR>:T''<CR>
+cnoremap $m <CR>:m''<CR>
+cnoremap $M <CR>:M''<CR>
+cnoremap $d <CR>:d<CR>``
+
 "maximize window when vim starts
 "set lines=999 columns=9999
 
@@ -119,29 +120,31 @@ if has("win32")
 	map <Leader>v :e \Users\Calvin\_vimrc
 else
 	map <Leader>v :e ~/.vimrc
+	map <Leader>V :e ~/.bash_profile
 endif
 
-"map plugin commands
-map <Leader>2 :NERDTreeFind
-map <Leader>3 :NERDTreeToggle
-map <Leader>4 :TagbarToggle
-map <Leader>m :MRU
-map <Leader>5 :UndotreeToggle
+"rainbow parentheses
+let g:rainbow_active = 1
 
-"easymotion
-map , <Plug>(easymotion-prefix)
-let g:EasyMotion_smartcase = 1
-map S <Plug>(easymotion-bd-jk)
-vmap S <Plug>(easymotion-bd-jk)
-map s <Plug>(easymotion-bd-w)
+"map plugin commands
+map <Leader><Leader>2 :NERDTreeFind
+map <Leader><Leader>3 :NERDTreeToggle
+map <Leader><Leader>4 :TagbarToggle
+map <Leader><Leader>5 :UndotreeToggle
+
+noremap <Leader>D :bd
+map <Leader>m :MRU
 
 "map fugitive commands
 noremap <Leader>a :Git add .
 noremap <Leader>s :Gstatus
 noremap <Leader>p :Gpush
-noremap <Leader>d :Gdiff
+noremap <Leader>dg :Gdiff
 noremap <Leader>b :Gblame
 noremap <Leader>r :Gread
+
+noremap <Leader>dt :windo diffthis
+noremap <Leader>ds :windo diffoff
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -153,6 +156,10 @@ noremap <Leader>k :wincmd k<cr>
 noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
+noremap <Leader><s-k> :split<cr>
+noremap <Leader><s-j> :split<cr>
+noremap <Leader><s-h> :vsplit<cr>
+noremap <Leader><s-l> :vsplit<cr>
 
 function Retab()
 	set noexpandtab
@@ -194,7 +201,7 @@ let javascript_enable_domhtmlcss=1
 
 "incremental search(auto select first match when searching)
 set incsearch
-set hlsearch
+"set hlsearch
 
 "this will ignore case unless explicitly searching with capitals
 set ignorecase
@@ -242,19 +249,14 @@ set nostartofline
 let NERDTreeIgnore = ['\.pyc$']
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
-
-"tagbar stuff
-"let g:tagbar_show_linenumbers = 2
-"let g:tagbar_foldlevel = 0
-"let g:tagbar_autofocus = 1
-
+let g:NERDTreeMapHelp = '<F1>'
 
 "when doing zl or zh do it 30 spaces instead
 nnoremap zl 30zl
 nnoremap zh 30zh
 
 set infercase
-set completeopt=longest,menuone
+"Set completeopt=longest,menuone
 set omnifunc=syntaxcomplete#Complete
 set completefunc=syntaxcomplete#Complete
 set complete=.,w,b,u,U,t,i,d
@@ -264,7 +266,7 @@ autocmd FileType css,scss setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "detect .md as markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -289,17 +291,37 @@ noremap <Leader><Leader>p :call CtrlPIgnoreToggle() <CR>
 
 "use cpsm as matcher for ctrlp
 let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+"let g:cpsm_match_empty_query = 0
 
 "always use ctrlp from the directory it started out in
 let g:ctrlp_working_path_mode = 0
 
 "airline stuff
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='badwolf'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 1
+
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+
+" Just filename in the tabline
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Easier tab/buffer switching
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
 
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -424,13 +446,6 @@ nnoremap <Insert> <Plug>InterestingWords
 
 set sidescroll=1
 
-"syntastic stuff
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"let g:syntastic_quiet_messages = {"!level":  "warnings"}
+if has("gui_running")
+	set transparency=10
+endif

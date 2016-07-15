@@ -53,19 +53,33 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/p
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
+#reviewroom aliases
 alias manage="reviewroom/project/manage.py"
-alias love="/Applications/love.app/Contents/MacOS/love"
+alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
+alias bugfixer="~/dev/devutils/bugfixer/bugfixer.sh"
 alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
-alias rm_pycs='find . -name "*.pyc" -delete'
-
-alias runfr="manage runserver_plus 3000"
+alias frrun="manage runserver_plus 3000"
+alias frshell="manage shell_plus"
 alias runserver="./manage.py runserver_plus 4000"
+alias t1="ssh frdev@frdev1.fluidreview.dev"
+
+#roguelike
+alias rogue="workon roguelike; cd ~/dev/stuff/roguelike"
+
+#misc aliases
+alias love="/Applications/love.app/Contents/MacOS/love"
+alias rm_pycs='find . -name "*.pyc" -delete'
 alias nutri="workon nutrihive; cd ../nutrihive"
-alias master="git checkout master"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
+alias profile="vim ~/.bash_profile"
+
+
 
 cd ~/dev/fluidreview/
-workon fr5.1
+workon fr
+
+#reviewroom environment variables
+export FR_PATH=~/dev/fluidreview/
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
