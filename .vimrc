@@ -40,12 +40,17 @@ Plug 'godlygeek/tabular'
 Plug 'nixprime/cpsm' , { 'do': './install.sh' }
 Plug 'Olical/vim-enmasse'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+if has("gui_running")
+	Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+endif
+
 Plug 'ervandew/supertab'
-Plug 'luochen1990/rainbow'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'isRuslan/vim-es6'
 Plug 'junegunn/vim-plug'
+Plug 'maksimr/vim-jsbeautify'
+Plug 'wellle/targets.vim'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -55,13 +60,11 @@ let g:ycm_dont_warn_on_startup = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
-"let g:ycm_filetype_whitelist = {
-	"\'python' : 1,
-	"\'*.html' : 1,
-	"\'vim' : 1,
-	"\'css' : 1,
-"\}
+let g:ycm_filetype_blacklist = {
+	\'fugitiveblame' : 1,
+\}
 
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
@@ -132,7 +135,7 @@ map <Leader><Leader>3 :NERDTreeToggle
 map <Leader><Leader>4 :TagbarToggle
 map <Leader><Leader>5 :UndotreeToggle
 
-noremap <Leader>D :bd
+noremap <Leader>D :bp\|bd #
 map <Leader>m :MRU
 
 "map fugitive commands
@@ -140,7 +143,7 @@ noremap <Leader>a :Git add .
 noremap <Leader>s :Gstatus
 noremap <Leader>p :Gpush
 noremap <Leader>dg :Gdiff
-noremap <Leader>b :Gblame
+noremap <Leader>B :Gblame
 noremap <Leader>r :Gread
 
 noremap <Leader>dt :windo diffthis
@@ -160,6 +163,9 @@ noremap <Leader><s-k> :split<cr>
 noremap <Leader><s-j> :split<cr>
 noremap <Leader><s-h> :vsplit<cr>
 noremap <Leader><s-l> :vsplit<cr>
+
+"CtrlP
+nnoremap <C-\> :CtrlPBuffer<CR>
 
 function Retab()
 	set noexpandtab
@@ -304,6 +310,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
+let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 
@@ -421,14 +428,6 @@ autocmd BufReadPost * call TabsOrSpaces()
 "call silver searcher for word under cursor
 :nnoremap <Leader>A :Ag -Q '<cword>' -G "py\|js\|html" <CR>
 
-"extra text objects
-for char in [ '_', '.', ':', ',', ';', '<bar>', '/', '<bslash>', '*', '+', '%', '`' ]
-	execute 'xnoremap i' . char . ' :<C-u>normal! T' . char . 'vt' . char . '<CR>'
-	execute 'onoremap i' . char . ' :normal vi' . char . '<CR>'
-	execute 'xnoremap a' . char . ' :<C-u>normal! F' . char . 'vf' . char . '<CR>'
-	execute 'onoremap a' . char . ' :normal va' . char . '<CR>'
-endfor
-
 "use enter and shift enter to add blank lines without ending up in insert mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
@@ -449,3 +448,20 @@ set sidescroll=1
 if has("gui_running")
 	set transparency=10
 endif
+
+function Beautyness()
+	if &filetype == 'javascript'
+		call RangeJsBeautify()
+	elseif &filetype == 'html'
+		call RangeHtmlBeautify()
+	elseif &filetype == 'html.mustache'
+		call RangeHtmlBeautify()
+	elseif &filetype == 'css'
+		call RangeCSSBeautify()
+	elseif &filetype == 'json'
+		call RangeJsonBeautify()
+	endif
+endfunction
+
+vmap <c-b> :call Beautyness()<cr>
+

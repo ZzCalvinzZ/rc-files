@@ -69,9 +69,11 @@ alias rogue="workon roguelike; cd ~/dev/stuff/roguelike"
 #misc aliases
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias rm_pycs='find . -name "*.pyc" -delete'
-alias nutri="workon nutrihive; cd ../nutrihive"
+alias habble="workon habble; cd ../habble"
+alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
+alias tag="ctags -R"
 
 
 
