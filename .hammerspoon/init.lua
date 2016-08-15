@@ -67,7 +67,12 @@ end)
 
 -- lock screen
 hs.hotkey.bind(mash.move, "U", function()
-    os.execute("/System/Library/CoreServices/Menu\\ Extras/User.menu/Contents/Resources/CGSession -suspend")
+    hs.caffeinate.lockScreen()
+end)
+
+-- sleep screen
+hs.hotkey.bind(mash.move, "S", function()
+    hs.caffeinate.systemSleep()
 end)
 
 -------------------------------------------------------------------------------------
@@ -99,6 +104,7 @@ function focusScreen(screen)
       hs.fnutils.partial(isInScreen, screen))
   local windowToFocus = #windows > 0 and windows[1] or hs.window.desktop()
   windowToFocus:focus()
+  hs.window.frontmostWindow():focus()
 
   -- Move mouse to center of screen
   local pt = geometry.rectMidPoint(screen:fullFrame())
