@@ -3,8 +3,10 @@ padding = 20
 local mash = {
   move    = {"ctrl", "alt", "cmd"},
   focus   = {"ctrl", "cmd"},
+  hyper   = {"ctrl", "cmd", "alt", "shift"},
 }
 
+-------------------------------------------------------------------------------------
 -- move window left
 hs.hotkey.bind(mash.move, "H", function()
   local win = hs.window.focusedWindow()
@@ -12,7 +14,7 @@ hs.hotkey.bind(mash.move, "H", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.x + padding
+  f.x = max.x + paddinm
   f.y = max.y + padding
   f.w = (max.w / 2) - padding
   f.h = max.h - padding * 2
@@ -46,27 +48,16 @@ hs.hotkey.bind(mash.move, "M", function()
   f.h = max.h - padding * 2
   win:setFrame(f)
 end)
+-------------------------------------------------------------------------------------
 
--- Focus windows
---local function focus(direction)
-  --local fn = "focusWindow" .. (direction:gsub("^%l", string.upper))
-
-  --return function()
-    --local win = hs.window:focusedWindow()
-    --if not win then return end
-
-    --win[fn]()
-  --end
---end
-
---hs.hotkey.bind(mash.focus, "K", focus("north"))
---hs.hotkey.bind(mash.focus, "L", focus("east"))
---hs.hotkey.bind(mash.focus, "J", focus("south"))
---hs.hotkey.bind(mash.focus, "H", focus("west"))
+--switch windows on same screen
+hs.hotkey.bind(mash.focus, "B", function()
+  local win = hs.window.focusedWindow():sendToBack()
+end)
 
 
 -- lock screen
-hs.hotkey.bind(mash.move, "U", function()
+hs.hotkey.bind(mash.move, "D", function()
     hs.caffeinate.lockScreen()
 end)
 
@@ -132,7 +123,7 @@ function drawBorder()
     local fh = f.h + 4
 
     border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
-    border:setStrokeWidth(3)
+    border:setStrokeWidth(4)
     border:setStrokeColor({["red"]=0.75,["blue"]=0.14,["green"]=0.83,["alpha"]=0.80})
     border:setRoundedRectRadii(5.0, 5.0)
     border:setStroke(true):setFill(false)
