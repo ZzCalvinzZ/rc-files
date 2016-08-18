@@ -55,6 +55,8 @@ hs.hotkey.bind(mash.focus, "B", function()
   local win = hs.window.focusedWindow():sendToBack()
 end)
 
+-------------------------------------------------------------------------------------
+
 
 -- lock screen
 hs.hotkey.bind(mash.move, "D", function()
@@ -68,14 +70,22 @@ end)
 
 -------------------------------------------------------------------------------------
 --Bring focus to next display/screen
-hs.hotkey.bind(mash.focus, "H", function ()
-  focusScreen(hs.window.focusedWindow():screen():next())
-end)
 
---Bring focus to previous display/screen
-hs.hotkey.bind(mash.focus, "L", function() 
-  focusScreen(hs.window.focusedWindow():screen():previous())
-end)
+local map = {
+    previous = "L",
+    next = "H",
+}
+
+function bindFocusDisplays()
+    hs.hotkey.bind(mash.focus, map.previous, function ()
+      focusScreen(hs.window.focusedWindow():screen():next())
+    end)
+
+    --Bring focus to previous display/screen
+    hs.hotkey.bind(mash.focus, map.next, function() 
+      focusScreen(hs.window.focusedWindow():screen():previous())
+    end)
+end
 
 --Predicate that checks if a window belongs to a screen
 function isInScreen(screen, win)
@@ -96,11 +106,21 @@ function focusScreen(screen)
   local windowToFocus = #windows > 0 and windows[1] or hs.window.desktop()
   windowToFocus:focus()
   hs.window.frontmostWindow():focus()
-
-  -- Move mouse to center of screen
-  local pt = geometry.rectMidPoint(screen:fullFrame())
-  mouse.setAbsolutePosition(pt)
 end
+
+bindFocusDisplays()
+
+--rebind focus screen commands
+hs.hotkey.bind(mash.focus, "S", function() 
+    for key, value in pairs(map) do
+        if value == "L" then
+            map[key] = "H"
+        elseif value == "H" then
+            map[key] = "L"
+        end
+    end
+    bindFocusDisplays()
+end)
 
 -------------------------------------------------------------------------------------
 
