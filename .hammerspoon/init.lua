@@ -203,12 +203,12 @@ end
 local stopwatchCount = 0
 
 function stopwatchFunction()
-    stopwatchCount = stopwatchCount + 1
-
     hs.notify.new(nil, {
         title = 'Timer',
         informativeText = SecondsToClock(stopwatchCount),
     }):send()
+
+    stopwatchCount = stopwatchCount + 1
 
 end
 
@@ -216,10 +216,11 @@ local stopwatch = hs.timer.new(1, stopwatchFunction)
 
 hs.hotkey.bind(mash.move, "T", function()
     if stopwatch:running() then
-        stopwatch:stop()
-    else
         stopwatchCount = 0
         hs.notify.withdrawAll()
+        stopwatch:stop()
+    else
+        stopwatchFunction()
         stopwatch:start()
     end
 end)
