@@ -14,7 +14,7 @@ hs.hotkey.bind(mash.move, "H", function()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.x + paddinm
+  f.x = max.x + padding
   f.y = max.y + padding
   f.w = (max.w / 2) - padding
   f.h = max.h - padding * 2
@@ -157,6 +157,32 @@ windows = hs.window.filter.new(nil)
 windows:subscribe(hs.window.filter.windowFocused, function () drawBorder() end)
 windows:subscribe(hs.window.filter.windowUnfocused, function () drawBorder() end)
 windows:subscribe(hs.window.filter.windowMoved, function () drawBorder() end)
+
+-------------------------------------------------------------------------------------
+
+--fullscreen stuff
+
+hs.hotkey.bind(mash.focus, "F", function()
+    
+    for key, window in pairs(hs.window.filter.new{'Google Chrome', override={fullscreen=true}}) do 
+        if window:isFullScreen() then
+            print 'hi'
+            window:focus()
+        end
+    end
+end)
+
+-------------------------------------------------------------------------------------
+
+-- map up and down arrows
+
+hs.hotkey.bind(mash.focus, "K", function()
+    hs.eventtap.keyStroke({}, "up")
+end)
+
+hs.hotkey.bind(mash.focus, "J", function()
+    hs.eventtap.keyStroke({}, "down")
+end)
 
 -------------------------------------------------------------------------------------
     
