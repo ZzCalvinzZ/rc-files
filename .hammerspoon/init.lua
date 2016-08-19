@@ -185,6 +185,50 @@ hs.hotkey.bind(mash.focus, "J", function()
 end)
 
 -------------------------------------------------------------------------------------
+
+-- timer
+function SecondsToClock(seconds)
+    local seconds = tonumber(seconds)
+
+    if seconds <= 0 then
+        return "00:00:00";
+    else
+        hours = string.format("%02.f", math.floor(seconds/3600));
+        mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+        secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+        return hours..":"..mins..":"..secs
+    end
+end
+
+local stopwatchCount = 0
+
+function stopwatchFunction()
+    stopwatchCount = stopwatchCount + 1
+
+    hs.notify.new(nil, {
+        title = 'Timer',
+        informativeText = SecondsToClock(stopwatchCount),
+    }):send()
+
+end
+
+local stopwatch = hs.timer.new(1, stopwatchFunction)
+
+hs.hotkey.bind(mash.move, "T", function()
+    if stopwatch:running() then
+        stopwatch:stop()
+    else
+        stopwatchCount = 0
+        hs.notify.withdrawAll()
+        stopwatch:start()
+    end
+end)
+
+hs.hotkey.bind(mash.focus, "J", function()
+    hs.eventtap.keyStroke({}, "down")
+end)
+
+-------------------------------------------------------------------------------------
     
 --reload config
 hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
