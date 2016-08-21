@@ -1,58 +1,80 @@
 padding = 20
 
 local mash = {
-  move    = {"ctrl", "alt", "cmd"},
-  focus   = {"ctrl", "cmd"},
-  hyper   = {"ctrl", "cmd", "alt", "shift"},
+    move    = {"ctrl", "alt", "cmd"},
+    focus   = {"ctrl", "cmd"},
+    hyper   = {"ctrl", "cmd", "alt", "shift"},
 }
 
 -------------------------------------------------------------------------------------
--- move window left
-hs.hotkey.bind(mash.move, "H", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
 
-  f.x = max.x + padding
-  f.y = max.y + padding
-  f.w = (max.w / 2) - padding
-  f.h = max.h - padding * 2
-  win:setFrame(f)
+
+function makeWindowFullscreen(win)
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + padding
+    f.y = max.y + padding
+    f.w = max.w - padding * 2
+    f.h = max.h - padding * 2
+    print('hi')
+    win:setFrame(f)
+end
+
+-- move window left
+hs.hotkey.bind(mash.hyper, "H", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
+
+    f.x = max.x + padding
+    f.y = max.y + padding
+    f.w = (max.w / 2) - padding
+    f.h = max.h - padding * 2
+    win:setFrame(f)
 end)
 
 -- move window right
-hs.hotkey.bind(mash.move, "L", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
+hs.hotkey.bind(mash.hyper, "L", function()
+    local win = hs.window.focusedWindow()
+    local f = win:frame()
+    local screen = win:screen()
+    local max = screen:frame()
 
-  f.x = max.x + (max.w / 2)
-  f.y = max.y + padding
-  f.w = (max.w / 2) - padding
-  f.h = max.h - padding * 2
-  win:setFrame(f)
+    f.x = max.x + (max.w / 2)
+    f.y = max.y + padding
+    f.w = (max.w / 2) - padding
+    f.h = max.h - padding * 2
+    win:setFrame(f)
 end)
 
 --fullscreen window
 hs.hotkey.bind(mash.move, "M", function()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x + padding
-  f.y = max.y + padding
-  f.w = max.w - padding * 2
-  f.h = max.h - padding * 2
-  win:setFrame(f)
+    local win = hs.window.focusedWindow()
+    makeWindowFullscreen(win)
 end)
+
+-- move window to the screen to the left
+hs.hotkey.bind(mash.move, "H", function()
+    local win = hs.window.focusedWindow()
+    win:moveOneScreenWest()
+    makeWindowFullscreen(win)
+end)
+
+-- move window to the screen to the right
+hs.hotkey.bind(mash.move, "L", function()
+    local win = hs.window.focusedWindow()
+    win:moveOneScreenEast()
+    makeWindowFullscreen(win)
+end)
+
 -------------------------------------------------------------------------------------
 
 --switch windows on same screen
 hs.hotkey.bind(mash.focus, "B", function()
-  local win = hs.window.focusedWindow():sendToBack()
+    local win = hs.window.focusedWindow():sendToBack()
 end)
 
 -------------------------------------------------------------------------------------
@@ -78,18 +100,18 @@ local map = {
 
 function bindFocusDisplays()
     hs.hotkey.bind(mash.focus, map.previous, function ()
-      focusScreen(hs.window.focusedWindow():screen():next())
+        focusScreen(hs.window.focusedWindow():screen():next())
     end)
 
     --Bring focus to previous display/screen
     hs.hotkey.bind(mash.focus, map.next, function() 
-      focusScreen(hs.window.focusedWindow():screen():previous())
+        focusScreen(hs.window.focusedWindow():screen():previous())
     end)
 end
 
 --Predicate that checks if a window belongs to a screen
 function isInScreen(screen, win)
-  return win:screen() == screen
+    return win:screen() == screen
 end
 
 -- Brings focus to the scren by setting focus on the front-most application in it.
@@ -97,15 +119,15 @@ end
 -- Mission Control gestures & keyboard shortcuts are anchored, oddly, on where the
 -- mouse is focused.
 function focusScreen(screen)
-  --Get windows within screen, ordered from front to back.
-  --If no windows exist, bring focus to desktop. Otherwise, set focus on
-  --front-most application window.
-  local windows = hs.fnutils.filter(
-      hs.window.orderedWindows(),
-      hs.fnutils.partial(isInScreen, screen))
-  local windowToFocus = #windows > 0 and windows[1] or hs.window.desktop()
-  windowToFocus:focus()
-  hs.window.frontmostWindow():focus()
+    --Get windows within screen, ordered from front to back.
+    --If no windows exist, bring focus to desktop. Otherwise, set focus on
+    --front-most application window.
+    local windows = hs.fnutils.filter(
+    hs.window.orderedWindows(),
+    hs.fnutils.partial(isInScreen, screen))
+    local windowToFocus = #windows > 0 and windows[1] or hs.window.desktop()
+    windowToFocus:focus()
+    hs.window.frontmostWindow():focus()
 end
 
 bindFocusDisplays()
@@ -163,7 +185,7 @@ windows:subscribe(hs.window.filter.windowMoved, function () drawBorder() end)
 --fullscreen stuff
 
 hs.hotkey.bind(mash.focus, "F", function()
-    
+
     for key, window in pairs(hs.window.filter.new{'Google Chrome', override={fullscreen=true}}) do 
         if window:isFullScreen() then
             print 'hi'
@@ -230,9 +252,9 @@ hs.hotkey.bind(mash.focus, "J", function()
 end)
 
 -------------------------------------------------------------------------------------
-    
+
 --reload config
 hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
-  hs.reload()
+    hs.reload()
 end)
 hs.alert.show("Config loaded")
