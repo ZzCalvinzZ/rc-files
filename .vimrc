@@ -51,6 +51,7 @@ Plug 'isRuslan/vim-es6'
 Plug 'junegunn/vim-plug'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'wellle/targets.vim'
+Plug 'kshenoy/vim-signature'
 
 "Plug 'vim-scripts/AutoComplPop'
 

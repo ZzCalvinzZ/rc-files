@@ -1,5 +1,7 @@
 padding = 20
 
+local wf=hs.window.filter.new():setDefaultFilter{}
+
 local mash = {
     move    = {"ctrl", "alt", "cmd"},
     focus   = {"ctrl", "cmd"},
@@ -10,6 +12,7 @@ local mash = {
 
 
 function makeWindowFullscreen(win)
+    print('hi')
     local f = win:frame()
     local screen = win:screen()
     local max = screen:frame()
@@ -18,9 +21,12 @@ function makeWindowFullscreen(win)
     f.y = max.y + padding
     f.w = max.w - padding * 2
     f.h = max.h - padding * 2
-    print('hi')
     win:setFrame(f)
 end
+
+-- maximize window on open
+
+wf:subscribe(hs.window.filter.windowCreated, makeWindowFullscreen)
 
 -- move window left
 hs.hotkey.bind(mash.hyper, "H", function()
