@@ -52,6 +52,9 @@ Plug 'junegunn/vim-plug'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
+Plug 'tpope/vim-scriptease'
+Plug 'vim-scripts/repmo.vim'
+Plug 'AndrewRadev/switch.vim'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -168,7 +171,7 @@ noremap <Leader><s-l> :vsplit<cr>
 "CtrlP
 nnoremap <C-\> :CtrlPBuffer<CR>
 
-function Retab()
+function! Retab()
 	set noexpandtab
 	:%retab!<cr>
 endfunction
@@ -222,7 +225,7 @@ set wildmenu
 set nowrap
 
 "wrap this in a function so that it overrides macvim settings
-function OverrideIndentation()
+function! OverrideIndentation()
 	"4 space hard tabs with autoindenting
 	set tabstop=4
 	set smarttab
@@ -408,7 +411,7 @@ let g:gitgutter_eager = 1
 set updatetime=250
 
 "determine whether to indent tabs or spaces based on buffer
-function TabsOrSpaces()
+function! TabsOrSpaces()
 	" Determines whether to use spaces or tabs on the current buffer.
 	if getfsize(bufname("%")) > 256000
 		" File is very large, just use the default.
@@ -450,7 +453,7 @@ if has("gui_running")
 	set transparency=10
 endif
 
-function Beautyness()
+function! Beautyness()
 	if &filetype == 'javascript'
 		call RangeJsBeautify()
 	elseif &filetype == 'html'
@@ -459,10 +462,17 @@ function Beautyness()
 		call RangeHtmlBeautify()
 	elseif &filetype == 'css'
 		call RangeCSSBeautify()
-	elseif &filetype == 'json'
+	elseif &filetype == 'json' || &filetype == 'python'
 		call RangeJsonBeautify()
 	endif
 endfunction
 
 vmap <c-b> :call Beautyness()<cr>
 
+"vim switch stuff for switching boolean values
+let g:switch_mapping = "-"
+
+"let g:switch_custom_definitions =
+    "\ [
+    "\   ['foo', 'bar', 'baz']
+    "\ ]
