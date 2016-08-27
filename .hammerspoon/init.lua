@@ -10,9 +10,7 @@ local mash = {
 
 -------------------------------------------------------------------------------------
 
-
 function makeWindowFullscreen(win)
-    print('hi')
     local f = win:frame()
     local screen = win:screen()
     local max = screen:frame()
@@ -194,7 +192,6 @@ hs.hotkey.bind(mash.focus, "F", function()
 
     for key, window in pairs(hs.window.filter.new{'Google Chrome', override={fullscreen=true}}) do 
         if window:isFullScreen() then
-            print 'hi'
             window:focus()
         end
     end
@@ -256,6 +253,19 @@ end)
 hs.hotkey.bind(mash.focus, "J", function()
     hs.eventtap.keyStroke({}, "down")
 end)
+
+-------------------------------------------------------------------------------------
+local watcher = hs.caffeinate.watcher
+
+--do stuff when you wake from sleep
+function handleCaffeine(event)
+    if event == watcher.screensDidUnlock  then
+    end
+end
+
+cf = watcher.new(handleCaffeine)
+cf:start()
+
 
 -------------------------------------------------------------------------------------
 
