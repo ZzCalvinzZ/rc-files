@@ -1,3 +1,5 @@
+spaces = require("hs._asm.undocumented.spaces")
+
 padding = 20
 
 local wf=hs.window.filter.new():setDefaultFilter{}
@@ -24,7 +26,7 @@ end
 
 -- maximize window on open
 
-wf:subscribe(hs.window.filter.windowCreated, makeWindowFullscreen)
+--wf:subscribe(hs.window.filter.windowCreated, makeWindowFullscreen)
 
 -- move window left
 hs.hotkey.bind(mash.hyper, "H", function()
@@ -97,19 +99,14 @@ end)
 -------------------------------------------------------------------------------------
 --Bring focus to next display/screen
 
-local map = {
-    previous = "L",
-    next = "H",
-}
-
 function bindFocusDisplays()
-    hs.hotkey.bind(mash.focus, map.previous, function ()
-        focusScreen(hs.window.focusedWindow():screen():next())
+    hs.hotkey.bind(mash.focus, "H", function ()
+        focusScreen(hs.screen.mainScreen():toWest())
     end)
 
     --Bring focus to previous display/screen
-    hs.hotkey.bind(mash.focus, map.next, function() 
-        focusScreen(hs.window.focusedWindow():screen():previous())
+    hs.hotkey.bind(mash.focus, "L", function() 
+        focusScreen(hs.screen.mainScreen():toEast())
     end)
 end
 
@@ -131,23 +128,19 @@ function focusScreen(screen)
     hs.fnutils.partial(isInScreen, screen))
     local windowToFocus = #windows > 0 and windows[1] or hs.window.desktop()
     windowToFocus:focus()
-    hs.window.frontmostWindow():focus()
+
+    for key, window in pairs(windows) do 
+        --print(window)
+        if isInScreen(screen, window) then
+            if window:isStandard() then
+                window:focus()
+                break
+            end
+        end
+    end
 end
 
 bindFocusDisplays()
-
---rebind focus screen commands
-hs.hotkey.bind(mash.focus, "S", function() 
-    for key, value in pairs(map) do
-        if value == "L" then
-            map[key] = "H"
-        elseif value == "H" then
-            map[key] = "L"
-        end
-    end
-    bindFocusDisplays()
-end)
-
 -------------------------------------------------------------------------------------
 
 -- border
@@ -190,9 +183,11 @@ windows:subscribe(hs.window.filter.windowMoved, function () drawBorder() end)
 
 hs.hotkey.bind(mash.focus, "F", function()
 
-    for key, window in pairs(hs.window.filter.new{'Google Chrome', override={fullscreen=true}}) do 
-        if window:isFullScreen() then
-            window:focus()
+    print(spaces.layout())
+    for key, spaceId in pairs(spaces.query(spaces.allSpaces)) do 
+        if spaces.spaceType(spaceId) == spaces.types.tiled then
+            spaces.changeToSpace(spaceId)
+            break
         end
     end
 end)
@@ -255,16 +250,16 @@ hs.hotkey.bind(mash.focus, "J", function()
 end)
 
 -------------------------------------------------------------------------------------
-local watcher = hs.caffeinate.watcher
+--local watcher = hs.caffeinate.watcher
 
---do stuff when you wake from sleep
-function handleCaffeine(event)
-    if event == watcher.screensDidUnlock  then
-    end
-end
+----do stuff when you wake from sleep
+--function handleCaffeine(event)
+    --if event == watcher.screensDidUnlock  then
+    --end
+--end
 
-cf = watcher.new(handleCaffeine)
-cf:start()
+--cf = watcher.new(handleCaffeine)
+--cf:start()
 
 
 -------------------------------------------------------------------------------------
