@@ -1,3 +1,4 @@
+require "tabletools"
 spaces = require("hs._asm.undocumented.spaces")
 
 padding = 20
@@ -11,6 +12,11 @@ local mash = {
 }
 
 -------------------------------------------------------------------------------------
+
+function sleep(s)
+    local ntime = os.time() + s
+    repeat until os.time() > ntime
+end
 
 function makeWindowFullscreen(win)
     local f = win:frame()
@@ -183,7 +189,6 @@ windows:subscribe(hs.window.filter.windowMoved, function () drawBorder() end)
 
 hs.hotkey.bind(mash.focus, "F", function()
 
-    print(spaces.layout())
     for key, spaceId in pairs(spaces.query(spaces.allSpaces)) do 
         if spaces.spaceType(spaceId) == spaces.types.tiled then
             spaces.changeToSpace(spaceId)
@@ -261,6 +266,29 @@ end)
 --cf = watcher.new(handleCaffeine)
 --cf:start()
 
+hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
+    local screens = hs.screen.allScreens()
+    local spacesDesc = spaces.query()
+    local spacesAsc = {}
+
+    for i = #spacesDesc, 1, -1 do
+        table.insert(spacesAsc, spacesDesc[i])
+    end
+
+    local iterm = hs.application.get('iTerm2')
+    local slack = hs.application.get('Slack')
+    local outlook = hs.application.get('Microsoft Outlook')
+    local radiant = hs.application.get('Radiant Player')
+
+    for i, name in ipairs({iterm, slack, outlook, '', radiant}) do
+        if name ~= '' then
+           local win = name:mainWindow():moveToScreen(screens[1]):spacesMoveTo(spacesAsc[i])
+            makeWindowFullscreen(win)
+            sleep(0.001)
+        end
+    end
+
+end)
 
 -------------------------------------------------------------------------------------
 
