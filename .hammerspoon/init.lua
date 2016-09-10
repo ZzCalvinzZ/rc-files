@@ -255,18 +255,42 @@ hs.hotkey.bind(mash.focus, "J", function()
 end)
 
 -------------------------------------------------------------------------------------
---local watcher = hs.caffeinate.watcher
+--reset screen stuff
+moveToSpace = function(app, screen, spaceId)
+    local moveIt = true
+    local win = app:mainWindow()
 
-----do stuff when you wake from sleep
---function handleCaffeine(event)
-    --if event == watcher.screensDidUnlock  then
-    --end
---end
+    if screen == nil or screen == win:screen() then
+        screenIt = false
+    else
+        screenIt = true
+    end
+    
+    if spaceId ~= nil then
+        for i, val in ipairs(win:spaces()) do
+            if val == spaceId then
+                moveIt = false
+                break
+            end
+        end
+    else
+        moveIt = false
+    end
 
---cf = watcher.new(handleCaffeine)
---cf:start()
+    if screenIt then
+        print('screen',app:name())
+        win:moveToScreen(screen)
+    end
+    
+    if moveIt then
+        spaces.changeToSpace(spaceId)
+        win:spacesMoveTo(spaceId)
+    end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
+    makeWindowFullscreen(win)
+end
+
+resetScreens = function()
     local screens = {}
     local allScreens = hs.screen.allScreens()
 
@@ -290,27 +314,45 @@ hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
 
     for i, name in ipairs({iterm, slack, outlook, '', radiant}) do
         if name ~= '' then
-            local win = name:mainWindow():moveToScreen(screens[1]):spacesMoveTo(spacesAsc[i])
-            makeWindowFullscreen(win)
-            sleep(0.000001)
+            moveToSpace(name, screens[1], spacesAsc[i])
         end
     end
     local mvimScreen
     local chromeScreen
 
     if #screens == 1 then
-        mvimScreen = 1
-        chromeScreen = 1
+        mvimScreen = screens[1]
+        chromeScreen = screens[1]
     elseif #screens == 3 then
-        mvimScreen = 2
-        chromeScreen = 3
+        mvimScreen = screens[2]
+        chromeScreen = screens[3]
     end
 
-    makeWindowFullscreen(chrome:mainWindow():moveToScreen(screens[chromeScreen]):spacesMoveTo(spacesDesc[1]))
-    sleep(0.000001)
-    makeWindowFullscreen(mvim:mainWindow():moveToScreen(screens[mvimScreen]):spacesMoveTo(spacesDesc[2]))
-    sleep(0.000001)
+    moveToSpace(chrome, chromeScreen)
 
+    moveToSpace(mvim, mvimScreen)
+
+end
+
+--caffeinate
+
+local watcher = hs.caffeinate.watcher
+
+--do stuff when you wake from sleep
+function handleCaffeine(event)
+    if event == watcher.sessionDidBecomeActive or 
+        event == watcher.screensDidWake or
+        event == watcher.systemDidWake or
+        event == watcher.screensDidUnlock then
+        resetScreens()
+    end
+end
+
+cf = watcher.new(handleCaffeine)
+cf:start()
+
+hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
+    resetScreens()
 end)
 
 -------------------------------------------------------------------------------------
