@@ -13,9 +13,8 @@ local mash = {
 
 -------------------------------------------------------------------------------------
 
-function sleep(s)
-    local ntime = os.time() + s
-    repeat until os.time() > ntime
+function sleep(n)
+    os.execute("sleep " .. tonumber(n))
 end
 
 function makeWindowFullscreen(win)
@@ -278,7 +277,6 @@ moveToSpace = function(app, screen, spaceId)
     end
 
     if screenIt then
-        print('screen',app:name())
         win:moveToScreen(screen)
     end
     
@@ -315,22 +313,28 @@ resetScreens = function()
     for i, name in ipairs({iterm, slack, outlook, '', radiant}) do
         if name ~= '' then
             moveToSpace(name, screens[1], spacesAsc[i])
+            sleep(0.001)
         end
     end
     local mvimScreen
     local chromeScreen
+    local mvimSpace = nil
+    local chromeSpace = nil
 
-    if #screens == 1 then
+    if #screens < 3 then
         mvimScreen = screens[1]
         chromeScreen = screens[1]
+        mvimSpace = spacesDesc[2]
+        chromeSpace = spacesDesc[1]
+
     elseif #screens == 3 then
         mvimScreen = screens[2]
         chromeScreen = screens[3]
     end
 
-    moveToSpace(chrome, chromeScreen)
+    moveToSpace(chrome, chromeScreen, chromeSpace)
 
-    moveToSpace(mvim, mvimScreen)
+    moveToSpace(mvim, mvimScreen, mvimSpace)
 
 end
 
@@ -354,6 +358,14 @@ cf:start()
 hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
     resetScreens()
 end)
+
+-------------------------------------------------------------------------------------
+--screenwatcher
+
+local screenWatcher = hs.screen.watcher
+
+sw = screenWatcher.new(resetScreens)
+sw:start()
 
 -------------------------------------------------------------------------------------
 
