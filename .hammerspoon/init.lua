@@ -267,7 +267,13 @@ end)
 --cf:start()
 
 hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
-    local screens = hs.screen.allScreens()
+    local screens = {}
+    local allScreens = hs.screen.allScreens()
+
+    for i, screen in ipairs(allScreens) do
+        screens[screen:position() + 1] = screen
+    end
+
     local spacesDesc = spaces.query()
     local spacesAsc = {}
 
@@ -279,14 +285,31 @@ hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
     local slack = hs.application.get('Slack')
     local outlook = hs.application.get('Microsoft Outlook')
     local radiant = hs.application.get('Radiant Player')
+    local chrome = hs.application.get('Google Chrome')
+    local mvim = hs.application.get('MacVim')
 
     for i, name in ipairs({iterm, slack, outlook, '', radiant}) do
         if name ~= '' then
-           local win = name:mainWindow():moveToScreen(screens[1]):spacesMoveTo(spacesAsc[i])
+            local win = name:mainWindow():moveToScreen(screens[1]):spacesMoveTo(spacesAsc[i])
             makeWindowFullscreen(win)
-            sleep(0.001)
+            sleep(0.000001)
         end
     end
+    local mvimScreen
+    local chromeScreen
+
+    if #screens == 1 then
+        mvimScreen = 1
+        chromeScreen = 1
+    elseif #screens == 3 then
+        mvimScreen = 2
+        chromeScreen = 3
+    end
+
+    makeWindowFullscreen(chrome:mainWindow():moveToScreen(screens[chromeScreen]):spacesMoveTo(spacesDesc[1]))
+    sleep(0.000001)
+    makeWindowFullscreen(mvim:mainWindow():moveToScreen(screens[mvimScreen]):spacesMoveTo(spacesDesc[2]))
+    sleep(0.000001)
 
 end)
 
