@@ -11,7 +11,6 @@ set nocp
 call plug#begin('~/.vim/bundle')
 
 "list of plugins to add
-Plug 'rking/ag.vim'
 "Plug 'godlygeek/csapprox'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -41,7 +40,7 @@ Plug 'nixprime/cpsm' , { 'do': './install.sh' }
 Plug 'Olical/vim-enmasse'
 Plug 'terryma/vim-multiple-cursors'
 
-if has("gui_running")
+if exists('g:useAutoComplete') || has("gui_running")
 	Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 endif
 
@@ -55,6 +54,9 @@ Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-scriptease'
 Plug 'vim-scripts/repmo.vim'
 Plug 'AndrewRadev/switch.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'joeytwiddle/sexy_scroller.vim'
+Plug 'rking/ag.vim'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -476,3 +478,32 @@ let g:switch_mapping = "-"
     "\ [
     "\   ['foo', 'bar', 'baz']
     "\ ]
+
+"autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+"let g:flake8_show_in_file=1
+"let g:flake8_ignore="E501,W191,W293"
+
+
+" for fuzzy file search
+set rtp+=~/.fzf
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+
+"sexy scroller options
+let g:SexyScroller_ScrollTime = 15
+let g:SexyScroller_CursorTime = 5
+let g:SexyScroller_MaxTime = 100
+
+let g:fzf_launcher = "In_a_new_term_function %s"

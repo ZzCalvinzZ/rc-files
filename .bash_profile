@@ -74,7 +74,7 @@ alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
 alias tag="ctags -R"
-
+alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 
 cd ~/dev/fluidreview/
@@ -90,3 +90,5 @@ export EDITOR="$VISUAL"
 export WERKZEUG_DEBUG_PIN=off
 
 TERM=screen-256color
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
