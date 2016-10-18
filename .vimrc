@@ -57,6 +57,8 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'rking/ag.vim'
+Plug 'scrooloose/syntastic'
+Plug 'altercation/vim-colors-solarized'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -130,6 +132,7 @@ if has("win32")
 else
 	map <Leader>v :e ~/.vimrc
 	map <Leader>V :e ~/.bash_profile
+	map <Leader>z :e ~/.zshrc
 endif
 
 "rainbow parentheses
@@ -145,12 +148,12 @@ noremap <Leader>D :bp\|bd #
 map <Leader>m :MRU
 
 "map fugitive commands
-noremap <Leader>a :Git add .
-noremap <Leader>s :Gstatus
-noremap <Leader>p :Gpush
-noremap <Leader>dg :Gdiff
-noremap <Leader>B :Gblame
-noremap <Leader>r :Gread
+noremap <Leader>ga :Git add .
+noremap <Leader>gs :Gstatus
+noremap <Leader>gp :Gpush
+noremap <Leader>gd :Gdiff
+noremap <Leader>gb :Gblame
+noremap <Leader>gr :Gread
 
 noremap <Leader>dt :windo diffthis
 noremap <Leader>ds :windo diffoff
@@ -198,7 +201,7 @@ map <Leader><Leader>b :let &background = ( &background == "dark"? "light" : "dar
 
 "what vim looks like
 set background=dark
-colorscheme gruvbox
+colorscheme solarized
 set guifont=Menlo\ for\ Powerline:h14
 
 "don't use menu popup when it detects new changes in gui
@@ -403,9 +406,9 @@ if has("win32")
 endif
 
 "for gitgutter
-nmap <Leader>gs <Plug>GitGutterStageHunk
-nmap <Leader>gr <Plug>GitGutterRevertHunk
-nmap <Leader>gp <Plug>GitGutterPreviewHunk
+nmap <Leader>ggs <Plug>GitGutterStageHunk
+nmap <Leader>ggr <Plug>GitGutterRevertHunk
+nmap <Leader>ggp <Plug>GitGutterPreviewHunk
 nmap <Nop> <Plug>GitGutterUndoHunk
 
 let g:gitgutter_realtime = 1
@@ -507,3 +510,11 @@ let g:SexyScroller_CursorTime = 5
 let g:SexyScroller_MaxTime = 100
 
 let g:fzf_launcher = "In_a_new_term_function %s"
+
+"syntastic
+map <Leader>sc :SyntasticCheck
+map <Leader>sr :SyntasticReset
+
+let g:syntastic_mode_map = {
+	\ "mode": "passive",
+	\}

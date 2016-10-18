@@ -76,6 +76,7 @@ alias profile="vim ~/.bash_profile"
 alias tag="ctags -R"
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
+alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
 
 cd ~/dev/fluidreview/
 workon fr

@@ -249,10 +249,6 @@ hs.hotkey.bind(mash.move, "T", function()
     end
 end)
 
-hs.hotkey.bind(mash.focus, "J", function()
-    hs.eventtap.keyStroke({}, "down")
-end)
-
 -------------------------------------------------------------------------------------
 --reset screen stuff
 moveToSpace = function(app, screen, spaceId)
@@ -306,11 +302,11 @@ resetScreens = function()
     local iterm = hs.application.get('iTerm2')
     local slack = hs.application.get('Slack')
     local outlook = hs.application.get('Microsoft Outlook')
-    local radiant = hs.application.get('Radiant Player')
+    --local radiant = hs.application.get('Radiant Player')
     local chrome = hs.application.get('Google Chrome')
     local mvim = hs.application.get('MacVim')
 
-    for i, name in ipairs({iterm, slack, outlook, '', radiant}) do
+    for i, name in ipairs({iterm, slack, outlook, '', ''}) do
         if name ~= '' then
             moveToSpace(name, screens[1], spacesAsc[i])
             sleep(0.001)
@@ -356,6 +352,7 @@ cf = watcher.new(handleCaffeine)
 cf:start()
 
 hs.hotkey.bind({"cmd", "ctrl"}, "C", function()
+    print('resetting')
     resetScreens()
 end)
 
@@ -366,6 +363,35 @@ local screenWatcher = hs.screen.watcher
 
 sw = screenWatcher.new(resetScreens)
 sw:start()
+
+-------------------------------------------------------------------------------------
+
+hs.hotkey.bind(mash.move, "C", function()
+    local consoleWin = hs.console.hswindow()
+    local screen = hs.window.focusedWindow():screen()
+
+    consoleWin:moveToScreen(screen):focus()
+
+end)
+
+-------------------------------------------------------------------------------------
+
+hs.hotkey.bind(mash.move, "N", function()
+    local app
+    app = hs.application.get('Notes')
+
+    if not app then
+        hs.application.open('Notes')
+        app = hs.application.get('Notes')
+    end
+
+    local win = app:mainWindow()
+
+    local screen = hs.window.focusedWindow():screen()
+
+    win:moveToScreen(screen):focus()
+
+end)
 
 -------------------------------------------------------------------------------------
 
