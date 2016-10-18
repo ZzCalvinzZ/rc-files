@@ -7,7 +7,7 @@ export ZSH=/Users/calvinc/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -183,10 +183,38 @@ export WERKZEUG_DEBUG_PIN=off
 
 TERM=screen-256color
 
-#don't show machine name
-prompt_context() {
-    if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-        prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-    fi
-}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#temp while vi_mode doesn't work
+function zle-line-init {
+    powerlevel9k_prepare_prompts
+    if (( ${+terminfo[smkx]} )); then
+        printf '%s' ${terminfo[smkx]}
+    fi
+    zle reset-prompt
+    zle -R
+}
+
+function zle-line-finish {
+    powerlevel9k_prepare_prompts
+    if (( ${+terminfo[rmkx]} )); then
+        printf '%s' ${terminfo[rmkx]}
+    fi
+    zle reset-prompt
+    zle -R
+}
+
+function zle-keymap-select {
+    powerlevel9k_prepare_prompts
+    zle reset-prompt
+    zle -R
+}
+
+zle -N zle-line-init
+zle -N ale-line-finish
+zle -N zle-keymap-select
+
+#POWERLEVEL9000 options
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs vi_mode)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+
