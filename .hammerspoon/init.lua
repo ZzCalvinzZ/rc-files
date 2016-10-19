@@ -253,35 +253,37 @@ end)
 --reset screen stuff
 moveToSpace = function(app, screen, spaceId)
     local moveIt = true
-    local win = app:mainWindow()
 
-    if screen == nil or screen == win:screen() then
-        screenIt = false
-    else
-        screenIt = true
-    end
-    
-    if spaceId ~= nil then
-        for i, val in ipairs(win:spaces()) do
-            if val == spaceId then
-                moveIt = false
-                break
-            end
+    for i, win in ipairs(app:allWindows()) do
+        
+        if screen == nil or screen == win:screen() then
+            screenIt = false
+        else
+            screenIt = true
         end
-    else
-        moveIt = false
-    end
+        
+        if spaceId ~= nil then
+            for i, val in ipairs(win:spaces()) do
+                if val == spaceId then
+                    moveIt = false
+                    break
+                end
+            end
+        else
+            moveIt = false
+        end
 
-    if screenIt then
-        win:moveToScreen(screen)
-    end
-    
-    if moveIt then
-        spaces.changeToSpace(spaceId)
-        win:spacesMoveTo(spaceId)
-    end
+        if screenIt then
+            win:moveToScreen(screen)
+        end
+        
+        if moveIt then
+            spaces.changeToSpace(spaceId)
+            win:spacesMoveTo(spaceId)
+        end
 
-    makeWindowFullscreen(win)
+        makeWindowFullscreen(win)
+    end
 end
 
 resetScreens = function()
