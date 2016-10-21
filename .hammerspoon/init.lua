@@ -396,6 +396,13 @@ hs.hotkey.bind(mash.move, "N", function()
 end)
 
 -------------------------------------------------------------------------------------
+-- notify to sit up straight
+hs.timer.doEvery(hs.timer.minutes(5), function ()
+    hs.alert.show("Check Posture!")
+    hs.sound.getByName("Glass"):play()
+end)
+
+-------------------------------------------------------------------------------------
 
 --reload config
 hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
