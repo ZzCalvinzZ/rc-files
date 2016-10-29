@@ -84,34 +84,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# #VIM!
-bindkey -v
-#bindkey -M viins '^k' kill-line
-#bindkey '^?' backward-delete-char
-#bindkey '^h' backward-delete-char
-#bindkey '^w' backward-kill-word
-#bindkey '^r' history-incremental-search-backward
-#zstyle ':completion:*' special-dirs true
-## show which vim mode we are in
-#precmd() {
-    #RPROMPT=""
-#}
-#zle-keymap-select () {
-  #case $KEYMAP in
-    #vicmd) print -rn -- $terminfo[cvvis];; # block cursor
-    #viins|main) print -rn -- $terminfo[cnorm];; # less visible cursor
-  #esac
-  #RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-  #RPS2=$RPS1
-  #zle reset-prompt
-#}
-#zle-line-init() {
-    #typeset -g __prompt_status="$?"
-#}
-#zle -N zle-keymap-select
-#zle -N zle-line-init
-#bindkey '^[[Z' reverse-menu-complete
-
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
 
@@ -143,6 +115,9 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/p
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
+#node local exec alias
+alias npm-exec='PATH=$(npm bin):$PATH'
+
 #reviewroom aliases
 alias manage="reviewroom/project/manage.py"
 alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
@@ -167,6 +142,7 @@ alias tag="ctags -R"
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
+alias homepage="workon homepage; cd ~/dev/stuff/homepage"
 
 
 cd ~/dev/fluidreview/
@@ -185,36 +161,8 @@ TERM=screen-256color
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#temp while vi_mode doesn't work
-function zle-line-init {
-    powerlevel9k_prepare_prompts
-    if (( ${+terminfo[smkx]} )); then
-        printf '%s' ${terminfo[smkx]}
-    fi
-    zle reset-prompt
-    zle -R
-}
-
-function zle-line-finish {
-    powerlevel9k_prepare_prompts
-    if (( ${+terminfo[rmkx]} )); then
-        printf '%s' ${terminfo[rmkx]}
-    fi
-    zle reset-prompt
-    zle -R
-}
-
-function zle-keymap-select {
-    powerlevel9k_prepare_prompts
-    zle reset-prompt
-    zle -R
-}
-
-zle -N zle-line-init
-zle -N ale-line-finish
-zle -N zle-keymap-select
-
 #POWERLEVEL9000 options
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs vi_mode)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 
+POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'
