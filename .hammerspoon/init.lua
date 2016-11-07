@@ -251,38 +251,42 @@ end)
 
 -------------------------------------------------------------------------------------
 --reset screen stuff
-moveToSpace = function(app, screen, spaceId)
+
+moveWinToSpace = function(win, screen, spaceId)
     local moveIt = true
-
-    for i, win in ipairs(app:allWindows()) do
         
-        if screen == nil or screen == win:screen() then
-            screenIt = false
-        else
-            screenIt = true
-        end
-        
-        if spaceId ~= nil then
-            for i, val in ipairs(win:spaces()) do
-                if val == spaceId then
-                    moveIt = false
-                    break
-                end
+    if screen == nil or screen == win:screen() then
+        screenIt = false
+    else
+        screenIt = true
+    end
+    
+    if spaceId ~= nil then
+        for i, val in ipairs(win:spaces()) do
+            if val == spaceId then
+                moveIt = false
+                break
             end
-        else
-            moveIt = false
         end
+    else
+        moveIt = false
+    end
 
-        if screenIt then
-            win:moveToScreen(screen)
-        end
-        
-        if moveIt then
-            spaces.changeToSpace(spaceId)
-            win:spacesMoveTo(spaceId)
-        end
+    if screenIt then
+        win:moveToScreen(screen)
+    end
+    
+    if moveIt then
+        spaces.changeToSpace(spaceId)
+        win:spacesMoveTo(spaceId)
+    end
 
-        makeWindowFullscreen(win)
+    makeWindowFullscreen(win)
+end
+
+moveToSpace = function(app, screen, spaceId)
+    for i, win in ipairs(app:allWindows()) do
+        moveWinToSpace(win, screen, spaceId)
     end
 end
 
@@ -331,6 +335,7 @@ resetScreens = function()
     end
 
     moveToSpace(chrome, chromeScreen, chromeSpace)
+    moveWinToSpace(chrome:findWindow('Google Play Music'), screens[1], spacesAsc[4])
 
     moveToSpace(mvim, mvimScreen, mvimSpace)
 
