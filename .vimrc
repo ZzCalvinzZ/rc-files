@@ -7,6 +7,7 @@ filetype off
 
 "turn off vi compatibility
 set nocp
+set macmeta
 
 call plug#begin('~/.vim/bundle')
 
@@ -14,10 +15,9 @@ call plug#begin('~/.vim/bundle')
 "Plug 'godlygeek/csapprox'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'yegappan/mru'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'kchmck/vim-coffee-script'
+Plug 'sheerun/vim-polyglot'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'thinca/vim-guicolorscheme'
@@ -27,11 +27,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'leafgarland/typescript-vim'
 Plug 'mbbill/undotree'
 Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
@@ -57,8 +55,15 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/syntastic'
+Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
+Plug 'mihaifm/bufstop'
+Plug 'yegappan/mru'
+Plug 'hdima/python-syntax'
+Plug 'junegunn/vim-easy-align'
+Plug 'https://github.com/vim-scripts/DfrankUtil'
+Plug 'https://github.com/vim-scripts/vimprj'
+Plug 'https://github.com/vim-scripts/indexer.tar.gz'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -87,12 +92,13 @@ let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+map <Leader>u :UltiSnipsEdit
 
 " automatically include certain sippets based on filetypes
 autocmd FileType html set ft=htmldjango.html
 
 " If you want :UltiSnipsEdit to split your window.
-"let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="vertical"
 
 filetype plugin indent on
 
@@ -144,8 +150,8 @@ map <Leader><Leader>3 :NERDTreeToggle
 map <Leader><Leader>4 :TagbarToggle
 map <Leader><Leader>5 :UndotreeToggle
 
+"noremap <Leader>D :BufSurfBack
 noremap <Leader>D :bp\|bd #
-map <Leader>m :MRU
 
 "map fugitive commands
 noremap <Leader>ga :Git add .
@@ -174,7 +180,19 @@ noremap <Leader><s-h> :vsplit<cr>
 noremap <Leader><s-l> :vsplit<cr>
 
 "CtrlP
-nnoremap <C-\> :CtrlPBuffer<CR>
+nnoremap <Leader>p :CtrlP<CR>
+"nnoremap <Leader>b :CtrlPBuffer<CR>
+"nnoremap <Leader>m :CtrlPMRUFiles<CR>
+
+"bufstop mappings
+map <leader>b :BufstopFast<CR>             " get a visual on the buffers
+map <leader>< :BufstopBack<CR>
+map <leader>> :BufstopForward<CR>
+let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
+let g:BufstopDismissKey = "<C-c>"
+
+"mru mapping
+map <Leader>m :MRU
 
 function! Retab()
 	set noexpandtab
@@ -197,12 +215,15 @@ inoremap <C-Space> <C-x><C-o>
 inoremap <C-c> <esc>
 
 "toggle background easily
-map <Leader><Leader>b :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 "what vim looks like
 set background=dark
 colorscheme solarized
-set guifont=Menlo\ for\ Powerline:h14
+set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h12
 
 "don't use menu popup when it detects new changes in gui
 set guioptions+=c
@@ -242,7 +263,7 @@ endfunction
 autocmd BufReadPost * call OverrideIndentation()
 
 "highlight the line you are on
-set cursorline
+set cursorline cursorcolumn
 
 "persistent undo for when vim is closed
 set undofile
@@ -319,25 +340,25 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 1
+"let g:airline#extensions#whitespace#enabled = 0
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#show_buffers = 1
 
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
 
-" Just filename in the tabline
-let g:airline#extensions#tabline#fnamemod = ':t'
+"" Just filename in the tabline
+"let g:airline#extensions#tabline#fnamemod = ':t'
 
-" Easier tab/buffer switching
-nmap <Leader>1 <Plug>AirlineSelectTab1
-nmap <Leader>2 <Plug>AirlineSelectTab2
-nmap <Leader>3 <Plug>AirlineSelectTab3
-nmap <Leader>4 <Plug>AirlineSelectTab4
-nmap <Leader>5 <Plug>AirlineSelectTab5
-nmap <Leader>6 <Plug>AirlineSelectTab6
-nmap <Leader>7 <Plug>AirlineSelectTab7
-nmap <Leader>8 <Plug>AirlineSelectTab8
-nmap <Leader>9 <Plug>AirlineSelectTab9
+"" Easier tab/buffer switching
+"nmap <Leader>1 <Plug>AirlineSelectTab1
+"nmap <Leader>2 <Plug>AirlineSelectTab2
+"nmap <Leader>3 <Plug>AirlineSelectTab3
+"nmap <Leader>4 <Plug>AirlineSelectTab4
+"nmap <Leader>5 <Plug>AirlineSelectTab5
+"nmap <Leader>6 <Plug>AirlineSelectTab6
+"nmap <Leader>7 <Plug>AirlineSelectTab7
+"nmap <Leader>8 <Plug>AirlineSelectTab8
+"nmap <Leader>9 <Plug>AirlineSelectTab9
 
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -353,7 +374,7 @@ let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
 "ctrlp stuff
-let g:ctrlp_cmd = 'CtrlPMixed'
+"let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 
@@ -363,6 +384,10 @@ set diffopt=vertical
 "make gitgutter faster
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
+
+"let g:gitgutter_sign_added = '|'
+"let g:gitgutter_sign_modified = '|'
+"let g:gitgutter_sign_removed = '|'
 
 "change where vim stores backup and swap files
 "set backupdir=~/.vim/backup//
@@ -454,9 +479,9 @@ nnoremap <Insert> <Plug>InterestingWords
 
 set sidescroll=1
 
-if has("gui_running")
-	set transparency=10
-endif
+"if has("gui_running")
+	"set transparency=2
+"endif
 
 function! Beautyness()
 	if &filetype == 'javascript'
@@ -511,10 +536,18 @@ let g:SexyScroller_MaxTime = 100
 
 let g:fzf_launcher = "In_a_new_term_function %s"
 
-"syntastic
-map <Leader>sc :SyntasticCheck
-map <Leader>sr :SyntasticReset
+let g:neomake_python_flake8_maker = {
+   \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128'],
+\ }
 
-let g:syntastic_mode_map = {
-	\ "mode": "passive",
-	\}
+let g:neomake_python_enabled_makers = ['flake8', 'python']
+"let g:neomake_open_list=2
+let g:neomake_list_height=5
+autocmd! BufWritePost * Neomake
+
+" add template paths for gf completing
+set path+=~/dev/fluidreview/apps/chide/products/smapply/templates/
+set path+=~/dev/fluidreview/apps/chide/products/reviewroom/templates/
+set path+=~/dev/fluidreview/reviewroom/templates/
+set path+=~/dev/fluidreview/apps
+set path+=~/dev/fluidreview/apps/chide/products/smapply/static/

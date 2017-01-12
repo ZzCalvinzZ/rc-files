@@ -51,7 +51,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote vi-mode)
+plugins=(git django virtualenvwrapper rand-quote)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,12 +138,13 @@ alias habble="workon habble; cd ../habble"
 alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
-alias tag="ctags -R"
+alias tag="ctags -R --exclude='*js'"
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
 alias homepage="workon homepage; cd ~/dev/stuff/homepage"
 
+alias rrpid="lsof -i tcp:3000"
 
 cd ~/dev/fluidreview/
 workon fr
@@ -159,7 +160,18 @@ export WERKZEUG_DEBUG_PIN=off
 
 TERM=screen-256color
 
+#fzf stufffffff
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+## fbr - checkout git branch (including remote branches)
+fbr() {
+  local branches branch
+  branches=$(git branch --all | grep -v HEAD) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
 
 #POWERLEVEL9000 options
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)

@@ -1,7 +1,7 @@
 require "tabletools"
 spaces = require("hs._asm.undocumented.spaces")
 
-padding = 20
+padding = 0
 
 local wf=hs.window.filter.new():setDefaultFilter{}
 
@@ -253,6 +253,7 @@ end)
 --reset screen stuff
 
 moveWinToSpace = function(win, screen, spaceId)
+    print(win:title(), win:application())
     local moveIt = true
         
     if screen == nil or screen == win:screen() then
@@ -312,7 +313,7 @@ resetScreens = function()
     local chrome = hs.application.get('Google Chrome')
     local mvim = hs.application.get('MacVim')
 
-    for i, name in ipairs({iterm, slack, outlook, '', ''}) do
+    for i, name in ipairs({iterm, slack, outlook, '', chrome}) do
         if name ~= '' then
             moveToSpace(name, screens[1], spacesAsc[i])
             sleep(0.001)
@@ -323,10 +324,15 @@ resetScreens = function()
     local mvimSpace = nil
     local chromeSpace = nil
 
-    if #screens < 3 then
+    if #screens < 2 then
         mvimScreen = screens[1]
         chromeScreen = screens[1]
         mvimSpace = spacesDesc[2]
+        chromeSpace = spacesDesc[1]
+
+    elseif #screens == 2 then
+        mvimScreen = screens[2]
+        chromeScreen = screens[1]
         chromeSpace = spacesDesc[1]
 
     elseif #screens == 3 then
@@ -351,7 +357,7 @@ function handleCaffeine(event)
         event == watcher.screensDidWake or
         event == watcher.systemDidWake or
         event == watcher.screensDidUnlock then
-        resetScreens()
+        --resetScreens()
     end
 end
 
@@ -366,10 +372,10 @@ end)
 -------------------------------------------------------------------------------------
 --screenwatcher
 
-local screenWatcher = hs.screen.watcher
+--local screenWatcher = hs.screen.watcher
 
-sw = screenWatcher.new(resetScreens)
-sw:start()
+--sw = screenWatcher.new(resetScreens)
+--sw:start()
 
 -------------------------------------------------------------------------------------
 
