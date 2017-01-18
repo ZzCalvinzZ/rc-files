@@ -12,11 +12,23 @@ call plug#begin('~/.vim/bundle')
 
 "list of plugins to add
 "Plug 'godlygeek/csapprox'
+Plug 'junegunn/vim-plug'
+
+"language syntax plugins
+Plug 'pangloss/vim-javascript'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'othree/html5.vim'
+Plug 'tbastos/vim-lua'
+Plug 'hdima/python-syntax'
+Plug 'keith/tmux.vim'
+Plug 'isRuslan/vim-es6'
+Plug 'leafgarland/typescript-vim'
+Plug 'kchmck/vim-coffee-script'
+
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 Plug 'thinca/vim-guicolorscheme'
 Plug 'tpope/vim-fugitive'
@@ -32,24 +44,22 @@ Plug 'mbbill/undotree'
 Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'godlygeek/tabular'
-Plug 'nixprime/cpsm' , { 'do': './install.sh' }
 Plug 'Olical/vim-enmasse'
 Plug 'terryma/vim-multiple-cursors'
-
-if exists('g:useAutoComplete') || has("gui_running")
-	Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-endif
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'zchee/deoplete-jedi'
 	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+else
+	Plug 'nixprime/cpsm' , { 'do': './install.sh' }
+	if exists('g:useAutoComplete') || has("gui_running")
+		Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+	endif
 endif
 
 Plug 'ervandew/supertab'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'isRuslan/vim-es6'
-Plug 'junegunn/vim-plug'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-scriptease'
@@ -62,7 +72,6 @@ Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
-Plug 'hdima/python-syntax'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
 Plug 'https://github.com/vim-scripts/DfrankUtil'
@@ -153,9 +162,6 @@ else
 	map <Leader>z :e ~/.zshrc
 endif
 
-"rainbow parentheses
-let g:rainbow_active = 1
-
 " rainbow
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -244,9 +250,6 @@ noremap <Leader>t :call Retab()<cr>
 
 "map space f to copy current file to clipboard
 nmap <Leader>f :let @* = expand("%")<cr>
-
-"map f12 to generate ctags
-noremap <Leader>C :! ctags<cr>
 
 "set omnicompolete to ctrl space
 inoremap <C-Space> <C-x><C-o>
@@ -352,7 +355,7 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 function! CtrlPIgnoreToggle()
 	if g:custom_ctrlp_on==0
 		let g:custom_ctrlp_on=1
-		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'reviewroom/media/', 'common/media/']
 		:echo 'now using gitignore'
 	else
 		let g:custom_ctrlp_on=0
@@ -374,7 +377,7 @@ let g:ctrlp_working_path_mode = 0
 
 "airline stuff
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_theme='base16'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -391,10 +394,6 @@ set diffopt=vertical
 "make gitgutter faster
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
-
-"let g:gitgutter_sign_added = '|'
-"let g:gitgutter_sign_modified = '|'
-"let g:gitgutter_sign_removed = '|'
 
 "change where vim stores backup and swap files
 "set backupdir=~/.vim/backup//
@@ -486,46 +485,14 @@ nnoremap <Insert> <Plug>InterestingWords
 
 set sidescroll=1
 
-"if has("gui_running")
-	"set transparency=2
-"endif
-
 "vim switch stuff for switching boolean values
 let g:switch_mapping = "-"
-
-"let g:switch_custom_definitions =
-    "\ [
-    "\   ['foo', 'bar', 'baz']
-    "\ ]
-
-"autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-"let g:flake8_show_in_file=1
-"let g:flake8_ignore="E501,W191,W293"
-
-
-" for fuzzy file search
-"set rtp+=~/.fzf
-
-" Mapping selecting mappings
-"nmap <leader><tab> <plug>(fzf-maps-n)
-"xmap <leader><tab> <plug>(fzf-maps-x)
-"omap <leader><tab> <plug>(fzf-maps-o)
-
-" Insert mode completion
-"imap <c-x><c-k> <plug>(fzf-complete-word)
-"imap <c-x><c-f> <plug>(fzf-complete-path)
-"imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-"imap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Advanced customization using autoload functions
-"inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 "sexy scroller options
 let g:SexyScroller_ScrollTime = 15
 let g:SexyScroller_CursorTime = 5
 let g:SexyScroller_MaxTime = 100
 
-"let g:fzf_launcher = "In_a_new_term_function %s"
 
 let g:neomake_python_flake8_maker = {
    \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128,E124'],

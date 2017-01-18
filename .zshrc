@@ -138,7 +138,9 @@ alias habble="workon habble; cd ../habble"
 alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
-alias tag="ctags -R"
+alias tag="ctags -R --exclude='*js'"
+alias jstag='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > jstags'
+
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
