@@ -7,7 +7,6 @@ filetype off
 
 "turn off vi compatibility
 set nocp
-set macmeta
 
 call plug#begin('~/.vim/bundle')
 
@@ -18,7 +17,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
-Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'thinca/vim-guicolorscheme'
 Plug 'tpope/vim-fugitive'
@@ -42,17 +40,22 @@ if exists('g:useAutoComplete') || has("gui_running")
 	Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 endif
 
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'zchee/deoplete-jedi'
+	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+endif
+
 Plug 'ervandew/supertab'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'isRuslan/vim-es6'
 Plug 'junegunn/vim-plug'
-Plug 'maksimr/vim-jsbeautify'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-scriptease'
 Plug 'vim-scripts/repmo.vim'
 Plug 'AndrewRadev/switch.vim'
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'rking/ag.vim'
 Plug 'neomake/neomake'
@@ -61,6 +64,7 @@ Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
 Plug 'hdima/python-syntax'
 Plug 'junegunn/vim-easy-align'
+Plug 'luochen1990/rainbow'
 Plug 'https://github.com/vim-scripts/DfrankUtil'
 Plug 'https://github.com/vim-scripts/vimprj'
 Plug 'https://github.com/vim-scripts/indexer.tar.gz'
@@ -69,6 +73,7 @@ Plug 'https://github.com/vim-scripts/indexer.tar.gz'
 
 call plug#end()
 
+""""""" autocomplete settings """"""""""
 let g:ycm_dont_warn_on_startup = 0
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
@@ -86,10 +91,17 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
 
+" deoplete tab-complete
+let g:deoplete#enable_at_startup = 1 
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+"""""""""""""""""""""""""""""""""""""""
+
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger           = '<tab>'
-let g:UltiSnipsJumpForwardTrigger      = '<tab>'
-let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 map <Leader>u :UltiSnipsEdit
@@ -143,6 +155,34 @@ endif
 
 "rainbow parentheses
 let g:rainbow_active = 1
+
+" rainbow
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\   'operators': '_,_',
+\   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\   'separately': {
+\       '*': {},
+\       'tex': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\       },
+\       'lisp': {
+\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\       },
+\       'vim': {
+\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\       },
+\       'html': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'htmldjango': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'css': 0,
+\   }
+\}
 
 "map plugin commands
 map <Leader><Leader>2 :NERDTreeFind
@@ -223,7 +263,7 @@ nmap ga <Plug>(EasyAlign)
 "what vim looks like
 set background=dark
 colorscheme solarized
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h12
+set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 
 "don't use menu popup when it detects new changes in gui
 set guioptions+=c
@@ -326,7 +366,7 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 noremap <Leader><Leader>p :call CtrlPIgnoreToggle() <CR>
 
 "use cpsm as matcher for ctrlp
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+"let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 "let g:cpsm_match_empty_query = 0
 
 "always use ctrlp from the directory it started out in
@@ -334,44 +374,11 @@ let g:ctrlp_working_path_mode = 0
 
 "airline stuff
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='solarized'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
-"let g:airline#extensions#whitespace#enabled = 0
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#show_buffers = 1
-
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-
-"" Just filename in the tabline
-"let g:airline#extensions#tabline#fnamemod = ':t'
-
-"" Easier tab/buffer switching
-"nmap <Leader>1 <Plug>AirlineSelectTab1
-"nmap <Leader>2 <Plug>AirlineSelectTab2
-"nmap <Leader>3 <Plug>AirlineSelectTab3
-"nmap <Leader>4 <Plug>AirlineSelectTab4
-"nmap <Leader>5 <Plug>AirlineSelectTab5
-"nmap <Leader>6 <Plug>AirlineSelectTab6
-"nmap <Leader>7 <Plug>AirlineSelectTab7
-"nmap <Leader>8 <Plug>AirlineSelectTab8
-"nmap <Leader>9 <Plug>AirlineSelectTab9
-
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
 
 "ctrlp stuff
 "let g:ctrlp_cmd = 'CtrlPMixed'
@@ -483,22 +490,6 @@ set sidescroll=1
 	"set transparency=2
 "endif
 
-function! Beautyness()
-	if &filetype == 'javascript'
-		call RangeJsBeautify()
-	elseif &filetype == 'html'
-		call RangeHtmlBeautify()
-	elseif &filetype == 'html.mustache'
-		call RangeHtmlBeautify()
-	elseif &filetype == 'css'
-		call RangeCSSBeautify()
-	elseif &filetype == 'json' || &filetype == 'python'
-		call RangeJsonBeautify()
-	endif
-endfunction
-
-vmap <c-b> :call Beautyness()<cr>
-
 "vim switch stuff for switching boolean values
 let g:switch_mapping = "-"
 
@@ -513,31 +504,31 @@ let g:switch_mapping = "-"
 
 
 " for fuzzy file search
-set rtp+=~/.fzf
+"set rtp+=~/.fzf
 
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+"nmap <leader><tab> <plug>(fzf-maps-n)
+"xmap <leader><tab> <plug>(fzf-maps-x)
+"omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+"imap <c-x><c-k> <plug>(fzf-complete-word)
+"imap <c-x><c-f> <plug>(fzf-complete-path)
+"imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+"imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Advanced customization using autoload functions
-inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+"inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 "sexy scroller options
 let g:SexyScroller_ScrollTime = 15
 let g:SexyScroller_CursorTime = 5
 let g:SexyScroller_MaxTime = 100
 
-let g:fzf_launcher = "In_a_new_term_function %s"
+"let g:fzf_launcher = "In_a_new_term_function %s"
 
 let g:neomake_python_flake8_maker = {
-   \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128'],
+   \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128,E124'],
 \ }
 
 let g:neomake_python_enabled_makers = ['flake8', 'python']

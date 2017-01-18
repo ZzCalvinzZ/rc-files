@@ -7,7 +7,7 @@ export ZSH=/Users/calvinc/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="pure"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,7 +51,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote)
+plugins=(git django virtualenvwrapper rand-quote vi-mode, zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,13 +138,12 @@ alias habble="workon habble; cd ../habble"
 alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
-alias tag="ctags -R --exclude='*js'"
+alias tag="ctags -R"
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
 alias homepage="workon homepage; cd ~/dev/stuff/homepage"
 
-alias rrpid="lsof -i tcp:3000"
 
 cd ~/dev/fluidreview/
 workon fr
@@ -160,21 +159,17 @@ export WERKZEUG_DEBUG_PIN=off
 
 TERM=screen-256color
 
-#fzf stufffffff
+# if you do a 'rm *', Zsh will give you a sanity check!
+setopt RM_STAR_WAIT
+
+# allows you to type Bash style comments on your command line
+# good 'ol Bash
+setopt interactivecomments
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-## fbr - checkout git branch (including remote branches)
-fbr() {
-  local branches branch
-  branches=$(git branch --all | grep -v HEAD) &&
-  branch=$(echo "$branches" |
-           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
-}
-
 #POWERLEVEL9000 options
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
 
-POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'
+#POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'

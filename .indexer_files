@@ -1,0 +1,3 @@
+[FluidReview]
+/home/calvinc/dev/fluidreview/
+option:ctags_param = "--exclude='*js'"
