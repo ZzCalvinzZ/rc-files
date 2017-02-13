@@ -1,16 +1,16 @@
-# ~/.tmuxinator/fr.yml
+# ~/.tmuxinator/haskell.yml
 
-name: fr
-root: ~/dev/fluidreview
+name: haskell
+root: ~/haskell
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-#pre: workon fr
+# pre: sudo /etc/rc.d/mysqld start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: workon fr
+# pre_window: rbenv shell 2.0.0-p247
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -22,27 +22,23 @@ pre_window: workon fr
 # startup_window: editor
 
 # Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-startup_pane: 1
+# startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t fr
+# post: tmux -CC attach -t haskell
 
 windows:
-  - editor:
+  - stack:
       layout: main-vertical
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
       panes:
         - nvim
-        - frshell
+        - stack
         - #empty, will just run plain bash
-  - server:
-      layout: main-vertical
-      panes:
-        - frrun
-        - cd reviewroom; webpack -w
-  - tig:
-      layout: main-vertical
-      panes:
-        - #empty, will just run plain bash
+  - whatever: #empty, will just run plain bash
+
