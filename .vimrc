@@ -24,6 +24,7 @@ Plug 'keith/tmux.vim'
 Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'mitsuhiko/vim-jinja'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -46,6 +47,7 @@ Plug 'michaeljsmith/vim-indent-object'
 Plug 'godlygeek/tabular'
 Plug 'Olical/vim-enmasse'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'maksimr/vim-jsbeautify'
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -116,7 +118,6 @@ let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 map <Leader>u :UltiSnipsEdit
 
 " automatically include certain sippets based on filetypes
-autocmd FileType html set ft=htmldjango.html
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -186,9 +187,28 @@ let g:rainbow_conf = {
 \       'htmldjango': {
 \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
 \       },
+\       'html.mustache': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
 \       'css': 0,
 \   }
 \}
+
+function! Beautyness()
+	if &filetype == 'javascript'
+		call RangeJsBeautify()
+	elseif &filetype == 'html'
+		call RangeHtmlBeautify()
+	elseif &filetype == 'html.mustache'
+		call RangeHtmlBeautify()
+	elseif &filetype == 'css'
+		call RangeCSSBeautify()
+	elseif &filetype == 'json' || &filetype == 'python'
+		call RangeJsonBeautify()
+	endif
+endfunction
+
+vmap <c-b> :call Beautyness()<cr>
 
 "map plugin commands
 map <Leader><Leader>2 :NERDTreeFind
@@ -204,7 +224,7 @@ noremap <Leader>ga :Git add .
 noremap <Leader>gs :Gstatus
 noremap <Leader>gp :Gpush
 noremap <Leader>gd :Gdiff
-noremap <Leader>gb :Gblame
+noremap <Leader>gb :Gblame wM
 noremap <Leader>gr :Gread
 
 noremap <Leader>dt :windo diffthis
@@ -377,7 +397,7 @@ let g:ctrlp_working_path_mode = 0
 
 "airline stuff
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+let g:airline_theme='powerlineish'
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -509,3 +529,6 @@ set path+=~/dev/fluidreview/apps/chide/products/reviewroom/templates/
 set path+=~/dev/fluidreview/reviewroom/templates/
 set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
+
+"live substitution
+set inccommand=nosplit

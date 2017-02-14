@@ -51,7 +51,7 @@ ZSH_THEME="pure"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote vi-mode, zsh-syntax-highlighting)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -118,6 +118,9 @@ MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 #node local exec alias
 alias npm-exec='PATH=$(npm bin):$PATH'
 
+#always aliases
+alias mux="tmuxinator"
+
 #reviewroom aliases
 alias manage="reviewroom/project/manage.py"
 alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
@@ -139,16 +142,11 @@ alias habblerun="./manage.py runserver_plus"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias profile="vim ~/.bash_profile"
 alias tag="ctags -R --exclude='*js'"
-alias jstag='find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed "/^$/d" | sort > jstags'
 
 alias cvim="vim --cmd 'let g:useAutoComplete=1'"
 
 alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
 alias homepage="workon homepage; cd ~/dev/stuff/homepage"
-
-
-cd ~/dev/fluidreview/
-workon fr
 
 #reviewroom environment variables
 export FR_PATH=~/dev/fluidreview/
@@ -169,9 +167,3 @@ setopt RM_STAR_WAIT
 setopt interactivecomments
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#POWERLEVEL9000 options
-#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv dir vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status)
-
-#POWERLEVEL9K_VIRTUALENV_BACKGROUND='white'
