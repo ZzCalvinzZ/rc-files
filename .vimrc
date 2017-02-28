@@ -28,7 +28,7 @@ Plug 'mitsuhiko/vim-jinja'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-gitgutter'
 Plug 'thinca/vim-guicolorscheme'
 Plug 'tpope/vim-fugitive'
@@ -215,9 +215,6 @@ endfunction
 vmap <c-b> :call Beautyness()<cr>
 
 "map plugin commands
-map <Leader><Leader>2 :NERDTreeFind
-map <Leader><Leader>3 :NERDTreeToggle
-map <Leader><Leader>4 :TagbarToggle
 map <Leader><Leader>5 :UndotreeToggle
 
 "noremap <Leader>D :BufSurfBack
@@ -266,10 +263,29 @@ map <leader>fb :Buffers
 map <leader>fl :Lines
 map <leader>fs :Snippets
 map <leader>fc :Commits
-map <leader>fh :History
+map <leader>fm :MRUFilesCWD
+
+""""""""""" MRU - FZF integration """"""""""
+command! MRUFilesCWD call fzf#run({
+\  'source':  s:mru_files_for_cwd(),
+\  'sink':    'edit',
+\  'options': '-m -x +s --prompt=MRU:'.shellescape(pathshorten(getcwd())).'/',
+\  'down':    '40%' })
+
+function! s:mru_files_for_cwd()
+  return map(filter(
+  \  systemlist("sed -n '2,$p' ~/.vim_mru_files"),
+  \  "v:val =~ '^" . getcwd() . "' && v:val !~ '__Tagbar__\\|\\[YankRing]\\|fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"
+  \ ), 'fnamemodify(v:val, ":p:.")')
+endfunction
+"""""""""""""""""""""""""""""""""""""""""""
 
 "mru mapping
 map <Leader>m :MRU
+
+" Use 'ffr' in normal mode to start it
+nmap ffr :MRUFilesCWD<CR>
+
 
 function! Retab()
 	set noexpandtab
@@ -492,7 +508,7 @@ nnoremap <Insert> <Plug>InterestingWords
 set sidescroll=1
 
 "vim switch stuff for switching boolean values
-let g:switch_mapping = "-"
+"let g:switch_mapping = "-"
 
 "sexy scroller options
 let g:SexyScroller_ScrollTime = 15
@@ -518,3 +534,14 @@ set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 "live substitution
 set inccommand=nosplit
+
+"netrw settings
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
+"augroup ProjectDrawer
+  "autocmd!
+  "autocmd VimEnter * :Vexplore
+"augroup END
