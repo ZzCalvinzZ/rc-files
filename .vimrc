@@ -69,6 +69,7 @@ Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
+Plug 'rking/ag.vim'
 Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
 Plug 'romainl/flattened'
@@ -248,11 +249,6 @@ noremap <Leader><s-j> :split<cr>
 noremap <Leader><s-h> :vsplit<cr>
 noremap <Leader><s-l> :vsplit<cr>
 
-"CtrlP
-nnoremap <Leader>p :CtrlP<CR>
-"nnoremap <Leader>b :CtrlPBuffer<CR>
-"nnoremap <Leader>m :CtrlPMRUFiles<CR>
-
 "bufstop mappings
 "map <leader>b :BufstopFast<CR>             " get a visual on the buffers
 map <leader>< :BufstopBack<CR>
@@ -260,9 +256,11 @@ map <leader>> :BufstopForward<CR>
 let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
 let g:BufstopDismissKey = "<C-c>"
 
+autocmd VimEnter * command! -nargs=* -bang Agf call fzf#vim#ag(<q-args>, <bang>0)
+
 "fzf mappings
 map <C-p> :Files
-map <leader>fa :Ag
+map <leader>fa :Agf
 map <leader>fg :GFiles
 map <leader>fb :Buffers
 map <leader>fl :Lines
@@ -386,31 +384,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "detect .md as markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
-"use gitignore for ctrlp ignore
-
-function! CtrlPIgnoreToggle()
-	if g:custom_ctrlp_on==0
-		let g:custom_ctrlp_on=1
-		let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard', 'reviewroom/media/', 'common/media/']
-		:echo 'now using gitignore'
-	else
-		let g:custom_ctrlp_on=0
-		let g:ctrlp_user_command = ''
-		:echo 'not using gitignore anymore'
-	endif
-endfunction
-
-let g:custom_ctrlp_on=1
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-noremap <Leader><Leader>p :call CtrlPIgnoreToggle() <CR>
-
-"use cpsm as matcher for ctrlp
-"let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-"let g:cpsm_match_empty_query = 0
-
-"always use ctrlp from the directory it started out in
-let g:ctrlp_working_path_mode = 0
-
 "airline stuff
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
@@ -420,11 +393,6 @@ if !exists('g:airline_symbols')
 endif
 
 let g:airline_extensions = []
-
-"ctrlp stuff
-"let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
 
 "make diffs appear side by side
 set diffopt=vertical
