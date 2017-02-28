@@ -1,4 +1,4 @@
---require "tabletools"
+require "tabletools"
 --spaces = require("hs._asm.undocumented.spaces")
 
 --padding = 0
@@ -7,7 +7,7 @@
 
 local mash = {
     move    = {"ctrl", "alt", "cmd"},
-    focus   = {"ctrl", "cmd"},
+    focus   = {"ctrl", "alt"},
     hyper   = {"ctrl", "cmd", "alt", "shift"},
 }
 
@@ -89,7 +89,6 @@ local mash = {
 --end)
 
 -------------------------------------------------------------------------------------
-
 
 -- lock screen
 hs.hotkey.bind(mash.move, "D", function()
@@ -416,7 +415,7 @@ end)
 -------------------------------------------------------------------------------------
 
 --reload config
-hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+hs.hotkey.bind(mash.focus, "R", function()
     hs.reload()
 end)
 hs.alert.show("Config loaded")

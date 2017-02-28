@@ -26,7 +26,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mitsuhiko/vim-jinja'
 
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -67,11 +66,12 @@ Plug 'kshenoy/vim-signature'
 Plug 'tpope/vim-scriptease'
 Plug 'vim-scripts/repmo.vim'
 Plug 'AndrewRadev/switch.vim'
-"Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
-Plug 'rking/ag.vim'
 Plug 'neomake/neomake'
 Plug 'altercation/vim-colors-solarized'
+Plug 'romainl/flattened'
 Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-easy-align'
@@ -79,6 +79,9 @@ Plug 'luochen1990/rainbow'
 Plug 'https://github.com/vim-scripts/DfrankUtil'
 Plug 'https://github.com/vim-scripts/vimprj'
 Plug 'https://github.com/vim-scripts/indexer.tar.gz'
+
+"colors
+Plug 'morhetz/gruvbox'
 
 "Plug 'vim-scripts/AutoComplPop'
 
@@ -251,11 +254,21 @@ nnoremap <Leader>p :CtrlP<CR>
 "nnoremap <Leader>m :CtrlPMRUFiles<CR>
 
 "bufstop mappings
-map <leader>b :BufstopFast<CR>             " get a visual on the buffers
+"map <leader>b :BufstopFast<CR>             " get a visual on the buffers
 map <leader>< :BufstopBack<CR>
 map <leader>> :BufstopForward<CR>
 let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
 let g:BufstopDismissKey = "<C-c>"
+
+"fzf mappings
+map <C-p> :Files
+map <leader>fa :Ag
+map <leader>fg :GFiles
+map <leader>fb :Buffers
+map <leader>fl :Lines
+map <leader>fs :Snippets
+map <leader>fc :Commits
+map <leader>fh :History
 
 "mru mapping
 map <Leader>m :MRU
@@ -285,7 +298,10 @@ nmap ga <Plug>(EasyAlign)
 
 "what vim looks like
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
+set termguicolors
+
+
 set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 
 "don't use menu popup when it detects new changes in gui
@@ -313,8 +329,7 @@ set wildmenu
 "don't wrap text when it doesn't fit in the window
 set nowrap
 
-"wrap this in a function so that it overrides macvim settings
-function! OverrideIndentation()
+function! PythonIndentation()
 	"4 space hard tabs with autoindenting
 	set tabstop=4
 	set smarttab
@@ -323,7 +338,8 @@ function! OverrideIndentation()
 	set autoindent
 endfunction
 
-autocmd BufReadPost * call OverrideIndentation()
+autocmd FileType python call PythonIndentation()
+autocmd FileType javascript call PythonIndentation()
 
 "highlight the line you are on
 set cursorline cursorcolumn
@@ -402,6 +418,8 @@ let g:airline_theme='powerlineish'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+let g:airline_extensions = []
 
 "ctrlp stuff
 "let g:ctrlp_cmd = 'CtrlPMixed'
@@ -486,7 +504,7 @@ endfunction
 autocmd BufReadPost * call TabsOrSpaces()
 
 "call silver searcher for word under cursor
-:nnoremap <Leader>A :Ag -Q '<cword>' -G "py\|js\|html" <CR>
+":nnoremap <Leader>A :Ag -Q '<cword>' -G "py\|js\|html" <CR>
 
 "use enter and shift enter to add blank lines without ending up in insert mode
 nmap <S-Enter> O<Esc>

@@ -1,7 +1,7 @@
 # ~/.tmuxinator/haskell.yml
 
 name: haskell
-root: ~/haskell
+root: ~/dev/haskell
 
 # Optional tmux socket
 # socket_name: foo
@@ -38,7 +38,7 @@ windows:
       # synchronize: after
       panes:
         - nvim
-        - stack
+        - stack repl
         - #empty, will just run plain bash
   - whatever: #empty, will just run plain bash
 

@@ -51,7 +51,7 @@ ZSH_THEME="pure"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,43 +115,15 @@ export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/p
 unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-#node local exec alias
-alias npm-exec='PATH=$(npm bin):$PATH'
-
-#always aliases
-alias mux="tmuxinator"
-
-#reviewroom aliases
-alias manage="reviewroom/project/manage.py"
-alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
-alias bugfixer="~/dev/devutils/bugfixer/bugfixer.sh"
-alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
-alias frrun="manage runserver_plus 3000"
-alias frshell="manage shell_plus"
-alias runserver="./manage.py runserver_plus 4000"
-alias t1="ssh frdev@frdev1.fluidreview.dev"
-
-#roguelike
-alias rogue="workon roguelike; cd ~/dev/stuff/roguelike"
-
 #misc aliases
-alias love="/Applications/love.app/Contents/MacOS/love"
-alias rm_pycs='find . -name "*.pyc" -delete'
-alias habble="workon habble; cd ../habble"
-alias habblerun="./manage.py runserver_plus"
-alias goodssl="/usr/local/opt/openssl/bin/openssl"
-alias profile="vim ~/.bash_profile"
-alias tag="ctags -R --exclude='*js'"
-
-alias cvim="vim --cmd 'let g:useAutoComplete=1'"
-
-alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
-alias homepage="workon homepage; cd ~/dev/stuff/homepage"
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
 
 #reviewroom environment variables
 export FR_PATH=~/dev/fluidreview/
 
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 # prevent security pin in flask
@@ -167,3 +139,5 @@ setopt RM_STAR_WAIT
 setopt interactivecomments
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export TERM="xterm-256color"
