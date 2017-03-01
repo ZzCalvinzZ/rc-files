@@ -1,0 +1,9 @@
+[user]
+	name = Calvin Collins
+	email = calvinkcollins@gmail.com
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore
+[merge]
+	tool = nvim
