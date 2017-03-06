@@ -28,7 +28,7 @@ Plug 'mitsuhiko/vim-jinja'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'thinca/vim-guicolorscheme'
 Plug 'tpope/vim-fugitive'
@@ -110,6 +110,8 @@ let g:SuperTabCrMapping                = 0
 let g:deoplete#enable_at_startup = 1 
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+let g:deoplete#auto_complete_delay=150
 
 """""""""""""""""""""""""""""""""""""""
 
@@ -215,7 +217,9 @@ endfunction
 vmap <c-b> :call Beautyness()<cr>
 
 "map plugin commands
-map <Leader><Leader>5 :UndotreeToggle
+map <Leader>2 :NERDTreeFind
+map <Leader>3 :NERDTreeToggle
+map <Leader>5 :UndotreeToggle
 
 "noremap <Leader>D :BufSurfBack
 noremap <Leader>D :bp\|bd #
@@ -228,8 +232,11 @@ noremap <Leader>gd :Gdiff
 noremap <Leader>gb :Gblame wM
 noremap <Leader>gr :Gread
 
-noremap <Leader>dt :windo diffthis
-noremap <Leader>ds :windo diffoff
+noremap <Leader>gdt :windo diffthis
+noremap <Leader>gds :windo diffoff
+
+"vimdiff mappings
+noremap <Leader>dp :diffput 4
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -250,8 +257,9 @@ noremap <Leader><s-l> :vsplit<cr>
 "map <leader>b :BufstopFast<CR>             " get a visual on the buffers
 map <leader>< :BufstopBack<CR>
 map <leader>> :BufstopForward<CR>
-let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
-let g:BufstopDismissKey = "<C-c>"
+"let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
+"let g:BufstopDismissKey = "<C-c>"
+"let g:BufstopLeader = "lksjdflkjsdflkjsd"
 
 autocmd VimEnter * command! -nargs=* -bang Agf call fzf#vim#ag(<q-args>, <bang>0)
 
@@ -263,6 +271,7 @@ map <leader>fb :Buffers
 map <leader>fl :Lines
 map <leader>fs :Snippets
 map <leader>fc :Commits
+map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
 
 """"""""""" MRU - FZF integration """"""""""
@@ -344,6 +353,10 @@ set wildmenu
 set nowrap
 
 function! PythonIndentation()
+	if &ft =~ 'haskell'
+		return
+	endif
+
 	"4 space hard tabs with autoindenting
 	set tabstop=4
 	set smarttab
@@ -352,8 +365,7 @@ function! PythonIndentation()
 	set autoindent
 endfunction
 
-autocmd FileType python call PythonIndentation()
-autocmd FileType javascript call PythonIndentation()
+autocmd BufReadPost * call PythonIndentation()
 
 "highlight the line you are on
 set cursorline cursorcolumn
@@ -462,7 +474,7 @@ endif
 nmap <Leader>ggs <Plug>GitGutterStageHunk
 nmap <Leader>ggr <Plug>GitGutterRevertHunk
 nmap <Leader>ggp <Plug>GitGutterPreviewHunk
-nmap <Nop> <Plug>GitGutterUndoHunk
+nmap <Leader>ggu <Plug>GitGutterUndoHunk
 
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
@@ -508,7 +520,7 @@ nnoremap <Insert> <Plug>InterestingWords
 set sidescroll=1
 
 "vim switch stuff for switching boolean values
-"let g:switch_mapping = "-"
+let g:switch_mapping = "-"
 
 "sexy scroller options
 let g:SexyScroller_ScrollTime = 15
@@ -533,15 +545,7 @@ set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 "live substitution
-set inccommand=nosplit
+if has('nvim')
+	set inccommand=nosplit
+endif
 
-"netrw settings
-"let g:netrw_banner = 0
-"let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"let g:netrw_winsize = 25
-"augroup ProjectDrawer
-  "autocmd!
-  "autocmd VimEnter * :Vexplore
-"augroup END

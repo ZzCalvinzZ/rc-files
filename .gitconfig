@@ -6,4 +6,6 @@
 [core]
 	excludesfile = ~/.gitignore
 [merge]
-	tool = nvim
+	tool = vimdiff
+[mergetool]
+	path = nvim
