@@ -13,6 +13,8 @@ local mash = {
 
 local mod1 = {"alt"}
 local mod2 = {"alt", "shift"}
+local mod3 = {"alt", "ctrl"}
+local mod4 = {"alt", "ctrl", "shift"}
 
 -- lock screen
 hs.hotkey.bind(mash.move, "D", function()
@@ -43,7 +45,7 @@ hs.alert.show("Config loaded")
 
 -- map for kwm
 local function kwmc(cmd)
-    print(hs.execute("/usr/local/bin/kwmc " .. cmd))
+    hs.execute("/usr/local/bin/kwmc " .. cmd)
 end
 
 --hs.hotkey.bind(mod1, "return", function() hs.execute("open -na /Applications/iTerm.app") end)
@@ -58,11 +60,11 @@ hs.hotkey.bind(mod2, "J", function() kwmc("window -s north") end)
 hs.hotkey.bind(mod2, "H", function() kwmc("window -s west") end)
 hs.hotkey.bind(mod2, "L", function() kwmc("window -s east") end)
 
-hs.hotkey.bind(mod1, "A", function() kwmc("display -f prev") end)
-hs.hotkey.bind(mod1, "F", function() kwmc("display -f next") end)
+hs.hotkey.bind(mod3, "H", function() kwmc("display -f prev") end)
+hs.hotkey.bind(mod3, "L", function() kwmc("display -f next") end)
 
-hs.hotkey.bind(mod2, "A", function() kwmc("window -m display prev") end)
-hs.hotkey.bind(mod2, "F", function() kwmc("window -m display next") end)
+hs.hotkey.bind(mod4, "H", function() kwmc("window -m display prev") end)
+hs.hotkey.bind(mod4, "L", function() kwmc("window -m display next") end)
 
 hs.hotkey.bind(mod1, "S", function() kwmc("window -c split-mode toggle") end)
 hs.hotkey.bind(mod1, "N", function() kwmc("space -t bsp") end)
@@ -74,4 +76,18 @@ hs.hotkey.bind(mod2, "3", function() kwmc("window -m space 3") end)
 hs.hotkey.bind(mod2, "4", function() kwmc("window -m space 4") end)
 hs.hotkey.bind(mod2, "5", function() kwmc("window -m space 5") end)
 
-hs.hotkey.bind(mod2, "R", function() kwmc("kwmc config reload") end)
+hs.hotkey.bind(mod1, "R", function()
+    kwmc("config reload")
+    hs.alert.show("Kwm reloaded")
+end)
+
+hs.hotkey.bind(mod2, "R", function() 
+    kwmc("quit")
+    hs.execute("brew services restart kwm")
+    hs.alert.show("Kwm service restarted")
+end)
+
+hs.hotkey.bind(mod2, "Q", function() 
+
+    hs.eventtap.keyStroke({"cmd"}, "W")
+end)

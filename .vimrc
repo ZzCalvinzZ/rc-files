@@ -30,7 +30,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
-Plug 'thinca/vim-guicolorscheme'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -48,22 +47,10 @@ Plug 'Olical/vim-enmasse'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'maksimr/vim-jsbeautify'
 
-if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'zchee/deoplete-jedi'
-	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-else
-	Plug 'nixprime/cpsm' , { 'do': './install.sh' }
-	if exists('g:useAutoComplete') || has("gui_running")
-		Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-	endif
-endif
-
-Plug 'ervandew/supertab'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'ervandew/supertab'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'tpope/vim-scriptease'
 Plug 'vim-scripts/repmo.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -71,36 +58,26 @@ Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'rking/ag.vim'
 Plug 'neomake/neomake'
-Plug 'altercation/vim-colors-solarized'
-Plug 'romainl/flattened'
 Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
-Plug 'https://github.com/vim-scripts/DfrankUtil'
-Plug 'https://github.com/vim-scripts/vimprj'
-Plug 'https://github.com/vim-scripts/indexer.tar.gz'
 
 "colors
 Plug 'morhetz/gruvbox'
+Plug 'romainl/Apprentice'
+
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'zchee/deoplete-jedi'
+	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+endif
 
 "Plug 'vim-scripts/AutoComplPop'
 
 call plug#end()
 
 """"""" autocomplete settings """"""""""
-let g:ycm_dont_warn_on_startup = 0
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-let g:ycm_filetype_blacklist = {
-	\'fugitiveblame' : 1,
-\}
-
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:SuperTabDefaultCompletionType    = '<C-n>'
@@ -132,8 +109,8 @@ filetype plugin indent on
 
 "fixes macvim python defaults
 
-let python_highlight_all = 1
-let b:did_indent = 1
+"let python_highlight_all = 1
+"let b:did_indent = 1
 
 "set this to the value of shiftwidth
 let g:pyindent_open_paren=4
@@ -191,6 +168,9 @@ let g:rainbow_conf = {
 \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
 \       },
 \       'htmldjango': {
+\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\       },
+\       'htmljinja': {
 \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
 \       },
 \       'html.mustache': {
@@ -254,13 +234,10 @@ noremap <Leader><s-h> :vsplit<cr>
 noremap <Leader><s-l> :vsplit<cr>
 
 "bufstop mappings
-"map <leader>b :BufstopFast<CR>             " get a visual on the buffers
 map <leader>< :BufstopBack<CR>
 map <leader>> :BufstopForward<CR>
-"let g:BufstopAutoSpeedToggle = 1       " now I can press ,3,3,3 to cycle the last 3 buffers
-"let g:BufstopDismissKey = "<C-c>"
-"let g:BufstopLeader = "lksjdflkjsdflkjsd"
 
+"for fzf Ag
 autocmd VimEnter * command! -nargs=* -bang Agf call fzf#vim#ag(<q-args>, <bang>0)
 
 "fzf mappings
@@ -292,10 +269,6 @@ endfunction
 "mru mapping
 map <Leader>m :MRU
 
-" Use 'ffr' in normal mode to start it
-nmap ffr :MRUFilesCWD<CR>
-
-
 function! Retab()
 	set noexpandtab
 	:%retab!<cr>
@@ -306,9 +279,6 @@ noremap <Leader>t :call Retab()<cr>
 
 "map space f to copy current file to clipboard
 nmap <Leader>f :let @* = expand("%")<cr>
-
-"set omnicompolete to ctrl space
-inoremap <C-Space> <C-x><C-o>
 
 "stop using esc to escape from insert mode
 inoremap <C-c> <esc>
@@ -322,8 +292,7 @@ nmap ga <Plug>(EasyAlign)
 "what vim looks like
 set background=dark
 colorscheme gruvbox
-set termguicolors
-
+"set termguicolors
 
 set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 
@@ -392,7 +361,7 @@ let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 let g:NERDTreeMapHelp = '<F1>'
 
-"when doing zl or zh do it 30 spaces instead
+"when doing zl or zh do it 30 spaces instead (horizontal scroll)
 nnoremap zl 30zl
 nnoremap zh 30zh
 
@@ -443,26 +412,13 @@ function! ExecuteMacroOverVisualRange()
 	execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
-function! Quick_scope_selective(movement)
-	let needs_disabling = 0
-	if !g:qs_enable
-		QuickScopeToggle
-		redraw
-		let needs_disabling = 1
-	endif
-	let letter = nr2char(getchar())
-	if needs_disabling
-		QuickScopeToggle
-	endif
-	return a:movement . letter
-endfunction
-
 "shows last command made
 set showcmd
 
 set backspace=2
 set backspace=indent,eol,start
 
+"windows stuff
 if has("win32")
 	set directory=.,$TEMP
 	set backupdir=.,$TEMP
@@ -499,23 +455,13 @@ endfunction
 " Call the function after opening a buffer
 autocmd BufReadPost * call TabsOrSpaces()
 
-"call silver searcher for word under cursor
-":nnoremap <Leader>A :Ag -Q '<cword>' -G "py\|js\|html" <CR>
-
 "use enter and shift enter to add blank lines without ending up in insert mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
 
-map <Leader><BS> :!rm -r ~/.vim/swap/* <CR>
-
 "use ctrl-a and ctrl-e as home and end
 :inoremap <C-E> <End>
 :inoremap <C-A> <Home>
-
-"interesting words stuff
-nnoremap <silent> <Leader>i :call InterestingWords('n')<cr>
-nnoremap <silent> <Leader>I :call UncolorAllWords()<cr>
-nnoremap <Insert> <Plug>InterestingWords
 
 set sidescroll=1
 
@@ -547,5 +493,10 @@ set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 "live substitution
 if has('nvim')
 	set inccommand=nosplit
+endif
+
+if &diff
+	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
+	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
 endif
 
