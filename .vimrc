@@ -5,6 +5,9 @@ syntax on
 
 filetype off
 
+"let unnamed register be clipboard
+"set clipboard=unnamed
+
 "turn off vi compatibility
 set nocp
 
@@ -25,26 +28,31 @@ Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mitsuhiko/vim-jinja'
+Plug 'mxw/vim-jsx'
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
+
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'ZzCalvinzZ/vim-sleuth'
+
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'othree/html5.vim'
+
+"snippets
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'mbbill/undotree'
+
 Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'godlygeek/tabular'
 Plug 'Olical/vim-enmasse'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'maksimr/vim-jsbeautify'
 
 Plug 'mustache/vim-mustache-handlebars'
@@ -57,7 +65,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'rking/ag.vim'
-Plug 'neomake/neomake'
 Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
 Plug 'junegunn/vim-easy-align'
@@ -69,8 +76,14 @@ Plug 'romainl/Apprentice'
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
 	Plug 'zchee/deoplete-jedi'
+	Plug 'davidhalter/jedi-vim'
+
 	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+	Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+
+	Plug 'neomake/neomake'
 endif
 
 "Plug 'vim-scripts/AutoComplPop'
@@ -81,14 +94,34 @@ call plug#end()
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
+let g:SuperTabCrMapping		       = 0
 
 " deoplete tab-complete
 let g:deoplete#enable_at_startup = 1 
+let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 let g:deoplete#auto_complete_delay=150
+
+"""""""""""""""""""""""""""""""""""""""
+"jedi and tern stuff
+
+function! SetupTern()
+	map <buffer><leader>cg :TernDef
+	map <buffer><leader>cd :TernDef
+	map <buffer><leader>ck :TernDoc
+	map <buffer><leader>cr :TernRename
+	map <buffer><leader>cn :TernRefs
+endfunction
+
+let g:jedi#goto_assignments_command = '<leader>cg'
+let g:jedi#goto_definitions_command = '<leader>cd'
+let g:jedi#documentation_command = '<leader>ck'
+let g:jedi#rename_command = '<leader>cr'
+let g:jedi#usages_command = '<leader>cn'
+
+autocmd FileType javascript call SetupTern()
 
 """""""""""""""""""""""""""""""""""""""
 
@@ -106,11 +139,6 @@ map <Leader>u :UltiSnipsEdit
 let g:UltiSnipsEditSplit="vertical"
 
 filetype plugin indent on
-
-"fixes macvim python defaults
-
-"let python_highlight_all = 1
-"let b:did_indent = 1
 
 "set this to the value of shiftwidth
 let g:pyindent_open_paren=4
@@ -154,29 +182,29 @@ let g:rainbow_conf = {
 \   'operators': '_,_',
 \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
 \   'separately': {
-\       '*': {},
-\       'tex': {
-\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-\       },
-\       'lisp': {
-\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-\       },
-\       'vim': {
-\           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-\       },
-\       'html': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\       'htmldjango': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\       'htmljinja': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\       'html.mustache': {
-\           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-\       },
-\       'css': 0,
+\	'*': {},
+\	'tex': {
+\	    'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+\	},
+\	'lisp': {
+\	    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\	},
+\	'vim': {
+\	    'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+\	},
+\	'html': {
+\	    'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\	},
+\	'htmldjango': {
+\	    'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\	},
+\	'htmljinja': {
+\	    'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\	},
+\	'html.mustache': {
+\	    'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+\	},
+\	'css': 0,
 \   }
 \}
 
@@ -280,9 +308,6 @@ noremap <Leader>t :call Retab()<cr>
 "map space f to copy current file to clipboard
 nmap <Leader>f :let @* = expand("%")<cr>
 
-"stop using esc to escape from insert mode
-inoremap <C-c> <esc>
-
 "toggle background easily
 map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
@@ -321,20 +346,11 @@ set wildmenu
 "don't wrap text when it doesn't fit in the window
 set nowrap
 
-function! PythonIndentation()
-	if &ft =~ 'haskell'
-		return
-	endif
-
-	"4 space hard tabs with autoindenting
+function! SetupEnvironment()
 	set tabstop=4
-	set smarttab
-	set shiftwidth=4
-	set noexpandtab
-	set autoindent
 endfunction
 
-autocmd BufReadPost * call PythonIndentation()
+autocmd BufNewFile,FileType * call SetupEnvironment()
 
 "highlight the line you are on
 set cursorline cursorcolumn
@@ -474,9 +490,14 @@ let g:SexyScroller_CursorTime = 5
 let g:SexyScroller_MaxTime = 100
 
 
+let g:python_host_prog = '/usr/local/Cellar/python/2.7.12_2/bin/python'
+let g:python3_host_prog = '/usr/local/Cellar/python3/3.5.2_1/bin/python3'
+
 let g:neomake_python_flake8_maker = {
    \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128,E124'],
 \ }
+
+"let g:neomake_javascript_enabled_makers = ['eslint']
 
 let g:neomake_python_enabled_makers = ['flake8', 'python']
 "let g:neomake_open_list=2
@@ -490,6 +511,8 @@ set path+=~/dev/fluidreview/reviewroom/templates/
 set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
+set path+=~/dev/leagion/assets/js/
+
 "live substitution
 if has('nvim')
 	set inccommand=nosplit
@@ -499,4 +522,3 @@ if &diff
 	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
 	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
 endif
-

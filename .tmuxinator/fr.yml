@@ -22,7 +22,7 @@ pre_window: workon fr
 # startup_window: editor
 
 # Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-startup_pane: 1
+#startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
@@ -34,14 +34,14 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - nvim
+        - workon fr; nvim
         - frshell
         - #empty, will just run plain bash
   - server:
       layout: main-vertical
       panes:
         - frrun
-        - cd reviewroom; webpack -w
+        - npm start
   - tig:
       layout: main-vertical
       panes:
