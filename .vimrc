@@ -42,12 +42,14 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'ZzCalvinzZ/vim-sleuth'
 
+"airline
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 "snippets
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
+Plug 'mattn/emmet-vim'
 
 Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
@@ -56,10 +58,8 @@ Plug 'Olical/vim-enmasse'
 Plug 'maksimr/vim-jsbeautify'
 
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'ervandew/supertab'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'vim-scripts/repmo.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -72,7 +72,6 @@ Plug 'luochen1990/rainbow'
 
 "colors
 Plug 'morhetz/gruvbox'
-Plug 'romainl/Apprentice'
 
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -83,18 +82,16 @@ if has('nvim')
 	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 	Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 
+	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/bundle/gocode/vim/symlink.sh' }
+	Plug 'zchee/deoplete-go', { 'do': 'make'}
+	Plug 'fatih/vim-go'
+
 	Plug 'neomake/neomake'
 endif
 
 "Plug 'vim-scripts/AutoComplPop'
 
 call plug#end()
-
-""""""" autocomplete settings """"""""""
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping		       = 0
 
 " deoplete tab-complete
 let g:deoplete#enable_at_startup = 1 
@@ -115,6 +112,13 @@ function! SetupTern()
 	map <buffer><leader>cn :TernRefs
 endfunction
 
+function! SetupGo()
+	map <buffer><leader>cd :GoDef
+	map <buffer><leader>ck :GoDoc
+	map <buffer><leader>cr :GoRename
+	map <buffer><leader>cn :GoReferrers
+endfunction
+
 let g:jedi#goto_assignments_command = '<leader>cg'
 let g:jedi#goto_definitions_command = '<leader>cd'
 let g:jedi#documentation_command = '<leader>ck'
@@ -122,11 +126,11 @@ let g:jedi#rename_command = '<leader>cr'
 let g:jedi#usages_command = '<leader>cn'
 
 autocmd FileType javascript call SetupTern()
+autocmd FileType go call SetupGo()
 
 """""""""""""""""""""""""""""""""""""""
 
 " better key bindings for UltiSnipsExpandTrigger
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -260,6 +264,10 @@ noremap <Leader><s-k> :split<cr>
 noremap <Leader><s-j> :split<cr>
 noremap <Leader><s-h> :vsplit<cr>
 noremap <Leader><s-l> :vsplit<cr>
+
+map <leader>Q :q!<cr>
+map <leader>q :q<cr>
+map <leader>w :w<cr>
 
 "bufstop mappings
 map <leader>< :BufstopBack<CR>
@@ -522,3 +530,6 @@ if &diff
 	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
 	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
 endif
+
+"emmet
+let g:user_emmet_leader_key = '<C-q>'

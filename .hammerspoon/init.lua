@@ -13,8 +13,9 @@ local mash = {
 
 local mod1 = {"alt"}
 local mod2 = {"alt", "shift"}
-local mod3 = {"alt", "ctrl"}
-local mod4 = {"alt", "ctrl", "shift"}
+local mod3 = {"alt", "shift", "cmd"}
+local mod4 = {"alt", "ctrl"}
+local mod5 = {"alt", "ctrl", "shift"}
 
 -- lock screen
 hs.hotkey.bind(mash.move, "D", function()
@@ -60,11 +61,11 @@ hs.hotkey.bind(mod2, "J", function() kwmc("window -s north") end)
 hs.hotkey.bind(mod2, "H", function() kwmc("window -s west") end)
 hs.hotkey.bind(mod2, "L", function() kwmc("window -s east") end)
 
-hs.hotkey.bind(mod3, "H", function() kwmc("display -f prev") end)
-hs.hotkey.bind(mod3, "L", function() kwmc("display -f next") end)
+hs.hotkey.bind(mod4, "H", function() kwmc("display -f prev") end)
+hs.hotkey.bind(mod4, "L", function() kwmc("display -f next") end)
 
-hs.hotkey.bind(mod4, "H", function() kwmc("window -m display prev") end)
-hs.hotkey.bind(mod4, "L", function() kwmc("window -m display next") end)
+hs.hotkey.bind(mod5, "H", function() kwmc("window -m display prev") end)
+hs.hotkey.bind(mod5, "L", function() kwmc("window -m display next") end)
 
 hs.hotkey.bind(mod1, "S", function() kwmc("window -c split-mode toggle") end)
 hs.hotkey.bind(mod1, "N", function() kwmc("space -t bsp") end)
@@ -75,6 +76,8 @@ hs.hotkey.bind(mod2, "2", function() kwmc("window -m space 2") end)
 hs.hotkey.bind(mod2, "3", function() kwmc("window -m space 3") end)
 hs.hotkey.bind(mod2, "4", function() kwmc("window -m space 4") end)
 hs.hotkey.bind(mod2, "5", function() kwmc("window -m space 5") end)
+hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 6") end)
+hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 7") end)
 
 hs.hotkey.bind(mod1, "R", function()
     kwmc("config reload")

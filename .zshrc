@@ -87,15 +87,17 @@ source $ZSH/oh-my-zsh.sh
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
 
-#lots of Node stuff
+#################### NODE PATHS ##########################
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-
 PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
 NPM_PACKAGES="${HOME}/.npm-packages"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+##########################################################
+
+#################### GO PATHS ##########################
+export GOPATH="$HOME/dev/go"
+export PATH=$PATH:$(go env GOPATH)/bin
+##########################################################
 
 #MacPorts
 PATH="/opt/local/bin:/opt/local/sbin:$PATH"

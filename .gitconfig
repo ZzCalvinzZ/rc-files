@@ -6,6 +6,9 @@
 [core]
 	excludesfile = ~/.gitignore
 [merge]
-	tool = vimdiff
+	tool = fugitive
 [mergetool]
 	path = nvim
+	keepBackup = false
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gdiff\" \"$MERGED\"
