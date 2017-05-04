@@ -99,12 +99,17 @@ export GOPATH="$HOME/dev/go"
 export PATH=$PATH:$(go env GOPATH)/bin
 ##########################################################
 
+#################### Android tools PATHS ##########################
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+##########################################################
+
 #MacPorts
 PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 #other paths
 PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
 PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/local/Cellar/gettext/0.19.2/bin"
 PATH="$PATH:/usr/local/Cellar/graphviz/2.38.0/include/graphviz"

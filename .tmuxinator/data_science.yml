@@ -1,16 +1,16 @@
-# ~/.tmuxinator/home.yml
+# ~/.tmuxinator/data_science.yml
 
-name: home
-root: ~/
+name: data_science
+root: ~/dev/data_science
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-#pre: workon fr
+#pre: workon data_science
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-#pre_window: workon
+pre_window: workon data_science
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -35,9 +35,10 @@ windows:
       layout: main-vertical
       panes:
         - nvim
-        - #empty, will just run plain bash
+        - ipython
         - #empty, will just run plain bash
   - whatever:
       layout: main-vertical
       panes:
+        - jupyter notebook
         - #empty, will just run plain bash

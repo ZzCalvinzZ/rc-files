@@ -514,6 +514,7 @@ autocmd! BufWritePost * Neomake
 
 " add template paths for gf completing
 set path+=~/dev/fluidreview/apps/chide/products/smapply/templates/
+set path+=~/dev/fluidreview/apps/chide/products/smapply/mail/templates/
 set path+=~/dev/fluidreview/apps/chide/products/reviewroom/templates/
 set path+=~/dev/fluidreview/reviewroom/templates/
 set path+=~/dev/fluidreview/apps
