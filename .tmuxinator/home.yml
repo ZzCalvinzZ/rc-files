@@ -1,7 +1,7 @@
-# ~/.tmuxinator/go.yml
+# ~/.tmuxinator/home.yml
 
-name: go
-root: ~/dev/go
+name: home
+root: ~
 
 # Optional tmux socket
 # socket_name: foo
