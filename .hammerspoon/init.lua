@@ -84,13 +84,13 @@ hs.hotkey.bind(mod1, "R", function()
     hs.alert.show("Kwm reloaded")
 end)
 
+hs.hotkey.bind(mod2, "Q", function() 
+    kwmc("quit")
+end)
+
 hs.hotkey.bind(mod2, "R", function() 
     kwmc("quit")
     hs.execute("brew services restart kwm")
     hs.alert.show("Kwm service restarted")
 end)
 
-hs.hotkey.bind(mod2, "Q", function() 
-
-    hs.eventtap.keyStroke({"cmd"}, "W")
-end)
