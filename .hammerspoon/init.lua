@@ -77,7 +77,7 @@ hs.hotkey.bind(mod2, "3", function() kwmc("window -m space 3") end)
 hs.hotkey.bind(mod2, "4", function() kwmc("window -m space 4") end)
 hs.hotkey.bind(mod2, "5", function() kwmc("window -m space 5") end)
 hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 6") end)
-hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 7") end)
+hs.hotkey.bind(mod2, "7", function() kwmc("window -m space 7") end)
 
 hs.hotkey.bind(mod1, "R", function()
     kwmc("config reload")
