@@ -55,6 +55,8 @@ hs.hotkey.bind(mod1, "K", function() kwmc("window -f prev") end)
 hs.hotkey.bind(mod1, "J", function() kwmc("window -f next") end)
 hs.hotkey.bind(mod1, "H", function() kwmc("window -f west") end)
 hs.hotkey.bind(mod1, "L", function() kwmc("window -f east") end)
+hs.hotkey.bind(mod1, "F", function() kwmc("window -t focus") end)
+
 
 hs.hotkey.bind(mod2, "K", function() kwmc("window -s south") end)
 hs.hotkey.bind(mod2, "J", function() kwmc("window -s north") end)
@@ -79,10 +81,7 @@ hs.hotkey.bind(mod2, "5", function() kwmc("window -m space 5") end)
 hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 6") end)
 hs.hotkey.bind(mod2, "7", function() kwmc("window -m space 7") end)
 
-hs.hotkey.bind(mod1, "R", function()
-    kwmc("config reload")
-    hs.alert.show("Kwm reloaded")
-end)
+hs.hotkey.bind(mod1, "R", function() kwmc("window -r focused") end)
 
 hs.hotkey.bind(mod2, "Q", function() 
     kwmc("quit")

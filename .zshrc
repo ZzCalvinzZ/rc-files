@@ -51,7 +51,7 @@ ZSH_THEME="pure"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,45 +87,39 @@ source $ZSH/oh-my-zsh.sh
 export WORKON_HOME=~/Envs
 source /usr/local/bin/virtualenvwrapper.sh
 
-#################### NODE PATHS ##########################
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
+#################### PATHS #######################################
+
+#Node
 NPM_PACKAGES="${HOME}/.npm-packages"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-##########################################################
+PATH="$NPM_PACKAGES/bin:$PATH"
 
-#################### GO PATHS ##########################
+#Go
 export GOPATH="$HOME/dev/go"
 export PATH=$PATH:$(go env GOPATH)/bin
-##########################################################
 
-#################### Android tools PATHS ##########################
+#Android
 export ANDROID_HOME=${HOME}/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-##########################################################
 
 #MacPorts
 PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
-#other paths
+#Brew stuff
 PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
-PATH="$HOME/bin:$PATH"
 PATH="$PATH:/usr/local/Cellar/gettext/0.19.2/bin"
 PATH="$PATH:/usr/local/Cellar/graphviz/2.38.0/include/graphviz"
-for d in /Users/calvinc/.npm-packages/bin/*; do PATH="$PATH:$d"; done
+
+#for pdfconvert2 (needed in Fluidreview)
+PATH="$HOME/bin:$PATH"
+
 export PATH
+
+##################################################################
 
 # for pygraphviz to work
 export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/Cellar/graphviz/2.38.0/lib/pkgconfig"
-
-unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-#misc aliases
-if [ -f ~/.aliases ]; then
-    source ~/.aliases
-fi
 
 #reviewroom environment variables
 export FR_PATH=~/dev/fluidreview/
@@ -145,6 +139,13 @@ setopt RM_STAR_WAIT
 # good 'ol Bash
 setopt interactivecomments
 
+# fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export TERM="xterm-256color"
+
+# Source my aliases file
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
+

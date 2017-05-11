@@ -29,6 +29,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
