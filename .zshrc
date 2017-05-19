@@ -149,3 +149,5 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+#add ssh keys to MacOs keyring
+ssh-add -A 2>/dev/null;

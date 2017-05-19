@@ -52,6 +52,8 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'mattn/emmet-vim'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'godlygeek/tabular'
