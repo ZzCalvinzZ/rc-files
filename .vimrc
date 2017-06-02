@@ -6,7 +6,7 @@ syntax on
 filetype off
 
 "let unnamed register be clipboard
-"set clipboard=unnamed
+set clipboard=unnamed
 
 "turn off vi compatibility
 set nocp
@@ -87,7 +87,11 @@ if has('nvim')
 	Plug 'zchee/deoplete-go', { 'do': 'make'}
 	Plug 'fatih/vim-go'
 
-	Plug 'neomake/neomake'
+	Plug 'neomake/neomake', { 'do':
+								\ 'npm install -g eslint@latest;
+								\ npm install -g babel-eslint@latest'
+							\}
+	"Plug 'w0rp/ale'
 endif
 
 "Plug 'vim-scripts/AutoComplPop'
@@ -148,7 +152,7 @@ filetype plugin indent on
 "set this to the value of shiftwidth
 let g:pyindent_open_paren=4
 
-set relativenumber
+set norelativenumber
 
 "gives more space at the bottom so you don't have to hit enter to see stuff
 set cmdheight=2
@@ -500,17 +504,25 @@ let g:SexyScroller_MaxTime = 100
 
 
 let g:python_host_prog = '/usr/local/Cellar/python/2.7.12_2/bin/python'
-let g:python3_host_prog = '/usr/local/Cellar/python3/3.5.2_1/bin/python3'
+let g:python3_host_prog = '/usr/local/Cellar/python3/3.6.1/bin/python3'
+
+" ALE stuff for linting
+
+"let g:ale_python_flake8_options = 'flake8 --select=E,F,W'
+"let g:ale_sign_error = '>>'
+"let g:ale_sign_warning = '--'
+
+"ALL NEOMAKE THINGS
 
 let g:neomake_python_flake8_maker = {
    \ 'args': ['--ignore=E501,E265,E402,E116,W191,E731,E261,E262,E266,E302,E128,E124'],
 \ }
 
-"let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['eslint']
 
 let g:neomake_python_enabled_makers = ['flake8', 'python']
 "let g:neomake_open_list=2
-let g:neomake_list_height=5
+"let g:neomake_list_height=5
 autocmd! BufWritePost * Neomake
 
 " add template paths for gf completing
