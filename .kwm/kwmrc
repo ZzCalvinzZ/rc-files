@@ -124,15 +124,21 @@ blacklists an application from Kwms tiling
 The following command creates a rule that
 captures an application to the given screen,
 if the screen exists.
-
-   kwmc rule owner="iTunes" properties={display="1"}
 */
+
+kwmc rule owner="iTerm2" properties={space="1"}
+kwmc rule owner="Slack" properties={space="2"}
+kwmc rule owner="Outlook" properties={space="3"}
+kwmc rule owner="Chrome" properties={space="4"}
+kwmc rule owner="Finder" properties={space="5"}
+kwmc rule owner="Dash" properties={space="6"}
+kwmc rule owner="Steam" properties={float="true", space="7"}
 
 # Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 5
-kwmc config border focused color 0xFFF44141
-kwmc config border focused radius 6
+kwmc config border focused size 4
+kwmc config border focused color 0xFFFFF000
+kwmc config border focused radius 5
 
 # Enable border for marked window
 kwmc config border marked on

@@ -51,7 +51,7 @@ ZSH_THEME="pure"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -149,5 +149,11 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
-#add ssh keys to MacOs keyring
-ssh-add -A 2>/dev/null;
+#Docker stuff
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/calvinc/.docker/machine/machines/dev"
+export DOCKER_MACHINE_NAME="dev"
+# Run this command to configure your shell:
+# eval $(docker-machine env dev)
+

@@ -513,7 +513,7 @@ let g:python3_host_prog = '/usr/local/Cellar/python3/3.6.1/bin/python3'
 
 let g:ale_python_pylint_use_global = 1
 let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '--'
+let g:ale_sign_warning = '?'
 
 "ALL NEOMAKE THINGS
 
