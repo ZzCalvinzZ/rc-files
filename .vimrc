@@ -5,6 +5,9 @@ syntax on
 
 filetype off
 
+" show tab markers
+set list
+
 "let unnamed register be clipboard
 set clipboard=unnamed
 
@@ -93,6 +96,7 @@ if has('nvim')
 							"\}
 	Plug 'w0rp/ale', { 'do':
 						\ 'npm install -g eslint@latest;
+						\ npm install -g eslint-plugin-babel@latest;
 						\ npm install -g babel-eslint@latest'
 					\}
 endif
