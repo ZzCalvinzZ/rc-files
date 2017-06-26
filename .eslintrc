@@ -6,7 +6,7 @@
 	},
 	"extends": "eslint:recommended",
 	"parser": "babel-eslint",
-	"plugins": ["react"],
+	"plugins": ["react", "babel"],
 	"parserOptions": {
 		"ecmaFeatures": {
 			"experimentalObjectRestSpread": true,
@@ -15,13 +15,16 @@
 	},
 	"rules": {
 		"strict": 0,
-		"semi": 1,
 		"babel/semi": 1,
 		"react/jsx-uses-vars": 1,
 		"react/react-in-jsx-scope": 1
 	},
 	"globals": {
-		"gettext": true
+		"gettext": true,
+		"$": true,
+		"dragula": true,
+		"reverse": true,
+		"React": true
 	}
 
 }

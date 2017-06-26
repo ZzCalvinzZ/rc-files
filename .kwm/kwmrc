@@ -67,7 +67,7 @@ kwmc config center-on-float off
     The mouse will automatically move to the center
     of the focused window
 */
-kwmc config mouse-follows-focus off
+kwmc config mouse-follows-focus on
 
 /*
     Allows a window to be moved by dragging,
@@ -90,6 +90,20 @@ Override default settings for space 1 on screen 0
    kwmc config space 0 1 padding 100 100 100 100
    kwmc config space 0 1 gap 40 40
 */
+/*kwmc config space 0 1 tree terminal*/
+/*kwmc config space 0 1 name terminal*/
+/*kwmc config space 0 2 tree Slack*/
+/*kwmc config space 0 2 name Slack*/
+/*kwmc config space 0 3 tree outlook*/
+/*kwmc config space 0 3 name outlook*/
+/*kwmc config space 0 4 tree chrome*/
+/*kwmc config space 0 4 name chrome*/
+/*kwmc config space 0 5 tree finder*/
+/*kwmc config space 0 5 name finder*/
+/*kwmc config space 0 6 tree sketch*/
+/*kwmc config space 0 6 name sketch*/
+/*kwmc config space 0 7 tree steam*/
+/*kwmc config space 0 7 name steam*/
 
 /*
 Override default settings for screen 1
@@ -126,13 +140,13 @@ captures an application to the given screen,
 if the screen exists.
 */
 
-kwmc rule owner="iTerm2" properties={space="1"}
-kwmc rule owner="Slack" properties={space="2"}
-kwmc rule owner="Outlook" properties={space="3"}
-kwmc rule owner="Chrome" properties={space="4"}
-kwmc rule owner="Finder" properties={space="5"}
-kwmc rule owner="Dash" properties={space="6"}
-kwmc rule owner="Steam" properties={float="true", space="7"}
+/*kwmc rule owner="iTerm2" properties={space="1"}*/
+/*kwmc rule owner="Slack" properties={space="2"}*/
+/*kwmc rule owner="Outlook" properties={space="3"}*/
+/*kwmc rule owner="Chrome" properties={space="4"}*/
+/*kwmc rule owner="Finder" properties={space="5"}*/
+/*kwmc rule owner="Dash" properties={space="6"}*/
+kwmc rule owner="Steam" properties={float="true"}
 
 # Enable border for focused window
 kwmc config border focused on

@@ -32,11 +32,14 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+"Plug 'posva/vim-vue'
+
 let g:jsx_ext_required = 0
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 
@@ -225,7 +228,7 @@ let g:rainbow_conf = {
 \}
 
 function! Beautyness()
-	if &filetype == 'javascript'
+	if &filetype =~ 'javascript'
 		call RangeJsBeautify()
 	elseif &filetype == 'html'
 		call RangeHtmlBeautify()
@@ -298,6 +301,10 @@ map <leader>fs :Snippets
 map <leader>fc :Commits
 map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
+
+"easier formatting
+map <leader>= :set noexpandtab<bar>normal ggVG=
+map <leader>+ :set expandtab<bar>normal ggVG=
 
 """"""""""" MRU - FZF integration """"""""""
 command! MRUFilesCWD call fzf#run({
