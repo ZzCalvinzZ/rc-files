@@ -1,3 +1,5 @@
+"make sure it's in vim mode
+set nocompatible
 "show line numbers
 set number
 "turn on syntax highlighting
@@ -506,6 +508,9 @@ nmap <CR> o<Esc>
 :inoremap <C-E> <End>
 :inoremap <C-A> <Home>
 
+"remove space so I can use it for my leader
+nnoremap <SPACE> <Nop>
+
 set sidescroll=1
 
 "vim switch stuff for switching boolean values
@@ -517,8 +522,8 @@ let g:SexyScroller_CursorTime = 5
 let g:SexyScroller_MaxTime = 100
 
 
-let g:python_host_prog = '/usr/local/Cellar/python/2.7.12_2/bin/python'
-let g:python3_host_prog = '/usr/local/Cellar/python3/3.6.1/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 " ALE stuff for linting
 
