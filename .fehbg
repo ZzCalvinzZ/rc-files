@@ -1,0 +1,6 @@
+#!/bin/sh
+while true
+do
+	feh --bg-fill --randomize --no-fehbg ~/.wallpaper/* 
+	sleep 90m
+done
