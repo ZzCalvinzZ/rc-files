@@ -49,6 +49,10 @@ local function kwmc(cmd)
     hs.execute("/usr/local/bin/kwmc " .. cmd)
 end
 
+--local function refreshNerd()
+    --hs.osascript.applescript('tell application "Übersicht" to refresh widget id "nerdbar-widget-mode-coffee"')
+--end
+
 --call a brew command
 local function brew(args)
     local taskObj = hs.task.new("/usr/local/bin/brew", function(code, out, err)
@@ -98,6 +102,14 @@ hs.hotkey.bind(mod2, "8", function() kwmc("window -m space 8") end)
 
 hs.hotkey.bind(mod1, "R", function() kwmc("window -r focused") end)
 
+--hs.hotkey.bind(mod1, "1", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "2", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "3", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "4", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "5", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "6", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "7", function() refreshNerd() end)
+--hs.hotkey.bind(mod1, "8", function() refreshNerd() end)
 
 hs.hotkey.bind(mod2, "Q", function()
     brew({'services', 'stop', 'kwm'})
