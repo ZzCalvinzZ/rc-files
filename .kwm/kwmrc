@@ -37,7 +37,7 @@ e.g: window-rules in a separate file called 'rules'
 */
 
 # Set default values for screen padding
-kwmc config padding 25 0 3 3
+kwmc config padding 28 4 3 3
 
 # Set default values for container gaps
 kwmc config gap 10 10
@@ -150,8 +150,8 @@ kwmc rule owner="Steam" properties={float="true"}
 
 # Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 3
-kwmc config border focused color 0xFFebdbb2
+kwmc config border focused size 2
+kwmc config border focused color 0xFFb8bb26
 kwmc config border focused radius 4
 
 # Enable border for marked window
