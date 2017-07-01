@@ -1,5 +1,6 @@
 "make sure it's in vim mode
 set nocompatible
+
 "show line numbers
 set number
 "turn on syntax highlighting
@@ -9,6 +10,7 @@ filetype off
 
 " show tab markers
 set list
+"set lazyredraw          " Wait to redraw
 
 "let unnamed register be clipboard
 set clipboard=unnamed
@@ -18,8 +20,8 @@ set nocp
 
 "ag mapping for ack
 let g:ackprg = 'ag --vimgrep --smart-case'
-cnoreabbrev ag Ack
-cnoreabbrev Ag Ack
+"cnoreabbrev ag Ack
+"cnoreabbrev Ag Ack
 
 call plug#begin('~/.config/nvim/bundle')
 
@@ -37,6 +39,7 @@ Plug 'keith/tmux.vim'
 Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
 Plug 'kchmck/vim-coffee-script'
+Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
 "Plug 'posva/vim-vue'
@@ -46,7 +49,6 @@ let g:jsx_ext_required = 0
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 
@@ -71,13 +73,12 @@ Plug 'godlygeek/tabular'
 Plug 'Olical/vim-enmasse'
 Plug 'maksimr/vim-jsbeautify'
 
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'joeytwiddle/sexy_scroller.vim'
+"Plug 'joeytwiddle/sexy_scroller.vim'
 Plug 'mileszs/ack.vim'
 Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
@@ -387,7 +388,10 @@ endfunction
 autocmd BufNewFile,FileType * call SetupEnvironment()
 
 "highlight the line you are on
-set cursorline cursorcolumn
+"set cursorline cursorcolumn
+
+" fix screen flickering by using terminal background
+hi Normal ctermbg=NONE
 
 "persistent undo for when vim is closed
 set undofile
