@@ -52,7 +52,7 @@ ZSH_THEME="refined"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker extract)
 
 source $ZSH/oh-my-zsh.sh
 

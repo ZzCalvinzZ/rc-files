@@ -40,3 +40,7 @@ alias habblerun="./manage.py runserver_plus"
 alias love="/Applications/love.app/Contents/MacOS/love"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias tag="ctags -R --exclude='*js'"
+
+function get_process_for_port() {
+	lsof -i :$1
+}

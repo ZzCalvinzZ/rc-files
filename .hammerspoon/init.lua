@@ -27,16 +27,19 @@ hs.hotkey.bind(mash.move, "S", function()
     hs.caffeinate.systemSleep()
 end)
 
+hs.hotkey.bind(mash.focus, "return", function()
+    hs.eventtap.event.newSystemKeyEvent('PLAY', true):post()
+end)
 
 -- map up and down arrows
 
-hs.hotkey.bind(mash.focus, "K", function()
-    hs.eventtap.keyStroke({}, "up")
-end)
+--hs.hotkey.bind(mash.focus, "K", function()
+    --hs.eventtap.keyStroke({}, "up")
+--end)
 
-hs.hotkey.bind(mash.focus, "J", function()
-    hs.eventtap.keyStroke({}, "down")
-end)
+--hs.hotkey.bind(mash.focus, "J", function()
+    --hs.eventtap.keyStroke({}, "down")
+--end)
 
 --reload config
 hs.hotkey.bind(mash.focus, "R", function()
@@ -47,6 +50,11 @@ hs.alert.show("Config loaded")
 -- map for kwm
 local function kwmc(cmd)
     hs.execute("/usr/local/bin/kwmc " .. cmd)
+end
+
+--map for chunkwm
+local function chunk(cmd)
+    hs.execute("/usr/local/bin/chunkc " .. cmd)
 end
 
 --local function refreshNerd()
@@ -68,39 +76,39 @@ local function brew(args)
     hs.alert.show('command started')
 end
 
-hs.hotkey.bind(mod1, "K", function() kwmc("window -f prev") end)
-hs.hotkey.bind(mod1, "J", function() kwmc("window -f next") end)
-hs.hotkey.bind(mod1, "H", function() kwmc("window -f west") end)
-hs.hotkey.bind(mod1, "L", function() kwmc("window -f east") end)
+hs.hotkey.bind(mod1, "K", function() chunk("tiling::window --focus south") end)
+hs.hotkey.bind(mod1, "J", function() chunk("tiling::window --focus north") end)
+hs.hotkey.bind(mod1, "H", function() chunk("tiling::window --focus west") end)
+hs.hotkey.bind(mod1, "L", function() chunk("tiling::window --focus east") end)
 
-hs.hotkey.bind(mod2, "space", function() kwmc("window -t focused") end)
-hs.hotkey.bind(mod1, "F", function() kwmc("window -z fullscreen") end)
+hs.hotkey.bind(mod2, "space", function() chunk("tiling::window --warp-floating fullscreen") end)
+hs.hotkey.bind(mod1, "F", function() chunk("tiling::window --toggle fullscreen") end)
 
-hs.hotkey.bind(mod2, "K", function() kwmc("window -s south") end)
-hs.hotkey.bind(mod2, "J", function() kwmc("window -s north") end)
-hs.hotkey.bind(mod2, "H", function() kwmc("window -s west") end)
-hs.hotkey.bind(mod2, "L", function() kwmc("window -s east") end)
+hs.hotkey.bind(mod2, "K", function() chunk("tiling::window --warp south") end)
+hs.hotkey.bind(mod2, "J", function() chunk("tiling::window --warp north") end)
+hs.hotkey.bind(mod2, "H", function() chunk("tiling::window --warp west") end)
+hs.hotkey.bind(mod2, "L", function() chunk("tiling::window --warp east") end)
 
-hs.hotkey.bind(mod4, "H", function() kwmc("display -f prev") end)
-hs.hotkey.bind(mod4, "L", function() kwmc("display -f next") end)
+hs.hotkey.bind(mod4, "H", function() chunk("tiling::monitor -f prev") end)
+hs.hotkey.bind(mod4, "L", function() chunk("tiling::monitor -f next") end)
 
-hs.hotkey.bind(mod5, "H", function() kwmc("window -m display prev") end)
-hs.hotkey.bind(mod5, "L", function() kwmc("window -m display next") end)
+hs.hotkey.bind(mod5, "H", function() chunk("tiling::window --send-to-monitor prev") end)
+hs.hotkey.bind(mod5, "L", function() chunk("tiling::window --send-to-monitor next") end)
 
-hs.hotkey.bind(mod1, "S", function() kwmc("window -c split-mode toggle") end)
-hs.hotkey.bind(mod1, "E", function() kwmc("space -t bsp") end)
-hs.hotkey.bind(mod1, "W", function() kwmc("space -t monocle") end)
+hs.hotkey.bind(mod1, "S", function() chunk("window -c split-mode toggle") end)
+hs.hotkey.bind(mod1, "E", function() chunk("tiling::desktop --layout bsp") end)
+hs.hotkey.bind(mod1, "W", function() chunk("tiling::desktop --layout monocle") end)
 
-hs.hotkey.bind(mod2, "1", function() kwmc("window -m space 1") end)
-hs.hotkey.bind(mod2, "2", function() kwmc("window -m space 2") end)
-hs.hotkey.bind(mod2, "3", function() kwmc("window -m space 3") end)
-hs.hotkey.bind(mod2, "4", function() kwmc("window -m space 4") end)
-hs.hotkey.bind(mod2, "5", function() kwmc("window -m space 5") end)
-hs.hotkey.bind(mod2, "6", function() kwmc("window -m space 6") end)
-hs.hotkey.bind(mod2, "7", function() kwmc("window -m space 7") end)
-hs.hotkey.bind(mod2, "8", function() kwmc("window -m space 8") end)
+hs.hotkey.bind(mod2, "1", function() chunk("tiling::window --send-to-desktop 1") end)
+hs.hotkey.bind(mod2, "2", function() chunk("tiling::window --send-to-desktop 2") end)
+hs.hotkey.bind(mod2, "3", function() chunk("tiling::window --send-to-desktop 3") end)
+hs.hotkey.bind(mod2, "4", function() chunk("tiling::window --send-to-desktop 4") end)
+hs.hotkey.bind(mod2, "5", function() chunk("tiling::window --send-to-desktop 5") end)
+hs.hotkey.bind(mod2, "6", function() chunk("tiling::window --send-to-desktop 6") end)
+hs.hotkey.bind(mod2, "7", function() chunk("tiling::window --send-to-desktop 7") end)
+hs.hotkey.bind(mod2, "8", function() chunk("tiling::window --send-to-desktop 8") end)
 
-hs.hotkey.bind(mod1, "R", function() kwmc("window -r focused") end)
+hs.hotkey.bind(mod1, "R", function() chunk("window -r focused") end)
 
 --hs.hotkey.bind(mod1, "1", function() refreshNerd() end)
 --hs.hotkey.bind(mod1, "2", function() refreshNerd() end)
@@ -112,15 +120,15 @@ hs.hotkey.bind(mod1, "R", function() kwmc("window -r focused") end)
 --hs.hotkey.bind(mod1, "8", function() refreshNerd() end)
 
 hs.hotkey.bind(mod2, "Q", function()
-    brew({'services', 'stop', 'kwm'})
+    brew({'services', 'stop', 'chunkwm'})
 end)
 
 hs.hotkey.bind(mod2, "S", function()
-    brew({'services', 'start', 'kwm'})
+    brew({'services', 'start', 'chunkwm'})
 end)
 
 hs.hotkey.bind(mod2, "R", function()
-    brew({'services', 'restart', 'kwm'})
+    brew({'services', 'restart', 'chunkwm'})
 end)
 
 hs.hotkey.bind(mod1, "-", function()
