@@ -26,6 +26,8 @@ set noswapfile
 set undodir=~/.config/.nvim/undo//
 set diffopt=vertical "make diffs appear side by side
 set hidden "don't close file (hide it in a buffer)
+set relativenumber
+set mouse=a
 setlocal foldmethod=indent
 
 syntax on "turn on syntax highlighting
@@ -64,6 +66,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+Plug 'joeytwiddle/sexy_scroller.vim'
 
 let g:jsx_ext_required = 0
 
@@ -402,5 +405,12 @@ set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"sexy scroller options
+"
+let g:SexyScroller_ScrollTime = 5
+let g:SexyScroller_CursorTime = 5
+let g:SexyScroller_MaxTime = 250
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
