@@ -34,7 +34,7 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - nvim
+        - vim
         - #empty, will just run plain bash
         - #empty, will just run plain bash
   - whatever:

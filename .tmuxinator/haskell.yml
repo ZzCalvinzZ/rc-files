@@ -37,7 +37,7 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - nvim
+        - vim
         - stack repl
         - #empty, will just run plain bash
   - whatever: #empty, will just run plain bash

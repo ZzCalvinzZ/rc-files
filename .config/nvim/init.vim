@@ -29,6 +29,9 @@ set hidden "don't close file (hide it in a buffer)
 set relativenumber
 set mouse=a
 setlocal foldmethod=indent
+set cursorcolumn
+set cursorline
+
 
 syntax on "turn on syntax highlighting
 filetype off
@@ -328,15 +331,6 @@ function! s:mru_files_for_cwd()
   \ ), 'fnamemodify(v:val, ":p:.")')
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""
-"NERDTree stuff
-let NERDTreeIgnore = ['\.pyc$']
-let NERDTreeShowLineNumbers=1
-autocmd FileType nerdtree setlocal relativenumber
-let g:NERDTreeMapHelp = '<F1>'
-
-"detect .md as markdown
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
