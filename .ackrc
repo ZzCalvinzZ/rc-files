@@ -1,0 +1,3 @@
+--ignore-dir=common/media/
+--ignore-dir=reviewroom/media/
+--ignore-dir=locale/

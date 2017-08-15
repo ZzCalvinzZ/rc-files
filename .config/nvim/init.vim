@@ -26,11 +26,12 @@ set noswapfile
 set undodir=~/.config/.nvim/undo//
 set diffopt=vertical "make diffs appear side by side
 set hidden "don't close file (hide it in a buffer)
-set relativenumber
+set norelativenumber
 set mouse=a
 setlocal foldmethod=indent
 set cursorcolumn
 set cursorline
+set nohlsearch
 
 
 syntax on "turn on syntax highlighting
