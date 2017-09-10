@@ -32,7 +32,7 @@ setlocal foldmethod=indent
 set cursorcolumn
 set cursorline
 set nohlsearch
-
+set termguicolors "truecolors
 
 syntax on "turn on syntax highlighting
 filetype off
@@ -70,7 +70,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
-Plug 'joeytwiddle/sexy_scroller.vim'
 
 let g:jsx_ext_required = 0
 
@@ -117,6 +116,7 @@ Plug 'morhetz/gruvbox'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
+Plug 'fisadev/vim-isort', { 'do': 'pip install isort' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
@@ -135,6 +135,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "what vim looks like
+let g:gruvbox_italic=1
 set background=dark
 colorscheme gruvbox
 
@@ -220,7 +221,9 @@ vmap <c-b> :call Beautyness()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
-
+imap kj <Esc>
+nmap ; :
+vmap ; :
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
@@ -379,8 +382,8 @@ let g:switch_mapping = "-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+"let g:python_host_prog = '/usr/local/bin/python'
+"let g:python3_host_prog = '/usr/local/bin/python3'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
@@ -388,6 +391,13 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:ale_python_pylint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_python_flake8_args="--ignore=W191"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ack stuff
+"
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -400,12 +410,5 @@ set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"sexy scroller options
-"
-let g:SexyScroller_ScrollTime = 5
-let g:SexyScroller_CursorTime = 5
-let g:SexyScroller_MaxTime = 250
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

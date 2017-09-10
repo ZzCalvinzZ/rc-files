@@ -76,21 +76,30 @@ local function brew(args)
     hs.alert.show('command started')
 end
 
-hs.hotkey.bind(mod1, "K", function() chunk("tiling::window --focus south") end)
-hs.hotkey.bind(mod1, "J", function() chunk("tiling::window --focus north") end)
+hs.hotkey.bind(mod1, "K", function() chunk("tiling::window --focus north") end)
+hs.hotkey.bind(mod1, "J", function() chunk("tiling::window --focus south") end)
 hs.hotkey.bind(mod1, "H", function() chunk("tiling::window --focus west") end)
 hs.hotkey.bind(mod1, "L", function() chunk("tiling::window --focus east") end)
+
+hs.hotkey.bind(mod2, "K", function()
+                 chunk("tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north") end)
+hs.hotkey.bind(mod2, "J", function()
+                 chunk("tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south") end)
+hs.hotkey.bind(mod2, "H", function()
+                 chunk("tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west") end)
+hs.hotkey.bind(mod2, "L", function()
+                 chunk("tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east") end)
 
 hs.hotkey.bind(mod2, "space", function() chunk("tiling::window --warp-floating fullscreen") end)
 hs.hotkey.bind(mod1, "F", function() chunk("tiling::window --toggle fullscreen") end)
 
-hs.hotkey.bind(mod2, "K", function() chunk("tiling::window --warp south") end)
-hs.hotkey.bind(mod2, "J", function() chunk("tiling::window --warp north") end)
-hs.hotkey.bind(mod2, "H", function() chunk("tiling::window --warp west") end)
-hs.hotkey.bind(mod2, "L", function() chunk("tiling::window --warp east") end)
+hs.hotkey.bind(mod4, "K", function() chunk("tiling::window --warp north") end)
+hs.hotkey.bind(mod4, "J", function() chunk("tiling::window --warp south") end)
+hs.hotkey.bind(mod4, "H", function() chunk("tiling::window --warp west") end)
+hs.hotkey.bind(mod4, "L", function() chunk("tiling::window --warp east") end)
 
-hs.hotkey.bind(mod4, "H", function() chunk("tiling::monitor -f prev") end)
-hs.hotkey.bind(mod4, "L", function() chunk("tiling::monitor -f next") end)
+hs.hotkey.bind(mod5, "H", function() chunk("tiling::monitor -f prev") end)
+hs.hotkey.bind(mod5, "L", function() chunk("tiling::monitor -f next") end)
 
 hs.hotkey.bind(mod5, "H", function() chunk("tiling::window --send-to-monitor prev") end)
 hs.hotkey.bind(mod5, "L", function() chunk("tiling::window --send-to-monitor next") end)
@@ -139,4 +148,3 @@ hs.hotkey.bind(mod1, "-", function()
         virtualbox:mainWindow():focus()
     end
 end)
-
