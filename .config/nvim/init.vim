@@ -37,13 +37,14 @@ set termguicolors "truecolors
 syntax on "turn on syntax highlighting
 filetype off
 filetype plugin indent on
-hi Normal ctermbg=NONE 
+hi Normal ctermbg=NONE guibg=NONE
 
 "when opening new file, do this stuff
 function! SetupEnvironment()
 	set tabstop=4
 endfunction
 autocmd BufNewFile,FileType * call SetupEnvironment()
+autocmd BufWritePre * %s/\s\+$//e "trim trailing whitespace
 
 "better colors when using as diff
 if &diff
@@ -70,6 +71,9 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+Plug 'okcompute/vim-javascript-motions'
+
+Plug 'editorconfig/editorconfig-vim'
 
 let g:jsx_ext_required = 0
 
@@ -122,6 +126,7 @@ Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
+Plug 'Chiel92/vim-autoformat'
 
 "linting
 Plug 'w0rp/ale', { 'do':
@@ -142,7 +147,7 @@ colorscheme gruvbox
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " deoplete tab-complete
-let g:deoplete#enable_at_startup = 1 
+let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -221,9 +226,6 @@ vmap <c-b> :call Beautyness()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
-imap kj <Esc>
-nmap ; :
-vmap ; :
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
@@ -253,6 +255,8 @@ noremap <Leader>gds :windo diffoff
 
 "vimdiff mappings
 noremap <Leader>dp :diffput 4
+noremap <Leader>db :windo set nocursorbind noscrollbind
+noremap <Leader>dB :windo set cursorbind scrollbind
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -264,10 +268,14 @@ noremap <Leader>k :wincmd k<cr>
 noremap <Leader>j :wincmd j<cr>
 noremap <Leader>h :wincmd h<cr>
 noremap <Leader>l :wincmd l<cr>
-noremap <Leader><s-k> :split<cr>
-noremap <Leader><s-j> :split<cr>
-noremap <Leader><s-h> :vsplit<cr>
-noremap <Leader><s-l> :vsplit<cr>
+noremap <Leader><s-k> :wincmd K<cr>
+noremap <Leader><s-j> :wincmd J<cr>
+noremap <Leader><s-h> :wincmd H<cr>
+noremap <Leader><s-l> :wincmd L<cr>
+noremap <Leader><C-k> :split<cr>
+noremap <Leader><C-j> :split<cr>
+noremap <Leader><C-h> :vsplit<cr>
+noremap <Leader><C-l> :vsplit<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -291,10 +299,15 @@ map <leader>fs :Snippets
 map <leader>fc :Commits
 map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
+noremap <Leader>fw :Ack "<cword>"
+noremap <Leader>fW :Ack -Q "<cWORD>"
 
 "use to tab or untab entire file
 map <leader>= :set noexpandtab<bar>normal ggVG=
 map <leader>+ :set expandtab<bar>normal ggVG=
+
+"close all buffers
+map <leader>r :1,100bd<cr>
 
 "mru mapping
 map <Leader>m :MRU
@@ -393,10 +406,23 @@ let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_python_flake8_args="--ignore=W191"
+let g:ale_fixers = {
+\   'python': ['autopep8'],
+\   'javascript': ['eslint'],
+\}
+
+"keybindings
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"autoformat
+noremap <Leader>a :Autoformat<CR>
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

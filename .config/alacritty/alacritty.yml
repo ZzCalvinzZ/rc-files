@@ -33,10 +33,10 @@ dpi:
   y: 96.0
 
 # Display tabs using this many cells (changes require restart)
-tabspaces: 8
+tabspaces: 4
 
 # When true, bold text is drawn using the bright variant of colors.
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 # Font configuration (changes require restart)
 font:
@@ -59,7 +59,7 @@ font:
     # style: Italic
 
   # Point size of the font
-  size: 14.0
+  size: 15.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -90,9 +90,9 @@ custom_cursor_colors: false
 colors:
   # Default colors
   primary:
-    #background: '0x1d2021' # hard contrast: 
+    #background: '0x1d2021' # hard contrast:
     #background: '0x282828'
-    background: '0x32302f' #soft contrast: 
+    background: '0x32302f' #soft contrast:
     foreground: '0xebdbb2'
 
   # Normal colors
@@ -181,6 +181,8 @@ key_bindings:
   - { key: C,        mods: Command, action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }
+  - { key: Up,   mods: Command, action: IncreaseFontSize             }
+  - { key: Down, mods: Command, action: DecreaseFontSize             }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[1~",  mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
@@ -225,7 +227,7 @@ key_bindings:
   - { key: F11,                     chars: "\x1b[23~"                    }
   - { key: F12,                     chars: "\x1b[24~"                    }
   - { key: Back,                    chars: "\x7f"                        }
-  - { key: Back,     mods: Alt,     chars: "\x17"                    }
+  - { key: Back,     mods: Alt,     chars: "\x17"                        }
   - { key: Insert,                  chars: "\x1b[2~"                     }
   - { key: Delete,                  chars: "\x1b[3~"                     }
 

@@ -4,7 +4,7 @@
 		"browser": true,
 		"node": true
 	},
-	"extends": "eslint:recommended",
+	"extends": ["eslint:recommended", "plugin:react/recommended"],
 	"parser": "babel-eslint",
 	"plugins": ["react", "babel"],
 	"parserOptions": {
@@ -17,7 +17,8 @@
 		"strict": 0,
 		"babel/semi": 1,
 		"react/jsx-uses-vars": 1,
-		"react/react-in-jsx-scope": 1
+		"react/react-in-jsx-scope": 1,
+		"react/prop-types": 0
 	},
 	"globals": {
 		"gettext": true,

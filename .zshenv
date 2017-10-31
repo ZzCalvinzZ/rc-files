@@ -9,10 +9,6 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 PATH=~/.npm-global/bin:$PATH
 
-#Go
-export GOPATH="$HOME/dev/go"
-export PATH=$PATH:$(go env GOPATH)/bin
-
 #Android
 export ANDROID_HOME=${HOME}/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools

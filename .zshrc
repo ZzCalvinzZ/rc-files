@@ -107,6 +107,10 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+#Go
+export GOPATH="$HOME/dev/go"
+export PATH=$PATH:$(go env GOPATH)/bin
+
 #Docker stuff
 # Run this command to configure your shell:
 # eval $(docker-machine env dev)

@@ -64,13 +64,13 @@ end
 --call a brew command
 local function brew(args)
     local taskObj = hs.task.new("/usr/local/bin/brew", function(code, out, err)
-        if code == 0 then 
+        if code == 0 then
             hs.alert.show('command successful')
         else
             hs.alert.show('command error')
         end
     end, function() return true end, args)
-    
+
     taskObj:start()
 
     hs.alert.show('command started')
@@ -104,9 +104,10 @@ hs.hotkey.bind(mod5, "L", function() chunk("tiling::monitor -f next") end)
 hs.hotkey.bind(mod5, "H", function() chunk("tiling::window --send-to-monitor prev") end)
 hs.hotkey.bind(mod5, "L", function() chunk("tiling::window --send-to-monitor next") end)
 
-hs.hotkey.bind(mod1, "S", function() chunk("window -c split-mode toggle") end)
+hs.hotkey.bind(mod1, "S", function() chunk("tiling:window --toggle split") end)
 hs.hotkey.bind(mod1, "E", function() chunk("tiling::desktop --layout bsp") end)
 hs.hotkey.bind(mod1, "W", function() chunk("tiling::desktop --layout monocle") end)
+hs.hotkey.bind(mod1, "F", function() chunk("tiling:window --toggle fullscreen") end)
 
 hs.hotkey.bind(mod2, "1", function() chunk("tiling::window --send-to-desktop 1") end)
 hs.hotkey.bind(mod2, "2", function() chunk("tiling::window --send-to-desktop 2") end)

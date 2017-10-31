@@ -93,3 +93,5 @@ export WERKZEUG_DEBUG_PIN=off
 TERM=screen-256color
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+export PATH="$HOME/.cargo/bin:$PATH"
