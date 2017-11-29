@@ -34,6 +34,9 @@ set cursorline
 set nohlsearch
 set termguicolors "truecolors
 
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
 syntax on "turn on syntax highlighting
 filetype off
 filetype plugin indent on
@@ -71,11 +74,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
-Plug 'okcompute/vim-javascript-motions'
 
 Plug 'editorconfig/editorconfig-vim'
-
-let g:jsx_ext_required = 0
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'rbgrouleff/bclose.vim'
@@ -140,6 +140,7 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "what vim looks like
+let g:gruvbox_contrast_dark="soft"
 let g:gruvbox_italic=1
 set background=dark
 colorscheme gruvbox
@@ -186,6 +187,7 @@ autocmd FileType go call SetupGo()
 
 "for vim-javascript to show html and css highlighting
 let javascript_enable_domhtmlcss=1
+let g:vim_json_syntax_conceal = 0
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger="<C-j>"
@@ -206,29 +208,26 @@ cnoremap $M <CR>:M''<CR>
 cnoremap $d <CR>:d<CR>``
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"wrapper for JsBeautify
+"recursive macro function
 
-function! Beautyness()
-	if &filetype =~ 'javascript'
-		call RangeJsBeautify()
-	elseif &filetype == 'html'
-		call RangeHtmlBeautify()
-	elseif &filetype == 'html.mustache'
-		call RangeHtmlBeautify()
-	elseif &filetype == 'css'
-		call RangeCSSBeautify()
-	elseif &filetype == 'json' || &filetype == 'python'
-		call RangeJsonBeautify()
-	endif
+function! RecMacro(cmds)
+  let a = @a
+  let @a = a:cmds . "@a"
+  echo @a
+  try
+    normal @a
+  finally
+    let @a = a
+  endtry
 endfunction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"JSX
+let g:jsx_ext_required = 0
 
-vmap <c-b> :call Beautyness()<cr>
+nmap <Leader>11 0f<f i<cr><Esc>:call RecMacro('0f=l%a<C-v><cr><C-v><Esc>')<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
-nnoremap <SPACE> <Nop>
-let mapleader = " "
-
 map <Leader>v :e ~/.config/nvim/init.vim
 map <Leader>V :e ~/.bash_profile
 map <Leader>z :e ~/.zshrc
@@ -243,7 +242,7 @@ map <Leader>5 :UndotreeToggle
 noremap <Leader>D :bp\|bd #
 
 "map fugitive commands
-noremap <Leader>ga :Git add .
+noremap <Leader>ga :!git add .
 noremap <Leader>gs :Gstatus
 noremap <Leader>gp :Gpush
 noremap <Leader>gd :Gdiff
@@ -285,13 +284,13 @@ map <leader>w :w<cr>
 map <leader>< :BufstopBack<CR>
 map <leader>> :BufstopForward<CR>
 
-
-"for fzf Ag
-autocmd VimEnter * command! -nargs=* -bang Agf call fzf#vim#ag(<q-args>, <bang>0)
+"easier replacing
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+vnoremap <Leader>s :s/\<<C-r><C-w>\>/
 
 "fzf mappings
 map <C-p> :Files
-map <leader>fa :Agf
+"map \ :Find
 map <leader>fg :GFiles
 map <leader>fb :Buffers
 map <leader>fl :Lines
@@ -299,8 +298,10 @@ map <leader>fs :Snippets
 map <leader>fc :Commits
 map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
-noremap <Leader>fw :Ack "<cword>"
-noremap <Leader>fW :Ack -Q "<cWORD>"
+noremap <Leader>fa :Find <C-r><C-w><CR>
+noremap <Leader>fA :Find <C-r><C-W><CR>
+noremap \ :Ack ""<left>
+noremap <Leader>\ :Ack -Q "<word>"<CR>
 
 "use to tab or untab entire file
 map <leader>= :set noexpandtab<bar>normal ggVG=
@@ -332,6 +333,17 @@ nmap <CR> o<Esc>
 "use ctrl-a and ctrl-e as home and end
 :inoremap <C-E> <End>
 :inoremap <C-A> <Home>
+
+"auto expanding
+inoremap (; (<CR>);<C-c>O
+inoremap (, (<CR>),<C-c>O
+inoremap (<CR> (<CR>)<C-c>O
+inoremap {; {<CR>};<C-c>O
+inoremap {, {<CR>},<C-c>O
+inoremap {<CR> {<CR>}<C-c>O
+inoremap [; [<CR>];<C-c>O
+inoremap [, [<CR>],<C-c>O
+inoremap [<CR> [<CR>]<C-c>O
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -418,7 +430,27 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'rg --vimgrep'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"ripgrep
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep(
+			\'rg --column --line-number --no-heading
+			\ --fixed-strings --hidden --no-messages
+			\ --glob "!.git/*" --color "always"
+			\ '.shellescape(<q-args>), 1, <bang>0)
+set grepprg=rg\ --vimgrep
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "autoformat

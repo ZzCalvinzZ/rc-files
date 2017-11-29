@@ -25,7 +25,9 @@
 		"$": true,
 		"dragula": true,
 		"reverse": true,
-		"React": true
+		"React": true,
+		"R": true,
+		"_": true
 	}
 
 }

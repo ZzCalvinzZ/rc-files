@@ -111,6 +111,9 @@ fi
 export GOPATH="$HOME/dev/go"
 export PATH=$PATH:$(go env GOPATH)/bin
 
+#fzf ripgrep
+export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
+
 #Docker stuff
 # Run this command to configure your shell:
 # eval $(docker-machine env dev)
