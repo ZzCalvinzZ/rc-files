@@ -74,6 +74,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+Plug 'junegunn/vim-emoji'
 
 Plug 'editorconfig/editorconfig-vim'
 
@@ -88,6 +89,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'ZzCalvinzZ/vim-sleuth'
+Plug 'junegunn/gv.vim'
 
 "airline
 Plug 'bling/vim-airline'
@@ -119,6 +121,7 @@ Plug 'morhetz/gruvbox'
 "Autocomplete and related
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
+Plug 'fszymanski/deoplete-emoji'
 Plug 'davidhalter/jedi-vim'
 Plug 'fisadev/vim-isort', { 'do': 'pip install isort' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
@@ -152,6 +155,7 @@ let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+set completefunc=emoji#complete
 
 let g:deoplete#auto_complete_delay=150
 
@@ -227,6 +231,9 @@ let g:jsx_ext_required = 0
 nmap <Leader>11 0f<f i<cr><Esc>:call RecMacro('0f=l%a<C-v><cr><C-v><Esc>')<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Utilities
+vnoremap <leader>,rv c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
 map <Leader>v :e ~/.config/nvim/init.vim
 map <Leader>V :e ~/.bash_profile
@@ -248,6 +255,8 @@ noremap <Leader>gp :Gpush
 noremap <Leader>gd :Gdiff
 noremap <Leader>gb :Gblame wM
 noremap <Leader>gr :Gread
+noremap <Leader>gv :GV
+noremap <Leader>gf :GV!
 
 noremap <Leader>gdt :windo diffthis
 noremap <Leader>gds :windo diffoff
@@ -300,7 +309,7 @@ map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
 noremap <Leader>fa :Find <C-r><C-w><CR>
 noremap <Leader>fA :Find <C-r><C-W><CR>
-noremap \ :Ack ""<left>
+noremap \ :Ack "
 noremap <Leader>\ :Ack -Q "<word>"<CR>
 
 "use to tab or untab entire file
@@ -393,6 +402,10 @@ nmap <Leader>ggu <Plug>GitGutterUndoHunk
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 set updatetime=500
+let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+let g:gitgutter_sign_modified_removed = emoji#for('collision')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -414,8 +427,8 @@ let g:switch_mapping = "-"
 " ALE stuff for linting
 
 let g:ale_python_pylint_use_global = 1
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '?'
+let g:ale_sign_error = emoji#for('x')
+let g:ale_sign_warning = emoji#for('children_crossing')
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_python_flake8_args="--ignore=W191"
 let g:ale_fixers = {

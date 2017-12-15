@@ -7,8 +7,10 @@ set typelinkhints
 let searchlimit = 30
 let scrollstep = 70
 let barposition = "top"
-let hintcharacters = "asdfghjkl;"
+let hintcharacters = ";alshgkdjf"
 let completionengines = ["google"]
+let scrollstep = 140
+let fullpagescrollpercent = 75
 
 " alias ':g' to ':tabnew google'
 command g tabnew google
@@ -30,8 +32,8 @@ unmap d
 
 " Toggle the current HUD display value
 map <Leader>h :set hud!<CR>
-map <C-u> scrollPageUp
-map <C-d> scrollPageDown
+map <C-u> scrollFullPageUp
+map <C-d> scrollFullPageDown
 
 map <C-o> goBack
 map <C-i> goForward
