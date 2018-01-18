@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/calvinc/dev/leagion/assets/js/main/app/admin/dashboard'
+let g:netrw_dirhist_2='/'
+let g:netrw_dirhist_3='/Users/calvinc'
+let g:netrw_dirhist_4='/Users/calvinc/.hammerspoon'
+let g:netrw_dirhist_5='/Users/calvinc/dev/fluidreview/apps/chide/products/smapply/static/sma.admin/components/react/icons'
+let g:netrw_dirhist_6='/Users/calvinc/dev/fluidreview/apps/chide/products/smapply/static/sma.admin/components/react'
+let g:netrw_dirhist_7='/Users/calvinc/dev/fluidreview/apps/chide/products/smapply/static/sma.admin/components/react/icons'

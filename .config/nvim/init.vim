@@ -74,8 +74,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
-Plug 'junegunn/vim-emoji'
 
+"editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'scrooloose/nerdcommenter'
@@ -91,9 +91,9 @@ Plug 'tpope/vim-unimpaired'
 Plug 'ZzCalvinzZ/vim-sleuth'
 Plug 'junegunn/gv.vim'
 
-"airline
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"status line and other visual
+Plug 'itchyny/lightline.vim'
+Plug 'mhinz/vim-startify'
 
 "snippets
 Plug 'honza/vim-snippets'
@@ -121,7 +121,6 @@ Plug 'morhetz/gruvbox'
 "Autocomplete and related
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
-Plug 'fszymanski/deoplete-emoji'
 Plug 'davidhalter/jedi-vim'
 Plug 'fisadev/vim-isort', { 'do': 'pip install isort' }
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
@@ -155,9 +154,9 @@ let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-set completefunc=emoji#complete
 
 let g:deoplete#auto_complete_delay=150
+let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -233,6 +232,10 @@ nmap <Leader>11 0f<f i<cr><Esc>:call RecMacro('0f=l%a<C-v><cr><C-v><Esc>')<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Utilities
 vnoremap <leader>,rv c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"startify
+let g:startify_change_to_dir = 0
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
 map <Leader>v :e ~/.config/nvim/init.vim
@@ -328,6 +331,8 @@ nmap <Leader>f :let @* = expand("%")<cr>
 "toggle background easily
 map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
+"plug mappings
+nmap <leader>pi :source ~/.config/nvim/init.vim <bar> PlugInstall <bar> source ~/.config/nvim/init.vim<cr>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
@@ -354,6 +359,9 @@ inoremap [; [<CR>];<C-c>O
 inoremap [, [<CR>],<C-c>O
 inoremap [<CR> [<CR>]<C-c>O
 
+"profile / profiling
+nmap <Leader>pstart :profile start profile.log <bar> profile func * <bar> profile file *<cr>
+nmap <Leader>pstop :profile pause <bar> noautocmd qall!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! MRUFilesCWD call fzf#run({
@@ -368,19 +376,6 @@ function! s:mru_files_for_cwd()
   \  "v:val =~ '^" . getcwd() . "' && v:val !~ '__Tagbar__\\|\\[YankRing]\\|fugitive:\\|NERD_tree\\|^/tmp/\\|.git/'"
   \ ), 'fnamemodify(v:val, ":p:.")')
 endfunction
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"airline stuff
-let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_extensions = [] "faster airline with no extensions
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -402,13 +397,22 @@ nmap <Leader>ggu <Plug>GitGutterUndoHunk
 let g:gitgutter_realtime = 1
 let g:gitgutter_eager = 1
 set updatetime=500
-let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
-let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
-let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
-let g:gitgutter_sign_modified_removed = emoji#for('collision')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"lightline
 
+" Replace filename component of Lightline statusline
+let g:lightline = {
+      \ 'component_function': {
+      \   'filename': 'FilenameForLightline'
+      \ }
+      \ }
+
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ranger
 let g:ranger_map_keys = 0
 map <leader>2 :Ranger<CR>
@@ -427,8 +431,8 @@ let g:switch_mapping = "-"
 " ALE stuff for linting
 
 let g:ale_python_pylint_use_global = 1
-let g:ale_sign_error = emoji#for('x')
-let g:ale_sign_warning = emoji#for('children_crossing')
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '?'
 let g:ale_linters = {'python': ['flake8']}
 let g:ale_python_flake8_args="--ignore=W191"
 let g:ale_fixers = {

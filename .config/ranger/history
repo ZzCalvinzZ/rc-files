@@ -1,1 +1,50 @@
-open_with 
+touch TeamWithLogo.js
+mkdir player
+rename PlayerTable.js
+rename PlayerCreateModal.js
+rename PlayerRemoveFromSeasonModal.js
+touch ChangeAvatarModal.js
+touch TeamChangeLogo.js
+rename TeamChangeLogoModal.js
+rename TeamPlayerModal.js
+rename PlayerInviteModal.js
+search vali
+rename PlayerRemoveFromTeam.js
+rename PlayerRemoveFromTeamModal.js
+touch PlayerRemoveFromTeamModal.js
+rename PlayerSetTeamCaptain.js
+search task
+mkdir location
+LocationTable.js
+touch LocationTable.js
+rename LocationTable.js
+rename LocationCreateModal.js
+touch map.js
+rename LocationDeleteModal.js
+rename LocationDeleteManyModal.js
+rename LocationEditModal.js
+search manag
+touch middleware.py
+touch cache.py
+touch constants.py
+rename MatchSetScoreModal.js
+touch database.py
+touch models.py
+
+rename calvinkcollins.yml
+mkdir components
+touch Terminal.js
+touch Terminal.css
+search resou
+touch Cros
+rename CrosstabChart.js
+rename Crosstab.css
+rename CrosstabChart.css
+delete
+search K
+search kedit
+mkdir archinstall
+touch archinstall.sh
+touch README
+set --hidden
+set hidden_filter=0
