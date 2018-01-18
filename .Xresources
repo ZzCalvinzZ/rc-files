@@ -1,4 +1,4 @@
-*.font: xft:MesloLGS Nerd Font:pixelsize=16
+*.font: xft:Meslo LG S Regular Nerd Font Complete:pixelsize=16
 
 Xft.dpi:                        96
 Xft.antialias:                  1

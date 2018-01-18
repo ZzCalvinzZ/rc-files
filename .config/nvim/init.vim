@@ -122,7 +122,7 @@ Plug 'morhetz/gruvbox'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'davidhalter/jedi-vim'
-Plug 'fisadev/vim-isort', { 'do': 'pip install isort' }
+Plug 'fisadev/vim-isort'
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }

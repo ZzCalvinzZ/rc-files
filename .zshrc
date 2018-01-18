@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source /usr/local/bin/virtualenvwrapper.sh
+source $(dirname "$(which virtualenv).virtualenvwrapper.sh")
 
 TERM=screen-256color
 

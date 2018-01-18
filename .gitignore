@@ -1,3 +1,7 @@
 .config/.nvim
 .config/nvim/bundle
 .config/yarn
+.config/configstore
+.config/ranger/bookmarks
+.config/dconf
+.config/google-chrome
