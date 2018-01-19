@@ -99,8 +99,7 @@ setopt interactivecomments
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-#export TERM="xterm-256color"
-export TERM="xterm-256color-italic"
+export TERM="xterm-256color"
 
 # Source my aliases file
 if [ -f ~/.aliases ]; then

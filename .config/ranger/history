@@ -1,4 +1,3 @@
-touch TeamWithLogo.js
 mkdir player
 rename PlayerTable.js
 rename PlayerCreateModal.js
@@ -40,7 +39,6 @@ touch Cros
 rename CrosstabChart.js
 rename Crosstab.css
 rename CrosstabChart.css
-delete
 search K
 search kedit
 mkdir archinstall
@@ -48,3 +46,5 @@ touch archinstall.sh
 touch README
 set --hidden
 set hidden_filter=0
+search xterm
+delete
