@@ -1,0 +1,21 @@
+extends javascript, html, javascript.jsx
+
+snippet recompose
+import {withState, compose, setDisplayName} from 'recompose';
+
+const enhance = compose(
+	setDisplayName('$1'),
+	withState('$2', '$3', $4),
+);
+export default enhance(({$5}) => {
+	return (
+	);
+});
+endsnippet
+
+snippet trace
+var trace = R.curry(function(tag, x) {
+	console.log(tag, x);
+	return x;
+});
+endsnippet

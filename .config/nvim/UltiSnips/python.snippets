@@ -1,0 +1,48 @@
+snippet restview "use to generate django rest framework view"
+class $1List(ListCreateAPIView):
+	queryset = $1.objects.all()
+	serializer_class = $1Serializer
+
+class $1Detail(RetrieveUpdateDestroyAPIView):
+	queryset = $1.objects.all()
+	serializer_class = $1Serializer
+
+endsnippet
+
+
+snippet resturl "use to generate django rest framework urls"
+url(r'^${1/^\w+/\L$0\E/g}/$', $1List.as_view(), name='${1/^\w+/\L$0\E/g}-list'),
+url(r'^${1/^\w+/\L$0\E/g}/(?P<pk>[0-9]+)/$', $1Detail.as_view(), name='${1/^\w+/\L$0\E/g}-detail'),
+endsnippet
+
+snippet surveyview "used to debug the document viewer survey problems"
+for page in self.context['survey']:
+	for question in page:
+		info = question.expand()
+		variables = info['variables']
+		if question.question.type == '$1':
+			import ipdb; ipdb.set_trace()
+endsnippet
+
+snippet cblock "generate comment block with name"
+####################### $1 #########################
+
+##################### ENDOF $1 #####################
+endsnippet
+
+snippet pprint "pretty print"
+import pprint;pprint.pprint($1)
+endsnippet
+
+snippet ipdb "ipdb"
+import ipdb; ipdb.set_trace()
+endsnippet
+
+snippet except "set ipdb on exception"
+from ipdb import slaunch_ipdb_on_exception
+with slaunch_ipdb_on_exception():
+endsnippet
+
+snippet sleep "sleep"
+import time; time.sleep($1)
+endsnippet
