@@ -30,7 +30,10 @@ font pango:MesloLGS Nerd Font 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
+
+#lock screen
+bindsym $mod+Shift+s exec i3lock -c 282828
 
 # kill focused window
 bindsym $mod+Shift+q kill

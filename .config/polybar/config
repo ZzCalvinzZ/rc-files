@@ -181,7 +181,7 @@ label-open-padding-right = 3
 label-close-padding = 3
 
 menu-0-0 = lock
-menu-0-0-exec = ~/scripts/lock.sh
+menu-0-0-exec = i3lock -c 282828
 menu-0-0-background = #312842
 menu-0-0-foreground = #c05c47
 menu-0-0-padding-right = 3
