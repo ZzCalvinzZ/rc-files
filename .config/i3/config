@@ -37,6 +37,7 @@ bindsym $mod+Shift+q kill
 
 set_from_resource $fg color2
 set_from_resource $bg color7
+set_from_resource $fgf color10
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run
@@ -126,15 +127,15 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 #Borders
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 # Gaps
 smart_gaps on
-gaps inner 10
+gaps inner 5
 gaps outer 0
 
 # class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused          $fgf     $fgf     $fgf  $fgf       $fgf
 client.focused_inactive $bg     $bg     $fg  $bg       $bg
 client.unfocused        $bg     $bg     $fg  $bg       $bg
 client.urgent           $bg     $bg     $fg  $bg       $bg

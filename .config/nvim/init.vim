@@ -447,7 +447,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep'
+let g:ackprg = 'rg --vimgrep --hidden'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
@@ -471,8 +471,8 @@ set grepprg=rg\ --vimgrep
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "autoformat
-noremap <Leader>a :Autoformat<CR>
-let g:ackprg = 'ag --nogroup --nocolor --column'
+"noremap <Leader>a :Autoformat<CR>
+"let g:ackprg = 'ag --nogroup --nocolor --column'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
