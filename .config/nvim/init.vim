@@ -1,7 +1,11 @@
 set nocompatible "make sure it's in vim mode
 set number "show line numbers
 set list " show tab markers
-set clipboard=unnamed "let unnamed register be clipboard
+if has('macunix')
+	set clipboard=unnamed "let unnamed register be clipboard
+else
+	set clipboard=unnamedplus "let unnamed register be clipboard
+endif
 set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 set guioptions+=c "don't use menu popup when it detects new changes in gui
 set foldlevelstart=99

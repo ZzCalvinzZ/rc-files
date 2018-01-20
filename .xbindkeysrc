@@ -9,3 +9,6 @@
 # Mute volume
 "amixer set Master toggle"
    XF86AudioMute
+
+"playerctl play-pause"
+    Control+Alt + Return
