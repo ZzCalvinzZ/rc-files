@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 #lock screen
-bindsym $mod+Shift+d exec i3lock -c 282828 && xset dpms force standby
+bindsym $mod+Shift+d exec i3lock -c 282828 && sleep 1 && xset dpms force standby
 
 # kill focused window
 bindsym $mod+Shift+q kill
