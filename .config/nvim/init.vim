@@ -33,8 +33,8 @@ set hidden "don't close file (hide it in a buffer)
 set norelativenumber
 set mouse=a
 setlocal foldmethod=indent
-set cursorcolumn
-set cursorline
+set nocursorcolumn
+set nocursorline
 set nohlsearch
 set termguicolors "truecolors
 
@@ -472,11 +472,6 @@ command! -bang -nargs=* Find call fzf#vim#grep(
 			\ --glob "!.git/*" --color "always"
 			\ '.shellescape(<q-args>), 1, <bang>0)
 set grepprg=rg\ --vimgrep
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"autoformat
-"noremap <Leader>a :Autoformat<CR>
-"let g:ackprg = 'ag --nogroup --nocolor --column'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
