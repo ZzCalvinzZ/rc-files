@@ -129,8 +129,12 @@ hs.hotkey.bind(mod1, "R", function() chunk("window -r focused") end)
 --hs.hotkey.bind(mod1, "7", function() refreshNerd() end)
 --hs.hotkey.bind(mod1, "8", function() refreshNerd() end)
 
-hs.hotkey.bind(mod2, "Q", function()
+hs.hotkey.bind(mod3, "Q", function()
     brew({'services', 'stop', 'chunkwm'})
+end)
+
+hs.hotkey.bind(mod2, "Q", function()
+    hs.eventtap.keyStroke({"cmd"}, "W")
 end)
 
 hs.hotkey.bind(mod2, "S", function()
