@@ -17,7 +17,7 @@ set $mod Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:MesloLGS Nerd Font 8
+font pango:MesloLGS Nerd Font 11
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -32,11 +32,15 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+#lock screen
+bindsym $mod+Shift+d exec i3lock -c 282828 && sleep 1 && xset dpms force standby
+
 # kill focused window
 bindsym $mod+Shift+q kill
 
 set_from_resource $fg color2
 set_from_resource $bg color7
+set_from_resource $fgf color10
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run
@@ -95,46 +99,56 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+set $w1 "1 "
+set $w2 "2 "
+set $w3 "3 "
+set $w4 "4 "
+set $w5 "5 "
+set $w6 "6 "
+set $w7 "7 "
+
 #workspace assignments
-assign [class="termite"] 1
-assign [class="google-chrome"] 2
-assign [class="slack"] 3
-assign [class="Pavucontrol"] 3
+assign [class="Alacritty"] $w1
+assign [class="Google-chrome"] $w2
+assign [class="Slack"] $w3
+assign [class="Firefox Developer Edition"] $w4
+for_window [class="Spotify"] move container to workspace $w5
+assign [class="Arandr"] $w7
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 #Borders
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 
 # Gaps
 smart_gaps on
-gaps inner 10
+gaps inner 5
 gaps outer 0
 
 # class                 border  backgr. text indicator child_border
-client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused          $fgf     $fgf     $fgf  $fgf       $fgf
 client.focused_inactive $bg     $bg     $fg  $bg       $bg
 client.unfocused        $bg     $bg     $fg  $bg       $bg
 client.urgent           $bg     $bg     $fg  $bg       $bg
@@ -159,10 +173,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -173,16 +187,23 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym Control+c mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-#bar {
-        #status_command i3status
-#}
+bar {
+  position top
+  status_command i3blocks
+}
 
 new_window 1pixel
 
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id alacritty
+exec --no-startup-id google-chrome-stable
+exec --no-startup-id slack
+exec --no-startup-id firefox-developer-edition
+exec --no-startup-id spotify
+exec --no-startup-id arandr

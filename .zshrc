@@ -108,11 +108,16 @@ fi
 
 #Go
 export GOPATH="$HOME/dev/go"
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH=$PATH:$(go env GOPATH)/bin
-
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
+export TERMINAL=alacritty
 
 #Docker stuff
 # Run this command to configure your shell:
 # eval $(docker-machine env dev)
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
