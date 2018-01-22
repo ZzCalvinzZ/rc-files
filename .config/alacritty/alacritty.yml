@@ -178,7 +178,6 @@ visual_bell:
 #     - { ... , command: { program: "alacritty", args: ["-e", "vttest"] } }
 key_bindings:
   - { key: V,        mods: Command, action: Paste                        }
-  - { key: V,        mods: Control, action: Paste                        }
   - { key: C,        mods: Command, action: Copy                         }
   - { key: Q,        mods: Command, action: Quit                         }
   - { key: W,        mods: Command, action: Quit                         }

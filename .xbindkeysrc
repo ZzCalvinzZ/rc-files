@@ -1,13 +1,13 @@
 # Increase volume
-"amixer set Master 5%+"
+"amixer set Master 5%+ && pkill -RTMIN+10 i3blocks "
    XF86AudioRaiseVolume
 
 # Decrease volume
-"amixer set Master 5%-"
+"amixer set Master 5%- && pkill -RTMIN+10 i3blocks"
    XF86AudioLowerVolume
 
 # Mute volume
-"amixer set Master toggle"
+"amixer set Master toggle && pkill -RTMIN+10 i3blocks"
    XF86AudioMute
 
 "playerctl play-pause"
