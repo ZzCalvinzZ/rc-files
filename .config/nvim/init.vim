@@ -82,7 +82,7 @@ Plug 'mxw/vim-jsx'
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-commentary'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'mbbill/undotree'
@@ -124,11 +124,14 @@ Plug 'morhetz/gruvbox'
 
 "Autocomplete and related
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
-Plug 'davidhalter/jedi-vim'
 Plug 'fisadev/vim-isort'
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-Plug 'ternjs/tern_for_vim', {'do': 'npm install'}
+Plug 'autozimu/LanguageClient-neovim', {
+	\ 'branch': 'next',
+	\ 'do':
+		\ 'bash install.sh;
+		\ npm install -g javascript-typescript-langserver;
+		\ sudo pip install python-language-server'
+	\ }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
@@ -152,11 +155,15 @@ set background=dark
 colorscheme gruvbox
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"commenting
+map <Leader>c<space> :Commentary<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " deoplete tab-complete
 let g:deoplete#enable_at_startup = 1
 let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 let g:deoplete#auto_complete_delay=150
@@ -165,30 +172,20 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "jedi and tern stuff
+"let g:tern#command = ['tern']
 
-function! SetupTern()
-	map <buffer><leader>cg :TernDef
-	map <buffer><leader>cd :TernDef
-	map <buffer><leader>ck :TernDoc
-	map <buffer><leader>cr :TernRename
-	map <buffer><leader>cn :TernRefs
-endfunction
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['typescript-language-server', '--stdio'],
+    \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+    \ 'python': ['pyls'],
+    \ }
+let g:LanguageClient_diagnosticsEnable = 0
 
-function! SetupGo()
-	map <buffer><leader>cd :GoDef
-	map <buffer><leader>ck :GoDoc
-	map <buffer><leader>cr :GoRename
-	map <buffer><leader>cn :GoReferrers
-endfunction
-
-let g:jedi#goto_assignments_command = '<leader>cg'
-let g:jedi#goto_definitions_command = '<leader>cd'
-let g:jedi#documentation_command = '<leader>ck'
-let g:jedi#rename_command = '<leader>cr'
-let g:jedi#usages_command = '<leader>cn'
-
-autocmd FileType javascript call SetupTern()
-autocmd FileType go call SetupGo()
+nnoremap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent><Leader>cd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent><Leader>cR :call LanguageClient_textDocument_rename()<CR>
+nnoremap <silent><Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent><Leader>cr :call LanguageClient_textDocument_references()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -484,5 +481,4 @@ set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
