@@ -44,3 +44,6 @@ alias tag="ctags -R --exclude='*js'"
 function get_process_for_port() {
 	lsof -i :$1
 }
+
+#arch
+alias start="startx -- -ardelay 200 -arinterval 25"
