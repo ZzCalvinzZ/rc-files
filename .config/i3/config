@@ -38,9 +38,15 @@ bindsym $mod+Shift+d exec i3lock -c 282828 && sleep 1 && xset dpms force standby
 # kill focused window
 bindsym $mod+Shift+q kill
 
-set_from_resource $fg color2
-set_from_resource $bg color7
-set_from_resource $fgf color10
+set $bg #282828
+set $red #cc241d
+set $green #98971a
+set $yellow #d79921
+set $blue #458588
+set $purple #b16286
+set $aqua #689d68
+set $gray #a89984
+set $darkgray #1d2021
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec rofi -show run
@@ -147,13 +153,19 @@ smart_gaps on
 gaps inner 5
 gaps outer 0
 
-# class                 border  backgr. text indicator child_border
-client.focused          $fgf     $fgf     $fgf  $fgf       $fgf
-client.focused_inactive $bg     $bg     $fg  $bg       $bg
-client.unfocused        $bg     $bg     $fg  $bg       $bg
-client.urgent           $bg     $bg     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
-client.background $bg
+# green gruvbox
+# class                 border|backgr|text|indicator|child_border
+client.focused          $green $green $darkgray $purple $darkgray
+client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.urgent           $red $red $white $red $red
+
+# blue gruvbox
+# class                 border|backgr|text|indicator|child_border
+# client.focused          $blue $blue $darkgray $purple $darkgray
+# client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
+# client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+# client.urgent           $red $red $white $red $red
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -197,9 +209,24 @@ bindsym $mod+r mode "resize"
 bar {
   position top
   status_command i3blocks
+  colors {
+      # bar background color
+      background $bg
+      # text color used for blocks that do not have a color specified.
+      statusline $yellow
+      # workspaces section
+      #                    border  backgr. text
+      focused_workspace    $aqua $aqua $darkgray
+      inactive_workspace   $darkgray $darkgray $yellow
+      active_workspace     $darkgray $darkgray $yellow
+      urgent_workspace     $red $red $bg
+  }
 }
 
 new_window 1pixel
+
+exec setxkbmap -option ctrl:nocaps
+exec xset r rate 200 25
 
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
