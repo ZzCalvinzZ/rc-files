@@ -34,7 +34,7 @@ set norelativenumber
 set mouse=a
 setlocal foldmethod=indent
 set nocursorcolumn
-set nocursorline
+set cursorline
 set nohlsearch
 set termguicolors "truecolors
 
@@ -82,17 +82,30 @@ Plug 'mxw/vim-jsx'
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'tpope/vim-commentary'
+"formatting
+" Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'tpope/vim-fugitive'
+"useful
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
 Plug 'ZzCalvinzZ/vim-sleuth'
+Plug 'wellle/targets.vim'
+Plug 'kshenoy/vim-signature' "for showing marks in the gutter
+Plug 'AndrewRadev/switch.vim' "swapping booleans
+Plug 'ap/vim-css-color'
+Plug 'mihaifm/bufstop' "for switching buffers easily
+Plug 'junegunn/vim-easy-align'
+Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
+
+"git
+Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 
 "status line and other visual
@@ -103,21 +116,12 @@ Plug 'mhinz/vim-startify'
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 
-Plug 'ap/vim-css-color'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'godlygeek/tabular'
-Plug 'Olical/vim-enmasse'
-Plug 'maksimr/vim-jsbeautify'
 
-Plug 'wellle/targets.vim'
-Plug 'kshenoy/vim-signature'
-Plug 'AndrewRadev/switch.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
-Plug 'mihaifm/bufstop'
 Plug 'yegappan/mru'
-Plug 'junegunn/vim-easy-align'
 
 "colors
 Plug 'morhetz/gruvbox'
@@ -129,13 +133,12 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'branch': 'next',
 	\ 'do':
 		\ 'bash install.sh;
-		\ npm install -g javascript-typescript-langserver;
+		\ npm install -g typescript-language-server;
 		\ sudo pip install python-language-server'
 	\ }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
-Plug 'Chiel92/vim-autoformat'
 
 "linting
 Plug 'w0rp/ale', { 'do':
@@ -161,7 +164,6 @@ map <Leader>c<space> :Commentary<cr>
 
 " deoplete tab-complete
 let g:deoplete#enable_at_startup = 1
-let g:jedi#completions_enabled = 0
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -172,13 +174,11 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "jedi and tern stuff
-"let g:tern#command = ['tern']
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['typescript-language-server', '--stdio'],
-    \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
-    \ 'python': ['pyls'],
-    \ }
+ let g:LanguageClient_serverCommands = {
+     \ 'javascript': ['typescript-language-server', '--stdio'],
+     \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+     \ 'python': ['pyls'],
+     \ }
 let g:LanguageClient_diagnosticsEnable = 0
 
 nnoremap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
@@ -333,7 +333,6 @@ nmap <Leader>f :let @* = expand("%")<cr>
 map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 "plug mappings
-nmap <leader>pi :source ~/.config/nvim/init.vim <bar> PlugInstall <bar> source ~/.config/nvim/init.vim<cr>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
@@ -349,20 +348,9 @@ nmap <CR> o<Esc>
 :inoremap <C-E> <End>
 :inoremap <C-A> <Home>
 
-"auto expanding
-inoremap (; (<CR>);<C-c>O
-inoremap (, (<CR>),<C-c>O
-inoremap (<CR> (<CR>)<C-c>O
-inoremap {; {<CR>};<C-c>O
-inoremap {, {<CR>},<C-c>O
-inoremap {<CR> {<CR>}<C-c>O
-inoremap [; [<CR>];<C-c>O
-inoremap [, [<CR>],<C-c>O
-inoremap [<CR> [<CR>]<C-c>O
-
 "profile / profiling
-nmap <Leader>pstart :profile start profile.log <bar> profile func * <bar> profile file *<cr>
-nmap <Leader>pstop :profile pause <bar> noautocmd qall!<cr>
+nmap <Leader>/pstart :profile start profile.log <bar> profile func * <bar> profile file *<cr>
+nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! MRUFilesCWD call fzf#run({
