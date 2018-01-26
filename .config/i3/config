@@ -213,10 +213,10 @@ bar {
       # bar background color
       background $bg
       # text color used for blocks that do not have a color specified.
-      statusline $yellow
+      statusline $gray
       # workspaces section
       #                    border  backgr. text
-      focused_workspace    $aqua $aqua $darkgray
+      focused_workspace    $yellow $yellow $bg
       inactive_workspace   $darkgray $darkgray $yellow
       active_workspace     $darkgray $darkgray $yellow
       urgent_workspace     $red $red $bg
