@@ -78,6 +78,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+Plug 'ekalinin/Dockerfile.vim'
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
