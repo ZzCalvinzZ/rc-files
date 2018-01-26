@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 #lock screen
-bindsym $mod+Shift+d exec i3lock -c 282828 && sleep 1 && xset dpms force standby
+bindsym $mod+Shift+d exec i3lock -c 282828 -i ~/.config/i3/lock.png -t && sleep 1 && xset dpms force standby
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -225,8 +225,8 @@ bar {
 
 new_window 1pixel
 
-exec setxkbmap -option ctrl:nocaps
-exec xset r rate 200 25
+# exec setxkbmap -option ctrl:nocaps
+# exec xset r rate 200 25
 
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
