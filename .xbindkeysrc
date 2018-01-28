@@ -27,3 +27,12 @@
 
 "xbacklight -dec 10"
     XF86MonBrightnessDown
+
+"kbdlight down"
+    m:0x0 + c:237
+    XF86KbdBrightnessUp
+
+"kbdlight up"
+    m:0x0 + c:238
+    XF86KbdBrightnessDown
+
