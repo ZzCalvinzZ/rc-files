@@ -106,17 +106,21 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+	source /usr/share/fzf/key-bindings.zsh
+fi
+if [ -f /usr/share/fzf/completion.zsh ]; then
+	source /usr/share/fzf/completion.zsh
+fi
+
 #Go
 export GOPATH="$HOME/dev/go"
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH=$PATH:$(go env GOPATH)/bin
+
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=alacritty
-
-#Docker stuff
-# Run this command to configure your shell:
-# eval $(docker-machine env dev)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
