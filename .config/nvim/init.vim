@@ -472,3 +472,7 @@ set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"save as root
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

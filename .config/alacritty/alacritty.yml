@@ -227,7 +227,7 @@ key_bindings:
   - { key: F11,                     chars: "\x1b[23~"                    }
   - { key: F12,                     chars: "\x1b[24~"                    }
   - { key: Back,                    chars: "\x7f"                        }
-  - { key: Back,     mods: Alt,     chars: "\x17"                        }
+  - { key: Back,     mods: Control, chars: "\x17"                        }
   - { key: Insert,                  chars: "\x1b[2~"                     }
   - { key: Delete,                  chars: "\x1b[3~"                     }
 
