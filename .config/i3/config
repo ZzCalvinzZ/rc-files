@@ -177,6 +177,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+s exec "startx"
 
+bindsym $mod+Shift+m exec "~/.screenlayout/laptop.sh" #script should switch to laptop screen
+bindsym $mod+Shift+n exec "~/.screenlayout/nopan.sh" #remove panning from laptop screen
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -224,9 +227,6 @@ bar {
 }
 
 new_window 1pixel
-
-# exec setxkbmap -option ctrl:nocaps
-# exec xset r rate 200 25
 
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
