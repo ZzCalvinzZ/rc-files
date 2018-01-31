@@ -25,6 +25,10 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+if [ `type -P xbindkeys` ]; then
+    xbindkeys
+fi
+
 # start some nice programs
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -39,7 +43,6 @@ export TERMINAL=alacritty
 setxkbmap -option ctrl:nocaps
 xinput --set-prop 12 'libinput Accel Speed' -0.5
 VBoxClient-all
-
 ~/.fehbg &
 
 exec i3

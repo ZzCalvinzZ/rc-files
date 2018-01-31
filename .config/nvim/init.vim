@@ -78,6 +78,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
+Plug 'ekalinin/Dockerfile.vim'
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -477,3 +478,7 @@ set path+=~/dev/leagion/assets/js/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+"save as root
+command! -nargs=0 Sw w !sudo tee % > /dev/null
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

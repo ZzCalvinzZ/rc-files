@@ -52,7 +52,7 @@ ZSH_THEME="refined"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker extract)
+plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker extract docker-compose docker-machine)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,18 +106,23 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+	source /usr/share/fzf/key-bindings.zsh
+fi
+if [ -f /usr/share/fzf/completion.zsh ]; then
+	source /usr/share/fzf/completion.zsh
+fi
+
 #Go
 export GOPATH="$HOME/dev/go"
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 export PATH=$PATH:$(go env GOPATH)/bin
+
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=alacritty
 
-#Docker stuff
-# Run this command to configure your shell:
-# eval $(docker-machine env dev)
-
+#nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

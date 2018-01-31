@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 #lock screen
-bindsym $mod+Shift+d exec i3lock -c 282828 && sleep 1 && xset dpms force standby
+bindsym $mod+Shift+d exec i3lock -c 282828 -i ~/.config/i3/lock.png -t && sleep 1 && xset dpms force standby
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -155,7 +155,7 @@ gaps outer 0
 
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border
-client.focused          $green $green $darkgray $purple $darkgray
+client.focused          $green $green $darkgray $yellow $yellow
 client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
 client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
 client.urgent           $red $red $white $red $red
@@ -176,6 +176,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+s exec "startx"
+
+bindsym $mod+Shift+m exec "~/.screenlayout/laptop.sh" #script should switch to laptop screen
+bindsym $mod+Shift+n exec "~/.screenlayout/nopan.sh" #remove panning from laptop screen
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -213,10 +216,10 @@ bar {
       # bar background color
       background $bg
       # text color used for blocks that do not have a color specified.
-      statusline $yellow
+      statusline $gray
       # workspaces section
       #                    border  backgr. text
-      focused_workspace    $aqua $aqua $darkgray
+      focused_workspace    $yellow $yellow $bg
       inactive_workspace   $darkgray $darkgray $yellow
       active_workspace     $darkgray $darkgray $yellow
       urgent_workspace     $red $red $bg
@@ -224,9 +227,6 @@ bar {
 }
 
 new_window 1pixel
-
-exec setxkbmap -option ctrl:nocaps
-exec xset r rate 200 25
 
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
