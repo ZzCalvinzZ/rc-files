@@ -83,7 +83,7 @@ Plug 'mxw/vim-jsx'
 Plug 'editorconfig/editorconfig-vim'
 
 "formatting
-" Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -168,6 +168,7 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
+call deoplete#custom#source('ultisnips', 'rank', 9999)
 let g:deoplete#auto_complete_delay=150
 let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
 
@@ -195,8 +196,8 @@ let g:vim_json_syntax_conceal = 0
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<C-l>"
+let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 map <Leader>u :UltiSnipsEdit
 let g:UltiSnipsEditSplit="vertical" "If you want :UltiSnipsEdit to split your window.
 
@@ -314,8 +315,8 @@ map <leader>ff :BCommits
 map <leader>fm :MRUFilesCWD
 noremap <Leader>fa :Find <C-r><C-w><CR>
 noremap <Leader>fA :Find <C-r><C-W><CR>
-noremap \ :Ack "
-noremap <Leader>\ :Ack -Q "<word>"<CR>
+noremap \ :Ack! "
+noremap <Leader>\ :Ack! -Q "<word>"<CR>
 
 "use to tab or untab entire file
 map <leader>= :set noexpandtab<bar>normal ggVG=
@@ -352,6 +353,9 @@ nmap <CR> o<Esc>
 "profile / profiling
 nmap <Leader>/pstart :profile start profile.log <bar> profile func * <bar> profile file *<cr>
 nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
+
+"restart language server
+map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! MRUFilesCWD call fzf#run({
@@ -471,3 +475,5 @@ set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
