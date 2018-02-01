@@ -169,7 +169,7 @@ client.urgent           $red $red $white $red $red
 # client.urgent           $red $red $white $red $red
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -178,8 +178,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+s exec "startx"
 
+# custom keybindings
 bindsym $mod+Shift+m exec "~/.screenlayout/laptop.sh"
 bindsym $mod+Shift+n exec "~/.screenlayout/nopan.sh"
+bindsym --release $mod+Shift+c exec "import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
