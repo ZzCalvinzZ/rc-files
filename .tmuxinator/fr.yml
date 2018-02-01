@@ -6,11 +6,23 @@ root: ~/dev/fluidreview
 # Optional tmux socket
 # socket_name: foo
 
-# Runs before everything. Use it to start daemons etc.
-#pre: workon fr
+# Runs on project start, always
+# on_project_start: docker-compose up -d
 
+# Run on project start, the first time
+on_project_first_start: docker-compose up -d
+
+# Run on project start, after the first time
+# on_project_restart: command
+
+# Run on project exit ( detaching from tmux session )
+# on_project_exit: command
+
+# Run on project stop
+on_project_stop: docker-compose down
+#
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: workon fr
+# pre_window: workon fr
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -34,14 +46,16 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - workon fr; vim
-        - frshell
-        - #empty, will just run plain bash
+        - vim
+        - sleep 20;docker-compose exec smapply python reviewroom/project/manage.py shell_plus
+        - docker-compose exec smapply bash
+
   - server:
-      layout: main-vertical
+      layout: even-horizontal
       panes:
-        - frrun
-        - npm start
+        - docker attach fluidreview_smapply_1
+        - docker attach fluidreview_webpack_1
+        - docker attach fluidreview_deepthought_1
   - tig:
       layout: main-vertical
       panes:

@@ -24,7 +24,7 @@ alias frrun="manage runserver_plus 3000"
 alias frshell="manage shell_plus"
 alias runserver="./manage.py runserver_plus 4000"
 alias t1="ssh frdev@frdev1.fluidreview.dev"
-alias smvpn="sudo openconnect --protocol=gp ottawa-vpn.surveymonkey.com"
+alias smvpn="sudo openconnect --protocol=gp sanmateo-vpn.surveymonkey.com"
 
 alias deepthought_database="docker run -it --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=deepthought postgres"
 
@@ -47,4 +47,5 @@ function get_process_for_port() {
 }
 
 #arch
-alias start="startx -- -ardelay 200 -arinterval 25"
+alias start="startx -- -ardelay 220 -arinterval 30"
+alias slack="slack --disable-gpu"
