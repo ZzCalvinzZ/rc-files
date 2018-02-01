@@ -1,0 +1,5 @@
+useTabs: true
+semi: true
+jsxBracketSameLine: true
+singleQuote: true
+trailingComma: true

@@ -84,7 +84,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'editorconfig/editorconfig-vim'
 
 "formatting
-Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+" Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -145,7 +145,8 @@ Plug 'fatih/vim-go'
 Plug 'w0rp/ale', { 'do':
 					\ 'npm install -g eslint@latest;
 					\ npm install -g eslint-plugin-babel@latest;
-					\ npm install -g babel-eslint@latest'
+					\ npm install -g babel-eslint@latest;
+					\ npm install -g eslint-plugin-react@latest'
 				\}
 
 call plug#end()
@@ -424,7 +425,7 @@ let g:switch_mapping = "-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
-
+let g:ale_javascript_eslint_use_global = 1
 let g:ale_python_pylint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
