@@ -122,6 +122,9 @@ export PATH=$PATH:$(go env GOPATH)/bin
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=alacritty
 
+# browser
+export BROWSER=google-chrome-stable
+
 #nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
