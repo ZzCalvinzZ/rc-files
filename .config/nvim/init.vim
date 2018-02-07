@@ -358,6 +358,10 @@ nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
 
 "restart language server
 map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
+
+"add missing dependencies
+map <Leader>8 :!pip install neovim<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! MRUFilesCWD call fzf#run({
