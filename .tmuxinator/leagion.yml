@@ -1,7 +1,7 @@
 # ~/.tmuxinator/fr.yml
 
 name: leagion
-root: ~/dev/leagion
+root: ~/dev/Leagion
 
 # Optional tmux socket
 # socket_name: foo

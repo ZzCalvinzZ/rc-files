@@ -231,6 +231,7 @@ bar {
 
 new_window 1pixel
 
+exec --no-startup-id nm-applet
 exec --no-startup-id alacritty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
