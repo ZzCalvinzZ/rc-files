@@ -1,6 +1,7 @@
 set nocompatible "make sure it's in vim mode
 set number "show line numbers
 set list " show tab markers
+set listchars=tab:\|\ ,trail:·
 if has('macunix')
 	set clipboard=unnamed "let unnamed register be clipboard
 else
@@ -96,7 +97,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
-Plug 'ZzCalvinzZ/vim-sleuth'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'AndrewRadev/switch.vim' "swapping booleans

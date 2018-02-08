@@ -51,11 +51,12 @@ windows:
         - docker-compose exec smapply bash
 
   - server:
-      layout: even-horizontal
+      layout: tiled
       panes:
         - docker attach fluidreview_smapply_1
         - docker attach fluidreview_webpack_1
         - docker attach fluidreview_deepthought_1
+        - docker attach fluidreview_postgres_1
   - tig:
       layout: main-vertical
       panes:
