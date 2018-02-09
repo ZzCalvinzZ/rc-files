@@ -11,6 +11,9 @@ set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 set guioptions+=c "don't use menu popup when it detects new changes in gui
 set foldlevelstart=99
 set incsearch "incremental search(auto select first match when searching)
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
 set ignorecase "this will ignore case unless explicitly searching with capitals
 set smartcase
 set wildmode=longest,list,full "Shows menu items when tabbing for autocomplete
@@ -47,11 +50,6 @@ filetype off
 filetype plugin indent on
 hi Normal ctermbg=NONE guibg=NONE
 
-"when opening new file, do this stuff
-function! SetupEnvironment()
-	set tabstop=4
-endfunction
-autocmd BufNewFile,FileType * call SetupEnvironment()
 autocmd BufWritePre * %s/\s\+$//e "trim trailing whitespace
 
 "better colors when using as diff
@@ -85,7 +83,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'editorconfig/editorconfig-vim'
 
 "formatting
-Plug 'prettier/vim-prettier', { 'do': 'npm install -g prettier@latest' }
+" Plug 'prettier/vim-prettier', { 'do': 'npm install -g prettier@latest' }
 
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -144,6 +142,8 @@ Plug 'fatih/vim-go'
 "linting
 Plug 'w0rp/ale', { 'do':
 					\ 'npm install -g eslint@latest;
+					\ npm install -g prettier@latest;
+					\ npm install -g stylelint@latest;
 					\ npm install -g eslint-plugin-babel@latest;
 					\ npm install -g babel-eslint@latest;
 					\ npm install -g eslint-plugin-react@latest'
@@ -360,7 +360,7 @@ nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
 map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
 
 "add missing dependencies
-map <Leader>8 :!pip install neovim<cr>
+map <Leader>8 :!pip install neovim flake8<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -430,14 +430,17 @@ let g:switch_mapping = "-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
 let g:ale_javascript_eslint_use_global = 1
-let g:ale_python_pylint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'javascript': ['eslint'],
+\}
 let g:ale_python_flake8_args="--ignore=W191"
+let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   'python': ['autopep8'],
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'prettier'],
 \}
 
 "keybindings
@@ -485,9 +488,5 @@ execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 "save as root
 command! -nargs=0 Sw w !sudo tee % > /dev/null
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
