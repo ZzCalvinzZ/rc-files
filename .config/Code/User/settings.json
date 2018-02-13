@@ -2,7 +2,18 @@
     "window.zoomLevel": 1,
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "editor.fontFamily": "DejaVuSansMono Nerd Font",
+    
+    //git
+    "gitlens.gitExplorer.view": "history",
+    "gitlens.gitExplorer.enabled": true,
+	
 
+    //language specific
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+
+    "git.autofetch": true,
     // Vim settings
     "vim.useSystemClipboard": true,
     "vim.leader": " ",
@@ -102,20 +113,39 @@
             "commands": [
                 { "command": "workbench.action.togglePanel" }
             ],
+        }, {
+            "before": ["leader", "v"],
+            "commands": [
+                { "command": "workbench.action.openGlobalSettings" }
+            ],
         // git commands
         }, {
             "before": ["leader", "g", "p"],
             "commands": [
                 { "command": "git.push" }
             ],
+        }, {
+            "before": ["leader", "g", "a"],
+            "commands": [
+                { "command": "git.stageAll" }
+            ],
+        }, {
+            "before": ["leader", "g", "b"],
+            "commands": [
+                { "command": "gitlens.showLineBlame" }
+            ],
+        }, {
+            "before": ["leader", "g", "f"],
+            "commands": [
+                { "command": "gitlens.showQuickFileHistory" }
+            ],
+        }, {
+            "before": ["leader", "g", "v"],
+            "commands": [
+                { "command": "gitlens.showQuickRepoHistory" }
+            ],
 
         },
         
     ],
-
-    //language specific
-    "[javascript]": {
-        "editor.formatOnSave": true
-    }
-
 }

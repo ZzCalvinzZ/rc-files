@@ -3,5 +3,4 @@
     { "key": "ctrl+k", "command": "workbench.action.quickOpenSelectPrevious"},
     { "key": "ctrl+j", "command": "workbench.action.quickOpenSelectNext"},
     { "key": "ctrl+w", "command": ""},
-    lskdjflksdjf
 ]
