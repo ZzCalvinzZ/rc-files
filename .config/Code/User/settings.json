@@ -2,11 +2,14 @@
     "window.zoomLevel": 1,
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "editor.fontFamily": "DejaVuSansMono Nerd Font",
+    "workbench.editor.enablePreview": false,
     
     //git
     "gitlens.gitExplorer.view": "history",
     "gitlens.gitExplorer.enabled": true,
-	
+    "gitlens.resultsExplorer.files.layout": "tree",
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
 
     //language specific
     "[javascript]": {
@@ -38,16 +41,6 @@
             "commands": [
                 { "command": "workbench.action.focusPreviousGroup" }
             ]
-        }, {
-            "before": ["leader", "k"],
-            "commands": [
-                { "command": "workbench.action.nextEditor" }
-            ]
-        }, {
-            "before": ["leader", "j"],
-            "commands": [
-                { "command": "workbench.action.previousEditor" }
-            ],
         }, {
             "before": ["leader", "shift+h"],
             "commands": [
@@ -84,14 +77,14 @@
                 { "command": "workbench.view.scm" }
             ],
         }, {
-            "before": ["leader", "<"],
-            "commands": [
-                { "command": "repl.action.historyPrevious" }
-            ],
-        }, {
             "before": ["leader", ">"],
             "commands": [
-                { "command": "repl.action.historyNext" }
+                { "command": "workbench.action.nextEditor" }
+            ]
+        }, {
+            "before": ["leader", "<"],
+            "commands": [
+                { "command": "workbench.action.previousEditor" }
             ],
         }, {
             "before": ["leader", "m"],
@@ -118,6 +111,12 @@
             "commands": [
                 { "command": "workbench.action.openGlobalSettings" }
             ],
+        }, {
+            "before": ["g", "r"],
+            "commands": [
+                { "command": "editor.action.referenceSearch.trigger" }
+            ],
+
         // git commands
         }, {
             "before": ["leader", "g", "p"],
@@ -144,8 +143,11 @@
             "commands": [
                 { "command": "gitlens.showQuickRepoHistory" }
             ],
-
+        }, {
+            "before": ["leader", "g", "l"],
+            "commands": [
+                { "command": "gitlens.toggleCodeLens" }
+            ],
         },
-        
     ],
 }

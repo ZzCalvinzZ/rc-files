@@ -2,5 +2,5 @@
 [
     { "key": "ctrl+k", "command": "workbench.action.quickOpenSelectPrevious"},
     { "key": "ctrl+j", "command": "workbench.action.quickOpenSelectNext"},
-    { "key": "ctrl+w", "command": ""},
+    { "key": "ctrl+b", "command": "workbench.action.toggleSidebarVisibility"},
 ]
