@@ -1,7 +1,7 @@
-# ~/.tmuxinator/gamedevtv.yml
+# ~/.tmuxinator/docker.yml
 
-name: gamedevtv
-root: ~/dev/Platform
+name: docker
+root: ~/dev/stuff/udemy-docker-mastery
 
 # Optional tmux socket
 # socket_name: foo
@@ -10,7 +10,7 @@ root: ~/dev/Platform
 #pre: workon fr
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: workon gamedevtv
+#pre_window: workon
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -34,16 +34,9 @@ windows:
   - editor:
       layout: main-vertical
       panes:
-        - vim
+        - nvim
         - #empty, will just run plain bash
-  - server:
-      layout: tiled
-      panes:
-        - python ./server.py
-        - python -m worker
-        - npm start
-        - redis-server
-  - extra:
+  - whatever:
       layout: main-vertical
       panes:
         - #empty, will just run plain bash

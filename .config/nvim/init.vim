@@ -360,7 +360,7 @@ nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
 map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
 
 "add missing dependencies
-map <Leader>8 :!pip install neovim flake8<cr>
+map <Leader>8 :!pip install neovim flake8 python-language-server<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -440,7 +440,7 @@ let g:ale_python_flake8_args="--ignore=W191"
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
 \   'python': ['autopep8'],
-\   'javascript': ['eslint', 'prettier'],
+\   'javascript': ['prettier'],
 \}
 
 "keybindings
@@ -450,7 +450,7 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep --hidden'
+let g:ackprg = 'rg --vimgrep --hidden -i'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
