@@ -4,7 +4,8 @@
     { "key": "ctrl+j", "command": "workbench.action.quickOpenSelectNext"},
     { "key": "ctrl+b", "command": "workbench.action.toggleSidebarVisibility"},
     { "key": "ctrl+c", "command": "workbench.action.closeMessages", "when": "findWidgetVisible && suggestWidgetVisible && suggestWidgetMultipleSuggestions && renameInputVisible && referenceSearchVisible && inReferenceSearchEditor && quickFixWidgetVisible && parameterHintsVisible && parameterHintsMultipleSignatures"},
-    { "key": "F2", "command": "workbench.action.toggleMenuBar"},
     { "key": "F2", "command": "settings.cycle.toggleMenu", },
     { "key": "ctrl+shift+q", "command": "workbench.action.closeEditorsInGroup"},
+    { "key": "ctrl-k", "command": "selectPrevSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible"},
+    { "key": "ctrl-j", "command": "selectNextSuggestion", "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible"},
 ]
