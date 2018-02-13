@@ -7,7 +7,13 @@
 !.config/rofi
 !.config/wallpapers
 !.config/pylintrc
+!.config/Code
+
+.config/Code/*
 !.config/Code/User
+.config/Code/User/*
+!.config/Code/User/keybindings.json
+!.config/Code/User/settings.json
 
 .config/nvim/bundle
 .config/nvim/.netrwhist

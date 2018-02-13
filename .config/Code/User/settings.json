@@ -1,0 +1,121 @@
+{
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Gruvbox Dark (Soft)",
+    "editor.fontFamily": "DejaVuSansMono Nerd Font",
+
+    // Vim settings
+    "vim.useSystemClipboard": true,
+    "vim.leader": " ",
+    "vim.otherModesKeyBindingsNonRecursive": [
+        {
+            "before": ["leader", "w"],
+            "commands": [
+                { "command": "workbench.action.files.save"}
+            ]
+        }, {
+            "before": ["leader", "q"],
+            "commands": [
+                { "command": "workbench.action.closeActiveEditor"},
+            ]
+        }, {
+            "before": ["leader", "l"],
+            "commands": [
+                { "command": "workbench.action.focusNextGroup"}
+            ]
+        }, {
+            "before": ["leader", "h"],
+            "commands": [
+                { "command": "workbench.action.focusPreviousGroup" }
+            ]
+        }, {
+            "before": ["leader", "k"],
+            "commands": [
+                { "command": "workbench.action.nextEditor" }
+            ]
+        }, {
+            "before": ["leader", "j"],
+            "commands": [
+                { "command": "workbench.action.previousEditor" }
+            ],
+        }, {
+            "before": ["leader", "shift+h"],
+            "commands": [
+                { "command": "workbench.action.moveActiveEditorGroupLeft" }
+            ],
+        }, {
+            "before": ["leader", "shift+l"],
+            "commands": [
+                { "command": "workbench.action.moveActiveEditorGroupRight" }
+            ],
+        }, {
+            "before": ["leader", "<C-l>"],
+            "commands": [
+                { "command": "workbench.action.files.showOpenedFileInNewWindow" }
+            ],
+        }, {
+            "before": ["leader", "2"],
+            "commands": [
+                { "command": "workbench.view.explorer" }
+            ],
+        }, {
+            "before": ["\\"],
+            "commands": [
+                { "command": "workbench.action.findInFiles" }
+            ],
+        }, {
+            "before": ["leader", "g", "s"],
+            "commands": [
+                { "command": "workbench.view.scm" }
+            ],
+        }, {
+            "before": ["leader", "g", "s"],
+            "commands": [
+                { "command": "workbench.view.scm" }
+            ],
+        }, {
+            "before": ["leader", "<"],
+            "commands": [
+                { "command": "repl.action.historyPrevious" }
+            ],
+        }, {
+            "before": ["leader", ">"],
+            "commands": [
+                { "command": "repl.action.historyNext" }
+            ],
+        }, {
+            "before": ["leader", "m"],
+            "commands": [
+                { "command": "workbench.action.openPreviousEditorFromHistory" }
+            ],
+        }, {
+            "before": ["leader", "d"],
+            "commands": [
+                { "command": "workbench.view.debug" }
+            ],
+        }, {
+            "before": ["leader", "x"],
+            "commands": [
+                { "command": "workbench.view.extensions" }
+            ],
+        }, {
+            "before": ["leader", "p"],
+            "commands": [
+                { "command": "workbench.action.togglePanel" }
+            ],
+        // git commands
+        }, {
+            "before": ["leader", "g", "p"],
+            "commands": [
+                { "command": "git.push" }
+            ],
+
+        },
+        
+    ],
+
+    //language specific
+    "[javascript]": {
+        "editor.formatOnSave": true
+    }
+
+}
