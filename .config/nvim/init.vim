@@ -78,6 +78,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'prabirshrestha/async.vim'
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -135,6 +136,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 		\ npm install -g typescript-language-server;
 		\ sudo pip install python-language-server'
 	\ }
+Plug 'prabirshrestha/vim-lsp'
+
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
@@ -454,6 +457,14 @@ let g:ackprg = 'rg --vimgrep --hidden -i'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
 
 " --column: Show column number
 " --line-number: Show line number

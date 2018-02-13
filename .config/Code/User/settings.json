@@ -1,8 +1,19 @@
 {
     "window.zoomLevel": 1,
+    "window.menuBarVisibility": "hidden",
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "editor.fontFamily": "DejaVuSansMono Nerd Font",
     "workbench.editor.enablePreview": false,
+    "workbench.editor.showTabs": false,
+    "editor.tabCompletion": true,
+
+    "settings.cycle": [{
+        "id": "toggleMenu", // must be unique
+        "values": [
+            { "window.menuBarVisibility":"default" },
+            { "window.menuBarVisibility":"hidden" },
+        ]
+    }],
     
     //git
     "gitlens.gitExplorer.view": "history",
@@ -15,6 +26,9 @@
     "[javascript]": {
         "editor.formatOnSave": true
     },
+    "python.pythonPath":"/usr/local/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
 
     "git.autofetch": true,
     // Vim settings
@@ -32,6 +46,11 @@
                 { "command": "workbench.action.closeActiveEditor"},
             ]
         }, {
+            "before": ["leader", "c", "<space>"],
+            "commands": [
+                { "command": "editor.action.commentLine"}
+            ]
+        }, {
             "before": ["leader", "l"],
             "commands": [
                 { "command": "workbench.action.focusNextGroup"}
@@ -41,21 +60,16 @@
             "commands": [
                 { "command": "workbench.action.focusPreviousGroup" }
             ]
-        }, {
-            "before": ["leader", "shift+h"],
-            "commands": [
-                { "command": "workbench.action.moveActiveEditorGroupLeft" }
-            ],
-        }, {
-            "before": ["leader", "shift+l"],
-            "commands": [
-                { "command": "workbench.action.moveActiveEditorGroupRight" }
-            ],
-        }, {
-            "before": ["leader", "<C-l>"],
-            "commands": [
-                { "command": "workbench.action.files.showOpenedFileInNewWindow" }
-            ],
+        // }, {
+        //     "before": ["leader", "H"],
+        //     "commands": [
+        //         { "command": "workbench.action.moveActiveEditorGroupLeft" }
+        //     ],
+        // }, {
+        //     "before": ["leader", "L"],
+        //     "commands": [
+        //         { "command": "workbench.action.moveActiveEditorGroupRight" }
+        //     ],
         }, {
             "before": ["leader", "2"],
             "commands": [
@@ -77,12 +91,12 @@
                 { "command": "workbench.view.scm" }
             ],
         }, {
-            "before": ["leader", ">"],
+            "before": ["leader", "L"],
             "commands": [
                 { "command": "workbench.action.nextEditor" }
             ]
         }, {
-            "before": ["leader", "<"],
+            "before": ["leader", "H"],
             "commands": [
                 { "command": "workbench.action.previousEditor" }
             ],
@@ -102,11 +116,6 @@
                 { "command": "workbench.view.extensions" }
             ],
         }, {
-            "before": ["leader", "p"],
-            "commands": [
-                { "command": "workbench.action.togglePanel" }
-            ],
-        }, {
             "before": ["leader", "v"],
             "commands": [
                 { "command": "workbench.action.openGlobalSettings" }
@@ -115,6 +124,22 @@
             "before": ["g", "r"],
             "commands": [
                 { "command": "editor.action.referenceSearch.trigger" }
+            ],
+        }, {
+            "before": ["leader", "z"],
+            "commands": [
+                { "command": "workbench.action.toggleZenMode" }
+            ],
+        }, {
+            "before": ["leader", "p"],
+            "commands": [
+                { "command": "projectManager.listProjects" }
+            ],
+        //project
+        }, {
+            "before": ["-"],
+            "commands": [
+                { "command": "extension.toggleBool" }
             ],
 
         // git commands

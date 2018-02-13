@@ -107,20 +107,18 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $w1 "1 "
-set $w2 "2 "
-set $w3 "3 "
-set $w4 "4 "
+set $w2 "2 "
+set $w3 "3 "
+set $w4 "4 "
 set $w5 "5 "
-set $w6 "6 "
-set $w7 "7 "
+set $w10 "10 "
 
 #workspace assignments
 assign [class="Alacritty"] $w1
-assign [class="Google-chrome"] $w2
-assign [class="Slack"] $w3
-assign [class="Firefox Developer Edition"] $w4
+assign [class="Code"] $w2
+assign [class="Google-chrome"] $w3
+assign [class="Slack"] $w4
 for_window [class="Spotify"] move container to workspace $w5
-assign [class="Arandr"] $w7
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -128,11 +126,11 @@ bindsym $mod+2 workspace $w2
 bindsym $mod+3 workspace $w3
 bindsym $mod+4 workspace $w4
 bindsym $mod+5 workspace $w5
-bindsym $mod+6 workspace $w6
-bindsym $mod+7 workspace $w7
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $w10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
@@ -233,7 +231,7 @@ new_window 1pixel
 
 exec --no-startup-id nm-applet
 exec --no-startup-id alacritty
+exec --no-startup-id code
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
 exec --no-startup-id spotify
-exec --no-startup-id arandr
