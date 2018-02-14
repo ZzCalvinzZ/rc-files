@@ -8,6 +8,7 @@
 !.config/wallpapers
 !.config/pylintrc
 !.config/Code
+!.config/dunst
 
 .config/Code/*
 !.config/Code/User
