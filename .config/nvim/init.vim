@@ -39,7 +39,7 @@ set mouse=a
 setlocal foldmethod=indent
 set nocursorcolumn
 set cursorline
-set nohlsearch
+set nohlsearch "highlight entries when searching
 set termguicolors "truecolors
 
 nnoremap <SPACE> <Nop>
@@ -192,6 +192,7 @@ nmap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
 nmap <silent><Leader>cd :call LanguageClient_textDocument_definition()<CR>
 nmap <silent><Leader>cR :call LanguageClient_textDocument_rename()<CR>
 nmap <silent><Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
+nmap <silent><Leader>cw :call LanguageClient_workspace_symbol()<CR>
 nmap <silent><Leader>cr :call LanguageClient_textDocument_references()<CR>
 
 let g:LanguageClient_loadSettings = 1
