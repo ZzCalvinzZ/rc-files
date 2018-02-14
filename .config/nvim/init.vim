@@ -127,6 +127,7 @@ Plug 'yegappan/mru'
 Plug 'morhetz/gruvbox'
 
 "Autocomplete and related
+Plug 'python-mode/python-mode', { 'do': 'git submodule update --init --recursive' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'fisadev/vim-isort'
 Plug 'autozimu/LanguageClient-neovim', {
@@ -134,7 +135,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'do':
 		\ 'bash install.sh;
 		\ npm install -g typescript-language-server;
-		\ sudo pip install python-language-server'
+		\ npm install -g typescript'
 	\ }
 Plug 'prabirshrestha/vim-lsp'
 
@@ -187,11 +188,28 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
      \ }
 let g:LanguageClient_diagnosticsEnable = 0
 
-nnoremap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent><Leader>cd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent><Leader>cR :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent><Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent><Leader>cr :call LanguageClient_textDocument_references()<CR>
+nmap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
+nmap <silent><Leader>cd :call LanguageClient_textDocument_definition()<CR>
+nmap <silent><Leader>cR :call LanguageClient_textDocument_rename()<CR>
+nmap <silent><Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
+nmap <silent><Leader>cr :call LanguageClient_textDocument_references()<CR>
+
+let g:LanguageClient_loadSettings = 1
+let g:LanguageClient_rootMarkers = ['.git']
+
+let g:pymode_warnings = 1
+let g:pymode_trim_whitespaces = 0
+let g:pymode_options = 0
+let g:pymode_indent = 0
+let g:pymode_folding = 0
+let g:pymode_doc = 0
+let g:pymode_run = 0
+let g:pymode_breakpoint = 0
+let g:pymode_lint = 0
+let g:pymode_rope_completion = 0
+
+let g:pymode_rope = 1
+let g:pymode_rope_goto_definition_bind = '<leader>cg'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

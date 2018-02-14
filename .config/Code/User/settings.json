@@ -1,6 +1,6 @@
 {
     "window.zoomLevel": 1,
-    "window.menuBarVisibility": "default",
+    "window.menuBarVisibility": "hidden",
     "workbench.colorTheme": "Gruvbox Dark (Soft)",
     "editor.fontFamily": "DejaVuSansMono Nerd Font",
     "workbench.editor.enablePreview": false,
