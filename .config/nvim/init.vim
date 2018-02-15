@@ -1,7 +1,5 @@
 set nocompatible "make sure it's in vim mode
 set number "show line numbers
-set list " show tab markers
-set listchars=tab:\|\ ,trail:·
 if has('macunix')
 	set clipboard=unnamed "let unnamed register be clipboard
 else
@@ -41,6 +39,7 @@ set nocursorcolumn
 set cursorline
 set nohlsearch "highlight entries when searching
 set termguicolors "truecolors
+set splitright
 
 nnoremap <SPACE> <Nop>
 let mapleader = " "
@@ -79,6 +78,7 @@ Plug 'mitsuhiko/vim-jinja'
 Plug 'mxw/vim-jsx'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'prabirshrestha/async.vim'
+Plug 'Yggdroot/indentLine'
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -473,28 +473,8 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 "ack stuff
 "
 let g:ackprg = 'rg --vimgrep --hidden -i'
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
-" --column: Show column number
-" --line-number: Show line number
-" --no-heading: Do not show file headings in results
-" --fixed-strings: Search term as a literal string
-" --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
-" --hidden: Search hidden files and folders
-" --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-" --color: Search color options
 command! -bang -nargs=* Find call fzf#vim#grep(
 			\'rg --column --line-number --no-heading
 			\ --fixed-strings --hidden --no-messages
@@ -519,4 +499,9 @@ execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 "save as root
 command! -nargs=0 Sw w !sudo tee % > /dev/null
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"indents
+let g:indentLine_char = '▏'
+set list " show tab markers
+set listchars=tab:\▏\ ,trail:·
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

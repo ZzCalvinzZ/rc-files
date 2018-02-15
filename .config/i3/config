@@ -109,7 +109,7 @@ bindsym $mod+a focus parent
 set $w1 "1 "
 set $w2 "2 "
 set $w3 "3 "
-set $w4 "4 "
+set $w4 "4 "
 set $w10 "10 "
 
 #workspace assignments
@@ -140,7 +140,7 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $w10
 
 #Borders
 for_window [class="^.*"] border pixel 2
