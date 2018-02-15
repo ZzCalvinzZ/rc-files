@@ -210,6 +210,7 @@ let g:pymode_lint = 0
 let g:pymode_rope_completion = 0
 
 let g:pymode_rope = 1
+let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_goto_definition_bind = '<leader>cg'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -352,9 +353,6 @@ map <leader>r :1,100bd<cr>
 "mru mapping
 map <Leader>m :MRU
 
-"map space f to copy current file to clipboard
-nmap <Leader>f :let @* = expand("%")<cr>
-
 "toggle background easily
 map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
@@ -365,10 +363,6 @@ nmap ga <Plug>(EasyAlign)
 "when doing zl or zh do it 30 spaces instead (horizontal scroll)
 nnoremap zl 30zl
 nnoremap zh 30zh
-
-"use enter and shift enter to add blank lines without ending up in insert mode
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
 
 "use ctrl-a and ctrl-e as home and end
 :inoremap <C-E> <End>
@@ -461,7 +455,7 @@ let g:ale_linters = {
 let g:ale_python_flake8_args="--ignore=W191"
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-\   'python': ['autopep8'],
+\   'python': ['yapf'],
 \   'javascript': ['prettier'],
 \}
 
@@ -483,7 +477,6 @@ command! -bang -nargs=* Find call fzf#vim#grep(
 set grepprg=rg\ --vimgrep
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " add template paths for gf completing
 set path+=~/dev/fluidreview/apps/chide/products/smapply/templates/
 set path+=~/dev/fluidreview/apps/chide/products/smapply/mail/templates/
@@ -493,6 +486,7 @@ set path+=~/dev/fluidreview/apps
 set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
 
 set path+=~/dev/leagion/assets/js/
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
@@ -504,4 +498,11 @@ command! -nargs=0 Sw w !sudo tee % > /dev/null
 let g:indentLine_char = '▏'
 set list " show tab markers
 set listchars=tab:\▏\ ,trail:·
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"file mappings
+"
+nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
+"map space f to copy current file to clipboard
+nmap <Leader>fn :let @* = expand("%")<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
