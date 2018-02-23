@@ -7,11 +7,12 @@ root: ~/dev/Platform
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-#pre: workon fr
-
+# pre: workon fr
+#
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: workon gamedevtv
 
+on_project_stop: sudo pkill redis-server
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 

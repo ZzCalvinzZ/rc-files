@@ -83,9 +83,6 @@ Plug 'Yggdroot/indentLine'
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
-"formatting
-" Plug 'prettier/vim-prettier', { 'do': 'npm install -g prettier@latest' }
-
 Plug 'rbgrouleff/bclose.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'mbbill/undotree'
@@ -137,7 +134,6 @@ Plug 'autozimu/LanguageClient-neovim', {
 		\ npm install -g typescript-language-server;
 		\ npm install -g typescript'
 	\ }
-Plug 'prabirshrestha/vim-lsp'
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -186,14 +182,15 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
      \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
      \ 'python': ['pyls'],
      \ }
-let g:LanguageClient_diagnosticsEnable = 0
+nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
+nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
+nmap <silent> <Leader>cR :call LanguageClient_textDocument_rename()<CR>
+nmap <silent> <Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
+nmap <silent> <Leader>cw :call LanguageClient_workspace_symbol()<CR>
+nmap <silent> <Leader>cr :call LanguageClient_textDocument_references()<CR>
 
-nmap <silent><Leader>ck :call LanguageClient_textDocument_hover()<CR>
-nmap <silent><Leader>cd :call LanguageClient_textDocument_definition()<CR>
-nmap <silent><Leader>cR :call LanguageClient_textDocument_rename()<CR>
-nmap <silent><Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
-nmap <silent><Leader>cw :call LanguageClient_workspace_symbol()<CR>
-nmap <silent><Leader>cr :call LanguageClient_textDocument_references()<CR>
+let g:LanguageClient_diagnosticsEnable = 0
+let g:LanguageClient_diagnosticsList = "Location"
 
 let g:LanguageClient_loadSettings = 1
 let g:LanguageClient_rootMarkers = ['.git']
@@ -210,6 +207,7 @@ let g:pymode_lint = 0
 let g:pymode_rope_completion = 0
 
 let g:pymode_rope = 1
+let g:pymode_rope_regenerate_on_write = 0
 let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_rope_goto_definition_bind = '<leader>cg'
 
@@ -230,13 +228,6 @@ let g:UltiSnipsEditSplit="vertical" "If you want :UltiSnipsEdit to split your wi
 
 "set this to the value of shiftwidth
 let g:pyindent_open_paren=4
-
-" allows incsearch highlighting for range commands
-cnoremap $t <CR>:t''<CR>
-cnoremap $T <CR>:T''<CR>
-cnoremap $m <CR>:m''<CR>
-cnoremap $M <CR>:M''<CR>
-cnoremap $d <CR>:d<CR>``
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "recursive macro function
@@ -378,6 +369,9 @@ map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
 "add missing dependencies
 map <Leader>8 :!pip install neovim flake8 python-language-server<cr>
 
+"mapping to swap visually. Delete something, then hit visually select, then
+"hit <C-x> to swap
+vnoremap <C-X> <Esc>`.``gvP``P
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 command! MRUFilesCWD call fzf#run({
@@ -453,7 +447,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_python_flake8_args="--ignore=W191"
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['yapf'],
 \   'javascript': ['prettier'],
@@ -462,11 +456,12 @@ let g:ale_fixers = {
 "keybindings
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent><Leader>cf :ALEFix<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep --hidden -i'
+" let g:ackprg = 'rg --vimgrep --hidden -i'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep(

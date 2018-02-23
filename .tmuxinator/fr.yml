@@ -48,7 +48,7 @@ windows:
       panes:
         - vim
         - sleep 20;docker-compose exec smapply python reviewroom/project/manage.py shell_plus
-        - docker-compose exec smapply bash
+        - #empty, will just run plain bash
 
   - server:
       layout: tiled
@@ -60,4 +60,4 @@ windows:
   - tig:
       layout: main-vertical
       panes:
-        - #empty, will just run plain bash
+        - docker-compose exec smapply bash

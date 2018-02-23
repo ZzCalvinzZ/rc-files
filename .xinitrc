@@ -40,6 +40,7 @@ fi
 
 export TERMINAL=alacritty
 # xset r rate 200 25
+xinput set-prop 11 308 0
 setxkbmap -option ctrl:nocaps
 xinput --set-prop 12 'libinput Accel Speed' -0.5
 VBoxClient-all
