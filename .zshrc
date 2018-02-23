@@ -7,7 +7,7 @@ export ZSH=~/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined"
+ZSH_THEME=""
 
 
 # Uncomment the following line to use case-sensitive completion.
@@ -52,7 +52,7 @@ ZSH_THEME="refined"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo zsh-syntax-highlighting tmuxinator osx golang docker extract docker-compose docker-machine)
+plugins=(git django virtualenvwrapper rand-quote sudo tmuxinator osx golang docker extract docker-compose docker-machine zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -129,3 +129,8 @@ export BROWSER=google-chrome-stable
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+autoload -U promptinit; promptinit
+prompt pure
+
+source ~/notifyosd.zsh
