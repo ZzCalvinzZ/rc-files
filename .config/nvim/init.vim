@@ -461,7 +461,7 @@ nmap <silent><Leader>cf :ALEFix<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-" let g:ackprg = 'rg --vimgrep --hidden -i'
+let g:ackprg = 'rg --vimgrep --hidden -i'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep(

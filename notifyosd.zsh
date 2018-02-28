@@ -32,12 +32,10 @@ function notifyosd-precmd() {
 			fi
             if [ ! -z $SSH_TTY ] ; then
                 notify-send -i utilities-terminal \
-						-u $urgency "$cmd_basename on `hostname` completed $cmdstat" "\"$cmd\" took $cmd_time"; \
-						play -q $sndstat
+						-u $urgency "$cmd_basename on `hostname` completed $cmdstat" "\"$cmd\" took $cmd_time"
             else
                 notify-send -i utilities-terminal \
-						-u $urgency "$cmd_basename completed $cmdstat" "\"$cmd\" took $cmd_time"; \
-						play -q $sndstat
+						-u $urgency "$cmd_basename completed $cmdstat" "\"$cmd\" took $cmd_time"
             fi
         fi
         unset cmd

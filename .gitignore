@@ -9,6 +9,7 @@
 !.config/pylintrc
 !.config/Code
 !.config/dunst
+!.config/mimeapps.list
 
 .config/Code/*
 !.config/Code/User

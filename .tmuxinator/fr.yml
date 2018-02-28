@@ -7,10 +7,10 @@ root: ~/dev/fluidreview
 # socket_name: foo
 
 # Runs on project start, always
-on_project_start: docker-compose up -d
+# on_project_start: make docker start
 
 # Run on project start, the first time
-on_project_first_start: docker-compose up -d
+on_project_first_start: make docker-start
 
 # Run on project start, after the first time
 # on_project_restart: command
@@ -19,7 +19,7 @@ on_project_first_start: docker-compose up -d
 # on_project_exit: command
 
 # Run on project stop
-on_project_stop: docker-compose down
+on_project_stop: make docker-stop
 #
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 pre_window: workon fr
@@ -47,17 +47,17 @@ windows:
       layout: main-vertical
       panes:
         - vim
-        - sleep 20;docker-compose exec smapply python reviewroom/project/manage.py shell_plus
+        - sleep 20;docker-compose -f docker/docker-compose.yml exec smapply python reviewroom/project/manage.py shell_plus
         - #empty, will just run plain bash
 
   - server:
       layout: tiled
       panes:
-        - docker attach fluidreview_smapply_1
-        - docker attach fluidreview_webpack_1
-        - docker attach fluidreview_deepthought_1
-        - docker attach fluidreview_postgres_1
+        - docker attach docker_smapply_1
+        - docker attach docker_webpack_1
+        - docker attach docker_deepthought_1
+        - docker attach docker_postgres_1
   - tig:
       layout: main-vertical
       panes:
-        - docker-compose exec smapply bash
+        - docker-compose -f docker/docker-compose.yml exec smapply bash
