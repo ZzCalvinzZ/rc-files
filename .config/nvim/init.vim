@@ -79,6 +79,8 @@ Plug 'mxw/vim-jsx'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'Yggdroot/indentLine'
+Plug 'quabug/vim-gdscript'
+
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
