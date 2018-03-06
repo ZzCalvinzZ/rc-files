@@ -33,7 +33,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 #lock screen
-bindsym $mod+Shift+d exec i3lock -c 282828 -i ~/.config/i3/lock.png -t && sleep 1 && xset dpms force standby
+bindsym $mod+Shift+d exec xset s activate
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -246,3 +246,4 @@ exec --no-startup-id spotify
 exec --no-startup-id steam
 exec --no-startup-id godot
 exec --no-startup-id thunar
+exec --no-startup-id xss-lock -- i3lock -c 282828 -i ~/.config/i3/lock.png -t
