@@ -114,7 +114,7 @@ set $w5 "5 "
 set $w6 "6 "
 
 #workspace assignments
-assign [class="Alacritty"] $w1
+assign [class="Kitty"] $w1
 assign [class="Google-chrome"] $w2
 assign [class="Slack"] $w3
 for_window [class="Spotify"] move container to workspace $w4
@@ -239,7 +239,7 @@ bar {
 new_window 1pixel
 
 exec --no-startup-id nm-applet
-exec --no-startup-id alacritty
+exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
 exec --no-startup-id spotify
