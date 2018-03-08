@@ -120,7 +120,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
-export TERMINAL=alacritty
+export TERMINAL=kitty
 
 # browser
 export BROWSER=google-chrome-stable
