@@ -37,6 +37,7 @@ export FR_PATH=~/dev/fluidreview/
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+export TERMINAL=kitty
 
 # prevent security pin in flask
 export WERKZEUG_DEBUG_PIN=off

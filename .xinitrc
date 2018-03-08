@@ -38,7 +38,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-export TERMINAL=alacritty
+export TERMINAL=kitty
 # xset r rate 200 25
 xinput --set-prop 11 303 0
 setxkbmap -option ctrl:nocaps
