@@ -31,6 +31,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+backslash exec thunar
 
 #lock screen
 bindsym $mod+Shift+d exec xset s activate
@@ -238,7 +239,7 @@ bar {
 new_window 1pixel
 
 exec --no-startup-id nm-applet
-exec --no-startup-id kitty --name=__scratchpad
+exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
 exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
