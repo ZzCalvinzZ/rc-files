@@ -43,8 +43,8 @@ export TERMINAL=kitty
 xinput --set-prop 11 303 0
 setxkbmap -option ctrl:nocaps
 setxkbmap -option terminate:ctrl_alt_bksp
+setxkbmap -option shift:both_capslock
 xinput --set-prop 12 'libinput Accel Speed' -0.5
-VBoxClient-all
 ~/.fehbg &
 
 exec i3
