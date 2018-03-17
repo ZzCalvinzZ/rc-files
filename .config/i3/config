@@ -17,7 +17,7 @@ set $mod Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:MesloLGS Nerd Font 11
+font pango:MesloLGS Nerd Font 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -34,7 +34,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+backslash exec thunar
 
 #lock screen
-bindsym $mod+Shift+d exec xset s activate
+bindsym $mod+Shift+d exec systemctl suspend
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -246,4 +246,5 @@ exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id steam
 exec --no-startup-id godot
+exec --no-startup-id dropbox
 exec --no-startup-id xss-lock -- i3lock -c 282828 -i ~/.config/i3/lock.png -t

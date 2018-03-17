@@ -1,7 +1,7 @@
-# ~/.tmuxinator/gamedevtv.yml
+# ~/.tmuxinator/gamedevtvheader.yml
 
-name: gamedevtv
-root: ~/dev/Platform
+name: gamedevtvheader
+root: ~/dev/header
 
 # Optional tmux socket
 # socket_name: foo
@@ -10,9 +10,9 @@ root: ~/dev/Platform
 # pre: workon fr
 #
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: workon gamedevtv
+# pre_window: workon gamedevtv
 
-on_project_stop: sudo pkill redis-server
+# on_project_stop: sudo pkill redis-server
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
@@ -40,11 +40,4 @@ windows:
   - server:
       layout: tiled
       panes:
-        - python ./server.py
-        - python -m worker
         - npm start
-        - redis-server --port 9879
-  - extra:
-      layout: main-vertical
-      panes:
-        - #empty, will just run plain bash

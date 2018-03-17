@@ -500,6 +500,6 @@ set listchars=tab:\▏\ ,trail:·
 "
 nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
 "map space f to copy current file to clipboard
-nmap <Leader>fn :let @* = expand("%")<cr>
+nmap <Leader>fn :let @+ = expand("%")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
