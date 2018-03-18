@@ -1,4 +1,3 @@
-
 [Default Applications]
 application/csv=libreoffice-calc.desktop
 application/excel=libreoffice-calc.desktop
@@ -70,9 +69,11 @@ text/spreadsheet=libreoffice-calc.desktop
 text/tab-separated-values=libreoffice-calc.desktop
 text/x-comma-separated-values=libreoffice-calc.desktop
 zz-application/zz-winassoc-xls=libreoffice-calc.desktop
-
 text/html=google-chrome.desktop
 x-scheme-handler/http=google-chrome.desktop
 x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop
+
+[Added Associations]
+video/webm=vlc.desktop;

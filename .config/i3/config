@@ -189,6 +189,7 @@ bindsym $mod+minus scratchpad show
 bindsym $mod+Shift+m exec "~/.screenlayout/laptop.sh"
 bindsym $mod+Shift+n exec "~/.screenlayout/nopan.sh"
 bindsym --release $mod+Shift+c exec "import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
+bindsym --release $mod+Shift+v exec "simplescreenrecorder"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
