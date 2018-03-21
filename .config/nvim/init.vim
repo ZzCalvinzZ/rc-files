@@ -269,6 +269,8 @@ map <Leader>2 :NERDTreeFind
 map <Leader>3 :NERDTreeToggle
 map <Leader>5 :UndotreeToggle
 
+inoremap <C-c> <esc>
+
 "noremap <Leader>D :BufSurfBack
 noremap <Leader>D :bp\|bd #
 

@@ -239,13 +239,11 @@ bar {
 
 new_window 1pixel
 
+exec --no-startup-id xss-lock -- i3lock -c 282828 -i ~/.config/i3/lock.png -t
 exec --no-startup-id nm-applet
+exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
 exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
 exec --no-startup-id spotify
-exec --no-startup-id steam
-exec --no-startup-id godot
-exec --no-startup-id dropbox
-exec --no-startup-id xss-lock -- i3lock -c 282828 -i ~/.config/i3/lock.png -t
