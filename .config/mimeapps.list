@@ -78,3 +78,4 @@ x-scheme-handler/unknown=google-chrome.desktop
 [Added Associations]
 video/webm=vlc.desktop;
 video/mp4=vlc.desktop;
+audio/mp4=vlc.desktop;

@@ -10,6 +10,7 @@
 !.config/pylintrc
 !.config/Code
 !.config/dunst
+!.config/sounds
 !.config/mimeapps.list
 
 .config/Code/*
