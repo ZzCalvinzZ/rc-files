@@ -1,24 +1,33 @@
 # Increase volume
 "amixer set Master 5%+ && pkill -RTMIN+10 i3blocks "
-   XF86AudioRaiseVolume
+    Shift+Alt + bracketright
+"amixer set Master 5%+ && pkill -RTMIN+10 i3blocks "
+    XF86AudioRaiseVolume
 
 # Decrease volume
 "amixer set Master 5%- && pkill -RTMIN+10 i3blocks"
-   XF86AudioLowerVolume
+    Shift+Alt + bracketleft
+"amixer set Master 5%- && pkill -RTMIN+10 i3blocks"
+    XF86AudioLowerVolume
 
 # Mute volume
 "amixer set Master toggle && pkill -RTMIN+10 i3blocks"
-   XF86AudioMute
+    Shift+Alt + backslash
+"amixer set Master toggle && pkill -RTMIN+10 i3blocks"
+    XF86AudioMute
 
 "playerctl play-pause"
-    Control+Alt + Return
-
+    Shift+Alt + Return
 "playerctl play-pause"
     XF86AudioPlay
 
 "playerctl next"
+    Shift+Alt + period
+"playerctl next"
     XF86AudioNext
 
+"playerctl previous"
+    Shift+Alt + comma
 "playerctl previous"
     XF86AudioPrev
 
