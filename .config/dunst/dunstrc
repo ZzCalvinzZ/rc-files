@@ -143,10 +143,10 @@
     browser = xdg-open
 
     # Align icons left/right/off
-    icon_position = off
+    icon_position = left
 
     # Paths to default icons.
-	icon_folders = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
+    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
     width = 3
@@ -191,6 +191,18 @@
     foreground = "#ebdbb2"
 	frame_color = "#cc241d"
     timeout = 0
+
+[kitty]
+	appname = "Kitty"
+	new_icon = /home/calvin/.config/icons/terminal.png
+
+[spotify]
+	appname = "Spotify"
+	new_icon = /home/calvin/.config/icons/spotify.png
+
+[slack]
+	appname = "Electron"
+	new_icon = /home/calvin/.config/icons/slack.png
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
