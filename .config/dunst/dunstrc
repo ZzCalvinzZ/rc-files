@@ -146,7 +146,7 @@
     icon_position = left
 
     # Paths to default icons.
-    icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
+    icon_folders = /usr/share/icons/hicolor/32x32/apps/:/usr/share/icons/hicolor/32x32/status/
 
 [frame]
     width = 3
@@ -203,6 +203,10 @@
 [slack]
 	appname = "Electron"
 	new_icon = /home/calvin/.config/icons/slack.png
+
+[NetworkManager]
+	appname = "NetworkManager"
+	new_icon = /home/calvin/.config/icons/wifi.png
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
