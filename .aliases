@@ -5,6 +5,7 @@ alias hcal='cal | grep -C 6 --color -e " $(date +%e)" -e "^$(date +%e)"'
 alias get_processes='lsof -i -n -P | grep TCP'
 alias vim=nvim
 alias mkvirtualenv3='mkvirtualenv --python=`which python3`'
+alias start_tmuxinator='~/start_tmuxinator.sh'
 
 #node local exec alias
 alias npm-exec='PATH=$(npm bin):$PATH'
@@ -28,17 +29,9 @@ alias smvpn="sudo openconnect --protocol=gp sanmateo-vpn.surveymonkey.com"
 
 alias deepthought_database="docker run -it --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=deepthought postgres"
 
-#misc project aliases
-alias rogue="workon roguelike; cd ~/dev/stuff/roguelike"
-alias picturepay="workon picturepay; cd ~/dev/stuff/picturepay"
-alias homepage="workon homepage; cd ~/dev/stuff/homepage"
-alias habble="workon habble; cd ../habble"
-alias habblerun="./manage.py runserver_plus"
-
 ########################################################################
 
 #misc aliases
-alias love="/Applications/love.app/Contents/MacOS/love"
 alias goodssl="/usr/local/opt/openssl/bin/openssl"
 alias tag="ctags -R --exclude='*js'"
 

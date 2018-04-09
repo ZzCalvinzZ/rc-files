@@ -227,7 +227,7 @@ let g:vim_json_syntax_conceal = 0
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-l>"
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
-map <Leader>u :UltiSnipsEdit
+map <Leader>u :UltiSnipsEdit<cr>
 let g:UltiSnipsEditSplit="vertical" "If you want :UltiSnipsEdit to split your window.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -263,38 +263,39 @@ let g:startify_change_to_dir = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL MAPPINGS
-map <Leader>v :e ~/.config/nvim/init.vim
-map <Leader>V :e ~/.bash_profile
-map <Leader>z :e ~/.zshrc
-
+map <Leader>vv :e ~/.config/nvim/init.vim<cr>
+map <Leader>vz :e ~/.zshrc<cr>
+map <Leader>vt :e ~/.tmux.conf<cr>
+map <Leader>vm :e ~/.start_tmuxinator.sh<cr>
+map <Leader>va :e ~/.aliases<cr>
 
 "map plugin commands
-map <Leader>2 :NERDTreeFind
-map <Leader>3 :NERDTreeToggle
-map <Leader>5 :UndotreeToggle
+map <Leader>2 :NERDTreeFind<cr>
+map <Leader>3 :NERDTreeToggle<cr>
+map <Leader>5 :UndotreeToggle<cr>
 
 inoremap <C-c> <esc>
 
 "noremap <Leader>D :BufSurfBack
-noremap <Leader>D :bp\|bd #
+noremap <Leader>D :bp\|bd #<cr>
 
 "map fugitive commands
-noremap <Leader>ga :!git add .
-noremap <Leader>gs :Gstatus
-noremap <Leader>gp :Gpush
-noremap <Leader>gd :Gdiff
-noremap <Leader>gb :Gblame wM
-noremap <Leader>gr :Gread
-noremap <Leader>gv :GV
-noremap <Leader>gf :GV!
+noremap <Leader>ga :!git add .<cr>
+noremap <Leader>gs :Gstatus<cr>
+noremap <Leader>gp :Gpush<cr>
+noremap <Leader>gd :Gdiff<cr>
+noremap <Leader>gb :Gblame wM<cr>
+noremap <Leader>gr :Gread<cr>
+noremap <Leader>gv :GV<cr>
+noremap <Leader>gf :GV!<cr>
 
-noremap <Leader>gdt :windo diffthis
-noremap <Leader>gds :windo diffoff
+noremap <Leader>gdt :windo diffthis<cr>
+noremap <Leader>gds :windo diffoff<cr>
 
 "vimdiff mappings
-noremap <Leader>dp :diffput 4
-noremap <Leader>db :windo set nocursorbind noscrollbind
-noremap <Leader>dB :windo set cursorbind scrollbind
+noremap <Leader>dp :diffput 4<cr>
+noremap <Leader>db :windo set nocursorbind noscrollbind<cr>
+noremap <Leader>dB :windo set cursorbind scrollbind<cr>
 
 "map tab manipulation commands
 noremap <Leader>tc :tabc<cr>
@@ -328,29 +329,29 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 vnoremap <Leader>s :s/\<<C-r><C-w>\>/
 
 "fzf mappings
-map <C-p> :Files
-"map \ :Find
-map <leader>fg :GFiles
-map <leader>fb :Buffers
-map <leader>fl :Lines
-map <leader>fs :Snippets
-map <leader>fc :Commits
-map <leader>ff :BCommits
-map <leader>fm :MRUFilesCWD
+map <C-p> :Files<cr>
+"map \ :Find<cr>
+map <leader>fg :GFiles<cr>
+map <leader>fb :Buffers<cr>
+map <leader>fl :Lines<cr>
+map <leader>fs :Snippets<cr>
+map <leader>fc :Commits<cr>
+map <leader>ff :BCommits<cr>
+map <leader>fm :MRUFilesCWD<cr>
 noremap <Leader>fa :Find <C-r><C-w><CR>
 noremap <Leader>fA :Find <C-r><C-W><CR>
 noremap \ :Ack! "
 noremap <Leader>\ :Ack! "<cword>"<CR>
 
 "use to tab or untab entire file
-map <leader>= :set noexpandtab<bar>normal ggVG=
-map <leader>+ :set expandtab<bar>normal ggVG=
+map <leader>= :set noexpandtab<bar>normal ggVG=<cr>
+map <leader>+ :set expandtab<bar>normal ggVG=<cr>
 
 "close all buffers
 map <leader>r :1,100bd<cr>
 
 "mru mapping
-map <Leader>m :MRU
+map <Leader>m :MRU<cr>
 
 "toggle background easily
 map <Leader>B :let &background = ( &background == "dark"? "light" : "dark" )<CR>
