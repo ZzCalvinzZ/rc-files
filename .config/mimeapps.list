@@ -81,3 +81,6 @@ video/mp4=vlc.desktop;
 audio/mp4=vlc.desktop;
 audio/x-wav=vlc.desktop;
 image/png=feh.desktop;
+application/pdf=zathura-pdf-poppler.desktop;
+application/msword-template=libreoffice-writer.desktop;
+text/csv=libreoffice-calc.desktop;

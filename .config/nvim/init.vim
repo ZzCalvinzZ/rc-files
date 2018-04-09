@@ -111,6 +111,9 @@ Plug 'junegunn/gv.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
 
+"code scratchpad
+Plug 'metakirby5/codi.vim'
+
 "snippets
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -133,8 +136,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'branch': 'next',
 	\ 'do':
 		\ 'bash install.sh;
-		\ npm install -g typescript-language-server;
-		\ npm install -g typescript'
+		\ npm install -g typescript-language-server@latest;
+		\ npm install -g typescript@latest'
 	\ }
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
@@ -148,7 +151,8 @@ Plug 'w0rp/ale', { 'do':
 					\ npm install -g stylelint@latest;
 					\ npm install -g eslint-plugin-babel@latest;
 					\ npm install -g babel-eslint@latest;
-					\ npm install -g eslint-plugin-react@latest'
+					\ npm install -g eslint-plugin-react@latest;
+					\ npm install -g eslint-plugin-jest@latest'
 				\}
 
 call plug#end()
@@ -336,7 +340,7 @@ map <leader>fm :MRUFilesCWD
 noremap <Leader>fa :Find <C-r><C-w><CR>
 noremap <Leader>fA :Find <C-r><C-W><CR>
 noremap \ :Ack! "
-noremap <Leader>\ :Ack! -Q "<word>"<CR>
+noremap <Leader>\ :Ack! "<cword>"<CR>
 
 "use to tab or untab entire file
 map <leader>= :set noexpandtab<bar>normal ggVG=
@@ -449,6 +453,7 @@ let g:ale_sign_warning = '?'
 let g:ale_linters = {
 \   'python': ['flake8'],
 \   'javascript': ['eslint'],
+\   'javascript.jsx': ['eslint'],
 \}
 let g:ale_python_flake8_args="--ignore=W191"
 let g:ale_fix_on_save = 0
@@ -504,4 +509,10 @@ nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
 "map space f to copy current file to clipboard
 nmap <Leader>fn :let @+ = expand("%")<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! ScratchpadThisFiletype()
+	execute 'edit' '~/temp/temp.'.expand('%:e')
+	Codi
+endfunction
+command! Scratch call ScratchpadThisFiletype()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
