@@ -9,11 +9,11 @@ endsnippet
 
 # recompose
 snippet recompose
-import {withState, compose, setDisplayName} from 'recompose';
+import * as rc from 'recompose';
 
 const enhance = compose(
-	setDisplayName('$1'),
-	withState('$2', '$3', $4),
+	rc.setDisplayName('$1'),
+	rc.withState('$2', '$3', $4),
 );
 export default enhance(({$5}) => {
 	return (

@@ -49,7 +49,15 @@ filetype off
 filetype plugin indent on
 hi Normal ctermbg=NONE guibg=NONE
 
-autocmd BufWritePre * %s/\s\+$//e "trim trailing whitespace
+fun! StripTrailingWhitespace()
+    " Don't strip on these filetypes
+    if &ft =~ 'snippets'
+        return
+    endif
+    %s/\s\+$//e
+endfun
+
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 "better colors when using as diff
 if &diff
@@ -72,6 +80,7 @@ Plug 'hdima/python-syntax'
 Plug 'keith/tmux.vim'
 Plug 'isRuslan/vim-es6'
 Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mitsuhiko/vim-jinja'
@@ -137,7 +146,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 	\ 'do':
 		\ 'bash install.sh;
 		\ npm install -g typescript-language-server@latest;
-		\ npm install -g typescript@latest'
+		\ npm install -g typescript@latest;
+		\ npm install -g ts-node@latest'
 	\ }
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
@@ -186,6 +196,8 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
  let g:LanguageClient_serverCommands = {
      \ 'javascript': ['typescript-language-server', '--stdio'],
      \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+     \ 'typescript': ['typescript-language-server', '--stdio'],
+     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
      \ 'python': ['pyls'],
      \ }
 nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
@@ -461,6 +473,11 @@ let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['yapf'],
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'json': ['prettier'],
+\   'scss': ['prettier'],
+\   'xml': ['prettier'],
+\   'html': ['prettier'],
 \}
 
 "keybindings
@@ -516,4 +533,20 @@ function! ScratchpadThisFiletype()
 	Codi
 endfunction
 command! Scratch call ScratchpadThisFiletype()
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Codi
+function! PP_js(line)
+	" Strip escape codes
+	return substitute(a:line, "\<esc>".'\[\d\(\a\|\dm\)', '', 'g')
+endfunction
+
+let g:codi#interpreters = {
+	\ 'typescript': {
+		\ 'bin': 'ts-node',
+		\ 'prompt': '^\(>\|\.\.\.\+\) ',
+		\ 'preprocess': function('PP_js'),
+		\ },
+	\ }
+
+nmap <Leader>cc :Codi!!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

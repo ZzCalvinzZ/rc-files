@@ -57,7 +57,9 @@ windows:
         - docker attach docker_webpack_1
         - docker attach docker_deepthought_1
         - docker attach docker_postgres_1
-  - tig:
+  - uieditor:
       layout: main-vertical
       panes:
-        - docker-compose -f docker/docker-compose.yml exec smapply bash
+        - cd ../smapply-ui;vim
+        - cd ../smapply-ui;npm start
+        - cd ../smapply-ui
