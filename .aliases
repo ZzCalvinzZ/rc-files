@@ -43,3 +43,4 @@ function get_process_for_port() {
 alias start="startx -- -ardelay 210 -arinterval 30"
 alias slack="slack --disable-gpu"
 alias screenshot="import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
+alias open="xdg-open"

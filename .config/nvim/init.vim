@@ -90,7 +90,6 @@ Plug 'prabirshrestha/async.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'quabug/vim-gdscript'
 
-
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
 
@@ -111,6 +110,9 @@ Plug 'ap/vim-css-color'
 Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'junegunn/vim-easy-align'
 Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
+
+"tmux
+Plug 'christoomey/vim-tmux-navigator'
 
 "git
 Plug 'tpope/vim-fugitive'
@@ -315,18 +317,13 @@ noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
 
 "map window switching commands
-noremap <Leader>k :wincmd k<cr>
-noremap <Leader>j :wincmd j<cr>
-noremap <Leader>h :wincmd h<cr>
-noremap <Leader>l :wincmd l<cr>
-noremap <Leader><s-k> :wincmd K<cr>
-noremap <Leader><s-j> :wincmd J<cr>
-noremap <Leader><s-h> :wincmd H<cr>
-noremap <Leader><s-l> :wincmd L<cr>
-noremap <Leader><C-k> :split<cr>
-noremap <Leader><C-j> :split<cr>
-noremap <Leader><C-h> :vsplit<cr>
-noremap <Leader><C-l> :vsplit<cr>
+noremap <Leader>k :wincmd K<cr>
+noremap <Leader>j :wincmd J<cr>
+noremap <Leader>h :wincmd H<cr>
+noremap <Leader>l :wincmd L<cr>
+
+" vv to generate new vertical split
+nnoremap <silent> vv <C-w>v
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -468,7 +465,7 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
 \}
-let g:ale_python_flake8_args="--ignore=W191"
+let g:ale_python_flake8_args="--ignore=W191,W503"
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['yapf'],
