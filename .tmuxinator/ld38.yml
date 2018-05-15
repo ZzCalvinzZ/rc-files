@@ -32,11 +32,10 @@ pre_window: workon ld38
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
-        - workon ld38; vim
-        - frshell
-        - #empty, will just run plain bash
+        - vim
+        -  # nothing
   - server:
       layout: main-vertical
       panes:
@@ -46,3 +45,4 @@ windows:
       layout: main-vertical
       panes:
         - #empty, will just run plain bash
+        - frshell

@@ -32,7 +32,7 @@ root: ~/dev/dotfiles
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
-        - nvim
-        - #empty, will just run plain bash
+        - vim
+        -  # nothing

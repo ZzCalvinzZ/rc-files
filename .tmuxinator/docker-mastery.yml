@@ -32,10 +32,10 @@ root: ~/dev/stuff/udemy-docker-mastery
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
-        - nvim
-        - #empty, will just run plain bash
+        - vim
+        -  # nothing
   - whatever:
       layout: main-vertical
       panes:

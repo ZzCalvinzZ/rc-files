@@ -31,14 +31,13 @@ root: ~/dev/haskell
 # post: tmux -CC attach -t haskell
 
 windows:
-  - stack:
-      layout: main-vertical
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
+  - editor:
+      layout: main-horizontal
       panes:
         - vim
-        - stack repl
-        - #empty, will just run plain bash
+        -  # nothing
   - whatever: #empty, will just run plain bash
+      layout: main-vertical
+      panes:
+        - stack repl
 

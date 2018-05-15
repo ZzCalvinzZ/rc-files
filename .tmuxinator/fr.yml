@@ -44,12 +44,10 @@ pre_window: workon fr
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - vim
-        - sleep 20;docker-compose -f docker/docker-compose.yml exec smapply python reviewroom/project/manage.py shell_plus
-        - #empty, will just run plain bash
-
+        -  # nothing
   - server:
       layout: tiled
       panes:
@@ -57,9 +55,6 @@ windows:
         - docker attach docker_webpack_1
         - docker attach docker_deepthought_1
         - docker attach docker_postgres_1
-  - uieditor:
+  - playground:
       layout: main-vertical
-      panes:
-        - cd ../smapply-ui;vim
-        - cd ../smapply-ui;npm start
-        - cd ../smapply-ui
+        - sleep 20;docker-compose -f docker/docker-compose.yml exec smapply python reviewroom/project/manage.py shell_plus

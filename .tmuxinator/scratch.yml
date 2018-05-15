@@ -32,10 +32,11 @@ root: ~
 
 windows:
   - editor:
+      layout: main-horizontal
+      panes:
+        - vim
+        -  # nothing
+  - stuff:
       layout: main-vertical
       panes:
         - #empty, will just run plain bash
-  - whatever:
-      layout: main-vertical
-      panes:
-        - vim

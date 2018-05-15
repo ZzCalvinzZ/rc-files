@@ -32,13 +32,13 @@ pre_window: workon data_science
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - vim
-        - ipython
-        - #empty, will just run plain bash
+        -  # nothing
   - whatever:
       layout: main-vertical
       panes:
         - jupyter notebook
+        - ipython
         - #empty, will just run plain bash

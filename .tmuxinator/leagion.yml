@@ -32,11 +32,10 @@ pre_window: workon leagion
 
 windows:
   - editor:
-      layout: main-vertical
+      layout: main-horizontal
       panes:
         - vim
-        - ./manage.py shell_plus
-        - #empty, will just run plain bash
+        -  # nothing
   - server:
       layout: main-vertical
       panes:
@@ -45,4 +44,4 @@ windows:
   - tig:
       layout: main-vertical
       panes:
-        - #empty, will just run plain bash
+        - ./manage.py shell_plus

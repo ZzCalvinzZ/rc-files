@@ -43,6 +43,7 @@ set splitright
 
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+let &t_ut=''
 
 syntax on "turn on syntax highlighting
 filetype off
@@ -120,6 +121,7 @@ Plug 'junegunn/gv.vim'
 
 "status line and other visual
 Plug 'itchyny/lightline.vim'
+Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mhinz/vim-startify'
 
 "code scratchpad
@@ -170,9 +172,9 @@ Plug 'w0rp/ale', { 'do':
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "what vim looks like
 let g:gruvbox_contrast_dark="soft"
+" let g:gruvbox_contrast_light="soft"
 let g:gruvbox_italic=1
 set background=dark
 colorscheme gruvbox
@@ -317,13 +319,14 @@ noremap <Leader>te :tabe<cr>
 noremap <Leader>to :tabo<cr>
 
 "map window switching commands
-noremap <Leader>k :wincmd K<cr>
-noremap <Leader>j :wincmd J<cr>
-noremap <Leader>h :wincmd H<cr>
-noremap <Leader>l :wincmd L<cr>
+noremap <Leader><s-k> :wincmd K<cr>
+noremap <Leader><s-j> :wincmd J<cr>
+noremap <Leader><s-h> :wincmd H<cr>
+noremap <Leader><s-l> :wincmd L<cr>
 
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
+nnoremap <silent> vh <C-w>s
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -431,6 +434,7 @@ set updatetime=500
 
 " Replace filename component of Lightline statusline
 let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'filename': 'FilenameForLightline'
       \ }
@@ -478,8 +482,8 @@ let g:ale_fixers = {
 \}
 
 "keybindings
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap <silent>[f <Plug>(ale_previous_wrap)
+nmap <silent>]f <Plug>(ale_next_wrap)
 nmap <silent><Leader>cf :ALEFix<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
