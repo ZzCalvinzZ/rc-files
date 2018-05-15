@@ -46,7 +46,7 @@ windows:
   - editor:
       layout: main-horizontal
       panes:
-        - vim
+        - tmux resize-pane -Z&&vim
         -  # nothing
   - uieditor:
       layout: main-vertical
