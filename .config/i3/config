@@ -247,3 +247,6 @@ exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
 exec --no-startup-id spotify
+
+
+exec --no-startup-id autorandr -c

@@ -111,6 +111,7 @@ Plug 'ap/vim-css-color'
 Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'junegunn/vim-easy-align'
 Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
+Plug 'janko-m/vim-test'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -129,6 +130,7 @@ Plug 'metakirby5/codi.vim'
 
 "snippets
 Plug 'honza/vim-snippets'
+Plug 'epilande/vim-react-snippets'
 Plug 'SirVer/ultisnips'
 
 Plug 'michaeljsmith/vim-indent-object'
@@ -472,7 +474,7 @@ let g:ale_linters = {
 let g:ale_python_flake8_args="--ignore=W191,W503"
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
-\   'python': ['yapf'],
+\   'python': ['autopep8', 'yapf'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'json': ['prettier'],
@@ -550,4 +552,7 @@ let g:codi#interpreters = {
 	\ }
 
 nmap <Leader>cc :Codi!!<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim-test
+nmap <Leader>ct :TestNearest<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

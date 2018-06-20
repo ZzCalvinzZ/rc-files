@@ -1,4 +1,4 @@
-*.font: xft:DejaVuSansMono Nerd Font:pixelsize=16
+*.font: xft:DejaVu Sans Mono:pixelsize=16
 
 Xft.dpi:                        96
 Xft.antialias:                  1
