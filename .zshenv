@@ -41,3 +41,6 @@ export TERMINAL=kitty
 
 # prevent security pin in flask
 export WERKZEUG_DEBUG_PIN=off
+
+# react native expo
+export REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.61"

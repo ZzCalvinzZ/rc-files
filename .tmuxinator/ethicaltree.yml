@@ -1,0 +1,46 @@
+# ~/.tmuxinator/ethicaltree.yml
+
+name: ethicaltree
+root: ~/dev/ethicaltree-mobile
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: workon fr
+#
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: workon gamedevtv
+
+# on_project_stop: sudo pkill redis-server
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+#startup_pane: 1
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t fr
+
+windows:
+  - editor:
+      layout: main-horizontal
+      panes:
+        - tmux resize-pane -Z&&vim
+        -  # nothing
+  - server:
+      layout: tiled
+      panes:
+        - cd ../ethicaltree-api;docker-compose up
+        - cd ../ethicaltree-web;npm start
+        - npm run storybook
+        - npm start

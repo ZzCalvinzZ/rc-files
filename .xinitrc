@@ -44,5 +44,6 @@ setxkbmap -option terminate:ctrl_alt_bksp
 setxkbmap -option shift:both_capslock
 xinput --set-prop 12 'libinput Accel Speed' -0.5
 ~/.fehbg &
+udiskie --no-automount --tray --use-udisks2 &
 
 exec i3

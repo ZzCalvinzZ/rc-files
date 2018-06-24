@@ -111,15 +111,13 @@ set $w1 "1 "
 set $w2 "2 "
 set $w3 "3 "
 set $w4 "4 "
-set $w5 "5 "
-set $w6 "6 "
+set $w5 "5 "
 
 #workspace assignments
 assign [class="Google-chrome"] $w2
 assign [class="Slack"] $w3
 for_window [class="Spotify"] move container to workspace $w4
-assign [class="Steam"] $w5
-assign [class="Godot"] $w6
+assign [class="Zathura"] $w5
 for_window [instance="__scratchpad"] move scratchpad
 
 # switch to workspace
@@ -247,6 +245,7 @@ exec --no-startup-id kitty
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
 exec --no-startup-id spotify
+exec --no-startup-id zathura
 
 
 exec --no-startup-id autorandr -c
