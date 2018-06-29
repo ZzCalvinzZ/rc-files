@@ -2,7 +2,7 @@
 APP=$1
 SUMMARY=$2
 DESC=$3
-IDUNNO=$4
+ICON=$4
 URGENCY=$5
 
 NORMAL_SOUNDLIST=( \
@@ -20,8 +20,12 @@ if [[ $URGENCY = "LOW" ]]; then
 elif [[ $URGENCY = "NORMAL" ]]; then
 	if [[ $APP = "Kitty" ]]; then
 		SOUND="normal/link_get_heart.wav"
+	elif [[ $APP = "Electron" ]]; then
+		SOUND="normal/link_whistle.wav"
+	elif [[ $APP = "Thunderbird" ]]; then
+		SOUND="normal/link_rupee.wav"
 	else
-		SOUND=${NORMAL_SOUNDLIST[ $(( RANDOM % ${#NORMAL_SOUNDLIST[@]} )) ]}
+		SOUND="normal/link_fairy.wav"
 	fi
 	#statements
 elif [[ $URGENCY = "CRITICAL" ]]; then

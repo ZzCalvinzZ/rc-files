@@ -551,6 +551,7 @@ let g:codi#interpreters = {
 		\ },
 	\ }
 
+let g:codi#rightalign = 0
 nmap <Leader>cc :Codi!!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-test

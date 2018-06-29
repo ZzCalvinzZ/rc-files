@@ -24,3 +24,6 @@
 .config/nvim/.netrwhist
 .config/ranger/bookmarks
 .config/ranger/history
+
+playground/package-lock.json
+playground/node_modules/

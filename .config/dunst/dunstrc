@@ -208,6 +208,11 @@
 	appname = "NetworkManager"
 	new_icon = /home/calvin/.config/icons/wifi.png
 
+#Mailspring
+[Thunderbird]
+	appname = "Thunderbird"
+	new_icon = /home/calvin/.config/icons/email.png
+
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 # Messages can be matched by "appname", "summary", "body", "icon", "category",

@@ -1,18 +1,17 @@
-# ~/.tmuxinator/ethicaltree.yml
+# ~/.tmuxinator/playground.yml
 
-name: ethicaltree
-root: ~/dev/ethicaltree-mobile
+name: playground
+root: ~/playground
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-# pre: workon fr
-#
-# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: workon gamedevtv
+#pre: workon fr
 
-# on_project_stop: sudo pkill redis-server
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+#pre_window: workon
+
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
@@ -32,25 +31,12 @@ root: ~/dev/ethicaltree-mobile
 # post: tmux -CC attach -t fr
 
 windows:
-  - api:
+  - editor:
       layout: main-horizontal
       panes:
-        - cd ../ethicaltree-api; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-api
-  - web:
-      layout: main-horizontal
+        - tmux resize-pane -Z&&vim
+        -  # nothing
+  - whatever:
+      layout: main-vertical
       panes:
-        - cd ../ethicaltree-web; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-web
-  - mobile:
-      layout: main-horizontal
-      panes:
-        - cd ../ethicaltree-mobile; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-mobile
-  - servers:
-      layout: tiled
-      panes:
-        - cd ../ethicaltree-api;docker-compose up
-        - cd ../ethicaltree-web;npm start
-        - npm run storybook
-        - npm start
+        - #empty, will just run plain bash
