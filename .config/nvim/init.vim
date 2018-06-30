@@ -100,7 +100,9 @@ Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 
 "useful
-Plug 'tpope/vim-surround'
+Plug 'simeji/winresizer'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
@@ -112,6 +114,9 @@ Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'junegunn/vim-easy-align'
 Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
 Plug 'janko-m/vim-test'
+
+"Zeal
+Plug 'KabbAmine/zeavim.vim'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -171,6 +176,7 @@ Plug 'w0rp/ale', { 'do':
 					\ npm install -g eslint-plugin-jest@latest'
 				\}
 
+Plug 'machakann/vim-sandwich'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -329,6 +335,7 @@ noremap <Leader><s-l> :wincmd L<cr>
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> vh <C-w>s
+nnoremap <silent> vw :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -556,4 +563,7 @@ nmap <Leader>cc :Codi!!<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-test
 nmap <Leader>ct :TestNearest<cr>
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim-highlightedyank
+let g:highlightedyank_highlight_duration = 300
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
