@@ -137,6 +137,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'honza/vim-snippets'
 Plug 'epilande/vim-react-snippets'
 Plug 'SirVer/ultisnips'
+Plug 'joaohkfaria/vim-jest-snippets'
 
 Plug 'michaeljsmith/vim-indent-object'
 
@@ -158,6 +159,7 @@ Plug 'autozimu/LanguageClient-neovim', {
 		\ 'bash install.sh;
 		\ npm install -g typescript-language-server@latest;
 		\ npm install -g typescript@latest;
+		\ npm install -g jest@latest;
 		\ npm install -g ts-node@latest'
 	\ }
 
@@ -211,6 +213,7 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
      \ 'typescript': ['typescript-language-server', '--stdio'],
      \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
      \ 'python': ['pyls'],
+     \ 'ruby': ['language_server-ruby'],
      \ }
 nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
 nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
@@ -335,7 +338,7 @@ noremap <Leader><s-l> :wincmd L<cr>
 " vv to generate new vertical split
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> vh <C-w>s
-nnoremap <silent> vw :WinResizerStartResize<cr>
+nnoremap <silent> vr :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -482,6 +485,7 @@ let g:ale_python_flake8_args="--ignore=W191,W503"
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['autopep8', 'yapf'],
+\   'ruby': ['rubocop'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'json': ['prettier'],

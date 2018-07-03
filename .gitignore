@@ -25,5 +25,5 @@
 .config/ranger/bookmarks
 .config/ranger/history
 
-playground/package-lock.json
-playground/node_modules/
+playground/javascript/package-lock.json
+playground/javascript/node_modules/
