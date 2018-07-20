@@ -40,11 +40,8 @@ windows:
       layout: main-vertical
       panes:
         - vagrant up&&vagrant ssh -c 'cd /opt/src/AnWeb/; pyenv local anweb; pserve development.ini --reload; /bin/bash'
-  - approuter-editor:
-      layout: main-horizontal
-      panes:
-        - cd src/AnWeb&&tmux resize-pane -Z&&vim
-        -  # nothing
+        - vagrant ssh -c 'sleep 5; cd /opt/src/AsyncJobs/; pyenv local asyncjobs; python asyncjobs/worker.py config.ini; /bin/bash'
+        - vagrant ssh -c 'sleep 5; cd /opt/src/JobSvc/; pyenv local jobsvc; pserve development.ini --reload; /bin/bash'
   - approuter:
       layout: main-vertical
       panes:

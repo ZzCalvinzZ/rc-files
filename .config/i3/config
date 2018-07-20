@@ -131,7 +131,7 @@ bindsym $mod+3 workspace $w3
 bindsym $mod+4 workspace $w4
 bindsym $mod+5 workspace $w5
 bindsym $mod+6 workspace $w6
-bindsym $mod+7 workspace 7
+bindsym $mod+7 workspace $w7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
@@ -254,3 +254,4 @@ exec --no-startup-id thunderbird
 exec --no-startup-id VirtualBox
 
 exec --no-startup-id autorandr -c
+exec --no-startup-id xfce4-power-manager

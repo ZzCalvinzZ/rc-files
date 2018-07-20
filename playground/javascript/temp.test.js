@@ -1,12 +1,11 @@
 const {temp, shift} = require('./temp');
-const inputs = ['733049910872815764', 5];
-const output = '330479108928157';
+const inputs = ['abc'];
+const output = ['ab', 'c_'];
 
 test('temp', () => {
-	expect(temp(...inputs)).toBe(output);
+	expect(temp(...inputs)).toEqual(output);
 });
 
-test('shift', () => {
-	console.log(shift);
-	expect(shift([1,2,3])).toBe([2,3,1]);
+test('temp2', () => {
+	expect(temp('abcdef')).toEqual(['ab', 'cd', 'ef']);
 });

@@ -1,2 +1,2 @@
 #!/bin/sh
-'feh' '--bg-tile' '/home/calvin/.config/wallpapers/flowers.jpg' 
+feh --bg-scale '/home/calvin/.config/wallpapers/sierra.jpg' 

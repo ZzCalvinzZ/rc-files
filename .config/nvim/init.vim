@@ -104,7 +104,9 @@ Plug 'simeji/winresizer'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'kshenoy/vim-signature' "for showing marks in the gutter
@@ -160,7 +162,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 		\ npm install -g typescript-language-server@latest;
 		\ npm install -g typescript@latest;
 		\ npm install -g jest@latest;
-		\ npm install -g ts-node@latest'
+		\ npm install -g ts-node@latest;
+		\ gem install rubocop solargraph'
 	\ }
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
@@ -177,8 +180,6 @@ Plug 'w0rp/ale', { 'do':
 					\ npm install -g eslint-plugin-react@latest;
 					\ npm install -g eslint-plugin-jest@latest'
 				\}
-
-Plug 'machakann/vim-sandwich'
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -213,7 +214,7 @@ let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (the
      \ 'typescript': ['typescript-language-server', '--stdio'],
      \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
      \ 'python': ['pyls'],
-     \ 'ruby': ['language_server-ruby'],
+     \ 'ruby': ['solargraph', 'stdio'],
      \ }
 nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
 nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
@@ -336,9 +337,9 @@ noremap <Leader><s-h> :wincmd H<cr>
 noremap <Leader><s-l> :wincmd L<cr>
 
 " vv to generate new vertical split
-nnoremap <silent> vv <C-w>v
-nnoremap <silent> vh <C-w>s
-nnoremap <silent> vr :WinResizerStartResize<cr>
+map <Leader>sv <C-w>v
+map <Leader>sh <C-w>s
+map <Leader>sr :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -347,10 +348,6 @@ map <leader>w :w<cr>
 "bufstop mappings
 map <leader>< :BufstopBack<CR>
 map <leader>> :BufstopForward<CR>
-
-"easier replacing
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-vnoremap <Leader>s :s/\<<C-r><C-w>\>/
 
 "fzf mappings
 map <C-p> :Files<cr>
@@ -536,8 +533,8 @@ set list " show tab markers
 set listchars=tab:\▏\ ,trail:·
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "file mappings
-"
-nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
+"open file in browser
+"nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
 "map space f to copy current file to clipboard
 nmap <Leader>fn :let @+ = expand("%")<cr>
 
@@ -569,5 +566,5 @@ nmap <Leader>cc :Codi!!<cr>
 nmap <Leader>ct :TestNearest<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-highlightedyank
-let g:highlightedyank_highlight_duration = 300
+let g:highlightedyank_highlight_duration = 150
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
