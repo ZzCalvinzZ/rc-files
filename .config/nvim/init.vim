@@ -106,6 +106,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-rhubarb'
+
 " Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
@@ -470,7 +472,7 @@ let g:switch_mapping = "-"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
-let g:ale_javascript_eslint_use_global = 1
+" let g:ale_javascript_eslint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_linters = {

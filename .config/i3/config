@@ -124,6 +124,18 @@ assign [class="Zathura"] $w6
 assign [class="VirtualBox Manager"] $w7
 for_window [instance="__scratchpad"] move scratchpad
 
+workspace $w1 output DP2-1
+workspace $w2 output DP2-1
+workspace $w5 output DP2-1
+workspace $w6 output DP2-1
+workspace $w7 output DP2-1
+workspace 8 output DP2-1
+workspace 9 output DP2-1
+
+workspace $w3 output DP2-2
+workspace $w4 output DP2-2
+workspace 0 output DP2-2
+
 # switch to workspace
 bindsym $mod+1 workspace $w1
 bindsym $mod+2 workspace $w2
@@ -152,9 +164,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 for_window [class="^.*"] border pixel 2
 
 # Gaps
-smart_gaps on
+# smart_gaps on
 gaps inner 5
-gaps outer 0
+gaps outer 5
 
 # green gruvbox
 # class                 border|backgr|text|indicator|child_border

@@ -35,13 +35,22 @@ windows:
       layout: main-horizontal
       panes:
         - cd src/AnWeb&&tmux resize-pane -Z&&vim
-        -  # nothing
+        - cd src/AnWeb
+  - smweb-editor:
+      layout: main-horizontal
+      panes:
+        - cd src/smweb&&tmux resize-pane -Z&&vim
+        - cd src/smweb
   - anweb:
       layout: main-vertical
       panes:
         - vagrant up&&vagrant ssh -c 'cd /opt/src/AnWeb/; pyenv local anweb; pserve development.ini --reload; /bin/bash'
-        - vagrant ssh -c 'sleep 5; cd /opt/src/AsyncJobs/; pyenv local asyncjobs; python asyncjobs/worker.py config.ini; /bin/bash'
-        - vagrant ssh -c 'sleep 5; cd /opt/src/JobSvc/; pyenv local jobsvc; pserve development.ini --reload; /bin/bash'
+        - cd src/smweb/api/graphapi;yarn start
+        - cd src/smweb/apps/coreweb;yarn start
+        # - sleep 5&&vagrant ssh -c 'cd /opt/src/smweb/api/graphapi; yarn start; /bin/bash'
+        # - sleep 5&&vagrant ssh -c 'cd /opt/src/smweb/apps/coreweb; yarn start; /bin/bash'
+        # - sleep 5&&vagrant ssh -c 'cd /opt/src/AsyncJobs/; pyenv local asyncjobs; python asyncjobs/worker.py config.ini; /bin/bash'
+        # - sleep 5&&vagrant ssh -c 'cd /opt/src/JobSvc/; pyenv local jobsvc; pserve development.ini --reload; /bin/bash'
   - approuter:
       layout: main-vertical
       panes:
