@@ -22,8 +22,8 @@ PATH="/usr/local/Cellar/python/2.7.9/bin:$PATH"
 PATH="$PATH:/usr/local/Cellar/gettext/0.19.2/bin"
 PATH="$PATH:/usr/local/Cellar/graphviz/2.38.0/include/graphviz"
 
-#for pdfconvert2 (needed in Fluidreview)
-PATH="$HOME/bin:$PATH"
+#User pip
+PATH="$PATH:/home/calvin/.local/bin"
 
 export PATH
 

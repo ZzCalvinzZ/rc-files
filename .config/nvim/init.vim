@@ -72,8 +72,12 @@ call plug#begin('~/.config/nvim/bundle')
 
 Plug 'junegunn/vim-plug'
 
+"Neovim
+Plug 'lambdalisue/suda.vim'
+
 "language syntax plugins
 Plug 'pangloss/vim-javascript'
+Plug 'elzr/vim-json'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'othree/html5.vim'
 Plug 'tbastos/vim-lua'
@@ -90,6 +94,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'quabug/vim-gdscript'
+Plug 'jparise/vim-graphql'
 
 "editorconfig
 Plug 'editorconfig/editorconfig-vim'
@@ -154,34 +159,24 @@ Plug 'yegappan/mru'
 Plug 'morhetz/gruvbox'
 
 "Autocomplete and related
-Plug 'python-mode/python-mode', { 'do': 'git submodule update --init --recursive' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'fisadev/vim-isort'
-Plug 'autozimu/LanguageClient-neovim', {
-	\ 'branch': 'next',
-	\ 'do':
-		\ 'bash install.sh;
-		\ npm install -g typescript-language-server@latest;
-		\ npm install -g typescript@latest;
-		\ npm install -g jest@latest;
-		\ npm install -g ts-node@latest;
-		\ gem install rubocop solargraph'
-	\ }
 
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go'
 
 "linting
-Plug 'w0rp/ale', { 'do':
-					\ 'npm install -g eslint@latest;
-					\ npm install -g prettier@latest;
-					\ npm install -g stylelint@latest;
-					\ npm install -g eslint-plugin-babel@latest;
-					\ npm install -g babel-eslint@latest;
-					\ npm install -g eslint-plugin-react@latest;
-					\ npm install -g eslint-plugin-jest@latest'
-				\}
+ Plug 'w0rp/ale', { 'do':
+ 					\ 'npm install -g eslint@latest;
+ 					\ npm install -g prettier@latest;
+ 					\ npm install -g stylelint@latest;
+ 					\ npm install -g eslint-plugin-babel@latest;
+ 					\ npm install -g babel-eslint@latest;
+ 					\ npm install -g eslint-plugin-react@latest;
+ 					\ npm install -g eslint-plugin-jest@latest;
+ 					\ npm install -g eslint-plugin-graphql@latest'
+ 				\}
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -196,65 +191,55 @@ colorscheme gruvbox
 "commenting
 map <Leader>c<space> :Commentary<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"coc.nvim
 
-" deoplete tab-complete
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+" Better display for messages
+set cmdheight=2
 
-call deoplete#custom#source('ultisnips', 'rank', 9999)
-let g:deoplete#auto_complete_delay=150
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" Use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <C-p> to complete 'word', 'emoji' and 'include' sources
+imap <silent> <C-p> <Plug>(coc-complete-custom)
+
+" Use <cr> for confirm completion.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" remap gotos
+nmap <silent> <Leader>cd <Plug>(coc-definition)
+nmap <silent> <Leader>cy <Plug>(coc-type-definition)
+nmap <silent> <Leader>ci <Plug>(coc-implementation)
+nmap <silent> <Leader>cr <Plug>(coc-references)
+" nmap <silent> <Leader>cf <Plug>(coc-format)
+vmap <silent> <Leader>cf <Plug>(coc-format-selected)
+nnoremap <silent> <Leader>ck :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Show signature help while editing
+autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"jedi and tern stuff
- let g:LanguageClient_serverCommands = {
-     \ 'javascript': ['typescript-language-server', '--stdio'],
-     \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
-     \ 'typescript': ['typescript-language-server', '--stdio'],
-     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
-     \ 'python': ['pyls'],
-     \ 'ruby': ['solargraph', 'stdio'],
-     \ }
-nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
-nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
-nmap <silent> <Leader>cR :call LanguageClient_textDocument_rename()<CR>
-nmap <silent> <Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
-nmap <silent> <Leader>cw :call LanguageClient_workspace_symbol()<CR>
-nmap <silent> <Leader>cr :call LanguageClient_textDocument_references()<CR>
-
-let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_diagnosticsList = "Location"
-
-let g:LanguageClient_loadSettings = 1
-let g:LanguageClient_rootMarkers = ['.git']
-
-let g:pymode_warnings = 1
-let g:pymode_trim_whitespaces = 0
-let g:pymode_options = 0
-let g:pymode_indent = 0
-let g:pymode_folding = 0
-let g:pymode_doc = 0
-let g:pymode_run = 0
-let g:pymode_breakpoint = 0
-let g:pymode_lint = 0
-let g:pymode_rope_completion = 0
-
-let g:pymode_rope = 1
-let g:pymode_rope_regenerate_on_write = 0
-let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_rope_goto_definition_bind = '<leader>cg'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "for vim-javascript to show html and css highlighting
 let javascript_enable_domhtmlcss=1
-let g:vim_json_syntax_conceal = 0
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<C-l>"
 let g:UltiSnipsJumpForwardTrigger="<C-l>"
 let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 map <Leader>u :UltiSnipsEdit<cr>
@@ -447,9 +432,14 @@ set updatetime=500
 let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
-      \   'filename': 'FilenameForLightline'
+      \   'filename': 'FilenameForLightline',
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
       \ }
-      \ }
+      \}
 
 " Show full path of filename
 function! FilenameForLightline()
@@ -464,39 +454,6 @@ map <leader>2 :Ranger<CR>
 
 "vim switch stuff for switching boolean values
 let g:switch_mapping = "-"
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"let g:python_host_prog = '/usr/local/bin/python'
-"let g:python3_host_prog = '/usr/local/bin/python3'
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ALE stuff for linting
-" let g:ale_javascript_eslint_use_global = 1
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '?'
-let g:ale_linters = {
-\   'python': ['flake8'],
-\   'javascript': ['eslint'],
-\   'javascript.jsx': ['eslint'],
-\}
-let g:ale_python_flake8_args="--ignore=W191,W503"
-let g:ale_fix_on_save = 0
-let g:ale_fixers = {
-\   'python': ['autopep8', 'yapf'],
-\   'ruby': ['rubocop'],
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'json': ['prettier'],
-\   'scss': ['prettier'],
-\   'xml': ['prettier'],
-\   'html': ['prettier'],
-\}
-
-"keybindings
-nmap <silent>[f <Plug>(ale_previous_wrap)
-nmap <silent>]f <Plug>(ale_next_wrap)
-nmap <silent><Leader>cf :ALEFix<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
@@ -526,7 +483,7 @@ set path+=~/dev/leagion/assets/js/
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 "save as root
-command! -nargs=0 Sw w !sudo tee % > /dev/null
+command! -nargs=0 Sw w suda://%
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "indents
@@ -570,3 +527,101 @@ nmap <Leader>ct :TestNearest<cr>
 "vim-highlightedyank
 let g:highlightedyank_highlight_duration = 150
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vim_json_syntax_conceal = 0
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"vim-graphql
+let g:graphql_javascript_tags = [".. GraphQL .. ", "gql ", "graphql", "Relay.QL"]
+
+"TODO remove when I get a chance
+" Plug 'python-mode/python-mode', { 'do': 'git submodule update --init --recursive' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Plug 'zchee/deoplete-go', { 'do': 'make'}
+"
+" Plug 'autozimu/LanguageClient-neovim', {
+" 	\ 'branch': 'next',
+" 	\ 'do':
+" 		\ 'bash install.sh;
+" 		\ npm install -g typescript-language-server@latest;
+" 		\ npm install -g typescript@latest;
+" 		\ npm install -g jest@latest;
+" 		\ npm install -g ts-node@latest;
+" 		\ gem install rubocop solargraph'
+" 	\ }
+"
+" deoplete tab-complete
+" let g:deoplete#enable_at_startup = 1
+" inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" call deoplete#custom#source('ultisnips', 'rank', 9999)
+" let g:deoplete#auto_complete_delay=150
+
+"jedi and tern stuff
+ " let g:LanguageClient_serverCommands = {
+ "     \ 'javascript': ['typescript-language-server', '--stdio'],
+ "     \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
+ "     \ 'typescript': ['typescript-language-server', '--stdio'],
+ "     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
+ "     \ 'python': ['pyls'],
+ "     \ 'ruby': ['solargraph', 'stdio'],
+ "     \ }
+" nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
+" nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
+" nmap <silent> <Leader>cR :call LanguageClient_textDocument_rename()<CR>
+" nmap <silent> <Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
+" nmap <silent> <Leader>cw :call LanguageClient_workspace_symbol()<CR>
+" nmap <silent> <Leader>cr :call LanguageClient_textDocument_references()<CR>
+
+" let g:LanguageClient_diagnosticsEnable = 0
+" let g:LanguageClient_diagnosticsList = "Location"
+
+" let g:LanguageClient_loadSettings = 1
+" let g:LanguageClient_rootMarkers = ['.git']
+
+" let g:pymode_warnings = 1
+" let g:pymode_trim_whitespaces = 0
+" let g:pymode_options = 0
+" let g:pymode_indent = 0
+" let g:pymode_folding = 0
+" let g:pymode_doc = 0
+" let g:pymode_run = 0
+" let g:pymode_breakpoint = 0
+" let g:pymode_lint = 0
+" let g:pymode_rope_completion = 0
+
+" let g:pymode_rope = 1
+" let g:pymode_rope_regenerate_on_write = 0
+" let g:pymode_rope_goto_definition_cmd = 'e'
+" let g:pymode_rope_goto_definition_bind = '<leader>cg'
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE stuff for linting
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '?'
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'javascript': ['eslint'],
+\   'javascript.jsx': ['eslint'],
+\}
+let g:ale_python_flake8_args="--ignore=W191,W503"
+let g:ale_fix_on_save = 0
+let g:ale_fixers = {
+\   'python': ['autopep8'],
+\   'ruby': ['rubocop'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
+\   'json': ['prettier'],
+\   'scss': ['prettier'],
+\   'xml': ['prettier'],
+\   'html': ['prettier'],
+\}
+
+"keybindings
+nmap <silent>[f <Plug>(ale_previous_wrap)
+nmap <silent>]f <Plug>(ale_next_wrap)
+nmap <silent><Leader>cf :ALEFix<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

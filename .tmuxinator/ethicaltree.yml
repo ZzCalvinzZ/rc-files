@@ -1,7 +1,7 @@
 # ~/.tmuxinator/ethicaltree.yml
 
 name: ethicaltree
-root: ~/dev/ethicaltree-mobile
+root: ~/dev/ethicaltree
 
 # Optional tmux socket
 # socket_name: foo
@@ -35,22 +35,17 @@ windows:
   - api:
       layout: main-horizontal
       panes:
-        - cd ../ethicaltree-api; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-api
+        - cd api; tmux resize-pane -Z&&vim
+        - cd api
   - web:
       layout: main-horizontal
       panes:
-        - cd ../ethicaltree-web; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-web
-  - mobile:
-      layout: main-horizontal
-      panes:
-        - cd ../ethicaltree-mobile; tmux resize-pane -Z&&vim
-        - cd ../ethicaltree-mobile
+        - cd web; tmux resize-pane -Z&&vim
+        - cd web
   - servers:
       layout: tiled
       panes:
-        - cd ../ethicaltree-api;docker-compose up
-        - cd ../ethicaltree-web;npm start
-        - npm run storybook
-        - npm start
+        - cd api;docker-compose up
+        - cd web;npm start
+        # - npm run storybook
+        # - npm start

@@ -46,3 +46,16 @@ alias screenshot="import /tmp/screenshot.png && xclip -selection clipboard -targ
 alias open="xdg-open"
 alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
 alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
+alias change_timezone="timedatectl set-timezone $(curl -s https://ipapi.co/timezone)"
+
+#vim
+#language servers
+function install_language_servers() {
+	npm install -g typescript
+	npm install -g vscode-html-languageserver-bin
+	npm install -g vscode-json-languageserver
+	npm install -g css-langserver
+	npm install -g eslint-server
+	gem install solargraph
+	pip install --user 'python-language-server[all]'
+}
