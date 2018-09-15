@@ -108,7 +108,7 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $w1 "1 "
-set $w2 "2 "
+set $w2 "2 "
 set $w3 "3 "
 set $w4 "4 "
 set $w5 "5 "
@@ -116,7 +116,7 @@ set $w6 "6 "
 set $w7 "7 "
 
 #workspace assignments
-assign [class="Google-chrome"] $w2
+assign [class="Firefox Developer Edition"] $w2
 assign [class="Slack"] $w3
 assign [class="Thunderbird"] $w4
 for_window [class="Spotify"] move container to workspace $w5
@@ -253,12 +253,12 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- i3lock -c 282828 -i ~/.config/i3/lock.png -t
+exec --no-startup-id xss-lock -- betterlockscreen -l
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
 exec --no-startup-id i3-msg 'workspace $w1; exec kitty'
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id firefox-developer-edition
 exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id zathura

@@ -598,7 +598,7 @@ let g:graphql_javascript_tags = [".. GraphQL .. ", "gql ", "graphql", "Relay.QL"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
-let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_use_global = 0
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_linters = {
