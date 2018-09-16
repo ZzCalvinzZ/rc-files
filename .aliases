@@ -25,7 +25,7 @@ alias frrun="manage runserver_plus 3000"
 alias frshell="manage shell_plus"
 alias runserver="./manage.py runserver_plus 4000"
 alias t1="ssh frdev@frdev1.fluidreview.dev"
-alias smvpn="sudo openconnect --user=calvinc --protocol=gp sanmateo-vpn.surveymonkey.com"
+alias smvpn="sudo openconnect --user=calvinc --protocol=gp sanmateo-vpn.surveymonkey.com --script=/home/calvin/smvpn-script.sh"
 
 alias deepthought_database="docker run -it --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=deepthought postgres"
 
@@ -47,6 +47,7 @@ alias open="xdg-open"
 alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
 alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
 alias change_timezone="timedatectl set-timezone $(curl -s https://ipapi.co/timezone)"
+alias resolv="vim /etc/resolv.conf"
 
 #vim
 #language servers

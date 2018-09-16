@@ -52,7 +52,7 @@ ZSH_THEME=""
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper rand-quote sudo tmuxinator osx golang docker extract docker-compose docker-machine zsh-syntax-highlighting)
+plugins=(git django virtualenvwrapper sudo tmuxinator golang docker extract docker-compose docker-machine zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -123,7 +123,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=kitty
 
 # browser
-export BROWSER=firefox-developer-edition
+export BROWSER=google-chrome-stable
 
 autoload -U promptinit; promptinit
 prompt pure
