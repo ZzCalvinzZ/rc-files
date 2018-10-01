@@ -214,6 +214,7 @@ nmap <silent> <Leader>cy <Plug>(coc-type-definition)
 nmap <silent> <Leader>ci <Plug>(coc-implementation)
 nmap <silent> <Leader>cr <Plug>(coc-references)
 " nmap <silent> <Leader>cf <Plug>(coc-format)
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 vmap <silent> <Leader>cf <Plug>(coc-format-selected)
 nnoremap <silent> <Leader>ck :call <SID>show_documentation()<CR>
 
@@ -381,7 +382,7 @@ nmap <Leader>/pstart :profile start profile.log <bar> profile func * <bar> profi
 nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
 
 "restart language server
-map <Leader>9 :LanguageClientStop<cr>:LanguageClientStart<cr>
+map <Leader>9 :CocRestart<cr>
 
 "add missing dependencies
 map <Leader>8 :!pip install neovim flake8 python-language-server<cr>
@@ -493,7 +494,7 @@ set listchars=tab:\▏\ ,trail:·
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "file mappings
 "open file in browser
-"nnoremap <leader>fb :exe ':silent !google-chrome-stable %'<CR>
+"nnoremap <leader>fb :exe ':silent !chromium %'<CR>
 "map space f to copy current file to clipboard
 nmap <Leader>fn :let @+ = expand("%")<cr>
 

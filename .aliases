@@ -60,3 +60,12 @@ function install_language_servers() {
 	gem install solargraph
 	pip install --user 'python-language-server[all]'
 }
+
+#pomodoro
+# function pmwork() {
+# 	sleep 1500 && notify-send -i ~/.config/icons/tea.png "Break Time"
+# }
+
+# function pmbreak() {
+# 	sleep 300 && notify-send -i ~/.config/icons/wrench.png "Work"
+# }
