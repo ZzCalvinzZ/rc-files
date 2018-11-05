@@ -2,13 +2,13 @@
 
 # Left click
 if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
-  amixer -q sset Master 5%+
+  amixer -q sset Master 10%+
 # Middle click
 elif [[ "${BLOCK_BUTTON}" -eq 2 ]]; then
   amixer -q sset Master toggle
 # Right click
 elif [[ "${BLOCK_BUTTON}" -eq 3 ]]; then
-  amixer -q sset Master 5%-
+  amixer -q sset Master 10%-
 fi
 
 statusLine=$(amixer get Master | tail -n 1)

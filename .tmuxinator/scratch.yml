@@ -36,7 +36,7 @@ windows:
       panes:
         - tmux resize-pane -Z&&vim
         -  # nothing
-  - stuff:
+  - htop:
       layout: main-vertical
       panes:
         - #empty, will just run plain bash

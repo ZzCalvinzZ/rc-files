@@ -52,7 +52,7 @@ ZSH_THEME=""
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git django virtualenvwrapper sudo tmuxinator golang docker extract docker-compose docker-machine zsh-syntax-highlighting)
+plugins=(git django virtualenvwrapper tmuxinator golang docker extract docker-compose docker-machine zsh-syntax-highlighting github)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -142,13 +142,16 @@ export NVM_DIR="$HOME/.nvm"
 #Go
 export GOPATH="$HOME/dev/go"
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-export PATH=$PATH:$(go env GOPATH)/bin
+PATH=$PATH:$(go env GOPATH)/bin
 
 #User pip
 PATH="$PATH:/home/calvin/.local/bin"
 
-export PATH
 
+#yarn
+PATH="$HOME/.yarn/bin:/usr/local/bin/:$PATH:$HOME/.config/yarn/global/node_modules/.bin/"
+
+export PATH
 ##################################################################
 
 # for pygraphviz to work
@@ -173,5 +176,3 @@ export TERMINAL=kitty
 
 # browser
 export BROWSER=chromium
-
-

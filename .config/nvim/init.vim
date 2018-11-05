@@ -144,7 +144,6 @@ Plug 'metakirby5/codi.vim'
 
 "snippets
 Plug 'honza/vim-snippets'
-Plug 'epilande/vim-react-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'joaohkfaria/vim-jest-snippets'
 
@@ -174,6 +173,8 @@ Plug 'fatih/vim-go'
  					\ npm install -g babel-eslint@latest;
  					\ npm install -g eslint-plugin-react@latest;
  					\ npm install -g eslint-plugin-jest@latest;
+ 					\ npm install -g eslint-plugin-prettier@latest;
+					\ npm install -g eslint-plugin-jsx-control-statements;
  					\ npm install -g eslint-plugin-graphql@latest'
  				\}
 
@@ -387,6 +388,8 @@ map <Leader>9 :CocRestart<cr>
 "add missing dependencies
 map <Leader>8 :!pip install neovim flake8 python-language-server<cr>
 
+map <Leader>9 :!install_local_eslint<cr>
+
 "mapping to swap visually. Delete something, then hit visually select, then
 "hit <C-x> to swap
 vnoremap <C-X> <Esc>`.``gvP``P
@@ -450,6 +453,7 @@ endfunction
 "ranger
 let g:ranger_map_keys = 0
 map <leader>2 :Ranger<CR>
+let g:ranger_replace_netrw = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -531,7 +535,7 @@ let g:highlightedyank_highlight_duration = 150
 let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-graphql
-let g:graphql_javascript_tags = [".. GraphQL .. ", "gql ", "graphql", "Relay.QL"]
+let g:graphql_javascript_tags = [".. GraphQL .. ", "gql", "graphql", "Relay.QL"]
 
 "TODO remove when I get a chance
 " Plug 'python-mode/python-mode', { 'do': 'git submodule update --init --recursive' }
@@ -599,13 +603,14 @@ let g:graphql_javascript_tags = [".. GraphQL .. ", "gql ", "graphql", "Relay.QL"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
-let g:ale_javascript_eslint_use_global = 0
+let g:ale_javascript_eslint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_linters = {
 \   'python': ['flake8'],
 \   'javascript': ['eslint'],
 \   'javascript.jsx': ['eslint'],
+\   'graphql': ['eslint'],
 \}
 let g:ale_python_flake8_args="--ignore=W191,W503"
 let g:ale_fix_on_save = 0
@@ -618,6 +623,7 @@ let g:ale_fixers = {
 \   'scss': ['prettier'],
 \   'xml': ['prettier'],
 \   'html': ['prettier'],
+\   'graphql': ['prettier'],
 \}
 
 "keybindings

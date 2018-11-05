@@ -6,6 +6,8 @@ alias get_processes='lsof -i -n -P | grep TCP'
 alias vim=nvim
 alias mkvirtualenv3='mkvirtualenv --python=`which python3`'
 alias start_tmuxinator='~/start_tmuxinator.sh'
+alias dud='du -sh ./*/'
+alias git=hub
 
 #node local exec alias
 alias npm-exec='PATH=$(npm bin):$PATH'
@@ -59,6 +61,19 @@ function install_language_servers() {
 	npm install -g eslint-server
 	gem install solargraph
 	pip install --user 'python-language-server[all]'
+}
+
+function install_eslint_stuff() {
+	npm install -g eslint@latest
+	npm install -g prettier@latest
+	npm install -g stylelint@latest
+	npm install -g eslint-plugin-babel@latest
+	npm install -g babel-eslint@latest
+	npm install -g eslint-plugin-react@latest
+	npm install -g eslint-plugin-jest@latest
+	npm install -g eslint-plugin-graphql@latest
+	npm install -g eslint-plugin-prettier@latest
+	npm install -g eslint-plugin-jsx-control-statements
 }
 
 #pomodoro

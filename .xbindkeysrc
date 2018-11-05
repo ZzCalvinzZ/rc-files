@@ -1,13 +1,13 @@
 # Increase volume
-"amixer set Master 5%+ && pkill -RTMIN+10 i3blocks "
+"amixer set Master 10%+ && pkill -RTMIN+10 i3blocks "
     Shift+Alt + bracketright
-"amixer set Master 5%+ && pkill -RTMIN+10 i3blocks "
+"amixer set Master 10%+ && pkill -RTMIN+10 i3blocks "
     XF86AudioRaiseVolume
 
 # Decrease volume
-"amixer set Master 5%- && pkill -RTMIN+10 i3blocks"
+"amixer set Master 10%- && pkill -RTMIN+10 i3blocks"
     Shift+Alt + bracketleft
-"amixer set Master 5%- && pkill -RTMIN+10 i3blocks"
+"amixer set Master 10%- && pkill -RTMIN+10 i3blocks"
     XF86AudioLowerVolume
 
 # Mute volume

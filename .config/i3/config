@@ -34,7 +34,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+backslash exec thunar
 
 #lock screen
-bindsym $mod+Shift+d exec systemctl suspend
+bindsym $mod+Shift+s exec systemctl suspend
+bindsym $mod+Shift+d exec i3lock -c 282828
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -113,7 +114,7 @@ set $w2 "2 "
 set $w3 "3 "
 set $w4 "4 "
 set $w5 "5 "
-set $w6 "6 "
+set $w6 "6 "
 set $w7 "7 "
 
 #workspace assignments
@@ -122,7 +123,7 @@ assign [class="Chromium"] $w2
 assign [class="Slack"] $w3
 assign [class="Thunderbird"] $w4
 for_window [class="Spotify"] move container to workspace $w5
-assign [class="Zathura"] $w6
+assign [class="Steam"] $w6
 assign [class="VirtualBox Manager"] $w7
 for_window [instance="__scratchpad"] move scratchpad
 
@@ -192,7 +193,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+s exec "startx"
+# bindsym $mod+Shift+s exec "startx"
 
 #scratchpad
 # Make the currently focused window a scratchpad
@@ -239,9 +240,13 @@ bindsym $mod+r mode "resize"
 bar {
   position top
   status_command i3blocks
+  # tray_output primary
+  tray_padding 2
+  height 25
   colors {
       # bar background color
       background $bg
+
       # text color used for blocks that do not have a color specified.
       statusline $gray
       # workspaces section
@@ -255,7 +260,7 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- betterlockscreen -l
+exec --no-startup-id xss-lock -- i3lock -c 282828
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
@@ -264,7 +269,6 @@ exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_t
 exec --no-startup-id chromium
 exec --no-startup-id slack
 exec --no-startup-id spotify
-exec --no-startup-id zathura
 exec --no-startup-id thunderbird
 exec --no-startup-id VirtualBox
 

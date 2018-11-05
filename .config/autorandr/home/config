@@ -17,4 +17,5 @@ off
 output DP2-1
 mode 2560x1080
 pos 0x0
+primary
 rate 60.00
