@@ -35,7 +35,7 @@ bindsym $mod+backslash exec thunar
 
 #lock screen
 bindsym $mod+Shift+s exec systemctl suspend
-bindsym $mod+Shift+d exec i3lock -c 282828
+bindsym $mod+Shift+d exec physlock
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -260,7 +260,7 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- i3lock -c 282828
+exec --no-startup-id xss-lock -- physlock
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
