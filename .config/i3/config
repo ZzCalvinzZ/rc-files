@@ -35,7 +35,7 @@ bindsym $mod+backslash exec thunar
 
 #lock screen
 bindsym $mod+Shift+s exec systemctl suspend
-bindsym $mod+Shift+d exec physlock
+bindsym $mod+Shift+d exec physlock -d -p "$(cowsay -f eyes.cow $(fortune))"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -263,7 +263,7 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- physlock -d
+exec --no-startup-id xss-lock -- physlock -d -p "$(cowsay -f eyes.cow $(fortune))"
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
