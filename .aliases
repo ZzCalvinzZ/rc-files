@@ -53,28 +53,28 @@ alias resolv="vim /etc/resolv.conf"
 
 #vim
 #language servers
-function install_language_servers() {
-	npm install -g typescript
-	npm install -g vscode-html-languageserver-bin
-	npm install -g vscode-json-languageserver
-	npm install -g css-langserver
-	npm install -g eslint-server
-	gem install solargraph
-	pip install --user 'python-language-server[all]'
-}
+# function install_language_servers() {
+# 	npm install -g typescript
+# 	npm install -g vscode-html-languageserver-bin
+# 	npm install -g vscode-json-languageserver
+# 	npm install -g css-langserver
+# 	npm install -g eslint-server
+# 	gem install solargraph
+# 	pip install --user 'python-language-server[all]'
+# }
 
-function install_eslint_stuff() {
-	npm install -g eslint@latest
-	npm install -g prettier@latest
-	npm install -g stylelint@latest
-	npm install -g eslint-plugin-babel@latest
-	npm install -g babel-eslint@latest
-	npm install -g eslint-plugin-react@latest
-	npm install -g eslint-plugin-jest@latest
-	npm install -g eslint-plugin-graphql@latest
-	npm install -g eslint-plugin-prettier@latest
-	npm install -g eslint-plugin-jsx-control-statements
-}
+# function install_eslint_stuff() {
+# 	npm install -g eslint@latest
+# 	npm install -g prettier@latest
+# 	npm install -g stylelint@latest
+# 	npm install -g eslint-plugin-babel@latest
+# 	npm install -g babel-eslint@latest
+# 	npm install -g eslint-plugin-react@latest
+# 	npm install -g eslint-plugin-jest@latest
+# 	npm install -g eslint-plugin-graphql@latest
+# 	npm install -g eslint-plugin-prettier@latest
+# 	npm install -g eslint-plugin-jsx-control-statements
+# }
 
 #pomodoro
 # function pmwork() {

@@ -17,7 +17,7 @@ set $mod Mod1
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:MesloLGS Nerd Font 12
+font pango:DejaVu Sans Mono 12
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -35,7 +35,7 @@ bindsym $mod+backslash exec thunar
 
 #lock screen
 bindsym $mod+Shift+s exec systemctl suspend
-bindsym $mod+Shift+d exec physlock -d -p "$(cowsay -f eyes.cow $(fortune))"
+bindsym $mod+Shift+d exec i3lock -c b16286
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -241,6 +241,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+  font pango:MesloLGS Nerd Font 12
   position top
   status_command i3blocks
   # tray_output primary
@@ -263,7 +264,7 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- physlock -d -p "$(cowsay -f eyes.cow $(fortune))"
+exec --no-startup-id xss-lock -- i3lock -c b16286
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch

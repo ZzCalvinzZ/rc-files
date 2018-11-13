@@ -445,7 +445,7 @@ let g:lightline = {
       \ }
       \}
 
-" Show full path of filename
+" copy full path of filename
 function! FilenameForLightline()
     return expand('%')
 endfunction

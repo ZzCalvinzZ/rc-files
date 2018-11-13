@@ -50,6 +50,4 @@ xinput --set-prop 12 'libinput Accel Speed' -0.5
 ~/.fehbg &
 udiskie --no-automount --tray --use-udisks2 &
 
-light-locker
-
 exec i3
