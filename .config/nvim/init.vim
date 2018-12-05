@@ -208,6 +208,7 @@ imap <silent> <C-p> <Plug>(coc-complete-custom)
 
 " Use <cr> for confirm completion.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 
 " remap gotos
 nmap <silent> <Leader>cd <Plug>(coc-definition)
@@ -463,7 +464,7 @@ let g:switch_mapping = "-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep --hidden -i'
+let g:ackprg = 'rg --vimgrep --hidden -i -j1'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep(

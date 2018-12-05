@@ -90,3 +90,4 @@ text/csv=libreoffice-calc.desktop;
 x-scheme-handler/mailto=userapp-Evolution-6GYJLZ.desktop;thunderbird.desktop;
 message/rfc822=thunderbird.desktop;
 image/svg+xml=chromium.desktop;firefox-developer-edition.desktop;
+application/x-extension-html=chromium.desktop;

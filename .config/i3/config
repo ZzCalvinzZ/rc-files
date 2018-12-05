@@ -116,7 +116,7 @@ set $w4 "4 "
 set $w5 "5 "
 set $w6 "6 "
 set $w7 "7 "
-set $w8 "8 "
+# set $w8 "8 "
 
 #workspace assignments
 # assign [class="Firefox Developer Edition"] $w2
@@ -126,8 +126,8 @@ assign [class="Thunderbird"] $w4
 for_window [class="Spotify"] move container to workspace $w5
 assign [class="Steam"] $w6
 assign [class="VirtualBox Manager"] $w7
-assign [class="Insomnia"] $w8
-assign [class="Mysql-workbench-bin"] $w8
+assign [class="Insomnia"] $w7
+assign [class="Mysql-workbench-bin"] $w7
 for_window [instance="__scratchpad"] move scratchpad
 
 workspace $w1 output DP2-1
@@ -135,7 +135,7 @@ workspace $w2 output DP2-1
 workspace $w5 output DP2-1
 workspace $w6 output DP2-1
 workspace $w7 output DP2-1
-workspace $w8 output DP2-1
+workspace 8 output DP2-1
 workspace 8 output DP2-1
 workspace 9 output DP2-1
 
@@ -151,7 +151,7 @@ bindsym $mod+4 workspace $w4
 bindsym $mod+5 workspace $w5
 bindsym $mod+6 workspace $w6
 bindsym $mod+7 workspace $w7
-bindsym $mod+8 workspace $w8
+bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
@@ -163,7 +163,7 @@ bindsym $mod+Shift+4 move container to workspace $w4
 bindsym $mod+Shift+5 move container to workspace $w5
 bindsym $mod+Shift+6 move container to workspace $w6
 bindsym $mod+Shift+7 move container to workspace $w7
-bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 

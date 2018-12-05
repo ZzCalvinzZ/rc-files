@@ -19,18 +19,22 @@ alias attach="tmux attach-session -t"
 ########################################################################
 ## PROJECT ALIASES ##
 #reviewroom aliases
-alias manage="reviewroom/project/manage.py"
-alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
-alias bugfixer="~/dev/devutils/bugfixer/bugfixer.sh"
-alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
-alias frrun="manage runserver_plus 3000"
-alias frshell="manage shell_plus"
-alias runserver="./manage.py runserver_plus 4000"
-alias t1="ssh frdev@frdev1.fluidreview.dev"
+# alias manage="reviewroom/project/manage.py"
+# alias roadrunner="~/dev/devutils/roadrunner/roadrunner.sh 127.0.0.1 3000"
+# alias bugfixer="~/dev/devutils/bugfixer/bugfixer.sh"
+# alias ssh_frdev='ssh frdev@frdev1.fluidreview.dev'
+# alias frrun="manage runserver_plus 3000"
+# alias frshell="manage shell_plus"
+# alias runserver="./manage.py runserver_plus 4000"
+# alias t1="ssh frdev@frdev1.fluidreview.dev"
+# alias deepthought_database="docker run -it --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=deepthought postgres"
+
+#surveymonkey aliases
 alias smvpn="sudo openconnect --user=calvinc --protocol=gp sanmateo-vpn.surveymonkey.com --script=/home/calvin/smvpn-script.sh"
+alias approuter_restart="sh approuter/bin/dev.sh --cleanup && sh approuter/bin/dev.sh"
 
-alias deepthought_database="docker run -it --rm -p 5432:5432 -e POSTGRES_PASSWORD=secret -e POSTGRES_DB=deepthought postgres"
-
+#Ethicaltree
+alias rebuild_et="sudo chown -R calvin /home/calvin/dev/ethicaltree/api && docker-compose up --build"
 ########################################################################
 
 #misc aliases
