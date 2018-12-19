@@ -190,7 +190,7 @@ colorscheme gruvbox
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "commenting
-map <Leader>c<space> :Commentary<cr>
+map <C-_> :Commentary<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "coc.nvim
 
@@ -207,7 +207,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 imap <silent> <C-p> <Plug>(coc-complete-custom)
 
 " Use <cr> for confirm completion.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 
 " remap gotos
@@ -618,8 +618,8 @@ let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['autopep8'],
 \   'ruby': ['rubocop'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
+\   'javascript': ['prettier-eslint'],
+\   'typescript': ['prettier-eslint'],
 \   'json': ['prettier'],
 \   'scss': ['prettier'],
 \   'xml': ['prettier'],
