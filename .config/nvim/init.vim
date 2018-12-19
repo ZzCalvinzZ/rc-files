@@ -327,8 +327,8 @@ noremap <Leader><s-h> :wincmd H<cr>
 noremap <Leader><s-l> :wincmd L<cr>
 
 " vv to generate new vertical split
-map <C-\> <C-w>v
-nmap <C-r> :WinResizerStartResize<cr>
+nnoremap <C-\> <C-w>v
+nmap <C-S-r> :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -632,3 +632,11 @@ nmap <silent>]f <Plug>(ale_next_wrap)
 nmap <silent><Leader>cf :ALEFix<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
