@@ -327,9 +327,8 @@ noremap <Leader><s-h> :wincmd H<cr>
 noremap <Leader><s-l> :wincmd L<cr>
 
 " vv to generate new vertical split
-map <Leader>sv <C-w>v
-map <Leader>sh <C-w>s
-map <Leader>sr :WinResizerStartResize<cr>
+map <C-\> <C-w>v
+nmap <C-r> :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>

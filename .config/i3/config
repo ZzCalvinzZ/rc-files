@@ -267,8 +267,8 @@ new_window 1pixel
 exec --no-startup-id xss-lock -- i3lock -c b16286
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
-exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_tmuxinator.sh'
+exec --no-startup-id alacritty --name=__scratchpad tmuxinator scratch
+exec --no-startup-id i3-msg 'workspace $w1; exec alacritty sh ~/dev/dotfiles/start_tmuxinator.sh'
 # exec --no-startup-id firefox-developer-edition
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id slack
