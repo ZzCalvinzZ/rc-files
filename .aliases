@@ -54,6 +54,7 @@ alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
 alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
 alias change_timezone="timedatectl set-timezone $(curl -s https://ipapi.co/timezone)"
 alias resolv="vim /etc/resolv.conf"
+alias r="ranger"
 
 #vim
 #language servers

@@ -120,7 +120,8 @@ set $w7 "7 "
 
 #workspace assignments
 # assign [class="Firefox Developer Edition"] $w2
-assign [class="Google-chrome"] $w2
+# assign [class="Google-chrome"] $w2
+for_window [instance="main_chrome"] move container to workspace $w2
 assign [class="Slack"] $w3
 assign [class="Thunderbird"] $w4
 for_window [class="Spotify"] move container to workspace $w5
@@ -207,7 +208,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # custom keybindings
-bindsym $mod+Shift+m exec "autorandr -c"
+bindsym $mod+Shift+m exec "autorandr -c mobile"
+bindsym $mod+Shift+n exec "autorandr -c"
 bindsym --release $mod+Shift+c exec "import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
 bindsym --release $mod+Shift+v exec "simplescreenrecorder"
 
@@ -267,10 +269,8 @@ new_window 1pixel
 exec --no-startup-id xss-lock -- i3lock -c b16286
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-exec --no-startup-id alacritty --name=__scratchpad tmuxinator scratch
-exec --no-startup-id i3-msg 'workspace $w1; exec alacritty sh ~/dev/dotfiles/start_tmuxinator.sh'
 # exec --no-startup-id firefox-developer-edition
-exec --no-startup-id google-chrome-stable
+exec --no-startup-id i3-msg "workspace $w2; google-chrome-stable --disable-gpu-driver-bug-workarounds"
 exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id thunderbird
@@ -281,3 +281,7 @@ exec --no-startup-id insomnia
 
 exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager
+
+exec --no-startup-id "sh ~/start_tmuxinator.sh"
+exec --no-startup-id i3-msg 'workspace $w1; exec alacritty -e tmux attach-session -t home'
+exec --no-startup-id "alacritty --class=__scratchpad -e tmux attach-session -t scratch"

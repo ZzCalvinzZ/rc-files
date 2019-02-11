@@ -5,7 +5,6 @@ if has('macunix')
 else
 	set clipboard=unnamedplus "let unnamed register be clipboard
 endif
-set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline:h13
 set guioptions+=c "don't use menu popup when it detects new changes in gui
 set foldlevelstart=99
 set incsearch "incremental search(auto select first match when searching)
@@ -15,18 +14,13 @@ set shiftwidth=4
 set ignorecase "this will ignore case unless explicitly searching with capitals
 set smartcase
 set wildmode=longest,list,full "Shows menu items when tabbing for autocomplete
-set wildmenu
 set nowrap "don't wrap text when it doesn't fit in the window
 set undofile "persistent undo for when vim is closed
 set history=10000 "the amount of : commands saved
 set undolevels=10000 "the amount undo levels saved
-set scrolloff=5 "number of lines shown above/below cursor
-set sidescroll=1
-set laststatus=2 "the last window will always have a status line
 set nostartofline "keep the cursor on the same column when changing lines
 set inccommand=nosplit "live substitution
 set showcmd "shows last command made
-set backspace=indent,eol,start
 set nobackup
 set noswapfile
 set undodir=~/.config/.nvim/undo//
@@ -38,131 +32,95 @@ setlocal foldmethod=indent
 set nocursorcolumn
 set cursorline
 set nohlsearch "highlight entries when searching
-set termguicolors "truecolors
 set splitright
 
+"Truecolors
+set termguicolors
+execute "set t_8f=\e[38;2;%lu;%lu;%lum"
+execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+
+"Leader
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 let &t_ut=''
 
-syntax on "turn on syntax highlighting
+" syntax on "turn on syntax highlighting
 filetype off
 filetype plugin indent on
 hi Normal ctermbg=NONE guibg=NONE
-
-fun! StripTrailingWhitespace()
-    " Don't strip on these filetypes
-    if &ft =~ 'snippets'
-        return
-    endif
-    %s/\s\+$//e
-endfun
-
-autocmd BufWritePre * call StripTrailingWhitespace()
 
 "better colors when using as diff
 if &diff
 	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
 	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
 endif
+let g:ale_completion_enabled = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.config/nvim/bundle')
 
+"junegunn
 Plug 'junegunn/vim-plug'
+Plug 'junegunn/gv.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
 
 "Neovim
 Plug 'lambdalisue/suda.vim'
+Plug 'prabirshrestha/async.vim'
 
 "language syntax plugins
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'othree/html5.vim'
-Plug 'tbastos/vim-lua'
-Plug 'hdima/python-syntax'
-Plug 'keith/tmux.vim'
-Plug 'isRuslan/vim-es6'
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mitsuhiko/vim-jinja'
-Plug 'mxw/vim-jsx'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'Yggdroot/indentLine'
+Plug 'sheerun/vim-polyglot'
 Plug 'quabug/vim-gdscript'
-Plug 'jparise/vim-graphql'
 
-"editorconfig
-Plug 'editorconfig/editorconfig-vim'
-
-Plug 'rbgrouleff/bclose.vim'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'mbbill/undotree'
+"visual
+Plug 'Yggdroot/indentLine' "show the indent lines as |
+Plug 'ap/vim-css-color' "preview css colors
+Plug 'machakann/vim-highlightedyank' "highlights what you yank
 Plug 'airblade/vim-gitgutter'
 
 "useful
-Plug 'simeji/winresizer'
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'machakann/vim-highlightedyank'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'francoiscabrol/ranger.vim' "use ranger file manager
+Plug 'mbbill/undotree' "visual representation of undo history
+Plug 'simeji/winresizer' "resize window with <leader>r
+Plug 'vim-scripts/ReplaceWithRegister' "use 'gr' to paste
+Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
+Plug 'wellle/targets.vim' "extra vim text objects
+Plug 'AndrewRadev/switch.vim' "swapping booleans
+Plug 'kshenoy/vim-signature' "for showing marks in the gutter
+Plug 'mihaifm/bufstop' "for switching buffers easily
+
+"tpope
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-rhubarb'
-
-" Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-Plug 'wellle/targets.vim'
-Plug 'kshenoy/vim-signature' "for showing marks in the gutter
-Plug 'AndrewRadev/switch.vim' "swapping booleans
-Plug 'ap/vim-css-color'
-Plug 'mihaifm/bufstop' "for switching buffers easily
-Plug 'junegunn/vim-easy-align'
-Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
-Plug 'janko-m/vim-test'
-
-"Zeal
-Plug 'KabbAmine/zeavim.vim'
+Plug 'tpope/vim-fugitive'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
-
-"git
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
 
 "status line and other visual
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mhinz/vim-startify'
 
-"code scratchpad
-Plug 'metakirby5/codi.vim'
-
 "snippets
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'joaohkfaria/vim-jest-snippets'
+Plug 'isRuslan/vim-es6'
 
-Plug 'michaeljsmith/vim-indent-object'
-
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'yegappan/mru'
 
 "colors
 Plug 'morhetz/gruvbox'
-
-"Autocomplete and related
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'fisadev/vim-isort'
-
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.config/nvim/bundle/gocode/vim/symlink.sh' }
-Plug 'fatih/vim-go'
 
 "linting
  Plug 'w0rp/ale', { 'do':
@@ -192,49 +150,23 @@ colorscheme gruvbox
 "commenting
 map <C-_> :Commentary<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"coc.nvim
+"Language Server Settings
 
 " Better display for messages
 set cmdheight=2
 
-inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+inoremap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
+inoremap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 
-" Use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <C-p> to complete 'word', 'emoji' and 'include' sources
-imap <silent> <C-p> <Plug>(coc-complete-custom)
-
-" Use <cr> for confirm completion.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" " Use <cr> for confirm completion.
+" " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 
-" remap gotos
-nmap <silent> <Leader>cd <Plug>(coc-definition)
-nmap <silent> <Leader>cy <Plug>(coc-type-definition)
-nmap <silent> <Leader>ci <Plug>(coc-implementation)
-nmap <silent> <Leader>cr <Plug>(coc-references)
-" nmap <silent> <Leader>cf <Plug>(coc-format)
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-vmap <silent> <Leader>cf <Plug>(coc-format-selected)
-nnoremap <silent> <Leader>ck :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Show signature help while editing
-autocmd CursorHoldI,CursorMovedI * silent! call CocAction('showSignatureHelp')
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
+" " remap gotos
+nmap <silent> <Leader>cd :ALEGoToDefinition<cr>
+nmap <silent> <Leader>ch :ALEHover<cr>
+nmap <silent> <Leader>cr :ALEFindReferences<cr>
+nmap <silent> <Leader>cs :ALESymbolSearch<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -248,33 +180,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-h>"
 map <Leader>u :UltiSnipsEdit<cr>
 let g:UltiSnipsEditSplit="vertical" "If you want :UltiSnipsEdit to split your window.
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"set this to the value of shiftwidth
-let g:pyindent_open_paren=4
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"recursive macro function
-
-function! RecMacro(cmds)
-  let a = @a
-  let @a = a:cmds . "@a"
-  echo @a
-  try
-    normal @a
-  finally
-    let @a = a
-  endtry
-endfunction
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"JSX
-let g:jsx_ext_required = 0
-
-nmap <Leader>11 0f<f i<cr><Esc>:call RecMacro('0f=l%a<C-v><cr><C-v><Esc>')<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Utilities
-vnoremap <leader>,rv c<C-O>:set revins<CR><C-R>"<Esc>:set norevins<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "startify
 let g:startify_change_to_dir = 0
@@ -294,11 +199,9 @@ map <Leader>5 :UndotreeToggle<cr>
 
 inoremap <C-c> <esc>
 
-"noremap <Leader>D :BufSurfBack
 noremap <Leader>D :bp\|bd #<cr>
 
 "map fugitive commands
-noremap <Leader>ga :!git add .<cr>
 noremap <Leader>gs :Gstatus<cr>
 noremap <Leader>gp :Gpush<cr>
 noremap <Leader>gd :Gdiff<cr>
@@ -328,7 +231,7 @@ noremap <Leader><s-l> :wincmd L<cr>
 
 " vv to generate new vertical split
 nnoremap <C-\> <C-w>v
-nmap <C-S-r> :WinResizerStartResize<cr>
+nmap <leader>r :WinResizerStartResize<cr>
 
 map <leader>Q :q!<cr>
 map <leader>q :q<cr>
@@ -357,9 +260,6 @@ noremap <Leader>\ :Ack! "<cword>"<CR>
 map <leader>= :set noexpandtab<bar>normal ggVG=<cr>
 map <leader>+ :set expandtab<bar>normal ggVG=<cr>
 
-"close all buffers
-map <leader>r :1,100bd<cr>
-
 "mru mapping
 map <Leader>m :MRU<cr>
 
@@ -381,14 +281,6 @@ nnoremap zh 30zh
 "profile / profiling
 nmap <Leader>/pstart :profile start profile.log <bar> profile func * <bar> profile file *<cr>
 nmap <Leader>/pstop :profile pause <bar> noautocmd qall!<cr>
-
-"restart language server
-map <Leader>9 :CocRestart<cr>
-
-"add missing dependencies
-map <Leader>8 :!pip install neovim flake8 python-language-server<cr>
-
-map <Leader>9 :!install_local_eslint<cr>
 
 "mapping to swap visually. Delete something, then hit visually select, then
 "hit <C-x> to swap
@@ -474,19 +366,6 @@ command! -bang -nargs=* Find call fzf#vim#grep(
 set grepprg=rg\ --vimgrep
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" add template paths for gf completing
-set path+=~/dev/fluidreview/apps/chide/products/smapply/templates/
-set path+=~/dev/fluidreview/apps/chide/products/smapply/mail/templates/
-set path+=~/dev/fluidreview/apps/chide/products/reviewroom/templates/
-set path+=~/dev/fluidreview/reviewroom/templates/
-set path+=~/dev/fluidreview/apps
-set path+=~/dev/fluidreview/apps/chide/products/smapply/static/
-
-set path+=~/dev/leagion/assets/js/
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-execute "set t_8f=\e[38;2;%lu;%lu;%lum"
-execute "set t_8b=\e[48;2;%lu;%lu;%lum"
 "save as root
 command! -nargs=0 Sw w suda://%
 
@@ -503,29 +382,6 @@ set listchars=tab:\▏\ ,trail:·
 nmap <Leader>fn :let @+ = expand("%")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! ScratchpadThisFiletype()
-	execute 'edit' '~/temp/temp.'.expand('%:e')
-	Codi
-endfunction
-command! Scratch call ScratchpadThisFiletype()
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Codi
-function! PP_js(line)
-	" Strip escape codes
-	return substitute(a:line, "\<esc>".'\[\d\(\a\|\dm\)', '', 'g')
-endfunction
-
-let g:codi#interpreters = {
-	\ 'typescript': {
-		\ 'bin': 'ts-node',
-		\ 'prompt': '^\(>\|\.\.\.\+\) ',
-		\ 'preprocess': function('PP_js'),
-		\ },
-	\ }
-
-let g:codi#rightalign = 0
-nmap <Leader>cc :Codi!!<cr>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-test
 nmap <Leader>ct :TestNearest<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -537,99 +393,40 @@ let g:vim_json_syntax_conceal = 0
 "vim-graphql
 let g:graphql_javascript_tags = [".. GraphQL .. ", "gql", "graphql", "Relay.QL"]
 
-"TODO remove when I get a chance
-" Plug 'python-mode/python-mode', { 'do': 'git submodule update --init --recursive' }
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" Plug 'zchee/deoplete-go', { 'do': 'make'}
-"
-" Plug 'autozimu/LanguageClient-neovim', {
-" 	\ 'branch': 'next',
-" 	\ 'do':
-" 		\ 'bash install.sh;
-" 		\ npm install -g typescript-language-server@latest;
-" 		\ npm install -g typescript@latest;
-" 		\ npm install -g jest@latest;
-" 		\ npm install -g ts-node@latest;
-" 		\ gem install rubocop solargraph'
-" 	\ }
-"
-" deoplete tab-complete
-" let g:deoplete#enable_at_startup = 1
-" inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <expr><s-tab> pumvisible() ? "\<C-p>" : "\<TAB>"
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-" call deoplete#custom#source('ultisnips', 'rank', 9999)
-" let g:deoplete#auto_complete_delay=150
-
-"jedi and tern stuff
- " let g:LanguageClient_serverCommands = {
- "     \ 'javascript': ['typescript-language-server', '--stdio'],
- "     \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
- "     \ 'typescript': ['typescript-language-server', '--stdio'],
- "     \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
- "     \ 'python': ['pyls'],
- "     \ 'ruby': ['solargraph', 'stdio'],
- "     \ }
-" nmap <silent> <Leader>ck :call LanguageClient_textDocument_hover()<CR>
-" nmap <silent> <Leader>cd :call LanguageClient_textDocument_definition()<CR>
-" nmap <silent> <Leader>cR :call LanguageClient_textDocument_rename()<CR>
-" nmap <silent> <Leader>cs :call LanguageClient_textDocument_documentSymbol()<CR>
-" nmap <silent> <Leader>cw :call LanguageClient_workspace_symbol()<CR>
-" nmap <silent> <Leader>cr :call LanguageClient_textDocument_references()<CR>
-
-" let g:LanguageClient_diagnosticsEnable = 0
-" let g:LanguageClient_diagnosticsList = "Location"
-
-" let g:LanguageClient_loadSettings = 1
-" let g:LanguageClient_rootMarkers = ['.git']
-
-" let g:pymode_warnings = 1
-" let g:pymode_trim_whitespaces = 0
-" let g:pymode_options = 0
-" let g:pymode_indent = 0
-" let g:pymode_folding = 0
-" let g:pymode_doc = 0
-" let g:pymode_run = 0
-" let g:pymode_breakpoint = 0
-" let g:pymode_lint = 0
-" let g:pymode_rope_completion = 0
-
-" let g:pymode_rope = 1
-" let g:pymode_rope_regenerate_on_write = 0
-" let g:pymode_rope_goto_definition_cmd = 'e'
-" let g:pymode_rope_goto_definition_bind = '<leader>cg'
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE stuff for linting
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_sign_error = 'x'
 let g:ale_sign_warning = '?'
 let g:ale_linters = {
-\   'python': ['flake8'],
-\   'javascript': ['eslint'],
-\   'javascript.jsx': ['eslint'],
+\   'python': ['pyls'],
+\   'javascript': ['eslint', 'tsserver'],
+\   'javascript.jsx': ['eslint', 'tsserver'],
 \   'graphql': ['eslint'],
+\   'elm': ['make'],
 \}
 let g:ale_python_flake8_args="--ignore=W191,W503"
 let g:ale_fix_on_save = 0
 let g:ale_fixers = {
 \   'python': ['autopep8'],
 \   'ruby': ['rubocop'],
-\   'javascript': ['prettier-eslint'],
-\   'typescript': ['prettier-eslint'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'eslint'],
 \   'json': ['prettier'],
 \   'scss': ['prettier'],
 \   'xml': ['prettier'],
 \   'html': ['prettier'],
 \   'graphql': ['prettier'],
+\   'elm': ['elm-format'],
 \}
 
 "keybindings
 nmap <silent>[f <Plug>(ale_previous_wrap)
 nmap <silent>]f <Plug>(ale_next_wrap)
 nmap <silent><Leader>cf :ALEFix<CR>
+
+
+" autocmd FileType javascript.* setlocal equalprg=prettier-eslint\ --stdin
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tmux-navigator
@@ -640,3 +437,11 @@ nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" elm
+let g:elm_setup_keybindings = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"hacks
+let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
