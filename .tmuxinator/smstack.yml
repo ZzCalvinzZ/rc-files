@@ -54,5 +54,6 @@ windows:
   - approuter:
       layout: main-vertical
       panes:
+        - cd approuter&&vim ./conf/dev.yaml
         - sh approuter/bin/dev.sh
 

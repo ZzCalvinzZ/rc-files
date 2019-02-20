@@ -54,7 +54,6 @@ if &diff
 	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
 	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
 endif
-let g:ale_completion_enabled = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -67,9 +66,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 
-"Neovim
+"root file saving
 Plug 'lambdalisue/suda.vim'
+
+"autocomplete
 Plug 'prabirshrestha/async.vim'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -81,9 +83,13 @@ Plug 'ap/vim-css-color' "preview css colors
 Plug 'machakann/vim-highlightedyank' "highlights what you yank
 Plug 'airblade/vim-gitgutter'
 
+"language specific
+Plug 'ElmCast/elm-vim'
+
 "useful
 Plug 'editorconfig/editorconfig-vim'
 Plug 'francoiscabrol/ranger.vim' "use ranger file manager
+Plug 'rbgrouleff/bclose.vim' " for ranger.vim
 Plug 'mbbill/undotree' "visual representation of undo history
 Plug 'simeji/winresizer' "resize window with <leader>r
 Plug 'vim-scripts/ReplaceWithRegister' "use 'gr' to paste
@@ -92,6 +98,9 @@ Plug 'wellle/targets.vim' "extra vim text objects
 Plug 'AndrewRadev/switch.vim' "swapping booleans
 Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'mihaifm/bufstop' "for switching buffers easily
+Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
+Plug 'mattn/emmet-vim'
+Plug 'jiangmiao/auto-pairs'
 
 "tpope
 Plug 'tpope/vim-repeat'
@@ -101,6 +110,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -108,6 +118,7 @@ Plug 'christoomey/vim-tmux-navigator'
 "status line and other visual
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'ZzCalvinzZ/lightline-ale'
 Plug 'mhinz/vim-startify'
 
 "snippets
@@ -122,19 +133,19 @@ Plug 'yegappan/mru'
 "colors
 Plug 'morhetz/gruvbox'
 
-"linting
- Plug 'w0rp/ale', { 'do':
- 					\ 'npm install -g eslint@latest;
- 					\ npm install -g prettier@latest;
- 					\ npm install -g stylelint@latest;
- 					\ npm install -g eslint-plugin-babel@latest;
- 					\ npm install -g babel-eslint@latest;
- 					\ npm install -g eslint-plugin-react@latest;
- 					\ npm install -g eslint-plugin-jest@latest;
- 					\ npm install -g eslint-plugin-prettier@latest;
-					\ npm install -g eslint-plugin-jsx-control-statements;
- 					\ npm install -g eslint-plugin-graphql@latest'
- 				\}
+" linting
+  " Plug 'w0rp/ale', { 'do':
+  " 					\ 'npm install -g eslint@latest;
+  " 					\ npm install -g prettier@latest;
+  " 					\ npm install -g stylelint@latest;
+  " 					\ npm install -g eslint-plugin-babel@latest;
+  " 					\ npm install -g babel-eslint@latest;
+  " 					\ npm install -g eslint-plugin-react@latest;
+  " 					\ npm install -g eslint-plugin-jest@latest;
+  " 					\ npm install -g eslint-plugin-prettier@latest;
+					 " \ npm install -g eslint-plugin-jsx-control-statements;
+  " 					\ npm install -g eslint-plugin-graphql@latest'
+ 				" \}
 
 call plug#end()
 
@@ -157,16 +168,72 @@ set cmdheight=2
 
 inoremap <expr><C-j> pumvisible() ? "\<Down>" : "\<C-j>"
 inoremap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
+inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<cr>"
+inoremap <expr><TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
+imap <c-space> <Plug>(asyncomplete_force_refresh)
 
-" " Use <cr> for confirm completion.
-" " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
 
-" " remap gotos
-nmap <silent> <Leader>cd :ALEGoToDefinition<cr>
-nmap <silent> <Leader>ch :ALEHover<cr>
-nmap <silent> <Leader>cr :ALEFindReferences<cr>
-nmap <silent> <Leader>cs :ALESymbolSearch<cr>
+"preview window on autocomplete
+set completeopt+=preview
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+set hidden
+set cmdheight=2
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> <Leader>cd <Plug>(coc-definition)
+nmap <silent> <Leader>ct <Plug>(coc-type-definition)
+nmap <silent> <Leader>ci <Plug>(coc-implementation)
+nmap <silent> <Leader>ca <Plug>(coc-references)
+nmap <Leader>cr <Plug>(coc-rename)
+vmap <Leader>cf  <Plug>(coc-format-selected)
+nmap <Leader>cf  <Plug>(coc-format-selected)<CR>
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nmap <silent> [f <Plug>(coc-diagnostic-prev)
+nmap <silent> ]f <Plug>(coc-diagnostic-next)
+
+augroup cocstuff
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+vmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` for fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -329,13 +396,30 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'component_function': {
       \   'filename': 'FilenameForLightline',
-      \   'cocstatus': 'coc#status'
+      \   'cocstatus': 'coc#status',
       \ },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], [ 'fixer_checking' ]]
       \ }
       \}
+
+" let g:lightline.component_expand = {
+"       \  'fixer_checking': 'lightline#ale#fixing',
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
+
+" let g:lightline.component_type = {
+"       \     'fixer_checking': 'left',
+"       \     'linter_checking': 'left',
+"       \     'linter_warnings': 'warning',
+"       \     'linter_errors': 'error',
+"       \     'linter_ok': 'left',
+"       \ }
 
 " copy full path of filename
 function! FilenameForLightline()
@@ -393,41 +477,6 @@ let g:vim_json_syntax_conceal = 0
 "vim-graphql
 let g:graphql_javascript_tags = [".. GraphQL .. ", "gql", "graphql", "Relay.QL"]
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ALE stuff for linting
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '?'
-let g:ale_linters = {
-\   'python': ['pyls'],
-\   'javascript': ['eslint', 'tsserver'],
-\   'javascript.jsx': ['eslint', 'tsserver'],
-\   'graphql': ['eslint'],
-\   'elm': ['make'],
-\}
-let g:ale_python_flake8_args="--ignore=W191,W503"
-let g:ale_fix_on_save = 0
-let g:ale_fixers = {
-\   'python': ['autopep8'],
-\   'ruby': ['rubocop'],
-\   'javascript': ['prettier', 'eslint'],
-\   'typescript': ['prettier', 'eslint'],
-\   'json': ['prettier'],
-\   'scss': ['prettier'],
-\   'xml': ['prettier'],
-\   'html': ['prettier'],
-\   'graphql': ['prettier'],
-\   'elm': ['elm-format'],
-\}
-
-"keybindings
-nmap <silent>[f <Plug>(ale_previous_wrap)
-nmap <silent>]f <Plug>(ale_next_wrap)
-nmap <silent><Leader>cf :ALEFix<CR>
-
-
-" autocmd FileType javascript.* setlocal equalprg=prettier-eslint\ --stdin
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tmux-navigator
 let g:tmux_navigator_disable_when_zoomed = 1
@@ -441,6 +490,7 @@ nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " elm
 let g:elm_setup_keybindings = 0
+let g:elm_format_autosave = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "hacks
