@@ -1,6 +1,0 @@
-# .prettierrc
-useTabs: false
-semi: false
-jsxBracketSameLine: true
-singleQuote: true
-trailingComma: es5

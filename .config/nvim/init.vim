@@ -193,7 +193,8 @@ nmap <silent> <Leader>ci <Plug>(coc-implementation)
 nmap <silent> <Leader>ca <Plug>(coc-references)
 nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
-nmap <Leader>cf  <Plug>(coc-format-selected)<CR>
+nmap <Leader>cf  <Plug>(coc-format)
+nmap <Leader>cl  :CocList --interactive<CR>
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
