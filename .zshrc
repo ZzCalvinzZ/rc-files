@@ -69,9 +69,12 @@ export REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.61"
 
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
-export TERMINAL=kitty
+export TERMINAL=alacritty
 
-export BROWSER=chromium
+export BROWSER=firefox-developer-edition
+
+#
+export REVIEW_BASE=master
 
 # node versioning
 export NVS_HOME="$HOME/.nvs"

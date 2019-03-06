@@ -24,7 +24,7 @@ set showcmd "shows last command made
 set nobackup
 set noswapfile
 set undodir=~/.config/.nvim/undo//
-set diffopt=vertical "make diffs appear side by side
+" set diffopt=vertical "make diffs appear side by side
 set hidden "don't close file (hide it in a buffer)
 set norelativenumber
 set mouse=a
@@ -47,15 +47,8 @@ let &t_ut=''
 " syntax on "turn on syntax highlighting
 filetype off
 filetype plugin indent on
-hi Normal ctermbg=NONE guibg=NONE
 
-"better colors when using as diff
-if &diff
-	hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
-	hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.config/nvim/bundle')
 
@@ -131,7 +124,7 @@ Plug 'mileszs/ack.vim'
 Plug 'yegappan/mru'
 
 "colors
-Plug 'morhetz/gruvbox'
+Plug 'ZzCalvinzZ/gruvbox'
 
 " linting
   " Plug 'w0rp/ale', { 'do':
@@ -496,3 +489,11 @@ let g:elm_format_autosave = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "hacks
 let g:omni_sql_no_default_maps = 1 "dont load omnicompletes sql completions (they trip up <C-c>)
+
+" better colors when using as diff
+if &diff
+  " bg #32302f
+  hi DiffAdd guibg=#394739 guifg=NONE cterm=NONE gui=NONE ctermfg=NONE ctermbg=236
+  hi DiffDelete guibg=#511f1f guifg=NONE cterm=NONE gui=NONE ctermfg=NONE ctermbg=236
+  hi DiffChange guibg=#24274f guifg=NONE cterm=NONE gui=NONE ctermfg=NONE ctermbg=236
+endif
