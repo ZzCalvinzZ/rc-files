@@ -270,7 +270,7 @@ exec --no-startup-id xss-lock -- i3lock -c b16286
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 # exec --no-startup-id firefox-developer-edition
-exec --no-startup-id i3-msg "workspace $w2; google-chrome-stable --disable-gpu-driver-bug-workarounds"
+exec --no-startup-id i3-msg "workspace $w2; firefox-developer-edition"
 exec --no-startup-id slack
 exec --no-startup-id spotify
 exec --no-startup-id thunderbird

@@ -16,5 +16,6 @@
   "coc.preferences.diagnostic.warningSign": "?",
   "coc.preferences.diagnostic.infoSign": "i",
   "coc.preferences.diagnostic.hintSign": "h",
-  "prettier.eslintIntegration": true
+  "prettier.eslintIntegration": true,
+  "python.jediEnabled": false
 }

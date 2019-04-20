@@ -64,7 +64,27 @@ Plug 'lambdalisue/suda.vim'
 
 "autocomplete
 Plug 'prabirshrestha/async.vim'
+
+"coc
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+"js
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint'
+Plug 'neoclide/coc-jest'
+Plug 'neoclide/coc-prettier'
+Plug 'neoclide/coc-json'
+"css
+Plug 'neoclide/coc-stylelint'
+Plug 'neoclide/coc-css'
+"py
+Plug 'neoclide/coc-python'
+"misc
+Plug 'neoclide/coc-emmet'
+Plug 'neoclide/coc-html'
+Plug 'neoclide/coc-yaml'
+Plug 'neoclide/coc-solargraph'
+Plug 'neoclide/coc-highlight'
+Plug 'neoclide/coc-snippets'
 
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -93,7 +113,6 @@ Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
 Plug 'mattn/emmet-vim'
-Plug 'jiangmiao/auto-pairs'
 
 "tpope
 Plug 'tpope/vim-repeat'
@@ -188,6 +207,8 @@ nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
 nmap <Leader>cf  <Plug>(coc-format)
 nmap <Leader>cl  :CocList --interactive<CR>
+
+autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -469,7 +490,7 @@ let g:highlightedyank_highlight_duration = 150
 let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-graphql
-let g:graphql_javascript_tags = [".. GraphQL .. ", "gql", "graphql", "Relay.QL"]
+let g:graphql_javascript_tags = [".. GraphQL .. ", "gql",  "gql ", "graphql", "Relay.QL"]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tmux-navigator
@@ -497,3 +518,10 @@ if &diff
   hi DiffDelete guibg=#511f1f guifg=NONE cterm=NONE gui=NONE ctermfg=NONE ctermbg=236
   hi DiffChange guibg=#24274f guifg=NONE cterm=NONE gui=NONE ctermfg=NONE ctermbg=236
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"auto close {
+inoremap (<CR> (<CR>)<C-c>O
+inoremap {<CR> {<CR>}<C-c>O
+inoremap [<CR> [<CR>]<C-c>O

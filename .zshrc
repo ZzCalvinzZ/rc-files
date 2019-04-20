@@ -28,9 +28,11 @@ if [ -f /usr/share/fzf/completion.zsh ]; then
 	source /usr/share/fzf/completion.zsh
 fi
 
-source ~/notifyosd.zsh
+if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+  source ~/notifyosd.zsh
+fi
 
-source ~/.aliases.zsh
+source ~/.aliases
 
 #################### ENVS #######################################
 #
@@ -50,8 +52,14 @@ go() {
 # export PATH=${PATH}:${ANDROID_HOME}/tools
 # export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
+#ruby
+if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH" # ruby
-PATH="$PATH:/home/calvin/.local/bin" #User pip
+else
+PATH=/usr/local/opt/ruby/bin:$PATH
+fi
+
+PATH="$PATH:/$HOME/.local/bin" #User pip
 PATH="$HOME/.yarn/bin:/usr/local/bin/:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
 
 export PATH
