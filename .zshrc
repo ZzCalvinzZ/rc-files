@@ -55,8 +55,6 @@ go() {
 #ruby
 if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH" # ruby
-else
-PATH=/usr/local/opt/ruby/bin:$PATH
 fi
 
 PATH="$PATH:/$HOME/.local/bin" #User pip
@@ -67,7 +65,7 @@ export PATH
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
-export TERMINAL=kitty
+export TERMINAL=alacritty
 
 # prevent security pin in flask
 export WERKZEUG_DEBUG_PIN=off
