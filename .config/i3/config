@@ -109,10 +109,9 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 set $w1 "1 "
-set $w2 "2 "
-# set $w2 "2 "
+set $w2 "2 "
 set $w3 "3 "
-set $w4 "4 "
+set $w4 "4 "
 set $w5 "5 "
 set $w6 "6 "
 set $w7 "7 "
@@ -273,7 +272,7 @@ exec --no-startup-id dropbox
 exec --no-startup-id i3-msg "workspace $w2; firefox-developer-edition"
 exec --no-startup-id slack
 exec --no-startup-id spotify
-exec --no-startup-id thunderbird
+# exec --no-startup-id thunderbird
 exec --no-startup-id VirtualBox
 
 exec --no-startup-id mysql-workbench

@@ -108,6 +108,7 @@ Plug 'simeji/winresizer' "resize window with <leader>r
 Plug 'vim-scripts/ReplaceWithRegister' "use 'gr' to paste
 Plug 'Olical/vim-enmasse' "use to edit all results from Ack in a buffer
 Plug 'wellle/targets.vim' "extra vim text objects
+Plug 'michaeljsmith/vim-indent-object' "indent object
 Plug 'AndrewRadev/switch.vim' "swapping booleans
 Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'mihaifm/bufstop' "for switching buffers easily
@@ -207,6 +208,7 @@ nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
 nmap <Leader>cf  <Plug>(coc-format)
 nmap <Leader>cl  :CocList --interactive<CR>
+nmap <Leader>cc  :CocCommand<CR>
 
 autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
 
@@ -230,7 +232,7 @@ nmap <silent> ]f <Plug>(coc-diagnostic-next)
 augroup cocstuff
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json,python setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end

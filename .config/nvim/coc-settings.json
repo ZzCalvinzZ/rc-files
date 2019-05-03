@@ -1,21 +1,25 @@
 {
   // could be 'always' 'trigger' => for specified trigger characters only 'none'
-  "coc.preferences.autoTrigger": "always",
+  "suggest.autoTrigger": "always",
   // only used when autoTrigger is always
-  "coc.preferences.triggerAfterInsertEnter": false,
+  "suggest.triggerAfterInsertEnter": false,
   // timeout for completion
-  "coc.preferences.timeout": 300,
+  "suggest.timeout": 500,
   // not make vim select first item on completion start
-  "coc.preferences.noselect": false,
+  "suggest.noselect": false,
   // executable path for https://facebook.github.io/watchman/, detected from $PATH by default
   // "coc.preferences.watchmanPath": "",
   // enable diagnostic
-  "coc.preferences.diagnostic.enable": true,
-  "coc.preferences.diagnostic.signOffset": 1000,
-  "coc.preferences.diagnostic.errorSign": "✗",
-  "coc.preferences.diagnostic.warningSign": "?",
-  "coc.preferences.diagnostic.infoSign": "i",
-  "coc.preferences.diagnostic.hintSign": "h",
+  "diagnostic.enable": true,
+  "diagnostic.signOffset": 1000,
+  "diagnostic.errorSign": "✗",
+  "diagnostic.warningSign": "?",
+  "diagnostic.infoSign": "i",
+  "diagnostic.hintSign": "h",
   "prettier.eslintIntegration": true,
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "python.formatting.provider": "black",
+  "python.venvPath": "~/Envs",
+  "python.linting.flake8Enabled": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python"]
 }

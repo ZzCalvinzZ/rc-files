@@ -3,9 +3,6 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-#virtualenvwrapper
-source $(dirname "$(which virtualenv).virtualenvwrapper.sh")
-
 # if you do a 'rm *', Zsh will give you a sanity check!
 setopt RM_STAR_WAIT
 
@@ -34,12 +31,6 @@ fi
 
 source ~/.aliases
 
-#################### ENVS #######################################
-#
-# Virtual envs
-export WORKON_HOME=~/Envs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2
-
 #Go
 go() {
   export GOPATH="$HOME/dev/go"
@@ -57,7 +48,6 @@ if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH" # ruby
 fi
 
-PATH="$PATH:/$HOME/.local/bin" #User pip
 PATH="$HOME/.yarn/bin:/usr/local/bin/:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
 
 export PATH

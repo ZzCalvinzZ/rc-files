@@ -8,6 +8,7 @@ alias mkvirtualenv3='mkvirtualenv --python=`which python3`'
 alias start_tmuxinator='~/start_tmuxinator.sh'
 alias dud='du -sh ./*/'
 alias git=hub
+alias cat=bat
 
 #node local exec alias
 alias npm-exec='PATH=$(npm bin):$PATH'
