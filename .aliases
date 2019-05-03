@@ -88,7 +88,7 @@ alias r="ranger"
 # }
 
 #pomodoro
-# function pmwork() {
+
 # 	sleep 1500 && notify-send -i ~/.config/icons/tea.png "Break Time"
 # }
 
