@@ -51,13 +51,6 @@ set $gray #a89984
 set $darkgray #1d2021
 set $white #ebdbb2
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec rofi -show run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -116,6 +109,7 @@ set $w5 "5 "
 set $w6 "6 "
 set $w7 "7 "
 # set $w8 "8 "
+set $w0 ""
 
 #workspace assignments
 # assign [class="Firefox Developer Edition"] $w2
@@ -128,20 +122,7 @@ assign [class="Steam"] $w6
 assign [class="VirtualBox Manager"] $w7
 assign [class="Insomnia"] $w7
 assign [class="Mysql-workbench-bin"] $w7
-for_window [instance="__scratchpad"] move scratchpad
-
-workspace $w1 output DP2-1
-workspace $w2 output DP2-1
-workspace $w5 output DP2-1
-workspace $w6 output DP2-1
-workspace $w7 output DP2-1
-workspace 8 output DP2-1
-workspace 8 output DP2-1
-workspace 9 output DP2-1
-
-# workspace $w3 output DP2-2
-# workspace $w4 output DP2-2
-workspace 10 output DP2-2
+for_window [title="__scratchpad"] move scratchpad
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -153,7 +134,7 @@ bindsym $mod+6 workspace $w6
 bindsym $mod+7 workspace $w7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $w0
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $w1
@@ -165,7 +146,7 @@ bindsym $mod+Shift+6 move container to workspace $w6
 bindsym $mod+Shift+7 move container to workspace $w7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $w0
 
 #Borders
 for_window [class="^.*"] border pixel 2
@@ -283,4 +264,21 @@ exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id "sh ~/start_tmuxinator.sh"
 exec --no-startup-id i3-msg 'workspace $w1; exec alacritty -e tmux attach-session -t home'
-exec --no-startup-id "alacritty --class=__scratchpad -e tmux attach-session -t scratch"
+exec --no-startup-id "alacritty -t __scratchpad -e tmux attach-session -t scratch"
+
+# Bind the workspaces for monitor one
+set $m1 eDP1
+
+workspace $w0 output $m1
+
+# Bind the workspaces for monitor two
+set $m2 DP2-1
+
+workspace $w1 output $m2
+workspace $w2 output $m2
+workspace $w3 output $m2
+workspace $w4 output $m2
+workspace $w5 output $m2
+workspace $w6 output $m2
+workspace $w7 output $m2
+

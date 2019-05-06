@@ -32,11 +32,11 @@ root: ~/dev/stuff/elm-architecture-tutorial/
 
 windows:
   - editor:
-      layout: main-horizontal
+      layout: tiled
       panes:
-        - tmux resize-pane -Z&&vim
+        - vim
         -  # nothing
   - server:
-      layout: main-vertical
+      layout: tiled
       panes:
         - elm reactor

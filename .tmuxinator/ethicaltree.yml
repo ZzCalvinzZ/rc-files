@@ -33,14 +33,14 @@ root: ~/dev/ethicaltree
 
 windows:
   - api:
-      layout: main-horizontal
+      layout: tiled
       panes:
-        - cd api; tmux resize-pane -Z&&vim
+        - cd api;vim
         - cd api
   - web:
-      layout: main-horizontal
+      layout: tiled
       panes:
-        - cd web; tmux resize-pane -Z&&vim
+        - cd web;vim
         - cd web
   - servers:
       layout: tiled

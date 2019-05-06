@@ -207,7 +207,7 @@ nmap <silent> <Leader>ca <Plug>(coc-references)
 nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
 nmap <Leader>cf  <Plug>(coc-format)
-nmap <Leader>cl  :CocList --interactive<CR>
+nmap <Leader>cl  :CocList<CR>
 nmap <Leader>cc  :CocCommand<CR>
 
 autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
@@ -527,3 +527,7 @@ endif
 inoremap (<CR> (<CR>)<C-c>O
 inoremap {<CR> {<CR>}<C-c>O
 inoremap [<CR> [<CR>]<C-c>O
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"fugitive/ rhubarb
+let g:github_enterprise_urls = ['https://code.corp.surveymonkey.com']

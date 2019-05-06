@@ -32,11 +32,11 @@ root: ~/playground
 
 windows:
   - editor:
-      layout: main-horizontal
+      layout: tiled
       panes:
-        - tmux resize-pane -Z&&vim
+        - vim
         -  # nothing
   - whatever:
-      layout: main-vertical
+      layout: tiled
       panes:
         - #empty, will just run plain bash

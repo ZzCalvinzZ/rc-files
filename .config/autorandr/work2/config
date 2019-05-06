@@ -2,6 +2,8 @@ output DP1
 off
 output DP2
 off
+output DP2-2
+off
 output DP2-3
 off
 output HDMI1
@@ -10,14 +12,12 @@ output HDMI2
 off
 output VIRTUAL1
 off
-output eDP1
-off
-output DP2-2
-mode 1920x1080
-pos 1920x0
-rate 59.93
-rotate left
 output DP2-1
 mode 1920x1080
-pos 0x440
+pos 1920x0
+primary
 rate 60.00
+output eDP1
+mode 1920x1080
+pos 0x478
+rate 60.01
