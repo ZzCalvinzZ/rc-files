@@ -123,6 +123,7 @@ assign [class="VirtualBox Manager"] $w7
 assign [class="Insomnia"] $w7
 assign [class="Mysql-workbench-bin"] $w7
 for_window [title="__scratchpad"] move scratchpad
+for_window [title="__mainterm"] move $w1
 
 # switch to workspace
 bindsym $mod+1 workspace $w1
@@ -249,8 +250,8 @@ new_window 1pixel
 exec --no-startup-id xss-lock -- i3lock -c b16286
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
-# exec --no-startup-id firefox-developer-edition
-exec --no-startup-id i3-msg "workspace $w2; firefox-developer-edition"
+# exec --no-startup-id "firefox-developer-edition"
+# exec --no-startup-id i3-msg "workspace $w2; firefox-developer-edition"
 exec --no-startup-id slack
 exec --no-startup-id spotify
 # exec --no-startup-id thunderbird
@@ -262,9 +263,9 @@ exec --no-startup-id insomnia
 exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager
 
-exec --no-startup-id "sh ~/start_tmuxinator.sh"
-exec --no-startup-id i3-msg 'workspace $w1; exec alacritty -e tmux attach-session -t home'
-exec --no-startup-id "alacritty -t __scratchpad -e tmux attach-session -t scratch"
+exec --no-startup-id albert
+
+exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
 
 # Bind the workspaces for monitor one
 set $m1 eDP1
