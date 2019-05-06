@@ -14,6 +14,7 @@
 !.config/sounds
 !.config/icons
 !.config/mimeapps.list
+!.config/autostart
 
 .config/Code/*
 !.config/Code/User
