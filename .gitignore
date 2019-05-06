@@ -1,6 +1,7 @@
 .config/*
 
 !.config/alacritty
+!.config/albert
 !.config/kitty
 !.config/ranger
 !.config/i3
