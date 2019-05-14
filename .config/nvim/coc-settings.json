@@ -20,6 +20,6 @@
   "python.jediEnabled": false,
   "python.formatting.provider": "black",
   "python.venvPath": "~/Envs",
-  "python.linting.flake8Enabled": true,
-  "coc.preferences.formatOnSaveFiletypes": ["python"]
+  "python.linting.flake8Enabled": true
+  //"coc.preferences.formatOnSaveFiletypes": ["python"]
 }

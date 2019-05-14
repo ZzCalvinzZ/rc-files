@@ -75,7 +75,8 @@ x-scheme-handler/https=google-chrome.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop
 x-scheme-handler/mailspring=mailspring.desktop
-x-scheme-handler/mailto=thunderbird.desktop
+x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/webcal=google-chrome.desktop
 
 [Added Associations]
 video/webm=vlc.desktop;

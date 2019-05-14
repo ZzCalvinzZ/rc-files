@@ -95,6 +95,7 @@ Plug 'Yggdroot/indentLine' "show the indent lines as |
 Plug 'ap/vim-css-color' "preview css colors
 Plug 'machakann/vim-highlightedyank' "highlights what you yank
 Plug 'airblade/vim-gitgutter'
+Plug 'jparise/vim-graphql'
 
 "language specific
 Plug 'ElmCast/elm-vim'
@@ -142,6 +143,9 @@ Plug 'isRuslan/vim-es6'
 
 Plug 'mileszs/ack.vim'
 Plug 'yegappan/mru'
+
+"rest client
+Plug 'diepm/vim-rest-console'
 
 "colors
 Plug 'ZzCalvinzZ/gruvbox'
@@ -200,6 +204,12 @@ set signcolumn=yes
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
+function! FormatThenSave()
+  Format
+  write
+endfunction
+
+
 nmap <silent> <Leader>cd <Plug>(coc-definition)
 nmap <silent> <Leader>ct <Plug>(coc-type-definition)
 nmap <silent> <Leader>ci <Plug>(coc-implementation)
@@ -207,10 +217,12 @@ nmap <silent> <Leader>ca <Plug>(coc-references)
 nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
 nmap <Leader>cf  <Plug>(coc-format)
+nmap <Leader>cw  :call FormatThenSave()<CR>
 nmap <Leader>cl  :CocList<CR>
 nmap <Leader>cc  :CocCommand<CR>
 
-autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
+"format on save
+" autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -232,7 +244,7 @@ nmap <silent> ]f <Plug>(coc-diagnostic-next)
 augroup cocstuff
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json,python setl formatexpr=CocAction('formatSelected')
+  " autocmd FileType typescript,json,python setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -531,3 +543,14 @@ inoremap [<CR> [<CR>]<C-c>O
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "fugitive/ rhubarb
 let g:github_enterprise_urls = ['https://code.corp.surveymonkey.com']
+
+"rest client
+let g:vrc_curl_opts = {
+  \ '-sS': '',
+  \ '--connect-timeout': 10,
+  \ '-i': '',
+  \ '--max-time': 60,
+  \ '-k': '',
+  \}
+let g:vrc_trigger = '<C-n>'
+
