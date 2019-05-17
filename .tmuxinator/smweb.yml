@@ -41,17 +41,19 @@ root: ~/dev/stack/src/smweb
 
 windows:
   - graphapi:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - cd api/graphapi;vim
         - cd api/graphapi;yarn start
+        - cd api/graphapi
   - coreweb:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - cd apps/coreweb;vim
         - cd apps/coreweb;yarn start
+        - cd apps/coreweb
   - smweb:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - vim
         - #blank

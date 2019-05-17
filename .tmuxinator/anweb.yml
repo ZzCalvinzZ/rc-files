@@ -41,7 +41,8 @@ root: ~/dev/stack/src/AnWeb
 
 windows:
   - editor:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - vim
         - vagrant up&&vagrant ssh -c 'cd /opt/src/AnWeb/; pyenv local anweb; pserve development.ini --reload; /bin/bash'
+        - # nothing

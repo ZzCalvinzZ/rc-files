@@ -32,11 +32,8 @@ root: ~/playground
 
 windows:
   - editor:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - vim
         -  # nothing
-  - whatever:
-      layout: tiled
-      panes:
-        - #empty, will just run plain bash
+        -  # nothing

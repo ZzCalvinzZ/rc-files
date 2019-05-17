@@ -32,11 +32,8 @@ root: ~/dev/stuff/elm-architecture-tutorial/
 
 windows:
   - editor:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - vim
-        -  # nothing
-  - server:
-      layout: tiled
-      panes:
         - elm reactor
+        -  # nothing

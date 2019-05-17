@@ -54,8 +54,11 @@ if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 	alias open="xdg-open"
 	alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
 	alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
-	alias change_timezone="timedatectl set-timezone $(curl -s https://ipapi.co/timezone)"
 	alias resolv="vim /etc/resolv.conf"
+
+	change_timezone() {
+		timedatectl set-timezone $(curl -s https://ipapi.co/timezone)
+	}
 fi
 
 #arch and MacOs

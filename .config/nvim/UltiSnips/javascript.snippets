@@ -1,3 +1,4 @@
+priority 99999
 extends javascript, html, javascript.jsx
 
 snippet trace
@@ -5,6 +6,10 @@ var trace = R.curry(function(tag, x) {
 	console.log(tag, x);
 	return x;
 });
+endsnippet
+
+snippet butt
+console.log("blub", $1)
 endsnippet
 
 # recompose
@@ -298,4 +303,3 @@ endsnippet
 snippet ir "isRequired" w
 isRequired,
 endsnippet
-

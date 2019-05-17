@@ -32,7 +32,8 @@ root: ~/dev/stack/src/AnalyzeAPI
 
 windows:
   - editor:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - vim
         - pserve development.ini --reload
+        - # nothing

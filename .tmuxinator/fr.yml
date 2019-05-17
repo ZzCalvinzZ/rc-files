@@ -50,7 +50,7 @@ windows:
         -  # nothing
           -  # nothing
   - server:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - docker attach docker_smapply_1
         - docker attach docker_webpack_1

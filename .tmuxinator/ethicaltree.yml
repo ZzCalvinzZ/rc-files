@@ -33,17 +33,17 @@ root: ~/dev/ethicaltree
 
 windows:
   - api:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - cd api;vim
         - cd api
   - web:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - cd web;vim
         - cd web
   - servers:
-      layout: tiled
+      layout: main-horizontal
       panes:
         - cd api;docker-compose up
         - cd web;npm start

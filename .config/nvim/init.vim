@@ -88,6 +88,7 @@ Plug 'neoclide/coc-snippets'
 
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
+Plug 'pangloss/vim-javascript'
 Plug 'quabug/vim-gdscript'
 
 "visual
