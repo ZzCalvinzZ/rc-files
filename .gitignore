@@ -2,6 +2,7 @@
 
 !.config/alacritty
 !.config/albert
+.config/albert/core.db
 !.config/kitty
 !.config/ranger
 !.config/i3

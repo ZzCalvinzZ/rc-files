@@ -67,24 +67,6 @@ Plug 'prabirshrestha/async.vim'
 
 "coc
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-"js
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint'
-Plug 'neoclide/coc-jest'
-Plug 'neoclide/coc-prettier'
-Plug 'neoclide/coc-json'
-"css
-Plug 'neoclide/coc-stylelint'
-Plug 'neoclide/coc-css'
-"py
-Plug 'neoclide/coc-python'
-"misc
-Plug 'neoclide/coc-emmet'
-Plug 'neoclide/coc-html'
-Plug 'neoclide/coc-yaml'
-Plug 'neoclide/coc-solargraph'
-Plug 'neoclide/coc-highlight'
-Plug 'neoclide/coc-snippets'
 
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -95,7 +77,10 @@ Plug 'quabug/vim-gdscript'
 Plug 'Yggdroot/indentLine' "show the indent lines as |
 Plug 'ap/vim-css-color' "preview css colors
 Plug 'machakann/vim-highlightedyank' "highlights what you yank
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter' TODO remove when coc-git is stable
+Plug 'rhysd/git-messenger.vim'
+Plug 'jreybert/vimagit'
+
 Plug 'jparise/vim-graphql'
 
 "language specific
@@ -115,7 +100,7 @@ Plug 'AndrewRadev/switch.vim' "swapping booleans
 Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim' "simple html creation
 
 "tpope
 Plug 'tpope/vim-repeat'
@@ -133,7 +118,6 @@ Plug 'christoomey/vim-tmux-navigator'
 "status line and other visual
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
-" Plug 'ZzCalvinzZ/lightline-ale'
 Plug 'mhinz/vim-startify'
 
 "snippets
@@ -151,20 +135,6 @@ Plug 'diepm/vim-rest-console'
 "colors
 Plug 'ZzCalvinzZ/gruvbox'
 
-" linting
-  " Plug 'w0rp/ale', { 'do':
-  " 					\ 'npm install -g eslint@latest;
-  " 					\ npm install -g prettier@latest;
-  " 					\ npm install -g stylelint@latest;
-  " 					\ npm install -g eslint-plugin-babel@latest;
-  " 					\ npm install -g babel-eslint@latest;
-  " 					\ npm install -g eslint-plugin-react@latest;
-  " 					\ npm install -g eslint-plugin-jest@latest;
-  " 					\ npm install -g eslint-plugin-prettier@latest;
-					 " \ npm install -g eslint-plugin-jsx-control-statements;
-  " 					\ npm install -g eslint-plugin-graphql@latest'
- 				" \}
-
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -174,6 +144,7 @@ let g:gruvbox_contrast_dark="soft"
 let g:gruvbox_italic=1
 set background=dark
 colorscheme gruvbox
+highlight clear SignColumn
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "commenting
@@ -221,6 +192,24 @@ nmap <Leader>cf  <Plug>(coc-format)
 nmap <Leader>cw  :call FormatThenSave()<CR>
 nmap <Leader>cl  :CocList<CR>
 nmap <Leader>cc  :CocCommand<CR>
+
+let g:coc_global_extensions = [
+      \'coc-tsserver',
+      \'coc-eslint',
+      \'coc-jest',
+      \'coc-prettier',
+      \'coc-json',
+      \'coc-stylelint',
+      \'coc-css',
+      \'coc-python',
+      \'coc-emmet',
+      \'coc-html',
+      \'coc-yaml',
+      \'coc-solargraph',
+      \'coc-highlight',
+      \'coc-snippets',
+      \'coc-git'
+      \]
 
 "format on save
 " autocmd BufWritePre *.js,*.scss,*.sass,*.json,*.graphql,*.md,*.yaml :call CocAction('format')
@@ -409,14 +398,15 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "gitgutter stuff
-nmap <Leader>ggs <Plug>GitGutterStageHunk
-nmap <Leader>ggr <Plug>GitGutterRevertHunk
-nmap <Leader>ggp <Plug>GitGutterPreviewHunk
-nmap <Leader>ggu <Plug>GitGutterUndoHunk
+"TODO remove when coc-git is stable
+" nmap <Leader>ggs <Plug>GitGutterStageHunk
+" nmap <Leader>ggr <Plug>GitGutterRevertHunk
+" nmap <Leader>ggp <Plug>GitGutterPreviewHunk
+" nmap <Leader>ggu <Plug>GitGutterUndoHunk
 
-let g:gitgutter_realtime = 1
-let g:gitgutter_eager = 1
-set updatetime=500
+" let g:gitgutter_realtime = 1
+" let g:gitgutter_eager = 1
+" set updatetime=250
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "lightline
@@ -431,25 +421,9 @@ let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], [ 'fixer_checking' ]]
+      \   'right': [[]]
       \ }
       \}
-
-" let g:lightline.component_expand = {
-"       \  'fixer_checking': 'lightline#ale#fixing',
-"       \  'linter_checking': 'lightline#ale#checking',
-"       \  'linter_warnings': 'lightline#ale#warnings',
-"       \  'linter_errors': 'lightline#ale#errors',
-"       \  'linter_ok': 'lightline#ale#ok',
-"       \ }
-
-" let g:lightline.component_type = {
-"       \     'fixer_checking': 'left',
-"       \     'linter_checking': 'left',
-"       \     'linter_warnings': 'warning',
-"       \     'linter_errors': 'error',
-"       \     'linter_ok': 'left',
-"       \ }
 
 " copy full path of filename
 function! FilenameForLightline()
@@ -555,3 +529,5 @@ let g:vrc_curl_opts = {
   \}
 let g:vrc_trigger = '<C-n>'
 
+"git-messenger
+let g:git_messenger_always_into_popup = 1
