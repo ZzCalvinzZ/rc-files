@@ -111,6 +111,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-dadbod'
 
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
@@ -134,6 +135,8 @@ Plug 'diepm/vim-rest-console'
 
 "colors
 Plug 'ZzCalvinzZ/gruvbox'
+Plug 'jaxbot/semantic-highlight.vim'
+
 
 call plug#end()
 
@@ -228,8 +231,15 @@ endfunction
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-nmap <silent> [f <Plug>(coc-diagnostic-prev)
-nmap <silent> ]f <Plug>(coc-diagnostic-next)
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
+
+" show chunk diff at current position
+nmap gs <Plug>(coc-git-chunkinfo)
+" show commit ad current position
+nmap gc <Plug>(coc-git-commit)
 
 augroup cocstuff
   autocmd!

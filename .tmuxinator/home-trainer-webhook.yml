@@ -1,7 +1,7 @@
-# /home/calvin/.tmuxinator/approuter.yml
+# /home/calvin/.tmuxinator/home-trainer-webhook.yml
 
-name: approuter
-root: ~/dev/stack/approuter
+name: home-trainer-webhook
+root: ~/dev/home-trainer-webhook
 
 # Optional tmux socket
 # socket_name: foo
@@ -40,19 +40,12 @@ root: ~/dev/stack/approuter
 # attach: false
 
 windows:
-  - stack_approuter:
+  - editor:
       layout: main-horizontal
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - vim conf/dev.yaml
-        - sh bin/dev.sh
-  - standalone_approuter:
-      layout: main-horizontal
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      panes:
-        - cd ~/dev/approuter && vim conf/dev.yaml
-        - cd ~/dev/approuter
+        - vim
+        - #
+        - #

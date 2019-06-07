@@ -16,6 +16,8 @@
 !.config/icons
 !.config/mimeapps.list
 !.config/autostart
+!.config/gtk-2.0
+!.config/gtk-3.0
 
 .config/Code/*
 !.config/Code/User

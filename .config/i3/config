@@ -120,9 +120,8 @@ assign [class="Thunderbird"] $w4
 for_window [class="Spotify"] move container to workspace $w5
 assign [class="Steam"] $w6
 assign [class="VirtualBox Manager"] $w7
-assign [class="Insomnia"] $w7
 assign [class="Mysql-workbench-bin"] $w7
-for_window [name="__scratchpad"] move scratchpad
+for_window [class="__scratchpad"] move scratchpad
 for_window [title="__mainterm"] move $w1
 
 # switch to workspace
@@ -229,7 +228,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  font pango:MesloLGS Nerd Font 12
+  font pango:Hack 12
   position top
   status_command i3blocks
   # tray_output primary
@@ -265,7 +264,7 @@ exec --no-startup-id mysql-workbench
 exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager
 
-exec --no-startup-id albert
+exec --no-startup-id ulauncher
 
 # exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
 
