@@ -146,7 +146,7 @@
     icon_position = left
 
     # Paths to default icons.
-    icon_folders = /usr/share/icons/hicolor/32x32/apps/:/usr/share/icons/hicolor/32x32/status/
+    icon_folders = /usr/share/icons/Arc/apps/32/:/usr/share/icons/Arc/status/32/:/usr/share/icons/Arc/devices/32/:/usr/share/icons/Arc/categories/32/
 
 [frame]
     width = 3
@@ -201,17 +201,12 @@
 	new_icon = /home/calvin/.config/icons/spotify.png
 
 [slack]
-	appname = "Electron"
+	appname = "Slack"
 	new_icon = /home/calvin/.config/icons/slack.png
 
 [NetworkManager]
 	appname = "NetworkManager"
 	new_icon = /home/calvin/.config/icons/wifi.png
-
-#Mailspring
-[Thunderbird]
-	appname = "Thunderbird"
-	new_icon = /home/calvin/.config/icons/email.png
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
