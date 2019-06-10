@@ -35,7 +35,8 @@ bindsym $mod+backslash exec thunar
 
 #lock screen
 bindsym $mod+Shift+s exec systemctl suspend
-bindsym $mod+Shift+d exec i3lock -c b16286
+# bindsym $mod+Shift+d exec i3lock -c b16286
+bindsym $mod+Shift+d exec gllock
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -251,7 +252,8 @@ bar {
 
 new_window 1pixel
 
-exec --no-startup-id xss-lock -- i3lock -c b16286
+# exec --no-startup-id xss-lock -- i3lock -c b16286
+exec --no-startup-id xss-lock -- gllock
 exec --no-startup-id nm-applet
 exec --no-startup-id dropbox
 exec --no-startup-id slack
