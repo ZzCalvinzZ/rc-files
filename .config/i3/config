@@ -30,7 +30,8 @@ font pango:Hack 12
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+# bindsym $mod+Return exec kitty
+bindsym $mod+Return exec alacritty
 bindsym $mod+backslash exec thunar
 
 #lock screen
@@ -268,9 +269,10 @@ exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id ulauncher
 
-# exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
+exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
 
-exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
+# exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
+# exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_tmuxinator.sh'
 exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_tmuxinator.sh'
 
 # Bind the workspaces for monitor one

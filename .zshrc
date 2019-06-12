@@ -13,8 +13,6 @@ setopt interactivecomments
 # disable autocorrect suggestions
 unsetopt correct_all
 
-export TERM="xterm-256color"
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

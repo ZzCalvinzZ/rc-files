@@ -1,9 +1,9 @@
 set nocompatible "make sure it's in vim mode
 set number "show line numbers
 if has('macunix')
-	set clipboard=unnamed "let unnamed register be clipboard
+    set clipboard=unnamed "let unnamed register be clipboard
 else
-	set clipboard=unnamedplus "let unnamed register be clipboard
+    set clipboard=unnamedplus "let unnamed register be clipboard
 endif
 set guioptions+=c "don't use menu popup when it detects new changes in gui
 set foldlevelstart=99
@@ -135,8 +135,6 @@ Plug 'diepm/vim-rest-console'
 
 "colors
 Plug 'ZzCalvinzZ/gruvbox'
-Plug 'jaxbot/semantic-highlight.vim'
-
 
 call plug#end()
 
