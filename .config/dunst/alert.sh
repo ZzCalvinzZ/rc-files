@@ -5,6 +5,8 @@ DESC=$3
 ICON=$4
 URGENCY=$5
 
+logger $APP
+
 NORMAL_SOUNDLIST=( \
     "normal/link_whistle.wav" \
     "normal/link_fairy.wav" \
@@ -22,8 +24,8 @@ elif [[ $URGENCY = "NORMAL" ]]; then
 		SOUND="normal/link_get_heart.wav"
 	elif [[ $APP = "Slack" ]]; then
 		SOUND="normal/link_whistle.wav"
-	elif [[ $APP = "Thunderbird" ]]; then
-		SOUND="normal/link_rupee.wav"
+	elif [[ $APP = "claws-mail" ]]; then
+		SOUND="normal/ally-create.wav"
 	else
 		SOUND="normal/link_fairy.wav"
 	fi

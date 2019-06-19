@@ -76,7 +76,6 @@ Plug 'quabug/vim-gdscript'
 "visual
 Plug 'Yggdroot/indentLine' "show the indent lines as |
 Plug 'ap/vim-css-color' "preview css colors
-Plug 'machakann/vim-highlightedyank' "highlights what you yank
 " Plug 'airblade/vim-gitgutter' TODO remove when coc-git is stable
 Plug 'rhysd/git-messenger.vim'
 Plug 'jreybert/vimagit'
@@ -209,7 +208,9 @@ let g:coc_global_extensions = [
       \'coc-solargraph',
       \'coc-highlight',
       \'coc-snippets',
-      \'coc-git'
+      \'coc-git',
+      \'coc-yank',
+      \'coc-highlight'
       \]
 
 "format on save
@@ -451,7 +452,7 @@ let g:switch_mapping = "-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep --hidden -i -j1'
+let g:ackprg = 'rg --vimgrep --hidden -i -j1 -s'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep(
@@ -480,9 +481,6 @@ nmap <Leader>fn :let @+ = expand("%")<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-test
 nmap <Leader>ct :TestNearest<cr>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"vim-highlightedyank
-let g:highlightedyank_highlight_duration = 150
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

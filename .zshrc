@@ -46,7 +46,7 @@ if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH" # ruby
 fi
 
-PATH="$HOME/.yarn/bin:/usr/local/bin/:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
+PATH="$HOME/.yarn/bin:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
 
 export PATH
 ##################################################################

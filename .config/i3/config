@@ -31,7 +31,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec kitty
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 bindsym $mod+backslash exec thunar
 
 #lock screen
@@ -118,7 +118,7 @@ set $w0 ""
 # assign [class="Google-chrome"] $w2
 for_window [instance="main_chrome"] move container to workspace $w2
 assign [class="Slack"] $w3
-assign [class="Thunderbird"] $w4
+assign [class="claws-mail"] $w7
 for_window [class="Spotify"] move container to workspace $w5
 assign [class="Steam"] $w6
 assign [class="VirtualBox Manager"] $w7
@@ -268,11 +268,12 @@ exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id ulauncher
+exec --no-startup-id davmail
+exec --no-startup-id claws-mail
 
-exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
+# exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
 
-# exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
-# exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_tmuxinator.sh'
+exec --no-startup-id kitty --name=__scratchpad tmuxinator scratch
 exec --no-startup-id i3-msg 'workspace $w1; exec kitty sh ~/dev/dotfiles/start_tmuxinator.sh'
 
 # Bind the workspaces for monitor one
