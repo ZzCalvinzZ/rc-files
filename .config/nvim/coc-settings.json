@@ -1,4 +1,18 @@
 {
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"],
+      "initializationOptions": {
+        "runtime": "node",
+        "elmPath": "elm",
+        "elmFormatPath": "elm-format",
+        "elmTestPath": "elm-test"
+      }
+    }
+  },
   // could be 'always' 'trigger' => for specified trigger characters only 'none'
   "suggest.autoTrigger": "always",
   // only used when autoTrigger is always
@@ -17,7 +31,7 @@
   "diagnostic.warningSign": "?",
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "h",
-  "diagnostic.virtualText": true,
+  "diagnostic.virtualText": false,
   "prettier.eslintIntegration": true,
   "python.jediEnabled": false,
   "python.formatting.provider": "black",
@@ -33,5 +47,5 @@
   "git.topRemovedSign.hlGroup": "WarningMsg",
   "git.changeRemovedSign.text": "≃",
   "git.changeRemovedSign.hlGroup": "ModeMsg",
-  "codelens.enable": true
+  "coc.preferences.codeLens.enable": true
 }

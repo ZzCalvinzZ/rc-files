@@ -192,6 +192,7 @@ nmap <Leader>cf  <Plug>(coc-format)
 nmap <Leader>cw  :call FormatThenSave()<CR>
 nmap <Leader>cl  :CocList<CR>
 nmap <Leader>cc  :CocCommand<CR>
+nmap <Leader>co  :CocList outline<CR>
 
 let g:coc_global_extensions = [
       \'coc-tsserver',
@@ -452,7 +453,7 @@ let g:switch_mapping = "-"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ack stuff
 "
-let g:ackprg = 'rg --vimgrep --hidden -i -j1 -s'
+let g:ackprg = 'rg --vimgrep --hidden -i -j1'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "ripgrep
 command! -bang -nargs=* Find call fzf#vim#grep(

@@ -1,16 +1,16 @@
-# ~/.tmuxinator/elm.yml
+# ~/.tmuxinator/tetris.yml
 
-name: elm
-root: ~/dev/stuff/elm-architecture-tutorial/
+name: tetris
+root: ~/dev/stuff/tetris/
 
 # Optional tmux socket
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-#pre: workon fr
+# pre: workon fr
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-#pre_window: workon
+# pre_window: workon
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -22,7 +22,7 @@ root: ~/dev/stuff/elm-architecture-tutorial/
 # startup_window: editor
 
 # Specitifes (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
-#startup_pane: 1
+# startup_pane: 1
 
 # Controls whether the tmux session should be attached to automatically. Defaults to true.
 # attach: false
