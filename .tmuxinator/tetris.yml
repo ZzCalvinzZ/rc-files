@@ -1,7 +1,7 @@
 # ~/.tmuxinator/tetris.yml
 
 name: tetris
-root: ~/dev/stuff/tetris/
+root: ~/dev/stuff/elm-tetris/
 
 # Optional tmux socket
 # socket_name: foo

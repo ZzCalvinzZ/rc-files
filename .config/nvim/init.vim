@@ -160,7 +160,6 @@ inoremap <expr><C-k> pumvisible() ? "\<Up>" : "\<C-k>"
 inoremap <expr><cr> pumvisible() ? "\<C-y>" : "\<cr>"
 inoremap <expr><TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 imap <c-space> <Plug>(asyncomplete_force_refresh)
-
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_smart_completion = 1
 
@@ -211,6 +210,7 @@ let g:coc_global_extensions = [
       \'coc-snippets',
       \'coc-git',
       \'coc-yank',
+      \'coc-pairs',
       \'coc-highlight'
       \]
 
@@ -518,9 +518,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "auto close {
-inoremap (<CR> (<CR>)<C-c>O
-inoremap {<CR> {<CR>}<C-c>O
-inoremap [<CR> [<CR>]<C-c>O
+inoremap <S-CR> <CR><C-c>O
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "fugitive/ rhubarb

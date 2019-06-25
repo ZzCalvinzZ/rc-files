@@ -47,5 +47,6 @@
   "git.topRemovedSign.hlGroup": "WarningMsg",
   "git.changeRemovedSign.text": "≃",
   "git.changeRemovedSign.hlGroup": "ModeMsg",
-  "coc.preferences.codeLens.enable": true
+  "codeLens.enable": true,
+  "coc.preferences.formatOnType": false
 }
