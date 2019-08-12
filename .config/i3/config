@@ -269,7 +269,7 @@ exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id ulauncher
 
-exec --no-startup-id blueman-manager
+exec --no-startup-id blueman-applet
 
 # exec --no-startup-id davmail
 # exec --no-startup-id claws-mail
