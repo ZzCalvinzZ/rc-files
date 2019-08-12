@@ -78,7 +78,7 @@ Plug 'Yggdroot/indentLine' "show the indent lines as |
 Plug 'ap/vim-css-color' "preview css colors
 " Plug 'airblade/vim-gitgutter' TODO remove when coc-git is stable
 Plug 'rhysd/git-messenger.vim'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 
 Plug 'jparise/vim-graphql'
 
@@ -301,7 +301,7 @@ noremap <Leader>D :bp\|bd #<cr>
 noremap <Leader>gs :Gstatus<cr>
 noremap <Leader>gp :Gpush<cr>
 noremap <Leader>gd :Gdiff<cr>
-noremap <Leader>gb :Gblame wM<cr>
+noremap <Leader>gb :Gblame -wM<cr>
 noremap <Leader>gr :Gread<cr>
 noremap <Leader>gv :GV<cr>
 noremap <Leader>gf :GV!<cr>

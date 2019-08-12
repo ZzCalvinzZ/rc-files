@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --bg-scale '/home/calvin/.config/wallpapers/arch_linux_wallpaper.png' 
+feh --no-fehbg --bg-scale '/home/calvin/.config/wallpapers/arch_linux_wallpaper.png' 

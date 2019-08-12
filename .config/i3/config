@@ -268,8 +268,11 @@ exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager
 
 exec --no-startup-id ulauncher
-exec --no-startup-id davmail
-exec --no-startup-id claws-mail
+
+exec --no-startup-id blueman-manager
+
+# exec --no-startup-id davmail
+# exec --no-startup-id claws-mail
 
 # exec --no-startup-id "sh ~/start_tmuxinator.sh && alacritty -t __mainterm -e tmux attach-session -t home && alacritty -t __scratchpad -e tmux attach-session -t scratch"
 
