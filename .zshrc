@@ -48,6 +48,8 @@ fi
 
 PATH="$HOME/.yarn/bin:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
 
+PATH="$PATH:$HOME/.local/bin"
+
 export PATH
 ##################################################################
 

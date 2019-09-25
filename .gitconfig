@@ -35,3 +35,5 @@
   # instead of opening all files:
   # git reviewone foo.js bar.js
   reviewone = !nvim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\" +\"tabdo GitGutterEnable\" 
+[github-pr-stats "code.corp.surveymonkey.com"]
+	token = 8b04a1bd356d9f400c6032a4e80a9109dea7117b

@@ -33,6 +33,7 @@ set nocursorcolumn
 set cursorline
 set nohlsearch "highlight entries when searching
 set splitright
+set shortmess=aFc
 
 "Truecolors
 set termguicolors
@@ -533,6 +534,7 @@ let g:vrc_curl_opts = {
   \ '-k': '',
   \}
 let g:vrc_trigger = '<C-n>'
+let g:vrc_show_command = 1
 
 "git-messenger
 let g:git_messenger_always_into_popup = 1

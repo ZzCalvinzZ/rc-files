@@ -40,14 +40,14 @@ root: ~/dev/stack/approuter
 # attach: false
 
 windows:
-  - stack_approuter:
-      layout: main-horizontal
-      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
-      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
-      # synchronize: after
-      panes:
-        - vim conf/dev.yaml
-        - sh bin/dev.sh
+  # - stack_approuter:
+  #     layout: main-horizontal
+  #     # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+  #     # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+  #     # synchronize: after
+  #     panes:
+  #       - vim conf/dev.yaml
+  #       - sh bin/dev.sh
   - standalone_approuter:
       layout: main-horizontal
       # Synchronize all panes of this window, can be enabled before or after the pane commands run.
