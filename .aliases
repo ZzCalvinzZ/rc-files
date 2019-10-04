@@ -32,6 +32,7 @@ alias attach="tmux attach-session -t"
 
 #surveymonkey aliases
 alias smvpn="sudo openconnect --user=calvinc --protocol=gp sanmateo-vpn.surveymonkey.com --script=/home/calvin/smvpn-script.sh"
+alias smvpn_mt="sudo openconnect --user=calvinc --protocol=gp mt-vpn.surveymonkey.com --script=/home/calvin/smvpn-script.sh"
 alias approuter_restart="sh approuter/bin/dev.sh --cleanup && sh approuter/bin/dev.sh"
 
 #Ethicaltree

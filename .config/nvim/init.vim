@@ -326,7 +326,7 @@ noremap <Leader><s-j> :wincmd J<cr>
 noremap <Leader><s-h> :wincmd H<cr>
 noremap <Leader><s-l> :wincmd L<cr>
 
-" vv to generate new vertical split
+"generate new vertical split
 nnoremap <C-\> <C-w>v
 nmap <leader>r :WinResizerStartResize<cr>
 
@@ -538,3 +538,11 @@ let g:vrc_show_command = 1
 
 "git-messenger
 let g:git_messenger_always_into_popup = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"run code on command
+augroup run_commands
+  autocmd FileType python nnoremap <buffer> <leader>ce :w !python<cr>
+  autocmd FileType javascript nnoremap <buffer> <leader>ce :w !node<cr>
+augroup END
