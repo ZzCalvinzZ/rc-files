@@ -16,6 +16,7 @@
 	},
 	"rules": {
 		"strict": 0,
+		"no-console": "warn",
 		"babel/semi": 1,
 		"react/jsx-uses-vars": 1,
 		"react/react-in-jsx-scope": 1,

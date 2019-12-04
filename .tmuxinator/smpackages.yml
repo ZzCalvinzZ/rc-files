@@ -1,7 +1,7 @@
-# /home/calvin/.tmuxinator/smweb.yml
+# /home/calvin/.tmuxinator/smpackages.yml
 
-name: smweb
-root: ~/dev/stack/src/smweb
+name: smpackages
+root: ~/dev/stack/src/smpackages
 
 # Optional tmux socket
 # socket_name: foo
@@ -40,20 +40,9 @@ root: ~/dev/stack/src/smweb
 # attach: false
 
 windows:
-  - graphapi:
-      layout: main-horizontal
-      panes:
-        - cd api/graphapi;vim
-        - cd api/graphapi;npm start
-        - cd api/graphapi
-  - coreweb:
-      layout: main-horizontal
-      panes:
-        - cd apps/coreweb;vim
-        - cd apps/coreweb;npm start
-        - cd apps/coreweb
-  - smweb:
+  - smpackages:
       layout: main-horizontal
       panes:
         - vim
+        - #blank
         - #blank

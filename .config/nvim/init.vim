@@ -239,8 +239,13 @@ nmap ]g <Plug>(coc-git-nextchunk)
 
 " show chunk diff at current position
 nmap gs <Plug>(coc-git-chunkinfo)
+nmap gu :CocCommand git.chunkUndo<cr>
 " show commit ad current position
 nmap gc <Plug>(coc-git-commit)
+omap ig <Plug>(coc-git-chunk-inner)
+xmap ig <Plug>(coc-git-chunk-inner)
+omap ag <Plug>(coc-git-chunk-outer)
+xmap ag <Plug>(coc-git-chunk-outer)
 
 augroup cocstuff
   autocmd!
@@ -294,7 +299,7 @@ map <Leader>2 :NERDTreeFind<cr>
 map <Leader>3 :NERDTreeToggle<cr>
 map <Leader>5 :UndotreeToggle<cr>
 
-inoremap <C-c> <esc>
+inoremap <C-c> <esc><esc>
 
 noremap <Leader>D :bp\|bd #<cr>
 
@@ -546,3 +551,6 @@ augroup run_commands
   autocmd FileType python nnoremap <buffer> <leader>ce :w !python<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>ce :w !node<cr>
 augroup END
+
+let g:python_host_prog = "/home/calvin/.pyenv/versions/neovim2/bin/python"
+let g:python3_host_prog = "/home/calvin/.pyenv/versions/neovim3/bin/python"

@@ -27,6 +27,10 @@ if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   source ~/notifyosd.zsh
 fi
 
+if [ -f ~/.zshlocal ]; then
+	source ~/.zshlocal
+fi
+
 source ~/.aliases
 
 #Go
