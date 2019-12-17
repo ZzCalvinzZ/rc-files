@@ -32,6 +32,7 @@
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "h",
   "diagnostic.virtualText": false,
+  "eslint.run": "onSave",
   "prettier.eslintIntegration": true,
   "python.jediEnabled": false,
   "python.formatting.provider": "black",
@@ -49,7 +50,7 @@
   "git.changeRemovedSign.hlGroup": "ModeMsg",
   "codeLens.enable": false,
   "coc.preferences.formatOnType": false,
-  "stylelint.configOverrides":  {
+  "stylelint.configOverrides": {
     "ignoreFiles": ["**/*.js"]
   }
 }

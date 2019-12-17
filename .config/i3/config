@@ -260,9 +260,8 @@ exec --no-startup-id dropbox
 exec --no-startup-id slack
 exec --no-startup-id spotify
 # exec --no-startup-id thunderbird
-exec --no-startup-id VirtualBox
-
-exec --no-startup-id mysql-workbench
+# exec --no-startup-id VirtualBox
+# exec --no-startup-id mysql-workbench
 
 exec --no-startup-id autorandr -c
 exec --no-startup-id xfce4-power-manager

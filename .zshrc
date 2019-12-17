@@ -71,7 +71,7 @@ export REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.61"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=alacritty
 
-export BROWSER=firefox-developer-edition
+# export BROWSER=brave
 
 #
 export REVIEW_BASE=master

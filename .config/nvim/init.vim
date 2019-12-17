@@ -295,8 +295,6 @@ map <Leader>vm :e ~/.start_tmuxinator.sh<cr>
 map <Leader>va :e ~/.aliases<cr>
 
 "map plugin commands
-map <Leader>2 :NERDTreeFind<cr>
-map <Leader>3 :NERDTreeToggle<cr>
 map <Leader>5 :UndotreeToggle<cr>
 
 inoremap <C-c> <esc><esc>

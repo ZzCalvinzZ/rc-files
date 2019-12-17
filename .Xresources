@@ -9,6 +9,7 @@ Xft.lcdfilter:                  lcdlight
 Xft.rgba:                       rgb
 
 Xcursor.theme: Neutral
+Xcursor.size: 16
 
 !DARK
 ! hard contrast: *background: #1d2021
