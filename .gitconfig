@@ -15,6 +15,10 @@
 [hub]
 	host = code.corp.surveymonkey.com
 [alias]
+  hist = log --pretty=oneline -n 20 --graph --abbrev-commit
+
+  p = push --tags
+
   # list files which have changed since REVIEW_BASE
   # (REVIEW_BASE defaults to 'master' in my zshrc)
   files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")

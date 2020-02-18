@@ -11,6 +11,12 @@
         "elmFormatPath": "elm-format",
         "elmTestPath": "elm-test"
       }
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
     }
   },
   // could be 'always' 'trigger' => for specified trigger characters only 'none'
@@ -32,7 +38,7 @@
   "diagnostic.infoSign": "i",
   "diagnostic.hintSign": "h",
   "diagnostic.virtualText": false,
-  "eslint.run": "onSave",
+  "eslint.run": "onType",
   "prettier.eslintIntegration": true,
   "python.jediEnabled": false,
   "python.formatting.provider": "black",

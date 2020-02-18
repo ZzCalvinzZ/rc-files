@@ -67,7 +67,7 @@ Plug 'lambdalisue/suda.vim'
 Plug 'prabirshrestha/async.vim'
 
 "coc
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
@@ -81,15 +81,13 @@ Plug 'ap/vim-css-color' "preview css colors
 Plug 'rhysd/git-messenger.vim'
 " Plug 'jreybert/vimagit'
 
-Plug 'jparise/vim-graphql'
-
 "language specific
 Plug 'ElmCast/elm-vim'
 
 "useful
 Plug 'editorconfig/editorconfig-vim'
-Plug 'francoiscabrol/ranger.vim' "use ranger file manager
-Plug 'rbgrouleff/bclose.vim' " for ranger.vim
+Plug 'ptzz/lf.vim'
+Plug 'rbgrouleff/bclose.vim' " for lf.vim
 Plug 'mbbill/undotree' "visual representation of undo history
 Plug 'simeji/winresizer' "resize window with <leader>r
 Plug 'vim-scripts/ReplaceWithRegister' "use 'gr' to paste
@@ -101,6 +99,7 @@ Plug 'kshenoy/vim-signature' "for showing marks in the gutter
 Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
 Plug 'mattn/emmet-vim' "simple html creation
+Plug 'AndrewRadev/linediff.vim' "use :Linediff two visual blocks to diff them
 
 "tpope
 Plug 'tpope/vim-repeat'
@@ -176,12 +175,6 @@ set signcolumn=yes
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
-function! FormatThenSave()
-  Format
-  write
-endfunction
-
-
 nmap <silent> <Leader>cd <Plug>(coc-definition)
 nmap <silent> <Leader>ct <Plug>(coc-type-definition)
 nmap <silent> <Leader>ci <Plug>(coc-implementation)
@@ -189,7 +182,6 @@ nmap <silent> <Leader>ca <Plug>(coc-references)
 nmap <Leader>cr <Plug>(coc-rename)
 vmap <Leader>cf  <Plug>(coc-format-selected)
 nmap <Leader>cf  <Plug>(coc-format)
-nmap <Leader>cw  :call FormatThenSave()<CR>
 nmap <Leader>cl  :CocList<CR>
 nmap <Leader>cc  :CocCommand<CR>
 nmap <Leader>co  :CocList outline<CR>
@@ -309,6 +301,7 @@ noremap <Leader>gb :Gblame -wM<cr>
 noremap <Leader>gr :Gread<cr>
 noremap <Leader>gv :GV<cr>
 noremap <Leader>gf :GV!<cr>
+noremap <Leader>gw :GBrowse<cr>
 
 noremap <Leader>gdt :windo diffthis<cr>
 noremap <Leader>gds :windo diffoff<cr>
@@ -444,10 +437,11 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"ranger
-let g:ranger_map_keys = 0
-map <leader>2 :Ranger<CR>
-let g:ranger_replace_netrw = 1
+"file manager
+
+let g:lf_map_keys = 0
+map <leader>2 :Lf<CR>
+let g:lf_replace_netrw = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -489,7 +483,7 @@ nmap <Leader>ct :TestNearest<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vim_json_syntax_conceal = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"vim-graphql
+"vim-polyglot graphql
 let g:graphql_javascript_tags = [".. GraphQL .. ", "gql",  "gql ", "graphql", "Relay.QL"]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -548,6 +542,7 @@ let g:git_messenger_always_into_popup = 1
 augroup run_commands
   autocmd FileType python nnoremap <buffer> <leader>ce :w !python<cr>
   autocmd FileType javascript nnoremap <buffer> <leader>ce :w !node<cr>
+  autocmd FileType sh nnoremap <buffer> <leader>ce :w !sh<cr>
 augroup END
 
 let g:python_host_prog = "/home/calvin/.pyenv/versions/neovim2/bin/python"

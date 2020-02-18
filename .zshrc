@@ -71,13 +71,12 @@ export REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.61"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 export TERMINAL=alacritty
 
-# export BROWSER=brave
+# export BROWSER=google-chrome-stable
 
 #
 export REVIEW_BASE=master
 
-# node versioning
-export NVS_HOME="$HOME/.nvs"
-[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
 #jira autocomplete
 eval "$(jira --completion-script-zsh)"
+
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
