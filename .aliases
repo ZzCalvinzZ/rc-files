@@ -99,3 +99,11 @@ alias r="ranger"
 # function pmbreak() {
 # 	sleep 300 && notify-send -i ~/.config/icons/wrench.png "Work"
 # }
+function timer() {
+	termdown $1 
+
+	for i in {1..10}; do
+		paplay ~/.config/sounds/link_low_health.wav || break
+	done
+}
+

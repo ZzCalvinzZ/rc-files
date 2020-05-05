@@ -86,7 +86,7 @@ Plug 'ElmCast/elm-vim'
 
 "useful
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ptzz/lf.vim'
+Plug 'ptzz/lf.vim' " ranger alternative
 Plug 'rbgrouleff/bclose.vim' " for lf.vim
 Plug 'mbbill/undotree' "visual representation of undo history
 Plug 'simeji/winresizer' "resize window with <leader>r
@@ -100,6 +100,8 @@ Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
 Plug 'mattn/emmet-vim' "simple html creation
 Plug 'AndrewRadev/linediff.vim' "use :Linediff two visual blocks to diff them
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  } "markdown preview
+
 
 "tpope
 Plug 'tpope/vim-repeat'
@@ -242,7 +244,7 @@ xmap ag <Plug>(coc-git-chunk-outer)
 augroup cocstuff
   autocmd!
   " Setup formatexpr specified filetype(s).
-  " autocmd FileType typescript,json,python setl formatexpr=CocAction('formatSelected')
+  autocmd FileType javascript,typescript,json,python setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -547,3 +549,8 @@ augroup END
 
 let g:python_host_prog = "/home/calvin/.pyenv/versions/neovim2/bin/python"
 let g:python3_host_prog = "/home/calvin/.pyenv/versions/neovim3/bin/python"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" markdown preview
+let g:mkdp_auto_start = 0
+nmap <leader>6 <Plug>MarkdownPreviewToggle
