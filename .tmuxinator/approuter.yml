@@ -1,7 +1,7 @@
 # /home/calvin/.tmuxinator/approuter.yml
 
 name: approuter
-root: ~/dev/stack/approuter
+root: ~/dev/Approuter
 
 # Optional tmux socket
 # socket_name: foo
@@ -54,5 +54,5 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - cd ~/dev/approuter && vim conf/dev.yaml
-        - cd ~/dev/approuter
+        - vim conf/dev.yaml
+        - #blank
