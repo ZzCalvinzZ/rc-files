@@ -1,7 +1,7 @@
 # /home/calvin/.tmuxinator/smweb.yml
 
 name: smweb
-root: ~/dev/stack/src/smweb
+root: ~/dev/smweb
 
 # Optional tmux socket
 # socket_name: foo

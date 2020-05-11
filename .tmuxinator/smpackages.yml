@@ -1,7 +1,7 @@
 # /home/calvin/.tmuxinator/smpackages.yml
 
 name: smpackages
-root: ~/dev/stack/src/smpackages
+root: ~/dev/smpackages
 
 # Optional tmux socket
 # socket_name: foo
