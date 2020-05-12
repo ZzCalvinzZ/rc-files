@@ -1,0 +1,12 @@
+#!/bin/bash
+alacritty &
+brave-browser &
+slack &
+zoom &
+spotify &
+sleep 5
+wmctrl -r alacritty -t 0 -b add,maximized_horz,maximized_vert
+wmctrl -r brave -t 1 -b add,maximized_horz,maximized_vert
+wmctrl -r slack -t 2 -b add,maximized_horz,maximized_vert
+wmctrl -r zoom -t 3 -b add,maximized_horz,maximized_vert
+wmctrl -r spotify -t 4 -b add,maximized_horz,maximized_vert
