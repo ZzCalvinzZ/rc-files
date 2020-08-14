@@ -44,13 +44,11 @@ windows:
       layout: main-horizontal
       panes:
         - cd api/graphapi;vim
-        - cd api/graphapi;npm start
         - cd api/graphapi
   - coreweb:
       layout: main-horizontal
       panes:
         - cd apps/coreweb;vim
-        - cd apps/coreweb;npm start
         - cd apps/coreweb
   - smweb:
       layout: main-horizontal

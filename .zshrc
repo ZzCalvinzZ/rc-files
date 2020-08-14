@@ -50,7 +50,8 @@ go() {
 
 #ruby
 if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH" # ruby
+  export GEM_HOME=~/.ruby/
+  export PATH="$PATH:~/.ruby/bin"
 fi
 
 PATH="$HOME/.yarn/bin:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn

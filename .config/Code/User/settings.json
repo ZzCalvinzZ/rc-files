@@ -1,8 +1,8 @@
 {
     "window.zoomLevel": 1,
     "window.menuBarVisibility": "hidden",
-    "workbench.colorTheme": "Gruvbox Dark (Soft)",
-    "editor.fontFamily": "DejaVuSansMono Nerd Font",
+    "workbench.colorTheme": "Gruvbox Dark Soft",
+    "editor.fontFamily": "Hack Nerd Font",
     "workbench.editor.enablePreview": false,
     "workbench.editor.showTabs": false,
     "editor.tabCompletion": true,
@@ -175,4 +175,8 @@
             ],
         },
     ],
+    "editor.fontLigatures": null,
+    "yaml.schemas": {
+        "file:///home/calvinc/.vscode/extensions/atlassian.atlascode-2.6.6/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
 }

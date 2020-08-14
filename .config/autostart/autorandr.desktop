@@ -2,9 +2,9 @@
 Encoding=UTF-8
 Version=0.9.4
 Type=Application
-Name=applications start
+Name=autorandr
 Comment=
-Exec=sh /home/calvinc/dev/dotfiles/autostart
+Exec=autorandr -c
 OnlyShowIn=XFCE;
 RunHook=0
 StartupNotify=false
