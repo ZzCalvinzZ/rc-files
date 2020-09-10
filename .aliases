@@ -48,19 +48,19 @@ function get_process_for_port() {
 }
 
 #arch
-if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-	alias start="startx -- -ardelay 210 -arinterval 30"
-	alias slack="slack --disable-gpu"
-	alias screenshot="import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
-	alias open="xdg-open"
-	alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
-	alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
-	alias resolv="vim /etc/resolv.conf"
+# if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+# 	alias start="startx -- -ardelay 210 -arinterval 30"
+# 	alias slack="slack --disable-gpu"
+# 	alias screenshot="import /tmp/screenshot.png && xclip -selection clipboard -target image/png -i < /tmp/screenshot.png"
+# 	alias open="xdg-open"
+# 	alias disable_sophos="sudo /opt/sophos-av/bin/savdctl disable"
+# 	alias enable_sophos="sudo /opt/sophos-av/bin/savdctl enable"
+# 	alias resolv="vim /etc/resolv.conf"
 
-	change_timezone() {
-		timedatectl set-timezone $(curl -s https://ipapi.co/timezone)
-	}
-fi
+# 	change_timezone() {
+# 		timedatectl set-timezone $(curl -s https://ipapi.co/timezone)
+# 	}
+# fi
 
 #arch and MacOs
 alias r="ranger"

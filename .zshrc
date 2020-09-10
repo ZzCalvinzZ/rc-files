@@ -49,10 +49,10 @@ go() {
 # export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 #ruby
-if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
-  export GEM_HOME=~/.ruby/
-  export PATH="$PATH:~/.ruby/bin"
-fi
+# if [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+#   export GEM_HOME=~/.ruby/
+#   export PATH="$PATH:~/.ruby/bin"
+# fi
 
 PATH="$HOME/.yarn/bin:$PATH:$HOME/.config/yarn/global/node_modules/.bin/" #yarn
 
@@ -249,3 +249,5 @@ compinit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(pyenv virtualenv-init -)"
+eval "$(nodenv init -)"
+eval "$(ssh-agent)"

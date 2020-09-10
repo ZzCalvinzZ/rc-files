@@ -91,26 +91,26 @@
 font:
    # Normal (roman) font face
   normal:
-    family: Hack Nerd Font
+    family: Hack Nerd Font Mono
     style: Regular
 
   # Bold font face
   bold:
-    family: Hack Nerd Font
+    family: Hack Nerd Font Mono
     style: Bold
 
   # Italic font face
   italic:
-    family: Hack Nerd Font
+    family: Hack Nerd Font Mono
     style: Italic
 
   # Bold italic font face
   bold_italic:
-    family: Hack Nerd Font
+    family: Hack Nerd Font Mono
     style: Bold Italic
 
   # Point size
-  size: 11.0
+  size: 14.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -507,32 +507,33 @@ colors:
 # at once.
 key_bindings:
   # (Windows, Linux, and BSD only)
-  - { key: V,        mods: Control|Shift, action: Paste            }
-  - { key: C,        mods: Control|Shift, action: Copy             }
-  - { key: Insert,   mods: Shift,         action: PasteSelection   }
-  - { key: Key0,     mods: Control,       action: ResetFontSize    }
-  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
-  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  # - { key: V,        mods: Control|Shift, action: Paste            }
+  # - { key: C,        mods: Control|Shift, action: Copy             }
+  # - { key: Insert,   mods: Shift,         action: PasteSelection   }
+  # - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  # - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  # - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  # - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  # - { key: Minus,    mods: Control,       action: DecreaseFontSize }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # (macOS only)
-  #- { key: Key0,   mods: Command,         action: ResetFontSize    }
-  #- { key: Equals, mods: Command,         action: IncreaseFontSize }
-  #- { key: Add,    mods: Command,         action: IncreaseFontSize }
-  #- { key: Minus,  mods: Command,         action: DecreaseFontSize }
-  #- { key: K,      mods: Command,         action: ClearHistory     }
-  #- { key: K,      mods: Command,         chars: "\x0c"            }
-  #- { key: V,      mods: Command,         action: Paste            }
-  #- { key: C,      mods: Command,         action: Copy             }
-  #- { key: H,      mods: Command,         action: Hide             }
-  #- { key: M,      mods: Command,         action: Minimize         }
-  #- { key: Q,      mods: Command,         action: Quit             }
-  #- { key: W,      mods: Command,         action: Quit             }
-  #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  - { key: Key0,   mods: Command,         action: ResetFontSize    }
+  - { key: Equals, mods: Command,         action: IncreaseFontSize }
+  - { key: Add,    mods: Command,         action: IncreaseFontSize }
+  - { key: Minus,  mods: Command,         action: DecreaseFontSize }
+  - { key: K,      mods: Command,         action: ClearHistory     }
+  - { key: K,      mods: Command,         chars: "\x0c"            }
+  - { key: V,      mods: Command,         action: Paste            }
+  - { key: C,      mods: Command,         action: Copy             }
+  - { key: H,      mods: Command,         action: Hide             }
+  - { key: M,      mods: Command,         action: Minimize         }
+  - { key: Q,      mods: Command,         action: Quit             }
+  - { key: W,      mods: Command,         action: Quit             }
+  - { key: F,      mods: Command|Control, action: ToggleFullscreen }
+  - { key: Slash,  mods: Control,         chars: "\x1f" }
 
   #- { key: Paste,                    action: Paste                            }
   #- { key: Copy,                     action: Copy                             }
