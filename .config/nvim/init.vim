@@ -69,6 +69,11 @@ Plug 'prabirshrestha/async.vim'
 "coc
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+"lsp
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'nvim-lua/completion-nvim'
+" Plug 'nvim-lua/diagnostic-nvim'
+
 "language syntax plugins
 Plug 'sheerun/vim-polyglot'
 Plug 'pangloss/vim-javascript'
@@ -77,7 +82,7 @@ Plug 'quabug/vim-gdscript'
 "visual
 Plug 'Yggdroot/indentLine' "show the indent lines as |
 Plug 'ap/vim-css-color' "preview css colors
-" Plug 'airblade/vim-gitgutter' TODO remove when coc-git is stable
+" Plug 'airblade/vim-gitgutter' "TODO remove when coc-git is stable
 Plug 'rhysd/git-messenger.vim'
 " Plug 'jreybert/vimagit'
 
@@ -86,7 +91,7 @@ Plug 'ElmCast/elm-vim'
 
 "useful
 Plug 'editorconfig/editorconfig-vim'
-Plug 'ptzz/lf.vim' " ranger alternative
+Plug 'voldikss/vim-floaterm' " use to float things (lf)
 Plug 'rbgrouleff/bclose.vim' " for lf.vim
 Plug 'mbbill/undotree' "visual representation of undo history
 Plug 'simeji/winresizer' "resize window with <leader>r
@@ -152,7 +157,7 @@ highlight clear SignColumn
 "commenting
 map <C-_> :Commentary<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Language Server Settings
+"COC Language Server Settings
 
 " Better display for messages
 set cmdheight=2
@@ -263,6 +268,67 @@ command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" neovim lsp
+""
+"" Use <Tab> and <S-Tab> to navigate through popup menu
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"" Set completeopt to have a better completion experience
+"set completeopt=menuone,noinsert,noselect
+
+"" Avoid showing message extra message when using completion
+"set shortmess+=c
+
+"let g:completion_enable_snippet = 'UltiSnips'
+
+"lua <<EOF
+
+"local on_attach_vim = function(client) 
+"  require'completion'.on_attach(client)
+"  require'diagnostic'.on_attach(client)
+"end
+
+"local custom_attach = function(client)
+"	print("LSP started.");
+"	require'completion'.on_attach(client)
+"	require'diagnostic'.on_attach(client)
+
+"	map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
+"	map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
+"	map('n','K','<cmd>lua vim.lsp.buf.hover()<CR>')
+"	map('n','gr','<cmd>lua vim.lsp.buf.references()<CR>')
+"	map('n','gs','<cmd>lua vim.lsp.buf.signature_help()<CR>')
+"	map('n','gi','<cmd>lua vim.lsp.buf.implementation()<CR>')
+"	map('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>')
+"	map('n','<leader>gw','<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+"	map('n','<leader>gW','<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+"	map('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+"	map('n','<leader>ee','<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>')
+"	map('n','<leader>ar','<cmd>lua vim.lsp.buf.rename()<CR>')
+"	map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+"	map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
+"	map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
+"end
+
+"require'nvim_lsp'.tsserver.setup{on_attach=custom_attach}
+
+
+"EOF
+
+""diagnostics
+"let g:diagnostic_virtual_text_prefix = ' '
+"nmap [c :PrevDiagnosticCycle<CR>
+"nmap ]c :NextDiagnosticCycle<CR>
+
+"call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
+"call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
+"call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
+"call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -413,6 +479,12 @@ endfunction
 " nmap <Leader>ggp <Plug>GitGutterPreviewHunk
 " nmap <Leader>ggu <Plug>GitGutterUndoHunk
 
+" nmap gs <Plug>(GitGutterPreviewHunk)
+" nmap gu <Plug>(GitGutterUndoHunk)
+
+" nmap [g <Plug>(GitGutterPrevHunk)
+" nmap ]g <Plug>(GitGutterNextHunk)
+
 " let g:gitgutter_realtime = 1
 " let g:gitgutter_eager = 1
 " set updatetime=250
@@ -439,11 +511,11 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"file manager
+"floaterm
 
-let g:lf_map_keys = 0
-map <leader>2 :Lf<CR>
-let g:lf_replace_netrw = 1
+let g:floaterm_width=0.8
+let g:floaterm_height=0.8
+map <leader>2 :FloatermNew lf<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

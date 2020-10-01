@@ -250,4 +250,3 @@ compinit
 
 eval "$(pyenv virtualenv-init -)"
 eval "$(nodenv init -)"
-eval "$(ssh-agent)"
