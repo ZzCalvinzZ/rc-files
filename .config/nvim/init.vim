@@ -105,7 +105,7 @@ Plug 'mihaifm/bufstop' "for switching buffers easily
 Plug 'vim-scripts/argtextobj.vim' " Function arguments as text objects: ia, aa
 Plug 'mattn/emmet-vim' "simple html creation
 Plug 'AndrewRadev/linediff.vim' "use :Linediff two visual blocks to diff them
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  } "markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  } "use :MarkdownPreviewToggle
 
 
 "tpope
