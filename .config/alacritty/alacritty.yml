@@ -522,7 +522,7 @@ key_bindings:
   # (macOS only)
   - { key: Key0,   mods: Command,         action: ResetFontSize    }
   - { key: Equals, mods: Command,         action: IncreaseFontSize }
-  - { key: Add,    mods: Command,         action: IncreaseFontSize }
+  - { key: Plus,   mods: Command,         action: IncreaseFontSize }
   - { key: Minus,  mods: Command,         action: DecreaseFontSize }
   - { key: K,      mods: Command,         action: ClearHistory     }
   - { key: K,      mods: Command,         chars: "\x0c"            }
@@ -533,7 +533,9 @@ key_bindings:
   - { key: Q,      mods: Command,         action: Quit             }
   - { key: W,      mods: Command,         action: Quit             }
   - { key: F,      mods: Command|Control, action: ToggleFullscreen }
-  - { key: Slash,  mods: Control,         chars: "\x1f" }
+  - { key: Slash,  mods: Control,         chars: "\x1f"            }
+  - { key: F,      mods: Alt,             chars: "\x1bf"           }
+  - { key: B,      mods: Alt,             chars: "\x1bb"           }
 
   #- { key: Paste,                    action: Paste                            }
   #- { key: Copy,                     action: Copy                             }

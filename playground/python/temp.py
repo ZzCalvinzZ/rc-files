@@ -1,4 +1,7 @@
-is_closed = True
-show_closed = False
+def rotate_string(a, b):
+    #if a or b not string return false
+    if a == b:
+        return True
 
-print((not is_closed and not show_closed) or (is_closed and show_closed))
+
+assert rotate_string('survey', 'veysur'), True

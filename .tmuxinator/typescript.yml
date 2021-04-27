@@ -1,7 +1,7 @@
-# /home/calvin/.tmuxinator/anweb.yml
+# /home/calvin/.tmuxinator/typescript.yml
 
-name: anweb
-root: ~/dev/anweb
+name: typescript
+root: ~/playground/typescript
 
 # Optional tmux socket
 # socket_name: foo
@@ -40,8 +40,8 @@ root: ~/dev/anweb
 # attach: false
 
 windows:
-  - editor:
+  - smpackages:
       layout: main-horizontal
       panes:
         - vim
-        - #lksjdflkj
+        - #blank

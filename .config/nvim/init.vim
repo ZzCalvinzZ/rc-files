@@ -140,7 +140,9 @@ Plug 'yegappan/mru'
 Plug 'diepm/vim-rest-console'
 
 "colors
-Plug 'ZzCalvinzZ/gruvbox'
+" Plug 'ZzCalvinzZ/gruvbox'
+Plug 'rktjmp/lush.nvim'
+Plug 'npxbr/gruvbox.nvim'
 
 call plug#end()
 
@@ -515,6 +517,7 @@ endfunction
 
 let g:floaterm_width=0.8
 let g:floaterm_height=0.8
+let g:floaterm_opener='edit'
 map <leader>2 :FloatermNew lf<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -626,3 +629,5 @@ let g:python3_host_prog = "/Users/calvinc/.pyenv/versions/neovim3/bin/python"
 " markdown preview
 let g:mkdp_auto_start = 0
 nmap <leader>6 <Plug>MarkdownPreviewToggle
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0

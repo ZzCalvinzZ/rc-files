@@ -1,7 +1,7 @@
-# /home/calvin/.tmuxinator/anweb.yml
+# /home/calvin/.tmuxinator/extra3.yml
 
-name: anweb
-root: ~/dev/anweb
+name: extra3
+root: ~/dev
 
 # Optional tmux socket
 # socket_name: foo
@@ -40,8 +40,8 @@ root: ~/dev/anweb
 # attach: false
 
 windows:
-  - editor:
+  - extra3:
       layout: main-horizontal
       panes:
         - vim
-        - #lksjdflkj
+        - #blank
