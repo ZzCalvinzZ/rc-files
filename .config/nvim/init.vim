@@ -124,7 +124,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 "status line and other visual
 Plug 'itchyny/lightline.vim'
-Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'mhinz/vim-startify'
 
 "snippets
@@ -141,18 +141,20 @@ Plug 'diepm/vim-rest-console'
 
 "colors
 " Plug 'ZzCalvinzZ/gruvbox'
-Plug 'rktjmp/lush.nvim'
-Plug 'npxbr/gruvbox.nvim'
+" Plug 'rktjmp/lush.nvim', { 'branch': 'main' } 
+" Plug 'npxbr/gruvbox.nvim', { 'branch': 'main' }
+Plug 'sainnhe/sonokai'
+
 
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "what vim looks like
-let g:gruvbox_contrast_dark="soft"
-" let g:gruvbox_contrast_light="soft"
-let g:gruvbox_italic=1
 set background=dark
-colorscheme gruvbox
+let g:sonokai_enable_italic = 1
+let g:sonokai_disable_italic_comment = 1
+
+colorscheme sonokai
 highlight clear SignColumn
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -496,7 +498,7 @@ endfunction
 
 " Replace filename component of Lightline statusline
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
+      \ 'colorscheme': 'sonokai',
       \ 'component_function': {
       \   'filename': 'FilenameForLightline',
       \   'cocstatus': 'coc#status',
