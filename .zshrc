@@ -64,22 +64,15 @@ export PATH
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
-# prevent security pin in flask
-export WERKZEUG_DEBUG_PIN=off
-
-# react native expo
-export REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.61"
-
 #fzf ripgrep
 export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 
-# export BROWSER=google-chrome-stable
-
-#
+# git stuff
 export REVIEW_BASE=master
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
+# lf
 export LF_ICONS="\
 tw=:\
 st=:\
@@ -249,5 +242,7 @@ compinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+eval "$(rbenv init -)"
 eval "$(nodenv init -)"
