@@ -70,8 +70,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --no-messages --glob "!.git/*"'
 # git stuff
 export REVIEW_BASE=master
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
 # lf
 export LF_ICONS="\
 tw=:\
