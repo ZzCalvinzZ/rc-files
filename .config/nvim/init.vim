@@ -205,7 +205,7 @@ let g:coc_global_extensions = [
       \'coc-json',
       \'coc-stylelint',
       \'coc-css',
-      \'coc-python',
+      \'coc-pyright',
       \'coc-emmet',
       \'coc-html',
       \'coc-yaml',
@@ -625,7 +625,7 @@ augroup run_commands
 augroup END
 
 let g:python_host_prog = "/Users/calvinc/.pyenv/versions/neovim2/bin/python"
-let g:python3_host_prog = "/Users/calvinc/.pyenv/versions/neovim3/bin/python"
+let g:python3_host_prog = "/Users/calvincollins/.pyenv/versions/neovim3/bin/python"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " markdown preview

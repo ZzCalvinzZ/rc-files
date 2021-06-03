@@ -37,11 +37,11 @@ fi
 source ~/.aliases
 
 #Go
-go() {
-  export GOPATH="$HOME/dev/go"
-  export PATH=$PATH:$(go env GOPATH)/bin # go
-  go "$@"
-}
+# go() {
+#   export GOPATH="$HOME/dev/go"
+#   export PATH=$PATH:$(go env GOPATH)/bin # go
+#   go "$@"
+# }
 
 #Android
 # export ANDROID_HOME=${HOME}/Library/Android/sdk
@@ -240,7 +240,19 @@ compinit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
+# eval "$(pyenv init --path)"
+# eval "$(pyenv virtualenv-init -)"
+# eval "$(rbenv init -)"
+# eval "$(nodenv init -)"
+
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+source <(kubectl completion zsh)
+
+### BEGIN--Instacart Shell Settings. (Updated: Wed 26 May 2021 14:46:11 EDT. [Script Version 1.3.13])
+# This Line Added Automatically by Instacart Setup Script
+# The sourced file contains all of the instacart utilities and shell settings
+# To remove this functionality, leave the block, and enter "NO-TOUCH" in the BEGIN line, and comment the line below:
+source /Users/calvincollins/.instacart_shell_profile
+### END--Instacart Shell Settings.

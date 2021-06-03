@@ -1,12 +1,14 @@
 [user]
 	name = Calvin Collins
-	email = calvinc@surveymonkey.com
+	email = calvin.collins@instacart.com
 [push]
 	default = simple
 [core]
 	excludesfile = ~/.gitignore
+	whitespace = trailing-space,space-before-tab
 [merge]
 	tool = fugitive
+	stat = true
 [mergetool]
 	path = nvim
 	keepBackup = false
@@ -41,3 +43,13 @@
   reviewone = !nvim -p +\"tabdo Gdiff $REVIEW_BASE\" +\"
 [github-pr-stats "code.corp.surveymonkey.com"]
 	token = 8b04a1bd356d9f400c6032a4e80a9109dea7117b
+[http]
+	postBuffer = 524288000
+[diff]
+	mnemonicprefix = true
+[credential]
+	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[feature]
+	manyFiles = 1

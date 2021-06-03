@@ -46,7 +46,7 @@
   "prettier.eslintIntegration": true,
   "python.jediEnabled": false,
   "python.formatting.provider": "black",
-  "python.venvPath": "~/Envs",
+  "python.pythonPath": "python",
   "python.linting.flake8Enabled": true,
   "git.changedSign.text": "~",
   "git.changedSign.hlGroup": "ModeMsg",
